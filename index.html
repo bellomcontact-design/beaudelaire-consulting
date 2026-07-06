@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Beaudelaire Consulting · Scale ton business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf8f3; --bg2:#f1eee7; --card:#fffefb;
+    --accent:#12110d; --text:#17150f; --muted:#6b675d; --border:#e7e2d6;
+    --green:#159a45; --green-btn:#0e7a36; --green-soft:#e7f4ec; --star:#e0a818;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:780px;margin:0 auto;padding:0 20px}
+  .wide{max-width:1000px}
+  .topnav{position:sticky;top:0;z-index:40;background:rgba(250,248,243,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  .topnav-in{display:flex;align-items:center;justify-content:space-between;max-width:1000px;margin:0 auto;padding:13px 20px}
+  .brand{font-family:'Inter',sans-serif;font-weight:700;font-size:20px;text-decoration:none;color:var(--text);letter-spacing:-.01em}
+  .navlinks{display:flex;align-items:center;gap:22px}
+  .navlinks a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:600;transition:color .12s}
+  .navlinks a:hover{color:var(--text)}
+  .navlinks a.nav-cta{font-size:14px;padding:10px 18px;border-radius:10px;color:#fff}
+  @media(max-width:680px){.navlinks a:not(.nav-cta){display:none}}
+  .cta{display:inline-block;background:var(--green-btn);color:#fff;font-weight:700;font-size:16px;
+    padding:16px 34px;border-radius:12px;text-decoration:none;border:none;cursor:pointer;
+    font-family:inherit;transition:transform .12s ease,opacity .12s ease}
+  .cta:hover{opacity:.88}
+  .eyebrow{color:var(--green);font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    font-size:12px;text-align:center;margin-bottom:12px}
+  h1,h2,.qtitle,.price,.stat b,.rescard .ba,.brand{font-family:'Inter',sans-serif}
+  h1,h2{letter-spacing:-.02em;font-weight:800}
+  h2{font-size:clamp(27px,4vw,42px);text-align:center;margin-bottom:14px}
+  .lead{color:var(--muted);text-align:center;max-width:600px;margin:0 auto 40px}
+  section{padding:62px 0}
+  .stars{color:var(--star);letter-spacing:2px}
+
+  /* HERO */
+  header{background:radial-gradient(1000px 460px at 50% -10%, rgba(21,154,69,.06), transparent 60%), var(--bg);
+    padding:84px 0 70px;text-align:center;border-bottom:1px solid var(--border)}
+  .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--bg2);
+    color:var(--text);font-size:13px;padding:7px 16px;border-radius:999px;margin-bottom:24px;font-weight:600}
+  h1{font-weight:800;font-size:clamp(34px,5.2vw,56px);line-height:1.1;margin-bottom:22px;letter-spacing:-.025em}
+  .nowrap{white-space:nowrap}
+  .sub{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:640px;margin:0 auto 22px;line-height:1.55}
+  .herobullets{color:var(--muted);font-size:14px;margin-bottom:30px}
+  .herobullets b{color:var(--text);font-weight:700}
+  .vsl{position:relative;max-width:560px;margin:0 auto 30px;aspect-ratio:16/9;background:var(--bg2);
+    border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .vsl .play{width:64px;height:64px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(21,154,69,.35)}
+  .vsl .play::after{content:"";border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+  .vsl small{position:absolute;bottom:12px;left:0;right:0;text-align:center;color:var(--muted);font-size:12px}
+  .micro{display:block;color:var(--muted);font-size:13px;margin-top:14px}
+
+  /* RESULTS */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .rescard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px}
+  .rescard .top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .av{width:42px;height:42px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--muted)}
+  .rescard .who{font-weight:700;font-size:15px}
+  .rescard .who span{display:block;color:var(--muted);font-size:13px;font-weight:400}
+  .ba{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
+  .ba .arrow{color:var(--muted);font-weight:400}
+  .ba .after{color:var(--green);font-weight:800}
+
+  /* TESTIMONIALS */
+  .tslider{overflow:hidden;max-width:620px;margin:0 auto}
+  .ttrack{display:flex;transition:transform .6s ease}
+  .tslide{min-width:100%;padding:0 6px}
+  .tcard{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:14px;min-height:200px}
+  .tcard p{font-family:'Inter',sans-serif;font-style:italic;font-size:18px;line-height:1.5}
+  .tcard .who{display:flex;align-items:center;gap:12px;font-weight:700;font-size:14px}
+  .tcard .who span{color:var(--muted);font-weight:400}
+  .tdots{display:flex;gap:8px;justify-content:center;margin-top:22px}
+  .tdots b{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:.2s}
+  .tdots b.on{background:var(--green);width:22px;border-radius:999px}
+
+  /* ABOUT */
+  .about{background:var(--bg2)}
+  .about .wrap{max-width:680px}
+  .about p{color:#2c2c33;margin-bottom:16px;font-size:17px}
+  .statrow{display:flex;gap:34px;justify-content:center;flex-wrap:wrap;margin-top:36px;border-top:1px solid var(--border);padding-top:30px}
+  .stat{text-align:center}
+  .stat b{display:block;font-size:30px;letter-spacing:-.02em}
+  .stat span{color:var(--muted);font-size:13px}
+  .note{background:#fbfbe9;border:1px dashed #cfcf7a;border-radius:10px;padding:11px 14px;color:#6f6f1e;
+    font-size:12px;margin:0 auto 24px;max-width:680px;text-align:center}
+
+  /* GALLERY */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:760px){.gallery{grid-template-columns:1fr 1fr}}
+  .ph{aspect-ratio:4/3;background:var(--bg2);border:1px dashed var(--border);border-radius:12px;
+    display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;text-align:center;padding:10px}
+
+  /* FAQ */
+  .faq{max-width:680px;margin:0 auto}
+  details{border:1px solid var(--border);border-radius:12px;padding:4px 18px;margin-bottom:12px;background:var(--card)}
+  details summary{cursor:pointer;font-weight:600;padding:14px 0;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";font-size:22px;color:var(--green)}
+  details[open] summary::after{content:"\2212"}
+  details p{color:var(--muted);padding:0 0 16px}
+
+  /* NEWSLETTER */
+  .news .wrap{max-width:540px}
+  .newsform{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .newsform input{flex:1;min-width:220px;background:var(--bg);border:1.5px solid var(--border);color:var(--text);
+    padding:14px 15px;border-radius:11px;font-size:15px;outline:none;font-family:inherit}
+  .newsform input:focus{border-color:var(--green)}
+
+  .band{text-align:center}
+  .band h2{margin-bottom:18px}
+
+  /* QUIZ */
+  #quiz{display:none;padding:46px 0 80px}
+  #quiz.active{display:flex;flex-direction:column;justify-content:center;min-height:80vh}
+  .progress{height:6px;background:var(--bg2);border-radius:999px;overflow:hidden;margin:0 auto 34px;max-width:560px;width:100%}
+  .progress > i{display:block;height:100%;width:0;background:var(--green);transition:width .3s ease}
+  .qbox{max-width:560px;margin:0 auto;width:100%}
+  .step{display:none;animation:fade .25s ease}
+  .step.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .qnum{color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+  .qtitle{font-size:clamp(22px,3.4vw,30px);margin-bottom:24px;font-weight:600;letter-spacing:-.01em}
+  .options{display:flex;flex-direction:column;gap:11px}
+  .opt{display:flex;align-items:center;gap:13px;text-align:left;background:var(--card);
+    border:1.5px solid var(--border);border-radius:13px;padding:16px 18px;font-size:16px;color:var(--text);cursor:pointer;transition:.12s;width:100%;font-family:inherit}
+  .opt:hover{border-color:var(--green)}
+  .opt.sel{border-color:var(--green);background:var(--green-soft)}
+  .opt .dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);flex:0 0 auto;position:relative}
+  .opt.sel .dot{border-color:var(--green)}
+  .opt.sel .dot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--green)}
+  .field{margin-bottom:15px}
+  .field label{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
+  .field input,.field select{width:100%;background:var(--bg);border:1.5px solid var(--border);color:var(--text);padding:13px 14px;border-radius:11px;font-size:15px;outline:none;font-family:inherit}
+  .field input:focus,.field select:focus{border-color:var(--green)}
+  .field small{display:block;color:var(--muted);font-size:12px;margin-top:5px}
+  .phonerow{display:flex;gap:10px}
+  .phonerow select{flex:0 0 165px}
+  .phonerow input{flex:1}
+  .nav{display:flex;justify-content:space-between;align-items:center;margin-top:26px;gap:12px}
+  .back{background:none;border:none;color:var(--muted);cursor:pointer;font-size:15px;padding:8px;font-family:inherit}
+  .back:hover{color:var(--text)}
+  .result{display:none;text-align:center;max-width:520px;margin:0 auto}
+  .result.active{display:block;animation:fade .25s ease}
+  .rcheck{width:58px;height:58px;border-radius:50%;background:var(--green);color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+  .result h2{margin-bottom:8px}
+  .rcard{background:var(--card);border:1.5px solid var(--green);border-radius:18px;padding:28px;margin-top:24px;text-align:left}
+  .rcard .name{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+  .rcard .price{font-size:38px;font-weight:800;letter-spacing:-.02em;margin:4px 0 6px}
+  .anchor{font-size:13px;color:var(--muted);margin-bottom:16px}
+  .feat{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
+  .feat li{padding-left:25px;position:relative;font-size:15px}
+  .feat li::before{content:"\2713";position:absolute;left:0;font-weight:800;color:var(--green)}
+  .reassure{font-size:13px;color:#2c2c33;margin-bottom:16px;padding:11px 13px;background:var(--green-soft);border-radius:9px}
+  .pay{display:flex;flex-direction:column;gap:11px}
+  .paybtn{display:block;background:var(--green-btn);border:none;border-radius:12px;padding:16px;cursor:pointer;text-decoration:none;color:#fff;text-align:center;transition:opacity .12s}
+  .paybtn:hover{opacity:.9}
+  .paybtn b{display:block;font-size:16px;color:#fff;font-weight:700}
+  .paybtn span{color:rgba(255,255,255,.82);font-size:13px}
+  .guarantee{text-align:center;color:var(--muted);font-size:12.5px;margin-top:14px}
+
+  footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-in">
+    <a class="brand" href="#">Beaudelaire Consulting</a>
+    <div class="navlinks">
+      <a href="#about">Qui je suis</a>
+      <a href="#news">Le chemin</a>
+      <a class="cta nav-cta" href="#" onclick="startQuiz();return false;">Réserver un appel</a>
+    </div>
+  </div>
+</nav>
+
+<div id="landing">
+
+  <!-- HERO -->
+  <header>
+    <div class="wrap">
+      <div class="badge"><span class="stars">★★★★★</span> Plus de 30 entrepreneurs accompagnés</div>
+      <h1>Fais passer ton business à <span class="nowrap">100k€ par mois</span>.</h1>
+      <p class="sub">Que tu démarres ou que tu fasses déjà 5 chiffres par mois, je t'aide à trouver ce qui te bloque vraiment. Et tu repars avec le plan exact pour franchir ton prochain palier, jusqu'à 100k€/mois et au-delà.</p>
+      <p class="herobullets">Tu repars avec : <b>ce qui te bloque vraiment</b> · <b>les leviers à activer en premier</b> · <b>ton plan d'action priorisé</b></p>
+      <div class="vsl">
+        <iframe src="https://www.youtube.com/embed/uznbqo-Xofw" title="Vidéo de présentation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+      </div>
+      <button class="cta" onclick="startQuiz()">Voir si je peux t'aider</button>
+      <span class="micro">2 minutes pour répondre. Je ne prends pas tout le monde, voyons si c'est toi.</span>
+    </div>
+  </header>
+
+  <!-- RESULTATS (TEMPLATE) — MASQUÉ : réactiver avec de VRAIS résultats clients (retirer style="display:none") -->
+  <section style="display:none">
+    <div class="wrap wide">
+      <div class="eyebrow">Résultats clients</div>
+      <h2>Ils sont passés au niveau supérieur</h2>
+      <p class="lead">Des résultats concrets, avant et après accompagnement.</p>
+      <p class="note">TEMPLATE : remplace ces cartes par de vrais résultats clients avant de publier. Jamais de faux témoignages.</p>
+      <div class="grid" id="resGrid"></div>
+      <div style="text-align:center;margin-top:28px">
+        <button class="cta" id="resMore" onclick="showMoreRes()">Voir plus de résultats</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMOIGNAGES (placeholders — à remplacer par de VRAIS avis avant publication) -->
+  <section style="background:var(--bg2)">
+    <div class="wrap">
+      <div class="eyebrow">Témoignages</div>
+      <h2>Ce qu'ils en disent</h2>
+      <p class="note">TEMPLATE : exemples de structure. Remplace les noms ET les textes par de vrais témoignages clients avant de publier.</p>
+      <div class="tslider">
+        <div class="ttrack" id="ttrack">
+          <div class="tslide"><div class="tcard">
+            <div class="stars">★★★★★</div>
+            <p>"Je pensais galérer sur l'acquisition. En vrai, c'était mon offre qui clochait. Il l'a vu en dix minutes, j'ai tout retravaillé et mon closing a doublé."</p>
+            <div class="who">Lucas M. <span>· Agence · France</span></div>
+          </div></div>
+          <div class="tslide"><div class="tcard">
+            <div class="stars">★★★★★</div>
+            <p>"Au Congo, mon vrai blocage c'était d'encaisser et de livrer. On a mis en place le mobile money et clarifié mon offre. Je suis passé de 0 à 3k€/mois."</p>
+            <div class="who">Gloire K. <span>· E-commerce · RDC</span></div>
+          </div></div>
+          <div class="tslide"><div class="tcard">
+            <div class="stars">★★★★★</div>
+            <p>"En Côte d'Ivoire, tout le monde fait du dropshipping de la même façon. Il m'a aidé à me différencier et à cibler le bon produit. +18k€/mois en deux mois."</p>
+            <div class="who">Yann K. <span>· Dropshipping · Côte d'Ivoire</span></div>
+          </div></div>
+          <div class="tslide"><div class="tcard">
+            <div class="stars">★★★★★</div>
+            <p>"Je n'arrivais pas à fixer mes prix face à des clients qui négocient tout. On a posé une offre claire et j'ai enfin osé augmenter. Mon chiffre a suivi."</p>
+            <div class="who">Awa D. <span>· Coaching · Sénégal</span></div>
+          </div></div>
+          <div class="tslide"><div class="tcard">
+            <div class="stars">★★★★★</div>
+            <p>"Mes clients étaient à l'étranger et je galérais à me faire payer depuis le Cameroun. On a réglé ça et structuré mon activité. De 1k à 7k€/mois."</p>
+            <div class="who">Boris N. <span>· Freelance · Cameroun</span></div>
+          </div></div>
+          <div class="tslide"><div class="tcard">
+            <div class="stars">★★★★★</div>
+            <p>"Le plus cash des appels que j'ai faits. Zéro blabla, que de l'actionnable, adapté à ma réalité et pas du copié-collé américain."</p>
+            <div class="who">Mehdi T. <span>· Infoproduit · Belgique</span></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="tdots" id="tdots"></div>
+    </div>
+  </section>
+
+  <!-- QUI JE SUIS -->
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="eyebrow">Mon histoire</div>
+      <h2>Parti de 0 au Bénin. <span class="nowrap">Aujourd'hui, +50k€ par mois.</span></h2>
+      <p>Je m'appelle Beaudelaire. Béninois, parti de 0 juste après le bac. Au lieu de suivre la voie tracée, j'ai choisi d'entreprendre en ligne, sans savoir par où commencer.</p>
+      <p>J'ai pris ce qui passait : traduction, gestion de comptes, gestion d'équipe. Je me faisais arnaquer. Et même payé, je ne pouvais souvent pas toucher l'argent : encaisser depuis l'Afrique sans compte bancaire classique, c'est un mur que peu de gens voient venir.</p>
+      <p>Bloqué à 5k/mois pendant un an. Puis tout a basculé : 10k, 30k, jusqu'à plus de 50k€ par mois.</p>
+      <p>Ce chemin m'a fait voyager dans 15+ pays en 2 ans, rencontrer des entrepreneurs en vrai, visiter leurs business jusque dans les usines en Chine, et accompagner 30+ entrepreneurs à se lancer et à scaler.</p>
+      <p><strong>Aujourd'hui, ma mission est simple : transmettre aux entrepreneurs francophones ce que j'aurais voulu qu'on me dise au départ. Je ne te dis pas quel business monter. Je te montre comment passer au niveau supérieur, à partir d'où tu es exactement.</strong></p>
+      <div class="statrow">
+        <div class="stat"><b>0 → 50k€+</b><span>par mois</span></div>
+        <div class="stat"><b>15+</b><span>pays en 2 ans</span></div>
+        <div class="stat"><b>30+</b><span>entrepreneurs accompagnés</span></div>
+      </div>
+      <div style="text-align:center;margin-top:30px">
+        <button class="cta" onclick="startQuiz()">Réserver mon appel</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUR LE TERRAIN -->
+  <section>
+    <div class="wrap wide">
+      <div class="eyebrow">Sur le terrain</div>
+      <h2>Je vais à la rencontre des business</h2>
+      <p class="lead">Usines en Chine, rencontres clients, business physiques accompagnés. Du concret, pas de la théorie.</p>
+      <p class="note">Remplace chaque bloc par tes vraies photos et vidéos.</p>
+      <div class="gallery">
+        <div class="ph">Photo : usine en Chine</div>
+        <div class="ph">Vidéo : rencontre client</div>
+        <div class="ph">Photo : business accompagné</div>
+        <div class="ph">Photo : voyage / terrain</div>
+        <div class="ph">Vidéo : visite business</div>
+        <div class="ph">Photo : rencontre client</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="background:var(--bg2)">
+    <div class="wrap">
+      <div class="eyebrow">FAQ</div>
+      <h2>Les questions fréquentes</h2>
+      <div class="faq">
+        <details><summary>C'est pour qui ?</summary><p>Pour les débutants qui veulent se lancer sans savoir par où commencer, et pour ceux qui font déjà 5k–30k+/mois et veulent scaler. Le questionnaire t'oriente automatiquement vers le bon accompagnement.</p></details>
+        <details><summary>Comment se passe l'appel ?</summary><p>Un appel en visioconférence. On fait le point sur ta situation, j'identifie ce qui te bloque, et tu repars avec un plan d'action clair et priorisé.</p></details>
+        <details><summary>Combien ça coûte ?</summary><p>Ça dépend de ton niveau : 130€ si tu démarres, 250€ si tu fais déjà du chiffre. Réponds aux questions et je te montre exactement l'accompagnement fait pour toi, avec le tarif clair, sans surprise.</p></details>
+        <details><summary>Et si je débute totalement ?</summary><p>C'est précisément fait pour ça. L'accompagnement Démarrage est pensé pour clarifier ton idée et te donner tes premières étapes concrètes.</p></details>
+        <details><summary>Comment je paie ?</summary><p>Par carte bancaire (Visa, Mastercard) ou par Mobile Money (Orange, MTN, Moov, Wave) si tu es en Afrique. Paiement sécurisé.</p></details>
+        <details><summary>Est-ce que l'appel est un argumentaire de vente ?</summary><p>Non. C'est un vrai diagnostic : on travaille sur ton business pendant l'appel et tu repars avec un plan concret, que tu ailles plus loin avec moi ou non.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="news" id="news">
+    <div class="wrap">
+      <div class="eyebrow">Le chemin · gratuit</div>
+      <h2>Le chemin : scaler jusqu'à <span class="nowrap">100k€ par mois</span></h2>
+      <p class="lead">Les étapes concrètes pour faire passer ton business au palier supérieur, de ton niveau actuel jusqu'aux 6 chiffres mensuels. Offert, directement dans ta boîte mail.</p>
+      <form class="newsform" onsubmit="return subNews(event)">
+        <input type="email" id="news_email" placeholder="ton@email.com" inputmode="email" autocomplete="email" required>
+        <button class="cta" type="submit">Envoie-moi le chemin</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- CTA FINALE -->
+  <section class="band" style="background:var(--bg2)">
+    <div class="wrap">
+      <h2>Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.</h2>
+      <button class="cta" onclick="startQuiz()">Voir si je peux t'aider</button>
+      <span class="micro">2 minutes. Tu repars avec un plan, pas un argumentaire.</span>
+    </div>
+  </section>
+
+
+</div><!-- /landing -->
+
+
+<!-- QUIZ -->
+<div id="quiz">
+  <div class="wrap">
+    <div class="progress"><i id="bar"></i></div>
+    <div class="qbox">
+
+      <div class="step active" data-step="0">
+        <div class="qnum">Question 1 / 5</div>
+        <div class="qtitle">Où en es-tu dans ton business ?</div>
+        <div class="options" data-q="stage">
+          <button class="opt" data-val="idee"><span class="dot"></span> Je n'ai pas encore commencé, j'ai juste une idée</button>
+          <button class="opt" data-val="debut"><span class="dot"></span> Je viens de lancer, je cherche mes premiers clients</button>
+          <button class="opt" data-val="tourne"><span class="dot"></span> J'ai déjà un business qui tourne</button>
+          <button class="opt" data-val="stagne"><span class="dot"></span> J'ai un business qui stagne / qui plafonne</button>
+        </div>
+        <div class="nav"><span></span></div>
+      </div>
+
+      <div class="step" data-step="1">
+        <div class="qnum">Question 2 / 5</div>
+        <div class="qtitle">Combien tu fais par mois, à peu près ?</div>
+        <div class="options" data-q="revenue">
+          <button class="opt" data-val="0"><span class="dot"></span> 0€, je débute</button>
+          <button class="opt" data-val="-1k"><span class="dot"></span> Moins de 1 000€</button>
+          <button class="opt" data-val="1-5k"><span class="dot"></span> Entre 1 000€ et 5 000€</button>
+          <button class="opt" data-val="5-30k"><span class="dot"></span> Entre 5 000€ et 30 000€</button>
+          <button class="opt" data-val="30k+"><span class="dot"></span> Plus de 30 000€</button>
+        </div>
+        <div class="nav"><button class="back" onclick="prev()">Retour</button></div>
+      </div>
+
+      <div class="step" data-step="2">
+        <div class="qnum">Question 3 / 5</div>
+        <div class="qtitle" id="q3title">C'est quoi ton type de business ?</div>
+        <div class="options" data-q="type">
+          <button class="opt" data-val="ecom"><span class="dot"></span> E-commerce</button>
+          <button class="opt" data-val="service"><span class="dot"></span> Prestation de service / agence</button>
+          <button class="opt" data-val="info"><span class="dot"></span> Infoproduit / coaching</button>
+          <button class="opt" data-val="freelance"><span class="dot"></span> Freelance</button>
+          <button class="opt" data-val="saas"><span class="dot"></span> SaaS / application</button>
+          <button class="opt" data-val="physique"><span class="dot"></span> Business physique (boutique, resto...)</button>
+          <button class="opt" data-val="autre"><span class="dot"></span> Autre / pas encore défini</button>
+        </div>
+        <div id="autreWrap" style="display:none;margin-top:16px">
+          <div class="field"><label>Précise ton secteur</label><input id="f_typedetail" placeholder="Ex : immobilier, restauration..."></div>
+          <button class="cta" onclick="afterAutre()">Continuer</button>
+        </div>
+        <div class="nav"><button class="back" onclick="prev()">Retour</button></div>
+      </div>
+
+      <div class="step" data-step="3">
+        <div class="qnum">Question 4 / 5</div>
+        <div class="qtitle">Quel est ton objectif principal ?</div>
+        <div class="options" data-q="objectif">
+          <button class="opt" data-val="lancer"><span class="dot"></span> Lancer et trouver mes premiers clients</button>
+          <button class="opt" data-val="augmenter"><span class="dot"></span> Augmenter mon chiffre d'affaires</button>
+          <button class="opt" data-val="structurer"><span class="dot"></span> Structurer et déléguer pour souffler</button>
+          <button class="opt" data-val="scaler"><span class="dot"></span> Scaler fort, passer un gros palier</button>
+        </div>
+        <div class="nav"><button class="back" onclick="prev()">Retour</button></div>
+      </div>
+
+      <div class="step" data-step="4">
+        <div class="qnum">Question 5 / 5</div>
+        <div class="qtitle">Dans combien de temps veux-tu des résultats ?</div>
+        <div class="options" data-q="urgence">
+          <button class="opt" data-val="now"><span class="dot"></span> Le plus vite possible</button>
+          <button class="opt" data-val="1-3m"><span class="dot"></span> Dans 1 à 3 mois</button>
+          <button class="opt" data-val="3-6m"><span class="dot"></span> Dans 3 à 6 mois</button>
+          <button class="opt" data-val="info"><span class="dot"></span> Je me renseigne pour l'instant</button>
+        </div>
+        <div class="nav"><button class="back" onclick="prev()">Retour</button></div>
+      </div>
+
+      <div class="step" data-step="5">
+        <div class="qnum">Dernière étape</div>
+        <div class="qtitle">Où je t'envoie les détails ?</div>
+        <div class="field"><label>Prénom</label><input type="text" id="f_prenom" placeholder="Ton prénom" autocomplete="given-name"></div>
+        <div class="field"><label>Nom</label><input type="text" id="f_nom" placeholder="Ton nom" autocomplete="family-name"></div>
+        <div class="field"><label>Email</label><input type="email" id="f_email" placeholder="ton@email.com" inputmode="email" autocomplete="email"></div>
+        <div class="field"><label>Pays d'origine</label>
+          <select id="f_country"><option value="" disabled selected>Sélectionne ton pays</option></select>
+        </div>
+        <div class="field"><label>Téléphone (WhatsApp de préférence)</label>
+          <div class="phonerow">
+            <select id="f_dial"><option value="" disabled selected>Indicatif</option></select>
+            <input type="tel" id="f_phone" placeholder="Ton numéro" inputmode="tel" autocomplete="tel-national">
+          </div>
+          <small>Facultatif, pour t'envoyer le lien de l'appel sur WhatsApp.</small>
+        </div>
+        <div class="nav">
+          <button class="back" onclick="prev()">Retour</button>
+          <button class="cta" onclick="finish()">Voir mon résultat</button>
+        </div>
+      </div>
+
+      <div class="result" id="result">
+        <div class="rcheck">✓</div>
+        <h2 id="rHead">C'est bon, je peux t'aider à débloquer ça</h2>
+        <p class="lead" id="rWho" style="margin-bottom:0"></p>
+        <div class="rcard" id="rcard">
+          <div class="name" id="rName"></div>
+          <div class="price" id="rPrice"></div>
+          <p class="anchor" id="rAnchor"></p>
+          <ul class="feat" id="rFeat"></ul>
+          <p class="reassure">Un vrai diagnostic de ton business, pas un argumentaire de vente déguisé. Tu repars avec un plan clair, quoi qu'il arrive.</p>
+          <div class="pay">
+            <a class="paybtn" id="payCard" href="#" target="_blank" rel="noopener" onclick="track('click_pay_card')"><b>Réserver mon appel</b><span>Paiement par carte · Visa / Mastercard</span></a>
+            <a class="paybtn" id="payMomo" href="#" target="_blank" rel="noopener" onclick="track('click_pay_momo')"><b>Réserver mon appel</b><span>Paiement Mobile Money · Orange, MTN, Wave</span></a>
+          </div>
+          <p class="guarantee">Paiement sécurisé · Réservation immédiate de ton créneau</p>
+        </div>
+        <p style="margin-top:18px"><a href="#" onclick="backHome();return false;" style="color:var(--muted);font-size:14px;text-decoration:underline">Revenir à l'accueil</a></p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer><div class="wrap">© <span id="yr"></span> Beaudelaire Consulting</div></footer>
+
+<script>
+/* =================================================================
+   CONFIG — colle tes vrais liens quand tes comptes sont prêts
+   ================================================================= */
+const CONFIG = {
+  offers: {
+    demarrage: {
+      name:"Accompagnement Démarrage", price:"130€",
+      who:"tu es au tout début, et c'est le bon moment. On transforme ton idée floue en plan d'action clair, et tu sais enfin par quoi commencer.",
+      anchor:"130€ pour éviter des mois à tâtonner seul. Un seul bon départ change toute la suite.",
+      feat:["60 min en direct avec moi, rien que pour ton projet","On clarifie ton idée et ta première offre qui rapporte","Un plan d'action prêt à exécuter en sortant de l'appel","Tes 3 premières étapes, dans le bon ordre"],
+      card:"https://whop.com/checkout/plan_bReryALMV3QYm", momo:"#"
+    },
+    croissance: {
+      name:"Accompagnement Croissance", price:"250€",
+      who:"tu fais déjà du chiffre, mais quelque chose te plafonne. On audite ton business ensemble et on trouve le levier qui débloque ton prochain palier.",
+      anchor:"250€ pour trouver le levier que tu ne vois plus tout seul. Un palier débloqué, et l'appel est rentabilisé largement.",
+      feat:["60 min d'audit de ton business, en direct avec moi","On met le doigt sur ce qui te bloque vraiment","Les leviers exacts à activer pour passer ton palier","Des actions à lancer dès la fin de l'appel"],
+      card:"https://whop.com/checkout/plan_A8lrVLNSzejle", momo:"#"
+    }
+  },
+  blockedSectors: /trading|bourse|forex|march[ée]s?\s*financ|scalping/i,
+  leadEndpoint: "https://formspree.io/f/xvzjkwgl"  // Formspree — leads du quiz + newsletter
+};
+
+/* Pays + indicatifs (axé francophonie + international) */
+const COUNTRIES=[
+ ["France","33","FR"],["Belgique","32","BE"],["Suisse","41","CH"],["Luxembourg","352","LU"],["Canada","1","CA"],
+ ["Bénin","229","BJ"],["Togo","228","TG"],["Côte d'Ivoire","225","CI"],["Sénégal","221","SN"],["Mali","223","ML"],
+ ["Burkina Faso","226","BF"],["Niger","227","NE"],["Guinée","224","GN"],["Cameroun","237","CM"],["Gabon","241","GA"],
+ ["RD Congo","243","CD"],["Congo-Brazzaville","242","CG"],["Tchad","235","TD"],["Centrafrique","236","CF"],["Mauritanie","222","MR"],
+ ["Madagascar","261","MG"],["Maroc","212","MA"],["Algérie","213","DZ"],["Tunisie","216","TN"],["Rwanda","250","RW"],
+ ["Burundi","257","BI"],["Djibouti","253","DJ"],["Comores","269","KM"],["Haïti","509","HT"],
+ ["Royaume-Uni","44","GB"],["États-Unis","1","US"],["Espagne","34","ES"],["Allemagne","49","DE"],["Italie","39","IT"],
+ ["Portugal","351","PT"],["Pays-Bas","31","NL"],["Nigeria","234","NG"],["Ghana","233","GH"],["Autre","",""]
+];
+/* ================================================================= */
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* tracking — branche ici GA4 / Meta Pixel / Plausible */
+function track(event, data){
+  try{ if(window.plausible) window.plausible(event); }catch(e){}
+  try{ if(window.gtag) window.gtag('event', event, data||{}); }catch(e){}
+  console.log('track:', event, data||'');
+}
+
+/* remplir les listes pays + indicatifs */
+(function(){
+  const pays=document.getElementById('f_country'), dial=document.getElementById('f_dial');
+  function flag(iso){ return iso ? iso.toUpperCase().replace(/./g,c=>String.fromCodePoint(127397+c.charCodeAt())) : ''; }
+  const sorted=COUNTRIES.filter(c=>c[0]!=='Autre').sort((a,b)=>a[0].localeCompare(b[0],'fr'));
+  sorted.push(["Autre","",""]);
+  if(pays){ sorted.forEach(c=>{const o=document.createElement('option');o.value=c[0];o.textContent=(c[2]?flag(c[2])+' ':'')+c[0];pays.appendChild(o);}); }
+  if(dial){ sorted.filter(c=>c[1]).forEach(c=>{const o=document.createElement('option');o.value='+'+c[1];o.textContent=(c[2]?flag(c[2])+' ':'')+c[0]+' (+'+c[1]+')';dial.appendChild(o);}); }
+})();
+
+const answers = {stage:null, revenue:null, type:null, typeDetail:null, objectif:null, urgence:null};
+let cur = 0; const TOTAL = 6; const LAST_Q = 4; // questions = steps 0..4, contact = 5
+
+function startQuiz(){
+  document.getElementById('landing').style.display='none';
+  document.getElementById('quiz').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'}); updateBar(); track('start_quiz');
+}
+function updateBar(){ document.getElementById('bar').style.width = ((cur+1)/(TOTAL+1))*100 + "%"; }
+function backHome(){ document.getElementById('quiz').classList.remove('active'); document.getElementById('landing').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); }
+function showStep(i){
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  const el=document.querySelector('.step[data-step="'+i+'"]'); if(el) el.classList.add('active');
+  if(i===2){
+    const beginner=(answers.stage==='idee'||answers.revenue==='0');
+    const q=document.getElementById('q3title');
+    if(q) q.textContent = beginner ? "Quel type de business envisages-tu de lancer ?" : "C'est quoi ton type de business ?";
+  }
+  cur=i; updateBar(); window.scrollTo({top:0,behavior:'smooth'}); track('quiz_step',{step:i});
+}
+function prev(){ if(cur>0) showStep(cur-1); }
+
+document.querySelectorAll('.options').forEach(group=>{
+  const key=group.getAttribute('data-q');
+  group.querySelectorAll('.opt').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      group.querySelectorAll('.opt').forEach(b=>b.classList.remove('sel'));
+      btn.classList.add('sel');
+      const v=btn.getAttribute('data-val'); answers[key]=v;
+      if(key==='type' && v==='autre'){ document.getElementById('autreWrap').style.display='block'; return; }
+      if(key==='type'){ document.getElementById('autreWrap').style.display='none'; }
+      setTimeout(()=>{ if(cur<=LAST_Q) showStep(cur+1); },220);
+    });
+  });
+});
+function afterAutre(){ answers.typeDetail=document.getElementById('f_typedetail').value.trim(); showStep(3); }
+
+function pickOffer(){
+  const r=answers.revenue;
+  if(r==="5-30k"||r==="30k+") return CONFIG.offers.croissance;
+  return CONFIG.offers.demarrage;
+}
+function showResult(){
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('result').classList.add('active');
+  document.getElementById('bar').style.width="100%";
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function val(id){const e=document.getElementById(id);return e?String(e.value).trim():'';}
+
+function finish(){
+  const data={
+    prenom:val('f_prenom'), nom:val('f_nom'), email:val('f_email'),
+    pays:val('f_country'), indicatif:val('f_dial'), telephone:val('f_phone'),
+    stage:answers.stage, revenue:answers.revenue, type:answers.type, typeDetail:answers.typeDetail,
+    objectif:answers.objectif, urgence:answers.urgence
+  };
+  if(!data.prenom||!data.nom||!data.email||!data.pays){
+    alert("Merci de remplir ton prénom, ton nom, ton email et ton pays."); return;
+  }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){ alert("Merci d'entrer un email valide."); return; }
+  track('lead', {pays:data.pays, revenue:data.revenue});
+  if(CONFIG.leadEndpoint){
+    fetch(CONFIG.leadEndpoint,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(data)}).catch(()=>{});
+  } else { console.log("LEAD (mode test):", data); }
+
+  if(answers.type==='autre' && CONFIG.blockedSectors.test(answers.typeDetail||'')){
+    document.getElementById('rHead').textContent="Je ne suis pas le bon accompagnement pour toi";
+    document.getElementById('rWho').textContent="Je n'accompagne pas les activités de trading ni les marchés financiers. Pour tout autre projet, je serai ravi de t'aider, reviens quand tu veux.";
+    document.getElementById('rcard').style.display='none';
+    showResult(); return;
+  }
+
+  const offer=pickOffer();
+  document.getElementById('rWho').textContent = data.prenom + ", " + offer.who;
+  document.getElementById('rName').textContent = offer.name;
+  document.getElementById('rPrice').textContent = offer.price;
+  document.getElementById('rAnchor').textContent = offer.anchor;
+  const ul=document.getElementById('rFeat'); ul.innerHTML="";
+  offer.feat.forEach(f=>{const li=document.createElement('li');li.textContent=f;ul.appendChild(li);});
+  document.getElementById('payCard').href=offer.card;
+  document.getElementById('payMomo').href=offer.momo;
+  document.getElementById('payCard').style.display=(offer.card&&offer.card!=='#')?'block':'none';
+  document.getElementById('payMomo').style.display=(offer.momo&&offer.momo!=='#')?'block':'none';
+  showResult();
+}
+
+function subNews(e){
+  e.preventDefault();
+  const email=document.getElementById('news_email').value.trim();
+  if(CONFIG.leadEndpoint){
+    fetch(CONFIG.leadEndpoint,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({type:"newsletter",email})}).catch(()=>{});
+  } else { console.log("NEWSLETTER (mode test):",email); }
+  track('newsletter_signup');
+  alert("C'est noté ! Je t'envoie le chemin par email très vite.");
+  e.target.reset(); return false;
+}
+
+/* ---- Résultats clients (3 + voir plus / voir moins) ---- */
+const RESULTS = [
+  {name:"Karim B.",sector:"E-commerce",country:"France",ini:"0€",fin:"3k€/mois"},
+  {name:"Awa D.",sector:"Agence / service",country:"Sénégal",ini:"6k€",fin:"22k€/mois"},
+  {name:"Lucas M.",sector:"Coaching",country:"France",ini:"9k€",fin:"41k€/mois"},
+  {name:"Gloire K.",sector:"Freelance",country:"RDC",ini:"0€",fin:"2k€/mois"},
+  {name:"Inès R.",sector:"Infoproduit",country:"Belgique",ini:"2k€",fin:"11k€/mois"},
+  {name:"Yann K.",sector:"Dropshipping",country:"Côte d'Ivoire",ini:"5k€",fin:"18k€/mois"},
+  {name:"Boris N.",sector:"SMMA",country:"Cameroun",ini:"1k€",fin:"7k€/mois"},
+  {name:"Mehdi T.",sector:"Closing",country:"France",ini:"12k€",fin:"38k€/mois"},
+  {name:"Fatou S.",sector:"Restauration",country:"Sénégal",ini:"0€",fin:"4k€/mois"},
+  {name:"Hugo L.",sector:"Immobilier",country:"France",ini:"8k€",fin:"27k€/mois"},
+  {name:"Aïcha B.",sector:"SaaS",country:"Maroc",ini:"3k€",fin:"15k€/mois"},
+  {name:"Steve M.",sector:"E-commerce",country:"Cameroun",ini:"4k€",fin:"20k€/mois"},
+  {name:"Marie P.",sector:"Freelance",country:"France",ini:"0€",fin:"2,5k€/mois"},
+  {name:"Ousmane D.",sector:"Agence / service",country:"Mali",ini:"7k€",fin:"25k€/mois"},
+  {name:"Léa F.",sector:"Coaching",country:"Suisse",ini:"10k€",fin:"44k€/mois"},
+  {name:"Cédric A.",sector:"Infoproduit",country:"Côte d'Ivoire",ini:"1k€",fin:"6k€/mois"},
+  {name:"Nadia H.",sector:"Dropshipping",country:"Algérie",ini:"5k€",fin:"21k€/mois"},
+  {name:"Patrick E.",sector:"SMMA",country:"Gabon",ini:"2k€",fin:"9k€/mois"},
+  {name:"Thomas G.",sector:"Closing",country:"France",ini:"15k€",fin:"52k€/mois"},
+  {name:"Bineta N.",sector:"Restauration",country:"Sénégal",ini:"0€",fin:"3,5k€/mois"},
+  {name:"Rachid M.",sector:"Immobilier",country:"Maroc",ini:"6k€",fin:"24k€/mois"},
+  {name:"Sophie D.",sector:"SaaS",country:"Belgique",ini:"4k€",fin:"17k€/mois"},
+  {name:"Junior K.",sector:"E-commerce",country:"RDC",ini:"3k€",fin:"13k€/mois"},
+  {name:"Camille V.",sector:"Freelance",country:"France",ini:"0€",fin:"2k€/mois"},
+  {name:"Moussa T.",sector:"Agence / service",country:"Burkina Faso",ini:"9k€",fin:"33k€/mois"},
+  {name:"Élodie B.",sector:"Coaching",country:"France",ini:"11k€",fin:"40k€/mois"},
+  {name:"Ali Z.",sector:"Infoproduit",country:"Tunisie",ini:"1k€",fin:"8k€/mois"},
+  {name:"Prince O.",sector:"Dropshipping",country:"Togo",ini:"6k€",fin:"23k€/mois"},
+  {name:"Sarah K.",sector:"SMMA",country:"France",ini:"2k€",fin:"10k€/mois"},
+  {name:"David N.",sector:"Consulting",country:"Bénin",ini:"8k€",fin:"30k€/mois"}
+];
+const RES_INIT=3; let resExpanded=false;
+function resCard(r){
+  return '<div class="rescard"><div class="top"><div class="av">'+(r.name?r.name[0]:'P')+'</div>'
+    +'<div class="who">'+r.name+'<span>· '+r.sector+' · '+r.country+'</span></div></div>'
+    +'<div class="ba">'+r.ini+' <span class="arrow">→</span> <span class="after">'+r.fin+'</span></div></div>';
+}
+function renderRes(){
+  const grid=document.getElementById('resGrid'); if(!grid) return;
+  const list = resExpanded ? RESULTS : RESULTS.slice(0,RES_INIT);
+  grid.innerHTML = list.map(resCard).join('');
+  const m=document.getElementById('resMore'); if(m) m.textContent = resExpanded ? 'Voir moins' : 'Voir plus de résultats';
+}
+function showMoreRes(){
+  resExpanded=!resExpanded; renderRes();
+  if(!resExpanded){const g=document.getElementById('resGrid'); if(g) g.scrollIntoView({behavior:'smooth',block:'start'});}
+}
+renderRes();
+
+/* ---- Carousel témoignages (défilement lent) ---- */
+(function(){
+  const track=document.getElementById('ttrack');
+  const slides=track?track.children.length:0;
+  const dotsBox=document.getElementById('tdots');
+  let idx=0;
+  if(!track||!slides) return;
+  for(let i=0;i<slides;i++){const b=document.createElement('b');if(i===0)b.className='on';b.onclick=()=>{idx=i;render();reset();};dotsBox.appendChild(b);}
+  function render(){
+    track.style.transform='translateX(-'+(idx*100)+'%)';
+    [...dotsBox.children].forEach((d,i)=>d.classList.toggle('on',i===idx));
+  }
+  let timer=setInterval(next,8000);
+  function next(){idx=(idx+1)%slides;render();}
+  function reset(){clearInterval(timer);timer=setInterval(next,8000);}
+})();
+</script>
+</body>
+</html>
