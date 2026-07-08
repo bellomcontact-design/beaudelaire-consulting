@@ -451,14 +451,14 @@ const CONFIG = {
       who:"tu es au tout début, et c'est le bon moment. On transforme ton idée floue en plan d'action clair, et tu sais enfin par quoi commencer.",
       anchor:"130€ pour éviter des mois à tâtonner seul. Un seul bon départ change toute la suite.",
       feat:["60 min en direct avec moi, rien que pour ton projet","On clarifie ton idée et ta première offre qui rapporte","Un plan d'action prêt à exécuter en sortant de l'appel","Tes 3 premières étapes, dans le bon ordre"],
-      card:"https://whop.com/checkout/plan_bReryALMV3QYm", momo:"#"
+      card:"https://whop.com/checkout/plan_bReryALMV3QYm", momo:"https://me.fedapay.com/demarrage"
     },
     croissance: {
       name:"Accompagnement Croissance", price:"250€",
       who:"tu fais déjà du chiffre, mais quelque chose te plafonne. On audite ton business ensemble et on trouve le levier qui débloque ton prochain palier.",
       anchor:"250€ pour trouver le levier que tu ne vois plus tout seul. Un palier débloqué, et l'appel est rentabilisé largement.",
       feat:["60 min d'audit de ton business, en direct avec moi","On met le doigt sur ce qui te bloque vraiment","Les leviers exacts à activer pour passer ton palier","Des actions à lancer dès la fin de l'appel"],
-      card:"https://whop.com/checkout/plan_A8lrVLNSzejle", momo:"#"
+      card:"https://whop.com/checkout/plan_A8lrVLNSzejle", momo:"https://me.fedapay.com/croissance"
     }
   },
   blockedSectors: /trading|bourse|forex|march[ée]s?\s*financ|scalping/i,
@@ -482,6 +482,7 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 
 /* tracking — branche ici GA4 / Meta Pixel / Plausible */
 function track(event, data){
+  try{ if(window.va) window.va('event', {name:event}); }catch(e){}
   try{ if(window.plausible) window.plausible(event); }catch(e){}
   try{ if(window.gtag) window.gtag('event', event, data||{}); }catch(e){}
   console.log('track:', event, data||'');
@@ -663,5 +664,8 @@ renderRes();
   function reset(){clearInterval(timer);timer=setInterval(next,8000);}
 })();
 </script>
+<!-- Vercel Web Analytics -->
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
