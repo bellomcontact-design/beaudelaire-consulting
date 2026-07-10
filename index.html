@@ -296,13 +296,17 @@
   <!-- NEWSLETTER -->
   <section class="news" id="news">
     <div class="wrap">
-      <div class="eyebrow">Le chemin · gratuit</div>
-      <h2>Le chemin : scaler jusqu'à <span class="nowrap">30k€ par mois</span></h2>
-      <p class="lead">Les étapes concrètes pour faire passer ton business au palier supérieur, de ton niveau actuel jusqu'aux 6 chiffres mensuels. Offert, directement dans ta boîte mail.</p>
-      <form class="newsform" onsubmit="return subNews(event)">
+      <div class="eyebrow">Le chemin · guide gratuit pour débutants</div>
+      <h2>Le chemin : de 0 à ton <span class="nowrap">premier revenu en ligne</span></h2>
+      <p class="lead">Tu débutes et tu ne sais pas par où commencer ? Le guide pas à pas pour gagner ton premier argent en ligne, même avec juste un téléphone. Offert, à télécharger tout de suite.</p>
+      <form id="newsform" class="newsform" onsubmit="return subNews(event)">
         <input type="email" id="news_email" placeholder="ton@email.com" inputmode="email" autocomplete="email" required>
-        <button class="cta" type="submit">Envoie-moi le chemin</button>
+        <button class="cta" type="submit">Recevoir le chemin (gratuit)</button>
       </form>
+      <div id="newsDone" style="display:none;margin-top:6px">
+        <p class="lead" style="margin:0 0 14px">C'est bon, ton guide se télécharge. S'il ne démarre pas tout seul, clique ci-dessous.</p>
+        <a id="dlLink" class="cta" href="/le-chemin.pdf" download="Le-chemin-Beaudelaire.pdf">Télécharger « Le chemin » (PDF)</a>
+      </div>
     </div>
   </section>
 
@@ -592,8 +596,11 @@ function subNews(e){
     fetch(CONFIG.leadEndpoint,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({type:"newsletter",email})}).catch(()=>{});
   } else { console.log("NEWSLETTER (mode test):",email); }
   track('newsletter_signup');
-  alert("C'est noté ! Je t'envoie le chemin par email très vite.");
-  e.target.reset(); return false;
+  track('download_chemin');
+  document.getElementById('newsform').style.display='none';
+  document.getElementById('newsDone').style.display='block';
+  var a=document.getElementById('dlLink'); if(a){ try{ a.click(); }catch(err){} }
+  return false;
 }
 
 /* ---- Résultats clients (3 + voir plus / voir moins) ---- */
