@@ -32,13 +32,11 @@
  font-family:inherit;font-weight:700;font-size:13px;padding:7px 11px;cursor:pointer;transition:.12s}
  .langtoggle:hover{border-color:var(--green);color:var(--text)}
  /* barre d'achat fixe (mobile) */
- .buybar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;align-items:center;justify-content:space-between;gap:12px;
-   background:var(--card);border-top:1px solid var(--border);box-shadow:0 -6px 18px rgba(0,0,0,.08);
-   padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
- .buybar .bb-l{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.2}
- .buybar .bb-l b{font-size:15px;font-weight:800;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
- .buybar .bb-l span{font-size:14px;font-weight:800;color:var(--green)}
- .buybar a.bb-btn{flex:0 0 auto;background:var(--green2);color:#fff;font-weight:800;font-size:15.5px;padding:13px 24px;border-radius:11px;text-decoration:none;white-space:nowrap}
+ .buybar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;text-align:center;text-decoration:none;
+   background:var(--green2);color:#fff;font-weight:800;font-size:16.5px;letter-spacing:.01em;
+   box-shadow:0 -6px 20px rgba(0,0,0,.16);
+   padding:16px 16px calc(22px + env(safe-area-inset-bottom))}
+ .buybar .bb-price{color:#cdeed8}
  @media(max-width:680px){
    .brand{font-size:16px;white-space:nowrap}
    .topnav-in{position:relative}
@@ -48,8 +46,8 @@
    .navlinks.open{display:flex}
    .navlinks a{font-size:16px;padding:13px 2px}
    .navlinks a.nav-cta{background:var(--green2);color:#fff;border-radius:10px;text-align:center;margin-top:8px;padding:13px}
-   .buybar{display:flex}
-   body{padding-bottom:78px}
+   .buybar{display:block}
+   body{padding-bottom:96px}
  }
  .cta{display:inline-block;background:var(--green-btn);color:#fff;font-weight:700;font-size:16px;
  padding:16px 34px;border-radius:12px;text-decoration:none;border:none;cursor:pointer;
@@ -353,13 +351,7 @@
 </div><!-- /landing -->
 
 <!-- Barre d'achat fixe (mobile) -->
-<div class="buybar" id="buybar">
- <div class="bb-l">
- <b data-i18n="buy.label">Guide débutants</b>
- <span data-i18n="book.price">35 000 FCFA</span>
- </div>
- <a class="bb-btn" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n="buy.cta">Acheter</a>
-</div>
+<a class="buybar" id="buybar" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n-html="buy.full">Acheter le guide débutants · <span class="bb-price">35 000 FCFA</span></a>
 
 
 <!-- QUIZ -->
@@ -541,7 +533,7 @@ const I18N = {
  dl:"Télécharger « Le chemin » (PDF)"
  },
  book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.", price:"35 000 FCFA", cta:"Payer en mobile money", note:"Paiement mobile money (Afrique) · Téléchargement immédiat après paiement." },
- buy:{ label:"Guide débutants", cta:"Acheter" },
+ buy:{ full:'Acheter le guide débutants · <span class="bb-price">35 000 FCFA</span>' },
  final:{ h2:"Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.", cta:"Voir si je peux t'aider", micro:"2 minutes. Tu repars avec un plan, pas un argumentaire." },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Où en es-tu dans ton business ?",
@@ -638,7 +630,7 @@ const I18N = {
  dl:"Download “The path” (PDF)"
  },
  book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your first online business from zero, even with just a phone.", price:"35,000 FCFA", cta:"Pay with mobile money", note:"Mobile money payment (Africa) · Instant download after payment." },
- buy:{ label:"Beginners' guide", cta:"Buy" },
+ buy:{ full:'Buy the beginner guide · <span class="bb-price">35,000 FCFA</span>' },
  final:{ h2:"You can stay stuck for 5 more years.<br>Or fix it this week.", cta:"See if I can help you", micro:"2 minutes. You leave with a plan, not a pitch." },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Where are you in your business?",
@@ -710,6 +702,9 @@ const COUNTRIES=[
 /* ================================================================= */
 
 document.getElementById('yr').textContent = new Date().getFullYear();
+try{ if('scrollRestoration' in history) history.scrollRestoration='manual'; }catch(e){}
+if(!location.hash){ try{ window.scrollTo(0,0); }catch(e){} }
+window.addEventListener('load', function(){ if(!location.hash){ window.scrollTo(0,0); } });
 
 /* ---- Langue ---- */
 var LANG = (function(){
