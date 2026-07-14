@@ -33,10 +33,10 @@
  .langtoggle:hover{border-color:var(--green);color:var(--text)}
  /* barre d'achat fixe (mobile) */
  .buybar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;text-align:center;text-decoration:none;
-   background:var(--green2);color:#fff;font-weight:800;font-size:16.5px;letter-spacing:.01em;
+   background:var(--green-btn);color:#fff;font-weight:800;font-size:16.5px;letter-spacing:.01em;
    box-shadow:0 -6px 20px rgba(0,0,0,.16);
    padding:16px 16px calc(22px + env(safe-area-inset-bottom))}
- .buybar .bb-price{color:#cdeed8}
+ .buybar .bb-price{color:#bfe9cd}
  @media(max-width:680px){
    .brand{font-size:16px;white-space:nowrap}
    .topnav-in{position:relative}
@@ -45,7 +45,7 @@
      flex-direction:column;align-items:stretch;gap:0;padding:6px 20px 14px;display:none;box-shadow:0 10px 22px rgba(0,0,0,.07)}
    .navlinks.open{display:flex}
    .navlinks a{font-size:16px;padding:13px 2px}
-   .navlinks a.nav-cta{background:var(--green2);color:#fff;border-radius:10px;text-align:center;margin-top:8px;padding:13px}
+   .navlinks a.nav-cta{background:var(--green-btn);color:#fff;border-radius:10px;text-align:center;margin-top:8px;padding:13px}
    .buybar{display:block}
    body{padding-bottom:96px}
  }
@@ -351,7 +351,7 @@
 </div><!-- /landing -->
 
 <!-- Barre d'achat fixe (mobile) -->
-<a class="buybar" id="buybar" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n-html="buy.full">Acheter le guide débutants · <span class="bb-price">35 000 FCFA</span></a>
+<a class="buybar" id="buybar" href="#livre" data-i18n-html="buy.full">Acheter le guide débutants · <span class="bb-price">35 000 FCFA</span></a>
 
 
 <!-- QUIZ -->
