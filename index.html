@@ -301,6 +301,18 @@
  </div>
  </section>
 
+ <!-- LIVRE DÉBUTANTS (payant · mobile money) -->
+ <section class="band" id="livre">
+ <div class="wrap">
+ <div class="eyebrow" data-i18n="book.eyebrow">Pour les débutants</div>
+ <h2 data-i18n="book.h2">Le chemin des débutants</h2>
+ <p class="lead" data-i18n="book.lead">Le guide complet pour lancer ton business en ligne à partir de zéro, même avec juste un téléphone. 31 pages, à télécharger tout de suite après paiement.</p>
+ <div style="font-size:34px;font-weight:800;color:var(--green);margin:4px 0 16px" data-i18n="book.price">35 000 FCFA</div>
+ <a class="cta" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n="book.cta">Payer en mobile money</a>
+ <span class="micro" data-i18n="book.note">Paiement mobile money (Afrique) · Téléchargement immédiat après paiement.</span>
+ </div>
+ </section>
+
  <!-- CTA FINALE -->
  <section class="band" style="background:var(--bg2)">
  <div class="wrap">
@@ -491,6 +503,7 @@ const I18N = {
  done:"C'est bon, ton guide se télécharge. S'il ne démarre pas tout seul, clique ci-dessous.",
  dl:"Télécharger « Le chemin » (PDF)"
  },
+ book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton business en ligne à partir de zéro, même avec juste un téléphone. 31 pages, à télécharger tout de suite après paiement.", price:"35 000 FCFA", cta:"Payer en mobile money", note:"Paiement mobile money (Afrique) · Téléchargement immédiat après paiement." },
  final:{ h2:"Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.", cta:"Voir si je peux t'aider", micro:"2 minutes. Tu repars avec un plan, pas un argumentaire." },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Où en es-tu dans ton business ?",
@@ -586,6 +599,7 @@ const I18N = {
  done:"Done, your guide is downloading. If it doesn't start on its own, click below.",
  dl:"Download “The path” (PDF)"
  },
+ book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your online business from zero, even with just a phone. 31 pages, download instantly after payment.", price:"35,000 FCFA", cta:"Pay with mobile money", note:"Mobile money payment (Africa) · Instant download after payment." },
  final:{ h2:"You can stay stuck for 5 more years.<br>Or fix it this week.", cta:"See if I can help you", micro:"2 minutes. You leave with a plan, not a pitch." },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Where are you in your business?",
@@ -669,6 +683,33 @@ var LANG = (function(){
  try{ var s=localStorage.getItem('lang'); if(s==='fr'||s==='en') return s; }catch(e){}
  return (navigator.language||'en').toLowerCase().indexOf('fr')===0 ? 'fr' : 'en';
 })();
+/* ---- Attribution : d'ou vient la personne (1er contact, memorise) ---- */
+var ATTR = (function(){
+ var CODES={tt:'tiktok',ig:'instagram',yt:'youtube',fb:'facebook',li:'linkedin',x:'x',tw:'x'};
+ function infer(ref){
+  if(!ref) return '';
+  var r=ref.toLowerCase();
+  if(r.indexOf('beaudelaire')>=0) return '';
+  if(r.indexOf('tiktok')>=0) return 'tiktok';
+  if(r.indexOf('instagram')>=0) return 'instagram';
+  if(r.indexOf('youtube')>=0||r.indexOf('youtu.be')>=0) return 'youtube';
+  if(r.indexOf('facebook')>=0||r.indexOf('fb.')>=0) return 'facebook';
+  if(r.indexOf('linkedin')>=0) return 'linkedin';
+  if(r.indexOf('twitter')>=0||r.indexOf('x.com')>=0||r.indexOf('t.co')>=0) return 'x';
+  if(r.indexOf('google')>=0) return 'google';
+  try{ return new URL(ref).hostname.replace(/^www\./,''); }catch(e){ return 'autre'; }
+ }
+ var qs; try{ qs=new URLSearchParams(location.search); }catch(e){ qs=null; }
+ var sParam=((qs&&(qs.get('s')||qs.get('utm_source')))||'').toLowerCase();
+ var current = CODES[sParam] || sParam || infer(document.referrer) || 'direct';
+ var landing = ((location.pathname.match(/\/(fr|en)\b/i)||[])[0]) || location.pathname || '/';
+ var saved=null; try{ saved=JSON.parse(localStorage.getItem('attr')||'null'); }catch(e){}
+ if(!saved || !saved.source){
+  saved={ source: current, code: sParam||null, referrer: document.referrer||'', landing: landing, lang: LANG, ts: new Date().toISOString() };
+  try{ localStorage.setItem('attr', JSON.stringify(saved)); }catch(e){}
+ }
+ return saved;
+})();
 function T(){ return I18N[LANG]; }
 function getKey(obj,path){ return path.split('.').reduce(function(o,p){return (o&&o[p]!=null)?o[p]:null;},obj); }
 function applyI18N(){
@@ -692,11 +733,13 @@ function toggleLang(){
 
 /* tracking */
 function track(event, data){
- try{ if(window.va) window.va('event', {name:event}); }catch(e){}
- try{ if(window.plausible) window.plausible(event); }catch(e){}
- try{ if(window.gtag) window.gtag('event', event, data||{}); }catch(e){}
- console.log('track:', event, data||'');
+ var d = Object.assign({source:(ATTR&&ATTR.source)||'direct', lang:LANG}, data||{});
+ try{ if(window.va) window.va('event', Object.assign({name:event}, d)); }catch(e){}
+ try{ if(window.plausible) window.plausible(event, {props:d}); }catch(e){}
+ try{ if(window.gtag) window.gtag('event', event, d); }catch(e){}
+ console.log('track:', event, d);
 }
+track('visit');
 
 /* remplir les listes pays + indicatifs (selon la langue) */
 function fillCountries(){
@@ -800,7 +843,8 @@ function finish(){
  prenom:val('f_prenom'), nom:val('f_nom'), email:val('f_email'),
  pays:val('f_country'), indicatif:val('f_dial'), telephone:val('f_phone'),
  stage:answers.stage, revenue:answers.revenue, type:answers.type, typeDetail:answers.typeDetail,
- objectif:answers.objectif, urgence:answers.urgence, lang:LANG
+ objectif:answers.objectif, urgence:answers.urgence, lang:LANG,
+ source:ATTR.source, sourceCode:ATTR.code, referrer:ATTR.referrer, landing:ATTR.landing
  };
  if(!data.prenom||!data.nom||!data.email||!data.pays){ alert(t.js.alert_fill); return; }
  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){ alert(t.js.alert_email); return; }
@@ -822,7 +866,7 @@ function subNews(e){
  e.preventDefault();
  var email=document.getElementById('news_email').value.trim();
  if(CONFIG.leadEndpoint){
- fetch(CONFIG.leadEndpoint,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({type:"newsletter",email,lang:LANG})}).catch(function(){});
+ fetch(CONFIG.leadEndpoint,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({type:"newsletter",email,lang:LANG,source:ATTR.source,sourceCode:ATTR.code,referrer:ATTR.referrer,landing:ATTR.landing})}).catch(function(){});
  } else { console.log("NEWSLETTER (test):",email); }
  track('newsletter_signup'); track('download_chemin');
  document.getElementById('newsform').style.display='none';
