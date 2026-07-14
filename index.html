@@ -170,6 +170,7 @@
  <a class="brand" href="#">Beaudelaire Consulting</a>
  <div class="navlinks">
  <a href="#about" data-i18n="nav.about">Qui je suis</a>
+ <a href="#livre" data-i18n="nav.debutants">Débutants</a>
  <a href="#news" data-i18n="nav.chemin">Le chemin</a>
  <a class="cta nav-cta" href="#" onclick="startQuiz();return false;" data-i18n="nav.cta">Réserver un appel</a>
  <button class="langtoggle" id="langToggle" onclick="toggleLang()">EN</button>
@@ -284,7 +285,19 @@
  </div>
  </section>
 
- <!-- NEWSLETTER -->
+ <!-- LIVRE DÉBUTANTS (payant · mobile money) -->
+ <section class="band" id="livre">
+ <div class="wrap">
+ <div class="eyebrow" data-i18n="book.eyebrow">Pour les débutants</div>
+ <h2 data-i18n="book.h2">Le chemin des débutants</h2>
+ <p class="lead" data-i18n="book.lead">Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.</p>
+ <div style="font-size:34px;font-weight:800;color:var(--green);margin:4px 0 16px" data-i18n="book.price">35 000 FCFA</div>
+ <a class="cta" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n="book.cta">Payer en mobile money</a>
+ <span class="micro" data-i18n="book.note">Paiement mobile money (Afrique) · Téléchargement immédiat après paiement.</span>
+ </div>
+ </section>
+
+ <!-- NEWSLETTER (guide gratuit scaling) -->
  <section class="news" id="news">
  <div class="wrap">
  <div class="eyebrow" data-i18n="news.eyebrow">Le chemin · guide gratuit pour scaler</div>
@@ -298,18 +311,6 @@
  <p class="lead" style="margin:0 0 14px" data-i18n="news.done">C'est bon, ton guide se télécharge. S'il ne démarre pas tout seul, clique ci-dessous.</p>
  <a id="dlLink" class="cta" href="/le-chemin-fr.pdf" download="Le-chemin-Beaudelaire.pdf" data-i18n="news.dl">Télécharger « Le chemin » (PDF)</a>
  </div>
- </div>
- </section>
-
- <!-- LIVRE DÉBUTANTS (payant · mobile money) -->
- <section class="band" id="livre">
- <div class="wrap">
- <div class="eyebrow" data-i18n="book.eyebrow">Pour les débutants</div>
- <h2 data-i18n="book.h2">Le chemin des débutants</h2>
- <p class="lead" data-i18n="book.lead">Le guide complet pour lancer ton business en ligne à partir de zéro, même avec juste un téléphone. 31 pages, à télécharger tout de suite après paiement.</p>
- <div style="font-size:34px;font-weight:800;color:var(--green);margin:4px 0 16px" data-i18n="book.price">35 000 FCFA</div>
- <a class="cta" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n="book.cta">Payer en mobile money</a>
- <span class="micro" data-i18n="book.note">Paiement mobile money (Afrique) · Téléchargement immédiat après paiement.</span>
  </div>
  </section>
 
@@ -453,7 +454,7 @@
 const I18N = {
  fr: {
  _title:"Beaudelaire Consulting · Scale ton business",
- nav:{about:"Qui je suis", chemin:"Le chemin", cta:"Réserver un appel"},
+ nav:{about:"Qui je suis", debutants:"Débutants", chemin:"Le chemin", cta:"Réserver un appel"},
  hero:{
  badge:"Plus de 30 entrepreneurs accompagnés",
  h1:'Fais passer ton business à <span class="nowrap">30k€ par mois</span>.',
@@ -503,7 +504,7 @@ const I18N = {
  done:"C'est bon, ton guide se télécharge. S'il ne démarre pas tout seul, clique ci-dessous.",
  dl:"Télécharger « Le chemin » (PDF)"
  },
- book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton business en ligne à partir de zéro, même avec juste un téléphone. 31 pages, à télécharger tout de suite après paiement.", price:"35 000 FCFA", cta:"Payer en mobile money", note:"Paiement mobile money (Afrique) · Téléchargement immédiat après paiement." },
+ book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.", price:"35 000 FCFA", cta:"Payer en mobile money", note:"Paiement mobile money (Afrique) · Téléchargement immédiat après paiement." },
  final:{ h2:"Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.", cta:"Voir si je peux t'aider", micro:"2 minutes. Tu repars avec un plan, pas un argumentaire." },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Où en es-tu dans ton business ?",
@@ -549,7 +550,7 @@ const I18N = {
  },
  en: {
  _title:"Beaudelaire Consulting · Scale your business",
- nav:{about:"About me", chemin:"The path", cta:"Book a call"},
+ nav:{about:"About me", debutants:"Beginners", chemin:"The path", cta:"Book a call"},
  hero:{
  badge:"30+ entrepreneurs helped",
  h1:'Take your business to <span class="nowrap">$30k a month</span>.',
@@ -599,7 +600,7 @@ const I18N = {
  done:"Done, your guide is downloading. If it doesn't start on its own, click below.",
  dl:"Download “The path” (PDF)"
  },
- book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your online business from zero, even with just a phone. 31 pages, download instantly after payment.", price:"35,000 FCFA", cta:"Pay with mobile money", note:"Mobile money payment (Africa) · Instant download after payment." },
+ book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your first online business from zero, even with just a phone.", price:"35,000 FCFA", cta:"Pay with mobile money", note:"Mobile money payment (Africa) · Instant download after payment." },
  final:{ h2:"You can stay stuck for 5 more years.<br>Or fix it this week.", cta:"See if I can help you", micro:"2 minutes. You leave with a plan, not a pitch." },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Where are you in your business?",
