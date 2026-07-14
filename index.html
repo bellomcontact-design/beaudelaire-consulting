@@ -21,14 +21,36 @@
  .topnav{position:sticky;top:0;z-index:40;background:rgba(250,248,243,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
  .topnav-in{display:flex;align-items:center;justify-content:space-between;max-width:1000px;margin:0 auto;padding:13px 20px}
  .brand{font-family:'Inter',sans-serif;font-weight:700;font-size:20px;text-decoration:none;color:var(--text);letter-spacing:-.01em}
+ .navright{display:flex;align-items:center;gap:14px}
  .navlinks{display:flex;align-items:center;gap:22px}
  .navlinks a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:600;transition:color .12s}
  .navlinks a:hover{color:var(--text)}
  .navlinks a.nav-cta{font-size:14px;padding:10px 18px;border-radius:10px;color:#fff}
+ .navctl{display:flex;align-items:center;gap:9px}
+ .navburger{display:none;background:none;border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:19px;line-height:1;width:40px;height:38px;cursor:pointer}
  .langtoggle{background:none;border:1px solid var(--border);border-radius:8px;color:var(--muted);
  font-family:inherit;font-weight:700;font-size:13px;padding:7px 11px;cursor:pointer;transition:.12s}
  .langtoggle:hover{border-color:var(--green);color:var(--text)}
- @media(max-width:680px){.navlinks a:not(.nav-cta){display:none}}
+ /* barre d'achat fixe (mobile) */
+ .buybar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;align-items:center;justify-content:space-between;gap:12px;
+   background:var(--card);border-top:1px solid var(--border);box-shadow:0 -6px 18px rgba(0,0,0,.08);
+   padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+ .buybar .bb-l{display:flex;flex-direction:column;line-height:1.15}
+ .buybar .bb-l b{font-size:14.5px;font-weight:800;color:var(--text)}
+ .buybar .bb-l span{font-size:13px;font-weight:800;color:var(--green)}
+ .buybar a.bb-btn{background:var(--green2);color:#fff;font-weight:800;font-size:15px;padding:12px 22px;border-radius:11px;text-decoration:none;white-space:nowrap}
+ @media(max-width:680px){
+   .brand{font-size:16px;white-space:nowrap}
+   .topnav-in{position:relative}
+   .navburger{display:block}
+   .navlinks{position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:1px solid var(--border);
+     flex-direction:column;align-items:stretch;gap:0;padding:6px 20px 14px;display:none;box-shadow:0 10px 22px rgba(0,0,0,.07)}
+   .navlinks.open{display:flex}
+   .navlinks a{font-size:16px;padding:13px 2px}
+   .navlinks a.nav-cta{background:var(--green2);color:#fff;border-radius:10px;text-align:center;margin-top:8px;padding:13px}
+   .buybar{display:flex}
+   body{padding-bottom:78px}
+ }
  .cta{display:inline-block;background:var(--green-btn);color:#fff;font-weight:700;font-size:16px;
  padding:16px 34px;border-radius:12px;text-decoration:none;border:none;cursor:pointer;
  font-family:inherit;transition:transform .12s ease,opacity .12s ease}
@@ -168,12 +190,17 @@
 <nav class="topnav">
  <div class="topnav-in">
  <a class="brand" href="#">Beaudelaire Consulting</a>
- <div class="navlinks">
- <a href="#about" data-i18n="nav.about">Qui je suis</a>
- <a href="#livre" data-i18n="nav.debutants">Débutants</a>
- <a href="#news" data-i18n="nav.chemin">Le chemin</a>
- <a class="cta nav-cta" href="#" onclick="startQuiz();return false;" data-i18n="nav.cta">Réserver un appel</a>
+ <div class="navright">
+ <div class="navlinks" id="navlinks">
+ <a href="#about" data-i18n="nav.about" onclick="closeMenu()">Qui je suis</a>
+ <a href="#livre" data-i18n="nav.debutants" onclick="closeMenu()">Débutants</a>
+ <a href="#news" data-i18n="nav.chemin" onclick="closeMenu()">Le chemin</a>
+ <a class="cta nav-cta" href="#" onclick="startQuiz();closeMenu();return false;" data-i18n="nav.cta">Réserver un appel</a>
+ </div>
+ <div class="navctl">
  <button class="langtoggle" id="langToggle" onclick="toggleLang()">EN</button>
+ <button class="navburger" id="navBurger" onclick="toggleMenu()" aria-label="Menu">☰</button>
+ </div>
  </div>
  </div>
 </nav>
@@ -324,6 +351,15 @@
  </section>
 
 </div><!-- /landing -->
+
+<!-- Barre d'achat fixe (mobile) -->
+<div class="buybar" id="buybar">
+ <div class="bb-l">
+ <b data-i18n="buy.label">Le chemin des débutants</b>
+ <span data-i18n="book.price">35 000 FCFA</span>
+ </div>
+ <a class="bb-btn" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n="buy.cta">Acheter</a>
+</div>
 
 
 <!-- QUIZ -->
@@ -505,6 +541,7 @@ const I18N = {
  dl:"Télécharger « Le chemin » (PDF)"
  },
  book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.", price:"35 000 FCFA", cta:"Payer en mobile money", note:"Paiement mobile money (Afrique) · Téléchargement immédiat après paiement." },
+ buy:{ label:"Le chemin des débutants", cta:"Acheter" },
  final:{ h2:"Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.", cta:"Voir si je peux t'aider", micro:"2 minutes. Tu repars avec un plan, pas un argumentaire." },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Où en es-tu dans ton business ?",
@@ -601,6 +638,7 @@ const I18N = {
  dl:"Download “The path” (PDF)"
  },
  book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your first online business from zero, even with just a phone.", price:"35,000 FCFA", cta:"Pay with mobile money", note:"Mobile money payment (Africa) · Instant download after payment." },
+ buy:{ label:"Le chemin des débutants", cta:"Buy" },
  final:{ h2:"You can stay stuck for 5 more years.<br>Or fix it this week.", cta:"See if I can help you", micro:"2 minutes. You leave with a plan, not a pitch." },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Where are you in your business?",
@@ -731,6 +769,8 @@ function toggleLang(){
  try{ localStorage.setItem('lang',LANG); }catch(e){}
  applyI18N();
 }
+function toggleMenu(){ var n=document.getElementById('navlinks'); if(n) n.classList.toggle('open'); }
+function closeMenu(){ var n=document.getElementById('navlinks'); if(n) n.classList.remove('open'); }
 
 /* tracking */
 function track(event, data){
