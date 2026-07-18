@@ -325,17 +325,15 @@
  <!-- NEWSLETTER (guide gratuit scaling) -->
  <section class="news" id="news">
  <div class="wrap">
- <div class="eyebrow" data-i18n="news.eyebrow">Le chemin · guide gratuit pour scaler</div>
+ <div class="eyebrow" data-i18n="news.eyebrow">Le chemin · le guide pour scaler</div>
  <h2 data-i18n-html="news.h2">Tu bosses comme un fou et t'avances plus ? <span class="nowrap">Voilà le chemin.</span></h2>
- <p class="lead" data-i18n="news.lead">Tu gagnes déjà de l'argent mais tu plafonnes ? Le guide étape par étape pour rendre ton business irrésistible et passer au palier au-dessus, sans changer de véhicule. Offert, à télécharger tout de suite.</p>
- <form id="newsform" class="newsform" onsubmit="return subNews(event)">
- <input type="email" id="news_email" placeholder="ton@email.com" data-i18n-ph="news.ph" inputmode="email" autocomplete="email" required>
- <button class="cta" type="submit" data-i18n="news.cta">Recevoir le chemin (gratuit)</button>
- </form>
- <div id="newsDone" style="display:none;margin-top:6px">
- <p class="lead" style="margin:0 0 14px" data-i18n="news.done">C'est bon, ton guide se télécharge. S'il ne démarre pas tout seul, clique ci-dessous.</p>
- <a id="dlLink" class="cta" href="/le-chemin-fr.pdf" download="Le-chemin-Beaudelaire.pdf" data-i18n="news.dl">Télécharger « Le chemin » (PDF)</a>
+ <p class="lead" data-i18n="news.lead">Tu gagnes déjà de l'argent mais tu plafonnes ? Le guide étape par étape pour rendre ton business irrésistible et passer au palier au-dessus, sans changer de véhicule.</p>
+ <div style="font-size:34px;font-weight:800;color:var(--green);margin:8px 0 18px" data-i18n="news.price">165 000 FCFA</div>
+ <div style="display:flex;flex-direction:column;gap:12px;align-items:center;max-width:440px;margin:0 auto">
+ <a class="cta" style="width:100%" href="https://whop.com/checkout/plan_A8lrVLNSzejle" target="_blank" rel="noopener" data-i18n="news.card">Payer par carte (Visa / Mastercard)</a>
+ <a class="cta" style="width:100%;background:#fffefb;color:var(--green-btn);border:2px solid var(--green-btn)" href="https://me.fedapay.com/croissance" target="_blank" rel="noopener" data-i18n="news.momo">Payer en mobile money (Afrique)</a>
  </div>
+ <span class="micro" data-i18n="news.note">Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.</span>
  </div>
  </section>
 
@@ -525,12 +523,11 @@ const I18N = {
  q4:"Est-ce que l'appel est un argumentaire de vente ?", a4:"Non. C'est un vrai diagnostic : on travaille sur ton business pendant l'appel et tu repars avec un plan concret, que tu ailles plus loin avec moi ou non."
  },
  news:{
- eyebrow:"Le chemin · guide gratuit pour scaler",
+ eyebrow:"Le chemin · le guide pour scaler",
  h2:'Tu bosses comme un fou et t\'avances plus ? <span class="nowrap">Voilà le chemin.</span>',
- lead:"Tu gagnes déjà de l'argent mais tu plafonnes ? Le guide étape par étape pour rendre ton business irrésistible et passer au palier au-dessus, sans changer de véhicule. Offert, à télécharger tout de suite.",
- ph:"ton@email.com", cta:"Recevoir le chemin (gratuit)",
- done:"C'est bon, ton guide se télécharge. S'il ne démarre pas tout seul, clique ci-dessous.",
- dl:"Télécharger « Le chemin » (PDF)"
+ lead:"Tu gagnes déjà de l'argent mais tu plafonnes ? Le guide étape par étape pour rendre ton business irrésistible et passer au palier au-dessus, sans changer de véhicule.",
+ price:"165 000 FCFA", card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)",
+ note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement."
  },
  book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.", price:"35 000 FCFA", cta:"Payer en mobile money", note:"Paiement mobile money (Afrique) · Téléchargement immédiat après paiement." },
  buy:{ full:'Acheter le guide débutants · <span class="bb-price">35 000 FCFA</span>' },
@@ -622,12 +619,11 @@ const I18N = {
  q4:"Is the call a sales pitch?", a4:"No. It's a real diagnostic: we work on your business during the call and you leave with a concrete plan, whether you go further with me or not."
  },
  news:{
- eyebrow:"The path · free guide to scale",
+ eyebrow:"The path · the guide to scale",
  h2:'Working like crazy but going nowhere? <span class="nowrap">Here\'s the path.</span>',
- lead:"Already making money but stuck at a plateau? The step-by-step guide to make your business irresistible and reach the next level, without switching vehicles. Free, download it right now.",
- ph:"you@email.com", cta:"Get the path (free)",
- done:"Done, your guide is downloading. If it doesn't start on its own, click below.",
- dl:"Download “The path” (PDF)"
+ lead:"Already making money but stuck at a plateau? The step-by-step guide to make your business irresistible and reach the next level, without switching vehicles.",
+ price:"165,000 FCFA", card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)",
+ note:"Card (international) or mobile money (Africa) · Instant access after payment."
  },
  book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your first online business from zero, even with just a phone.", price:"35,000 FCFA", cta:"Pay with mobile money", note:"Mobile money payment (Africa) · Instant download after payment." },
  buy:{ full:'Buy the beginner guide · <span class="bb-price">35,000 FCFA</span>' },
