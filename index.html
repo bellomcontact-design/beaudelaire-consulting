@@ -452,6 +452,13 @@
  <div class="rcheck">✓</div>
  <h2 id="rHead" data-i18n="result.head">C'est bon, je peux t'aider à débloquer ça</h2>
  <p class="lead" id="rWho" style="margin-bottom:0"></p>
+ <div class="rcard" id="rGuide" style="display:none;margin-bottom:14px">
+ <div class="name" id="rgName"></div>
+ <div class="price" id="rgPrice"></div>
+ <p class="anchor" id="rgLine"></p>
+ <a class="paybtn" id="rgBuy" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide')"><b id="rgCta">Prendre le guide</b><span>Paiement mobile money (Afrique) · Téléchargement immédiat</span></a>
+ </div>
+ <div id="rOr" style="display:none;font-weight:800;color:var(--muted);margin:2px 0 14px;letter-spacing:.14em;font-size:13px">OU</div>
  <div class="rcard" id="rcard">
  <div class="name" id="rName"></div>
  <div class="price" id="rPrice"></div>
@@ -459,8 +466,8 @@
  <ul class="feat" id="rFeat"></ul>
  <p class="reassure" data-i18n="result.reassure">Un vrai diagnostic de ton business, pas un argumentaire de vente déguisé. Tu repars avec un plan clair, quoi qu'il arrive.</p>
  <div class="pay">
- <a class="paybtn" id="payCard" href="#" target="_blank" rel="noopener" onclick="track('click_pay_card')"><b data-i18n="result.book">Réserver mon appel</b><span data-i18n="result.card">Paiement par carte · Visa / Mastercard</span></a>
- <a class="paybtn" id="payMomo" href="#" target="_blank" rel="noopener" onclick="track('click_pay_momo')"><b data-i18n="result.book">Réserver mon appel</b><span data-i18n="result.momo">Paiement Mobile Money · Orange, MTN, Wave</span></a>
+ <a class="paybtn" id="payCard" href="#" target="_blank" rel="noopener" onclick="track('click_pay_card')"><b data-i18n="result.book">Réserver mon appel</b><span id="payCardSub" data-i18n="result.card">Paiement par carte · Visa / Mastercard</span></a>
+ <a class="paybtn" id="payMomo" href="#" target="_blank" rel="noopener" onclick="track('click_pay_momo')"><b data-i18n="result.book">Réserver mon appel</b><span id="payMomoSub" data-i18n="result.momo">Paiement Mobile Money · Orange, MTN, Wave</span></a>
  </div>
  <p class="guarantee" data-i18n="result.guarantee">Paiement sécurisé · Réservation immédiate de ton créneau</p>
  </div>
@@ -555,7 +562,8 @@ const I18N = {
  head:"C'est bon, je peux t'aider à débloquer ça",
  reassure:"Un vrai diagnostic de ton business, pas un argumentaire de vente déguisé. Tu repars avec un plan clair, quoi qu'il arrive.",
  book:"Réserver mon appel", card:"Paiement par carte · Visa / Mastercard", momo:"Paiement Mobile Money · Orange, MTN, Wave",
- guarantee:"Paiement sécurisé · Réservation immédiate de ton créneau", home:"Revenir à l'accueil"
+ guarantee:"Paiement sécurisé · Réservation immédiate de ton créneau", home:"Revenir à l'accueil",
+ guideopt:{ name:"Le guide des débutants", price:"35 000 FCFA", line:"Tu préfères commencer par toi-même, à ton rythme ? Prends le guide complet.", cta:"Prendre le guide" }
  },
  js:{
  alert_fill:"Merci de remplir ton prénom, ton nom, ton email et ton pays.",
@@ -564,11 +572,11 @@ const I18N = {
  blocked_body:"Je n'accompagne pas les activités de trading ni les marchés financiers. Pour tout autre projet, je serai ravi de t'aider, reviens quand tu veux."
  },
  offers:{
- demarrage:{ name:"Accompagnement Démarrage", price:"130€",
+ demarrage:{ name:"Accompagnement Démarrage", price:"130€", fcfa:"85 000 FCFA",
  who:"tu es au tout début, et c'est le bon moment. On transforme ton idée floue en plan d'action clair, et tu sais enfin par quoi commencer.",
  anchor:"130€ pour éviter des mois à tâtonner seul. Un seul bon départ change toute la suite.",
  feat:["60 min en direct avec moi, rien que pour ton projet","On clarifie ton idée et ta première offre qui rapporte","Un plan d'action prêt à exécuter en sortant de l'appel","Tes 3 premières étapes, dans le bon ordre"] },
- croissance:{ name:"Accompagnement Croissance", price:"250€",
+ croissance:{ name:"Accompagnement Croissance", price:"250€", fcfa:"164 000 FCFA",
  who:"tu fais déjà du chiffre, mais quelque chose te plafonne. On audite ton business ensemble et on trouve le levier qui débloque ton prochain palier.",
  anchor:"250€ pour trouver le levier que tu ne vois plus tout seul. Un palier débloqué, et l'appel est rentabilisé largement.",
  feat:["60 min d'audit de ton business, en direct avec moi","On met le doigt sur ce qui te bloque vraiment","Les leviers exacts à activer pour passer ton palier","Des actions à lancer dès la fin de l'appel"] }
@@ -651,7 +659,8 @@ const I18N = {
  head:"Good news, I can help you unlock this",
  reassure:"A real diagnostic of your business, not a disguised sales pitch. You leave with a clear plan, no matter what.",
  book:"Book my call", card:"Card payment · Visa / Mastercard", momo:"Mobile Money · Orange, MTN, Wave",
- guarantee:"Secure payment · Instant slot booking · billed in EUR at checkout", home:"Back to home"
+ guarantee:"Secure payment · Instant slot booking · billed in EUR at checkout", home:"Back to home",
+ guideopt:{ name:"Le chemin des débutants (French guide)", price:"35,000 FCFA", line:"Prefer to start on your own, at your pace? Get the complete guide.", cta:"Get the guide" }
  },
  js:{
  alert_fill:"Please fill in your first name, last name, email and country.",
@@ -660,11 +669,11 @@ const I18N = {
  blocked_body:"I don't help with trading or financial markets. For any other project I'd be glad to help, come back anytime."
  },
  offers:{
- demarrage:{ name:"Starter Session", price:"$149",
+ demarrage:{ name:"Starter Session", price:"$149", fcfa:"85 000 FCFA",
  who:"you're right at the beginning, and it's the perfect time. We turn your fuzzy idea into a clear action plan, and you finally know where to start.",
  anchor:"$149 to avoid months of fumbling alone. One good start changes everything after.",
  feat:["60 min live with me, just for your project","We clarify your idea and your first offer that actually sells","An action plan ready to execute when you hang up","Your first 3 steps, in the right order"] },
- croissance:{ name:"Growth Session", price:"$286",
+ croissance:{ name:"Growth Session", price:"$286", fcfa:"164 000 FCFA",
  who:"you're already making money, but something is capping you. We audit your business together and find the lever that unlocks your next level.",
  anchor:"$286 to find the lever you can't see on your own. Unlock one level and the call pays for itself many times over.",
  feat:["60 min business audit, live with me","We put a finger on what's really blocking you","The exact levers to pull to break your ceiling","Actions to launch the moment the call ends"] }
@@ -859,7 +868,7 @@ function renderResult(){
  document.getElementById('rcard').style.display='block';
  document.getElementById('rWho').textContent = (lastPrenom? lastPrenom+", " : "") + offer.who;
  document.getElementById('rName').textContent = offer.name;
- document.getElementById('rPrice').textContent = offer.price;
+ document.getElementById('rPrice').textContent = offer.price + (offer.fcfa? ' · '+offer.fcfa : '');
  document.getElementById('rAnchor').textContent = offer.anchor;
  var ul=document.getElementById('rFeat'); ul.innerHTML="";
  offer.feat.forEach(function(f){var li=document.createElement('li');li.textContent=f;ul.appendChild(li);});
@@ -867,6 +876,18 @@ function renderResult(){
  document.getElementById('payMomo').href=links.momo;
  document.getElementById('payCard').style.display=(links.card&&links.card!=='#')?'block':'none';
  document.getElementById('payMomo').style.display=(links.momo&&links.momo!=='#')?'block':'none';
+ var scard=document.getElementById('payCardSub'); if(scard) scard.textContent=offer.price+' · '+t.result.card;
+ var smomo=document.getElementById('payMomoSub'); if(smomo) smomo.textContent=(offer.fcfa||offer.price)+' · '+t.result.momo;
+ var g=t.result.guideopt; var showGuide=(lastOfferKey==='demarrage')&&g;
+ var gd=document.getElementById('rGuide'), gor=document.getElementById('rOr');
+ if(showGuide){
+   gd.style.display='block'; gor.style.display='block';
+   document.getElementById('rgName').textContent=g.name;
+   document.getElementById('rgPrice').textContent=g.price;
+   document.getElementById('rgLine').textContent=g.line;
+   document.getElementById('rgCta').textContent=g.cta;
+   document.getElementById('rgBuy').href='https://me.fedapay.com/fz5Q_7oB';
+ } else { gd.style.display='none'; gor.style.display='none'; }
 }
 
 function finish(){
