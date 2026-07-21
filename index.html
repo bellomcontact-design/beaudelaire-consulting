@@ -37,9 +37,9 @@
    box-shadow:0 -6px 20px rgba(0,0,0,.16);
    padding:16px 16px calc(22px + env(safe-area-inset-bottom))}
  .buybar .bb-price{color:#bfe9cd}
- .pnow{display:block;font-size:36px;font-weight:800;color:var(--green);white-space:nowrap;line-height:1.02}
+ .pnow{display:block;text-align:center;font-size:36px;font-weight:800;color:var(--green);white-space:nowrap;line-height:1.02}
  .pnow sup{font-size:.4em;font-weight:800;vertical-align:super;margin-left:3px}
- .pold{display:block;font-size:16px;font-weight:700;color:#9a958a;text-decoration:line-through;white-space:nowrap;margin-top:5px}
+ .pold{display:block;text-align:center;font-size:16px;font-weight:700;color:#9a958a;text-decoration:line-through;white-space:nowrap;margin-top:5px}
  @media(max-width:680px){
    .brand{font-size:16px;white-space:nowrap}
    .topnav-in{position:relative}
@@ -331,7 +331,7 @@
  <div class="eyebrow" data-i18n="news.eyebrow">Le chemin · le guide pour scaler</div>
  <h2 data-i18n-html="news.h2">Tu bosses comme un fou et t'avances plus ? <span class="nowrap">Voilà le chemin.</span></h2>
  <p class="lead" data-i18n="news.lead">Tu gagnes déjà de l'argent mais tu plafonnes ? Le guide étape par étape pour rendre ton business irrésistible et passer au palier au-dessus, sans changer de véhicule.</p>
- <div style="font-size:34px;font-weight:800;color:var(--green);margin:8px 0 18px" data-i18n="news.price">165 000 FCFA</div>
+ <div style="margin:8px 0 18px" data-i18n-html="news.price"><span class="pnow">165 000<sup>FCFA</sup></span></div>
  <div style="display:flex;flex-direction:column;gap:12px;align-items:center;max-width:440px;margin:0 auto">
  <a class="cta" style="width:100%" href="https://whop.com/checkout/plan_A8lrVLNSzejle" target="_blank" rel="noopener" data-i18n="news.card">Payer par carte (Visa / Mastercard)</a>
  <a class="cta" style="width:100%;background:#fffefb;color:var(--green-btn);border:2px solid var(--green-btn)" href="https://me.fedapay.com/croissance" target="_blank" rel="noopener" data-i18n="news.momo">Payer en mobile money (Afrique)</a>
@@ -536,7 +536,7 @@ const I18N = {
  eyebrow:"Le chemin · le guide pour scaler",
  h2:'Tu bosses comme un fou et t\'avances plus ? <span class="nowrap">Voilà le chemin.</span>',
  lead:"Tu gagnes déjà de l'argent mais tu plafonnes ? Le guide étape par étape pour rendre ton business irrésistible et passer au palier au-dessus, sans changer de véhicule.",
- price:"165 000 FCFA", card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)",
+ price:'<span class="pnow">165 000<sup>FCFA</sup></span>', card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)",
  note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement."
  },
  book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.", price:'<span class="pnow">35 000<sup>FCFA</sup></span><span class="pold">55 000 FCFA</span>', cta:"Payer en mobile money", note:"Paiement mobile money (Afrique) · Téléchargement immédiat après paiement." },
@@ -633,7 +633,7 @@ const I18N = {
  eyebrow:"The path · the guide to scale",
  h2:'Working like crazy but going nowhere? <span class="nowrap">Here\'s the path.</span>',
  lead:"Already making money but stuck at a plateau? The step-by-step guide to make your business irresistible and reach the next level, without switching vehicles.",
- price:"165,000 FCFA", card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)",
+ price:'<span class="pnow">165,000<sup>FCFA</sup></span>', card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)",
  note:"Card (international) or mobile money (Africa) · Instant access after payment."
  },
  book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your first online business from zero, even with just a phone.", price:'<span class="pnow">35,000<sup>FCFA</sup></span><span class="pold">55,000 FCFA</span>', cta:"Pay with mobile money", note:"Mobile money payment (Africa) · Instant download after payment." },
