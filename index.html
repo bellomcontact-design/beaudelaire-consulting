@@ -37,6 +37,9 @@
    box-shadow:0 -6px 20px rgba(0,0,0,.16);
    padding:16px 16px calc(22px + env(safe-area-inset-bottom))}
  .buybar .bb-price{color:#bfe9cd}
+ .pnow{display:block;font-size:36px;font-weight:800;color:var(--green);white-space:nowrap;line-height:1.02}
+ .pnow sup{font-size:.4em;font-weight:800;vertical-align:super;margin-left:3px}
+ .pold{display:block;font-size:16px;font-weight:700;color:#9a958a;text-decoration:line-through;white-space:nowrap;margin-top:5px}
  @media(max-width:680px){
    .brand{font-size:16px;white-space:nowrap}
    .topnav-in{position:relative}
@@ -316,7 +319,7 @@
  <div class="eyebrow" data-i18n="book.eyebrow">Pour les débutants</div>
  <h2 data-i18n="book.h2">Le chemin des débutants</h2>
  <p class="lead" data-i18n="book.lead">Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.</p>
- <div style="font-size:34px;font-weight:800;color:var(--green);margin:4px 0 16px" data-i18n-html="book.price"><span style="text-decoration:line-through;color:#9a958a;font-weight:700;font-size:.6em;margin-right:8px">55 000 FCFA</span>35 000 FCFA</div>
+ <div style="margin:6px 0 18px" data-i18n-html="book.price"><span class="pnow">35 000<sup>FCFA</sup></span><span class="pold">55 000 FCFA</span></div>
  <a class="cta" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n="book.cta">Payer en mobile money</a>
  <span class="micro" data-i18n="book.note">Paiement mobile money (Afrique) · Téléchargement immédiat après paiement.</span>
  </div>
@@ -536,7 +539,7 @@ const I18N = {
  price:"165 000 FCFA", card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)",
  note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement."
  },
- book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.", price:'<span style="text-decoration:line-through;color:#9a958a;font-weight:700;font-size:.6em;margin-right:8px">55 000 FCFA</span>35 000 FCFA', cta:"Payer en mobile money", note:"Paiement mobile money (Afrique) · Téléchargement immédiat après paiement." },
+ book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.", price:'<span class="pnow">35 000<sup>FCFA</sup></span><span class="pold">55 000 FCFA</span>', cta:"Payer en mobile money", note:"Paiement mobile money (Afrique) · Téléchargement immédiat après paiement." },
  buy:{ full:'Acheter le guide débutants · <span style="text-decoration:line-through;opacity:.6;font-weight:700;margin-right:6px">55 000</span><span class="bb-price">35 000 FCFA</span>' },
  final:{ h2:"Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.", cta:"Voir si je peux t'aider", micro:"2 minutes. Tu repars avec un plan, pas un argumentaire." },
  quiz:{
@@ -563,7 +566,7 @@ const I18N = {
  reassure:"Un vrai diagnostic de ton business, pas un argumentaire de vente déguisé. Tu repars avec un plan clair, quoi qu'il arrive.",
  book:"Réserver mon appel", card:"Paiement par carte · Visa / Mastercard", momo:"Paiement Mobile Money · Orange, MTN, Wave",
  guarantee:"Paiement sécurisé · Réservation immédiate de ton créneau", home:"Revenir à l'accueil",
- guideopt:{ name:"Le guide des débutants", price:'<span style="text-decoration:line-through;color:#9a958a;font-weight:700;font-size:.62em;margin-right:7px">55 000 FCFA</span>35 000 FCFA', line:"Tu préfères commencer par toi-même, à ton rythme ? Prends le guide complet.", cta:"Prendre le guide" }
+ guideopt:{ name:"Le guide des débutants", price:'<span class="pnow">35 000<sup>FCFA</sup></span><span class="pold">55 000 FCFA</span>', line:"Tu préfères commencer par toi-même, à ton rythme ? Prends le guide complet.", cta:"Prendre le guide" }
  },
  js:{
  alert_fill:"Merci de remplir ton prénom, ton nom, ton email et ton pays.",
@@ -572,11 +575,11 @@ const I18N = {
  blocked_body:"Je n'accompagne pas les activités de trading ni les marchés financiers. Pour tout autre projet, je serai ravi de t'aider, reviens quand tu veux."
  },
  offers:{
- demarrage:{ name:"Accompagnement Démarrage", price:"130€", fcfa:"85 000 FCFA",
+ demarrage:{ name:"Accompagnement Démarrage", price:"130€", fcfa:"85 000 FCFA", pricehtml:'<span class="pnow">85 000<sup>FCFA</sup></span><span class="pold">150 000 FCFA</span>',
  who:"tu es au tout début, et c'est le bon moment. On transforme ton idée floue en plan d'action clair, et tu sais enfin par quoi commencer.",
  anchor:"130€ pour éviter des mois à tâtonner seul. Un seul bon départ change toute la suite.",
- feat:["60 min en direct avec moi, rien que pour ton projet","On clarifie ton idée et ta première offre qui rapporte","Un plan d'action prêt à exécuter en sortant de l'appel","Tes 3 premières étapes, dans le bon ordre"] },
- croissance:{ name:"Accompagnement Croissance", price:"250€", fcfa:"164 000 FCFA",
+ feat:["Le guide des débutants, offert et expliqué pendant l'appel","60 min en direct avec moi, rien que pour ton projet","On clarifie ton idée et ta première offre qui rapporte","Un plan d'action prêt à exécuter en sortant de l'appel","Tes 3 premières étapes, dans le bon ordre"] },
+ croissance:{ name:"Accompagnement Croissance", price:"250€", fcfa:"164 000 FCFA", pricehtml:'<span class="pnow" style="font-size:28px">250€ · 164 000 FCFA</span>',
  who:"tu fais déjà du chiffre, mais quelque chose te plafonne. On audite ton business ensemble et on trouve le levier qui débloque ton prochain palier.",
  anchor:"250€ pour trouver le levier que tu ne vois plus tout seul. Un palier débloqué, et l'appel est rentabilisé largement.",
  feat:["60 min d'audit de ton business, en direct avec moi","On met le doigt sur ce qui te bloque vraiment","Les leviers exacts à activer pour passer ton palier","Des actions à lancer dès la fin de l'appel"] }
@@ -633,7 +636,7 @@ const I18N = {
  price:"165,000 FCFA", card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)",
  note:"Card (international) or mobile money (Africa) · Instant access after payment."
  },
- book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your first online business from zero, even with just a phone.", price:'<span style="text-decoration:line-through;color:#9a958a;font-weight:700;font-size:.6em;margin-right:8px">55,000 FCFA</span>35,000 FCFA', cta:"Pay with mobile money", note:"Mobile money payment (Africa) · Instant download after payment." },
+ book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your first online business from zero, even with just a phone.", price:'<span class="pnow">35,000<sup>FCFA</sup></span><span class="pold">55,000 FCFA</span>', cta:"Pay with mobile money", note:"Mobile money payment (Africa) · Instant download after payment." },
  buy:{ full:'Buy the beginner guide · <span style="text-decoration:line-through;opacity:.6;font-weight:700;margin-right:6px">55,000</span><span class="bb-price">35,000 FCFA</span>' },
  final:{ h2:"You can stay stuck for 5 more years.<br>Or fix it this week.", cta:"See if I can help you", micro:"2 minutes. You leave with a plan, not a pitch." },
  quiz:{
@@ -660,7 +663,7 @@ const I18N = {
  reassure:"A real diagnostic of your business, not a disguised sales pitch. You leave with a clear plan, no matter what.",
  book:"Book my call", card:"Card payment · Visa / Mastercard", momo:"Mobile Money · Orange, MTN, Wave",
  guarantee:"Secure payment · Instant slot booking · billed in EUR at checkout", home:"Back to home",
- guideopt:{ name:"Le chemin des débutants (French guide)", price:'<span style="text-decoration:line-through;color:#9a958a;font-weight:700;font-size:.62em;margin-right:7px">55,000 FCFA</span>35,000 FCFA', line:"Prefer to start on your own, at your pace? Get the complete guide.", cta:"Get the guide" }
+ guideopt:{ name:"Le chemin des débutants (French guide)", price:'<span class="pnow">35,000<sup>FCFA</sup></span><span class="pold">55,000 FCFA</span>', line:"Prefer to start on your own, at your pace? Get the complete guide.", cta:"Get the guide" }
  },
  js:{
  alert_fill:"Please fill in your first name, last name, email and country.",
@@ -669,11 +672,11 @@ const I18N = {
  blocked_body:"I don't help with trading or financial markets. For any other project I'd be glad to help, come back anytime."
  },
  offers:{
- demarrage:{ name:"Starter Session", price:"$149", fcfa:"85 000 FCFA",
+ demarrage:{ name:"Starter Session", price:"$149", fcfa:"85 000 FCFA", pricehtml:'<span class="pnow">85 000<sup>FCFA</sup></span><span class="pold">150 000 FCFA</span>',
  who:"you're right at the beginning, and it's the perfect time. We turn your fuzzy idea into a clear action plan, and you finally know where to start.",
  anchor:"$149 to avoid months of fumbling alone. One good start changes everything after.",
- feat:["60 min live with me, just for your project","We clarify your idea and your first offer that actually sells","An action plan ready to execute when you hang up","Your first 3 steps, in the right order"] },
- croissance:{ name:"Growth Session", price:"$286", fcfa:"164 000 FCFA",
+ feat:["The beginners' guide, included free and explained during the call","60 min live with me, just for your project","We clarify your idea and your first offer that actually sells","An action plan ready to execute when you hang up","Your first 3 steps, in the right order"] },
+ croissance:{ name:"Growth Session", price:"$286", fcfa:"164 000 FCFA", pricehtml:'<span class="pnow" style="font-size:28px">$286 · 164 000 FCFA</span>',
  who:"you're already making money, but something is capping you. We audit your business together and find the lever that unlocks your next level.",
  anchor:"$286 to find the lever you can't see on your own. Unlock one level and the call pays for itself many times over.",
  feat:["60 min business audit, live with me","We put a finger on what's really blocking you","The exact levers to pull to break your ceiling","Actions to launch the moment the call ends"] }
@@ -868,7 +871,7 @@ function renderResult(){
  document.getElementById('rcard').style.display='block';
  document.getElementById('rWho').textContent = (lastPrenom? lastPrenom+", " : "") + offer.who;
  document.getElementById('rName').textContent = offer.name;
- document.getElementById('rPrice').textContent = offer.price + (offer.fcfa? ' · '+offer.fcfa : '');
+ document.getElementById('rPrice').innerHTML = offer.pricehtml || (offer.price + (offer.fcfa? ' · '+offer.fcfa : ''));
  document.getElementById('rAnchor').textContent = offer.anchor;
  var ul=document.getElementById('rFeat'); ul.innerHTML="";
  offer.feat.forEach(function(f){var li=document.createElement('li');li.textContent=f;ul.appendChild(li);});
