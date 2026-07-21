@@ -316,7 +316,7 @@
  <div class="eyebrow" data-i18n="book.eyebrow">Pour les débutants</div>
  <h2 data-i18n="book.h2">Le chemin des débutants</h2>
  <p class="lead" data-i18n="book.lead">Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.</p>
- <div style="font-size:34px;font-weight:800;color:var(--green);margin:4px 0 16px" data-i18n="book.price">35 000 FCFA</div>
+ <div style="font-size:34px;font-weight:800;color:var(--green);margin:4px 0 16px" data-i18n-html="book.price"><span style="text-decoration:line-through;color:#9a958a;font-weight:700;font-size:.6em;margin-right:8px">55 000 FCFA</span>35 000 FCFA</div>
  <a class="cta" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n="book.cta">Payer en mobile money</a>
  <span class="micro" data-i18n="book.note">Paiement mobile money (Afrique) · Téléchargement immédiat après paiement.</span>
  </div>
@@ -536,8 +536,8 @@ const I18N = {
  price:"165 000 FCFA", card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)",
  note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement."
  },
- book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.", price:"35 000 FCFA", cta:"Payer en mobile money", note:"Paiement mobile money (Afrique) · Téléchargement immédiat après paiement." },
- buy:{ full:'Acheter le guide débutants · <span class="bb-price">35 000 FCFA</span>' },
+ book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.", price:'<span style="text-decoration:line-through;color:#9a958a;font-weight:700;font-size:.6em;margin-right:8px">55 000 FCFA</span>35 000 FCFA', cta:"Payer en mobile money", note:"Paiement mobile money (Afrique) · Téléchargement immédiat après paiement." },
+ buy:{ full:'Acheter le guide débutants · <span style="text-decoration:line-through;opacity:.6;font-weight:700;margin-right:6px">55 000</span><span class="bb-price">35 000 FCFA</span>' },
  final:{ h2:"Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.", cta:"Voir si je peux t'aider", micro:"2 minutes. Tu repars avec un plan, pas un argumentaire." },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Où en es-tu dans ton business ?",
@@ -563,7 +563,7 @@ const I18N = {
  reassure:"Un vrai diagnostic de ton business, pas un argumentaire de vente déguisé. Tu repars avec un plan clair, quoi qu'il arrive.",
  book:"Réserver mon appel", card:"Paiement par carte · Visa / Mastercard", momo:"Paiement Mobile Money · Orange, MTN, Wave",
  guarantee:"Paiement sécurisé · Réservation immédiate de ton créneau", home:"Revenir à l'accueil",
- guideopt:{ name:"Le guide des débutants", price:"35 000 FCFA", line:"Tu préfères commencer par toi-même, à ton rythme ? Prends le guide complet.", cta:"Prendre le guide" }
+ guideopt:{ name:"Le guide des débutants", price:'<span style="text-decoration:line-through;color:#9a958a;font-weight:700;font-size:.62em;margin-right:7px">55 000 FCFA</span>35 000 FCFA', line:"Tu préfères commencer par toi-même, à ton rythme ? Prends le guide complet.", cta:"Prendre le guide" }
  },
  js:{
  alert_fill:"Merci de remplir ton prénom, ton nom, ton email et ton pays.",
@@ -633,8 +633,8 @@ const I18N = {
  price:"165,000 FCFA", card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)",
  note:"Card (international) or mobile money (Africa) · Instant access after payment."
  },
- book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your first online business from zero, even with just a phone.", price:"35,000 FCFA", cta:"Pay with mobile money", note:"Mobile money payment (Africa) · Instant download after payment." },
- buy:{ full:'Buy the beginner guide · <span class="bb-price">35,000 FCFA</span>' },
+ book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your first online business from zero, even with just a phone.", price:'<span style="text-decoration:line-through;color:#9a958a;font-weight:700;font-size:.6em;margin-right:8px">55,000 FCFA</span>35,000 FCFA', cta:"Pay with mobile money", note:"Mobile money payment (Africa) · Instant download after payment." },
+ buy:{ full:'Buy the beginner guide · <span style="text-decoration:line-through;opacity:.6;font-weight:700;margin-right:6px">55,000</span><span class="bb-price">35,000 FCFA</span>' },
  final:{ h2:"You can stay stuck for 5 more years.<br>Or fix it this week.", cta:"See if I can help you", micro:"2 minutes. You leave with a plan, not a pitch." },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Where are you in your business?",
@@ -660,7 +660,7 @@ const I18N = {
  reassure:"A real diagnostic of your business, not a disguised sales pitch. You leave with a clear plan, no matter what.",
  book:"Book my call", card:"Card payment · Visa / Mastercard", momo:"Mobile Money · Orange, MTN, Wave",
  guarantee:"Secure payment · Instant slot booking · billed in EUR at checkout", home:"Back to home",
- guideopt:{ name:"Le chemin des débutants (French guide)", price:"35,000 FCFA", line:"Prefer to start on your own, at your pace? Get the complete guide.", cta:"Get the guide" }
+ guideopt:{ name:"Le chemin des débutants (French guide)", price:'<span style="text-decoration:line-through;color:#9a958a;font-weight:700;font-size:.62em;margin-right:7px">55,000 FCFA</span>35,000 FCFA', line:"Prefer to start on your own, at your pace? Get the complete guide.", cta:"Get the guide" }
  },
  js:{
  alert_fill:"Please fill in your first name, last name, email and country.",
@@ -883,7 +883,7 @@ function renderResult(){
  if(showGuide){
    gd.style.display='block'; gor.style.display='block';
    document.getElementById('rgName').textContent=g.name;
-   document.getElementById('rgPrice').textContent=g.price;
+   document.getElementById('rgPrice').innerHTML=g.price;
    document.getElementById('rgLine').textContent=g.line;
    document.getElementById('rgCta').textContent=g.cta;
    document.getElementById('rgBuy').href='https://me.fedapay.com/fz5Q_7oB';
