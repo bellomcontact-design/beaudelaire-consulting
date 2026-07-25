@@ -693,7 +693,8 @@ const CONFIG = {
  croissance:{ card:"https://whop.com/checkout/plan_A8lrVLNSzejle", momo:"https://me.fedapay.com/croissance" }
  },
  blockedSectors: /trading|bourse|forex|march[ée]s?\s*financ|scalping|stock market|financial market/i,
- leadEndpoint: "https://formspree.io/f/xvzjkwgl"
+ leadEndpoint: "https://api.web3forms.com/submit",
+ web3key: "352b0617-723c-4c32-bbbc-f14b16219062"
 };
 
 /* Pays : [nomFR, indicatif, iso, nomEN] */
@@ -906,6 +907,9 @@ function finish(){
  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){ alert(t.js.alert_email); return; }
  track('lead', {pays:data.pays, revenue:data.revenue});
  if(CONFIG.leadEndpoint){
+ data.access_key=CONFIG.web3key;
+ data.subject="Nouveau lead — "+data.prenom+" "+data.nom+" ("+data.pays+")";
+ data.from_name="Beaudelaire Consulting";
  fetch(CONFIG.leadEndpoint,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(data)}).catch(function(){});
  } else { console.log("LEAD (test):", data); }
 
@@ -922,7 +926,7 @@ function subNews(e){
  e.preventDefault();
  var email=document.getElementById('news_email').value.trim();
  if(CONFIG.leadEndpoint){
- fetch(CONFIG.leadEndpoint,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({type:"newsletter",email,lang:LANG,source:ATTR.source,sourceCode:ATTR.code,referrer:ATTR.referrer,landing:ATTR.landing})}).catch(function(){});
+ fetch(CONFIG.leadEndpoint,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({access_key:CONFIG.web3key,subject:"Nouvel inscrit guide/newsletter — "+email,from_name:"Beaudelaire Consulting",type:"newsletter",email,lang:LANG,source:ATTR.source,sourceCode:ATTR.code,referrer:ATTR.referrer,landing:ATTR.landing})}).catch(function(){});
  } else { console.log("NEWSLETTER (test):",email); }
  track('newsletter_signup'); track('download_chemin');
  document.getElementById('newsform').style.display='none';
