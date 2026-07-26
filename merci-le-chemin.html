@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Merci · Le chemin (guide pour scaler)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf8f3; --card:#fffefb; --text:#17150f; --muted:#6b675d; --border:#e7e2d6;
+    --green:#159a45; --green-btn:#0e7a36; --green-soft:#e7f4ec;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    display:flex;align-items:center;justify-content:center;padding:24px;line-height:1.5}
+  .wrap{width:100%;max-width:520px;text-align:center}
+  .card{background:var(--card);border:1.5px solid var(--border);border-radius:20px;
+    padding:40px 30px;box-shadow:0 10px 40px rgba(20,40,25,.06)}
+  .check{width:64px;height:64px;border-radius:50%;background:var(--green-soft);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+  .check svg{width:34px;height:34px}
+  h1{font-size:26px;font-weight:800;margin:0 0 8px;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:16px;margin:0 0 28px}
+  .choose{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--green);margin:0 0 14px}
+  .btns{display:flex;flex-direction:column;gap:12px}
+  a.dl{display:flex;align-items:center;justify-content:center;gap:10px;
+    text-decoration:none;font-weight:700;font-size:16px;padding:16px 18px;border-radius:13px;transition:transform .12s ease,opacity .12s ease}
+  a.dl:hover{transform:translateY(-1px);opacity:.94}
+  a.fr{background:var(--green-btn);color:#fff}
+  a.en{background:#fffefb;color:var(--green-btn);border:2px solid var(--green-btn)}
+  .flag{font-size:19px}
+  .foot{margin-top:26px;font-size:13.5px;color:var(--muted)}
+  .foot a{color:var(--green-btn);text-decoration:none;font-weight:600}
+  .brand{margin-top:22px;font-size:13px;color:var(--muted);font-weight:600}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="check">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#159a45" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h1>Merci pour ton achat ! <span style="font-weight:600">/ Thank you!</span></h1>
+      <p class="sub">Ton guide est prêt. Choisis ta langue pour le télécharger.<br>Your guide is ready. Choose your language to download.</p>
+      <p class="choose">Télécharger · Download</p>
+      <div class="btns">
+        <a class="dl fr" href="https://beaudelaire-consulting.vercel.app/le-chemin-fr.pdf" download><span class="flag">🇫🇷</span> Télécharger en français</a>
+        <a class="dl en" href="https://beaudelaire-consulting.vercel.app/le-chemin-en.pdf" download><span class="flag">🇬🇧</span> Download in English</a>
+      </div>
+      <p class="foot">Un souci pour télécharger ? Écris-moi : <a href="mailto:beaudelaireconsulting@gmail.com">beaudelaireconsulting@gmail.com</a><br><span style="opacity:.8">Trouble downloading? Email me.</span></p>
+    </div>
+    <p class="brand">Beaudelaire Consulting</p>
+  </div>
+</body>
+</html>
