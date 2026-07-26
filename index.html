@@ -33,7 +33,7 @@
  .langtoggle:hover{border-color:var(--green);color:var(--text)}
  /* barre d'achat fixe (mobile) */
  .buybar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;text-align:center;text-decoration:none;
-   background:var(--green-btn);color:#fff;font-weight:800;font-size:16.5px;letter-spacing:.01em;
+   background:var(--green-btn);color:#fff;font-weight:800;font-size:15px;letter-spacing:.01em;white-space:nowrap;
    box-shadow:0 -6px 20px rgba(0,0,0,.16);
    padding:16px 16px calc(22px + env(safe-area-inset-bottom))}
  .buybar .bb-price{color:#bfe9cd}
@@ -357,7 +357,7 @@
 </div><!-- /landing -->
 
 <!-- Barre d'achat fixe (mobile) -->
-<a class="buybar" id="buybar" href="#livre" data-i18n-html="buy.full">Acheter le guide débutants · <span class="bb-price">35 000<sup style="font-size:.55em;vertical-align:super;margin-left:2px">FCFA</sup> (50€)</span></a>
+<a class="buybar" id="buybar" href="#livre" data-i18n-html="buy.full">Acheter le guide · <span class="bb-price">35 000<sup style="font-size:.55em;vertical-align:super;margin-left:1px">FCFA</sup> (50€)</span></a>
 
 
 <!-- QUIZ -->
@@ -548,7 +548,7 @@ const I18N = {
  note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement."
  },
  book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.", price:'<span class="pnow">35 000<sup>FCFA</sup> <span class="peur">(50€)</span></span><span class="pold">55 000 FCFA</span>', card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)", note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement." },
- buy:{ full:'Acheter le guide débutants · <span style="text-decoration:line-through;opacity:.6;font-weight:700;margin-right:6px">55 000</span><span class="bb-price">35 000<sup style="font-size:.55em;vertical-align:super;margin-left:2px">FCFA</sup> (50€)</span>' },
+ buy:{ full:'Acheter le guide · <span class="bb-price">35 000<sup style="font-size:.55em;vertical-align:super;margin-left:1px">FCFA</sup> (50€)</span>' },
  final:{ h2:"Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.", cta:"Voir si je peux t'aider", micro:"2 minutes. Tu repars avec un plan, pas un argumentaire." },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Où en es-tu dans ton business ?",
@@ -645,7 +645,7 @@ const I18N = {
  note:"Card (international) or mobile money (Africa) · Instant access after payment."
  },
  book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your first online business from zero, even with just a phone.", price:'<span class="pnow">35,000<sup>FCFA</sup> <span class="peur">(€50)</span></span><span class="pold">55,000 FCFA</span>', card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)", note:"Card (international) or mobile money (Africa) · Instant access after payment." },
- buy:{ full:'Buy the beginner guide · <span style="text-decoration:line-through;opacity:.6;font-weight:700;margin-right:6px">55,000</span><span class="bb-price">35,000<sup style="font-size:.55em;vertical-align:super;margin-left:2px">FCFA</sup> (€50)</span>' },
+ buy:{ full:'Buy the guide · <span class="bb-price">35,000<sup style="font-size:.55em;vertical-align:super;margin-left:1px">FCFA</sup> (€50)</span>' },
  final:{ h2:"You can stay stuck for 5 more years.<br>Or fix it this week.", cta:"See if I can help you", micro:"2 minutes. You leave with a plan, not a pitch." },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Where are you in your business?",
