@@ -39,6 +39,7 @@
  .buybar .bb-price{color:#bfe9cd}
  .pnow{display:block;text-align:center;font-size:36px;font-weight:800;color:var(--green);white-space:nowrap;line-height:1.02}
  .pnow sup{font-size:.4em;font-weight:800;vertical-align:super;margin-left:3px}
+ .pnow .peur{font-size:.42em;font-weight:700;color:var(--muted);vertical-align:middle;margin-left:2px}
  .pold{display:block;text-align:center;font-size:16px;font-weight:700;color:#9a958a;text-decoration:line-through;white-space:nowrap;margin-top:5px}
  @media(max-width:680px){
    .brand{font-size:16px;white-space:nowrap}
@@ -334,9 +335,10 @@
  <div class="eyebrow" data-i18n="news.eyebrow">Le chemin · le guide pour scaler</div>
  <h2 data-i18n-html="news.h2">Tu bosses comme un fou et t'avances plus ? <span class="nowrap">Voilà le chemin.</span></h2>
  <p class="lead" data-i18n="news.lead">Tu gagnes déjà de l'argent mais tu plafonnes ? Le guide étape par étape pour rendre ton business irrésistible et passer au palier au-dessus, sans changer de véhicule.</p>
- <div style="margin:8px 0 18px" data-i18n-html="news.price"><span class="pnow">165 000<sup>FCFA</sup></span></div>
+ <p class="micro" style="color:var(--green-btn);font-weight:700;margin:0 0 6px" data-i18n="news.forwho">Réservé à ceux qui font déjà de l'argent en ligne et veulent passer au palier au-dessus. Ce n'est pas un guide pour débutants.</p>
+ <div style="margin:8px 0 18px" data-i18n-html="news.price"><span class="pnow">165 000<sup>FCFA</sup> <span class="peur">(250€)</span></span></div>
  <div style="display:flex;flex-direction:column;gap:12px;align-items:center;max-width:440px;margin:0 auto">
- <a class="cta" style="width:100%" href="https://whop.com/checkout/plan_A8lrVLNSzejle" target="_blank" rel="noopener" data-i18n="news.card">Payer par carte (Visa / Mastercard)</a>
+ <a class="cta" style="width:100%" href="https://whop.com/checkout/plan_kWZMN4mJL7JvW" target="_blank" rel="noopener" data-i18n="news.card">Payer par carte (Visa / Mastercard)</a>
  <a class="cta" style="width:100%;background:#fffefb;color:var(--green-btn);border:2px solid var(--green-btn)" href="https://me.fedapay.com/croissance" target="_blank" rel="noopener" data-i18n="news.momo">Payer en mobile money (Afrique)</a>
  </div>
  <span class="micro" data-i18n="news.note">Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.</span>
@@ -355,7 +357,7 @@
 </div><!-- /landing -->
 
 <!-- Barre d'achat fixe (mobile) -->
-<a class="buybar" id="buybar" href="#livre" data-i18n-html="buy.full">Acheter le guide débutants · <span class="bb-price">35 000<sup style="font-size:.55em;vertical-align:super;margin-left:2px">FCFA</sup></span></a>
+<a class="buybar" id="buybar" href="#livre" data-i18n-html="buy.full">Acheter le guide débutants · <span class="bb-price">35 000<sup style="font-size:.55em;vertical-align:super;margin-left:2px">FCFA</sup> (50€)</span></a>
 
 
 <!-- QUIZ -->
@@ -462,7 +464,10 @@
  <div class="name" id="rgName"></div>
  <div class="price" id="rgPrice"></div>
  <p class="anchor" id="rgLine"></p>
+ <div class="pay">
+ <a class="paybtn" id="rgCard" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide_card')"><b id="rgCtaC">Prendre le guide</b><span>Paiement par carte · Visa / Mastercard</span></a>
  <a class="paybtn" id="rgBuy" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide')"><b id="rgCta">Prendre le guide</b><span>Paiement mobile money (Afrique) · Téléchargement immédiat</span></a>
+ </div>
  </div>
  <div id="rOr" style="display:none;font-weight:800;color:var(--muted);margin:2px 0 14px;letter-spacing:.14em;font-size:13px">OU</div>
  <div class="rcard" id="rcard">
@@ -539,11 +544,11 @@ const I18N = {
  eyebrow:"Le chemin · le guide pour scaler",
  h2:'Tu bosses comme un fou et t\'avances plus ? <span class="nowrap">Voilà le chemin.</span>',
  lead:"Tu gagnes déjà de l'argent mais tu plafonnes ? Le guide étape par étape pour rendre ton business irrésistible et passer au palier au-dessus, sans changer de véhicule.",
- price:'<span class="pnow">165 000<sup>FCFA</sup></span>', card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)",
+ forwho:"Réservé à ceux qui font déjà de l'argent en ligne et veulent passer au palier au-dessus. Ce n'est pas un guide pour débutants.", price:'<span class="pnow">165 000<sup>FCFA</sup> <span class="peur">(250€)</span></span>', card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)",
  note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement."
  },
- book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.", price:'<span class="pnow">35 000<sup>FCFA</sup></span><span class="pold">55 000 FCFA</span>', card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)", note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement." },
- buy:{ full:'Acheter le guide débutants · <span style="text-decoration:line-through;opacity:.6;font-weight:700;margin-right:6px">55 000</span><span class="bb-price">35 000<sup style="font-size:.55em;vertical-align:super;margin-left:2px">FCFA</sup></span>' },
+ book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.", price:'<span class="pnow">35 000<sup>FCFA</sup> <span class="peur">(50€)</span></span><span class="pold">55 000 FCFA</span>', card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)", note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement." },
+ buy:{ full:'Acheter le guide débutants · <span style="text-decoration:line-through;opacity:.6;font-weight:700;margin-right:6px">55 000</span><span class="bb-price">35 000<sup style="font-size:.55em;vertical-align:super;margin-left:2px">FCFA</sup> (50€)</span>' },
  final:{ h2:"Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.", cta:"Voir si je peux t'aider", micro:"2 minutes. Tu repars avec un plan, pas un argumentaire." },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Où en es-tu dans ton business ?",
@@ -569,7 +574,7 @@ const I18N = {
  reassure:"Un vrai diagnostic de ton business, pas un argumentaire de vente déguisé. Tu repars avec un plan clair, quoi qu'il arrive.",
  book:"Réserver mon appel", card:"Paiement par carte · Visa / Mastercard", momo:"Paiement Mobile Money · Orange, MTN, Wave",
  guarantee:"Paiement sécurisé · Réservation immédiate de ton créneau", home:"Revenir à l'accueil",
- guideopt:{ name:"Le guide des débutants", price:'<span class="pnow">35 000<sup>FCFA</sup></span><span class="pold">55 000 FCFA</span>', line:"Tu préfères commencer par toi-même, à ton rythme ? Prends le guide complet.", cta:"Prendre le guide" }
+ guideopt:{ name:"Le guide des débutants", price:'<span class="pnow">35 000<sup>FCFA</sup> <span class="peur">(50€)</span></span><span class="pold">55 000 FCFA</span>', line:"Tu préfères commencer par toi-même, à ton rythme ? Prends le guide complet.", cta:"Prendre le guide" }
  },
  js:{
  alert_fill:"Merci de remplir ton prénom, ton nom, ton email et ton pays.",
@@ -636,11 +641,11 @@ const I18N = {
  eyebrow:"The path · the guide to scale",
  h2:'Working like crazy but going nowhere? <span class="nowrap">Here\'s the path.</span>',
  lead:"Already making money but stuck at a plateau? The step-by-step guide to make your business irresistible and reach the next level, without switching vehicles.",
- price:'<span class="pnow">165,000<sup>FCFA</sup></span>', card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)",
+ forwho:"For people who already make money online and want to reach the next level. This is not a beginner's guide.", price:'<span class="pnow">165,000<sup>FCFA</sup> <span class="peur">(€250)</span></span>', card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)",
  note:"Card (international) or mobile money (Africa) · Instant access after payment."
  },
- book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your first online business from zero, even with just a phone.", price:'<span class="pnow">35,000<sup>FCFA</sup></span><span class="pold">55,000 FCFA</span>', card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)", note:"Card (international) or mobile money (Africa) · Instant access after payment." },
- buy:{ full:'Buy the beginner guide · <span style="text-decoration:line-through;opacity:.6;font-weight:700;margin-right:6px">55,000</span><span class="bb-price">35,000<sup style="font-size:.55em;vertical-align:super;margin-left:2px">FCFA</sup></span>' },
+ book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your first online business from zero, even with just a phone.", price:'<span class="pnow">35,000<sup>FCFA</sup> <span class="peur">(€50)</span></span><span class="pold">55,000 FCFA</span>', card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)", note:"Card (international) or mobile money (Africa) · Instant access after payment." },
+ buy:{ full:'Buy the beginner guide · <span style="text-decoration:line-through;opacity:.6;font-weight:700;margin-right:6px">55,000</span><span class="bb-price">35,000<sup style="font-size:.55em;vertical-align:super;margin-left:2px">FCFA</sup> (€50)</span>' },
  final:{ h2:"You can stay stuck for 5 more years.<br>Or fix it this week.", cta:"See if I can help you", micro:"2 minutes. You leave with a plan, not a pitch." },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Where are you in your business?",
@@ -666,7 +671,7 @@ const I18N = {
  reassure:"A real diagnostic of your business, not a disguised sales pitch. You leave with a clear plan, no matter what.",
  book:"Book my call", card:"Card payment · Visa / Mastercard", momo:"Mobile Money · Orange, MTN, Wave",
  guarantee:"Secure payment · Instant slot booking · billed in EUR at checkout", home:"Back to home",
- guideopt:{ name:"Le chemin des débutants (French guide)", price:'<span class="pnow">35,000<sup>FCFA</sup></span><span class="pold">55,000 FCFA</span>', line:"Prefer to start on your own, at your pace? Get the complete guide.", cta:"Get the guide" }
+ guideopt:{ name:"Le chemin des débutants (French guide)", price:'<span class="pnow">35,000<sup>FCFA</sup> <span class="peur">(€50)</span></span><span class="pold">55,000 FCFA</span>', line:"Prefer to start on your own, at your pace? Get the complete guide.", cta:"Get the guide" }
  },
  js:{
  alert_fill:"Please fill in your first name, last name, email and country.",
@@ -893,6 +898,8 @@ function renderResult(){
    document.getElementById('rgPrice').innerHTML=g.price;
    document.getElementById('rgLine').textContent=g.line;
    document.getElementById('rgCta').textContent=g.cta;
+   document.getElementById('rgCtaC').textContent=g.cta;
+   document.getElementById('rgCard').href='https://whop.com/checkout/plan_2YIjdBpeJTH9M';
    document.getElementById('rgBuy').href='https://me.fedapay.com/fz5Q_7oB';
  } else { gd.style.display='none'; gor.style.display='none'; }
 }
