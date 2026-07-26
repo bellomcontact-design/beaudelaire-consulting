@@ -320,8 +320,11 @@
  <h2 data-i18n="book.h2">Le chemin des débutants</h2>
  <p class="lead" data-i18n="book.lead">Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.</p>
  <div style="margin:6px 0 18px" data-i18n-html="book.price"><span class="pnow">35 000<sup>FCFA</sup></span><span class="pold">55 000 FCFA</span></div>
- <a class="cta" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n="book.cta">Payer en mobile money</a>
- <span class="micro" data-i18n="book.note">Paiement mobile money (Afrique) · Téléchargement immédiat après paiement.</span>
+ <div style="display:flex;flex-direction:column;gap:12px;align-items:center;max-width:440px;margin:0 auto">
+ <a class="cta" style="width:100%" href="https://whop.com/checkout/plan_2YIjdBpeJTH9M" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
+ <a class="cta" style="width:100%;background:#fffefb;color:var(--green-btn);border:2px solid var(--green-btn)" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n="book.momo">Payer en mobile money (Afrique)</a>
+ </div>
+ <span class="micro" data-i18n="book.note">Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.</span>
  </div>
  </section>
 
@@ -539,7 +542,7 @@ const I18N = {
  price:'<span class="pnow">165 000<sup>FCFA</sup></span>', card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)",
  note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement."
  },
- book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.", price:'<span class="pnow">35 000<sup>FCFA</sup></span><span class="pold">55 000 FCFA</span>', cta:"Payer en mobile money", note:"Paiement mobile money (Afrique) · Téléchargement immédiat après paiement." },
+ book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.", price:'<span class="pnow">35 000<sup>FCFA</sup></span><span class="pold">55 000 FCFA</span>', card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)", note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement." },
  buy:{ full:'Acheter le guide débutants · <span style="text-decoration:line-through;opacity:.6;font-weight:700;margin-right:6px">55 000</span><span class="bb-price">35 000<sup style="font-size:.55em;vertical-align:super;margin-left:2px">FCFA</sup></span>' },
  final:{ h2:"Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.", cta:"Voir si je peux t'aider", micro:"2 minutes. Tu repars avec un plan, pas un argumentaire." },
  quiz:{
@@ -636,7 +639,7 @@ const I18N = {
  price:'<span class="pnow">165,000<sup>FCFA</sup></span>', card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)",
  note:"Card (international) or mobile money (Africa) · Instant access after payment."
  },
- book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your first online business from zero, even with just a phone.", price:'<span class="pnow">35,000<sup>FCFA</sup></span><span class="pold">55,000 FCFA</span>', cta:"Pay with mobile money", note:"Mobile money payment (Africa) · Instant download after payment." },
+ book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your first online business from zero, even with just a phone.", price:'<span class="pnow">35,000<sup>FCFA</sup></span><span class="pold">55,000 FCFA</span>', card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)", note:"Card (international) or mobile money (Africa) · Instant access after payment." },
  buy:{ full:'Buy the beginner guide · <span style="text-decoration:line-through;opacity:.6;font-weight:700;margin-right:6px">55,000</span><span class="bb-price">35,000<sup style="font-size:.55em;vertical-align:super;margin-left:2px">FCFA</sup></span>' },
  final:{ h2:"You can stay stuck for 5 more years.<br>Or fix it this week.", cta:"See if I can help you", micro:"2 minutes. You leave with a plan, not a pitch." },
  quiz:{
