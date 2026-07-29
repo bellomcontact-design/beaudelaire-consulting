@@ -705,7 +705,7 @@ const CONFIG = {
  web3key: "352b0617-723c-4c32-bbbc-f14b16219062",
  sheetEndpoint: "https://script.google.com/macros/s/AKfycbwum5ItgU4ezupY-JfvQkEpziCxuKvbhwDVb3Oz6lZFJDNR1KqROV9hAL2BvJKiDdxV/exec"
 };
-function sendSheet(payload){ if(window.CONFIG&&CONFIG.sheetEndpoint){ try{ fetch(CONFIG.sheetEndpoint,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)}).catch(function(){}); }catch(e){} } }
+function sendSheet(payload){ try{ if(typeof CONFIG!=='undefined' && CONFIG.sheetEndpoint){ fetch(CONFIG.sheetEndpoint,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)}).catch(function(){}); } }catch(e){} }
 
 /* Pays : [nomFR, indicatif, iso, nomEN] */
 const COUNTRIES=[
