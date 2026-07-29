@@ -918,12 +918,6 @@ function finish(){
  if(!data.prenom||!data.nom||!data.email||!data.pays){ alert(t.js.alert_fill); return; }
  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){ alert(t.js.alert_email); return; }
  track('lead', {pays:data.pays, revenue:data.revenue});
- if(CONFIG.leadEndpoint){
- data.access_key=CONFIG.web3key;
- data.subject="Nouveau lead — "+data.prenom+" "+data.nom+" ("+data.pays+")";
- data.from_name="Beaudelaire Consulting";
- fetch(CONFIG.leadEndpoint,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(data)}).catch(function(){});
- } else { console.log("LEAD (test):", data); }
  sendSheet(data);
 
  lastPrenom = data.prenom;
@@ -938,9 +932,6 @@ function finish(){
 function subNews(e){
  e.preventDefault();
  var email=document.getElementById('news_email').value.trim();
- if(CONFIG.leadEndpoint){
- fetch(CONFIG.leadEndpoint,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({access_key:CONFIG.web3key,subject:"Nouvel inscrit guide/newsletter — "+email,from_name:"Beaudelaire Consulting",type:"newsletter",email,lang:LANG,source:ATTR.source,sourceCode:ATTR.code,referrer:ATTR.referrer,landing:ATTR.landing})}).catch(function(){});
- } else { console.log("NEWSLETTER (test):",email); }
  sendSheet({type:"newsletter",email:email,lang:LANG,source:ATTR.source,sourceCode:ATTR.code,referrer:ATTR.referrer,landing:ATTR.landing});
  track('newsletter_signup'); track('download_chemin');
  document.getElementById('newsform').style.display='none';
