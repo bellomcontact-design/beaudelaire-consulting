@@ -702,8 +702,10 @@ const CONFIG = {
  },
  blockedSectors: /trading|bourse|forex|march[ée]s?\s*financ|scalping|stock market|financial market/i,
  leadEndpoint: "https://api.web3forms.com/submit",
- web3key: "352b0617-723c-4c32-bbbc-f14b16219062"
+ web3key: "352b0617-723c-4c32-bbbc-f14b16219062",
+ sheetEndpoint: "https://script.google.com/macros/s/AKfycbwum5ItgU4ezupY-JfvQkEpziCxuKvbhwDVb3Oz6lZFJDNR1KqROV9hAL2BvJKiDdxV/exec"
 };
+function sendSheet(payload){ if(window.CONFIG&&CONFIG.sheetEndpoint){ try{ fetch(CONFIG.sheetEndpoint,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)}).catch(function(){}); }catch(e){} } }
 
 /* Pays : [nomFR, indicatif, iso, nomEN] */
 const COUNTRIES=[
@@ -922,6 +924,7 @@ function finish(){
  data.from_name="Beaudelaire Consulting";
  fetch(CONFIG.leadEndpoint,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(data)}).catch(function(){});
  } else { console.log("LEAD (test):", data); }
+ sendSheet(data);
 
  lastPrenom = data.prenom;
  if(answers.type==='autre' && CONFIG.blockedSectors.test(answers.typeDetail||'')){
@@ -938,6 +941,7 @@ function subNews(e){
  if(CONFIG.leadEndpoint){
  fetch(CONFIG.leadEndpoint,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({access_key:CONFIG.web3key,subject:"Nouvel inscrit guide/newsletter — "+email,from_name:"Beaudelaire Consulting",type:"newsletter",email,lang:LANG,source:ATTR.source,sourceCode:ATTR.code,referrer:ATTR.referrer,landing:ATTR.landing})}).catch(function(){});
  } else { console.log("NEWSLETTER (test):",email); }
+ sendSheet({type:"newsletter",email:email,lang:LANG,source:ATTR.source,sourceCode:ATTR.code,referrer:ATTR.referrer,landing:ATTR.landing});
  track('newsletter_signup'); track('download_chemin');
  document.getElementById('newsform').style.display='none';
  document.getElementById('newsDone').style.display='block';
