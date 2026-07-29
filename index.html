@@ -40,6 +40,15 @@
  .pnow{display:block;text-align:center;font-size:36px;font-weight:800;color:var(--green);white-space:nowrap;line-height:1.02}
  .pnow sup{font-size:.4em;font-weight:800;vertical-align:super;margin-left:3px}
  .pnow .peur{font-size:.42em;font-weight:700;color:var(--muted);vertical-align:middle;margin-left:2px}
+ .bkcards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:660px;margin:24px auto 8px;text-align:left}
+ .bkcard{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:16px 16px}
+ .bkcard .bkico{font-size:22px;margin-bottom:6px;line-height:1}
+ .bkcard b{display:block;font-size:15px;color:var(--text);margin-bottom:3px}
+ .bkcard span{font-size:13.5px;color:var(--muted);line-height:1.45}
+ .bkcommu{background:var(--green-soft);border:1.5px solid #b9e0c8;border-radius:14px;padding:16px 18px;max-width:660px;margin:14px auto 22px;text-align:left}
+ .bkcommu b{display:block;font-size:16px;color:var(--green-btn);margin-bottom:5px}
+ .bkcommu span{font-size:14px;color:var(--text);line-height:1.5}
+ @media(max-width:560px){ .bkcards{grid-template-columns:1fr} }
  .pold{display:block;text-align:center;font-size:16px;font-weight:700;color:#9a958a;text-decoration:line-through;white-space:nowrap;margin-top:5px}
  @media(max-width:680px){
    .brand{font-size:16px;white-space:nowrap}
@@ -262,7 +271,20 @@
  <div class="wrap">
  <div class="eyebrow" data-i18n="book.eyebrow">Pour les débutants</div>
  <h2 data-i18n="book.h2">Le chemin des débutants</h2>
- <p class="lead" data-i18n="book.lead">Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.</p>
+ <p class="lead" data-i18n="book.lead">Le guide complet pour faire tes premiers revenus en ligne, quel que soit ton point de départ. Zéro rêve, zéro blabla : du concret, tiré de mon expérience.</p>
+
+ <div class="bkcards">
+ <div class="bkcard"><div class="bkico">🧭</div><b data-i18n="book.f1t">Tous les véhicules</b><span data-i18n="book.f1">Les vraies façons de faire tes premiers revenus en ligne, même à partir de zéro, même avec juste un téléphone.</span></div>
+ <div class="bkcard"><div class="bkico">🎯</div><b data-i18n="book.f2t">Choisir le tien</b><span data-i18n="book.f2">Comment trouver celui qui te correspond selon ta situation, sans te disperser.</span></div>
+ <div class="bkcard"><div class="bkico">💳</div><b data-i18n="book.f3t">Clients & paiement</b><span data-i18n="book.f3">Trouver tes premiers clients et encaisser depuis l'Afrique, un mur que peu de gens t'expliquent.</span></div>
+ <div class="bkcard"><div class="bkico">🗺️</div><b data-i18n="book.f4t">Ton plan d'action</b><span data-i18n="book.f4">Le mindset et les étapes jour par jour, pour passer à l'action au lieu de tourner en rond.</span></div>
+ </div>
+
+ <div class="bkcommu">
+ <b data-i18n="book.commu_t">Tu n'es pas seul. 🤝</b>
+ <span data-i18n="book.commu">En prenant le guide, tu rejoins la communauté privée Ex-rienneux. Tu échanges avec les autres, tu poses toutes tes questions, et on suit tes progrès ensemble. Ce n'est pas un PDF que tu reçois et basta : tu es accompagné pour quitter la vie de rienneux.</span>
+ </div>
+
  <div style="margin:6px 0 18px" data-i18n-html="book.price"><span class="pnow">35 000<sup>FCFA</sup></span><span class="pold">55 000 FCFA</span></div>
  <div style="display:flex;flex-direction:column;gap:12px;align-items:center;max-width:440px;margin:0 auto">
  <a class="cta" style="width:100%" href="https://whop.com/checkout/plan_2YIjdBpeJTH9M" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
@@ -341,6 +363,7 @@
  <details><summary data-i18n="faq.q2">Comment se passe l'appel ?</summary><p data-i18n="faq.a2">Un appel en visioconférence. On fait le point sur ta situation, j'identifie ce qui te bloque, et tu repars avec un plan d'action clair et priorisé.</p></details>
  <details><summary data-i18n="faq.q3">Et si je débute totalement ?</summary><p data-i18n="faq.a3">C'est précisément fait pour ça. L'accompagnement Démarrage est pensé pour clarifier ton idée et te donner tes premières étapes concrètes.</p></details>
  <details><summary data-i18n="faq.q4">Est-ce que l'appel est un argumentaire de vente ?</summary><p data-i18n="faq.a4">Non. C'est un vrai diagnostic : on travaille sur ton business pendant l'appel et tu repars avec un plan concret, que tu ailles plus loin avec moi ou non.</p></details>
+ <details><summary data-i18n="faq.q5">Qu'est-ce qu'il y a dans le guide des débutants ?</summary><p data-i18n="faq.a5">Du concret, pas du rêve. Il ne s'agit pas de te vendre un business miracle ni du e-commerce à la mode. Le guide passe en revue les vraies façons (les véhicules) de faire tes premiers revenus en ligne selon d'où tu pars, comment choisir la tienne, trouver tes premiers clients et encaisser depuis l'Afrique. Tout vient de mon expérience réelle. Et surtout : en l'achetant, tu rejoins la communauté Ex-rienneux, où tu poses tes questions et où on suit tes progrès. Tu n'es jamais laissé seul.</p></details>
  </div>
  </div>
  </section>
@@ -538,7 +561,8 @@ const I18N = {
  q1:"C'est pour qui ?", a1:"Pour les débutants qui veulent se lancer sans savoir par où commencer, et pour ceux qui font déjà 5k-30k+/mois et veulent scaler. Le questionnaire t'oriente automatiquement vers le bon accompagnement.",
  q2:"Comment se passe l'appel ?", a2:"Un appel en visioconférence. On fait le point sur ta situation, j'identifie ce qui te bloque, et tu repars avec un plan d'action clair et priorisé.",
  q3:"Et si je débute totalement ?", a3:"C'est précisément fait pour ça. L'accompagnement Démarrage est pensé pour clarifier ton idée et te donner tes premières étapes concrètes.",
- q4:"Est-ce que l'appel est un argumentaire de vente ?", a4:"Non. C'est un vrai diagnostic : on travaille sur ton business pendant l'appel et tu repars avec un plan concret, que tu ailles plus loin avec moi ou non."
+ q4:"Est-ce que l'appel est un argumentaire de vente ?", a4:"Non. C'est un vrai diagnostic : on travaille sur ton business pendant l'appel et tu repars avec un plan concret, que tu ailles plus loin avec moi ou non.",
+ q5:"Qu'est-ce qu'il y a dans le guide des débutants ?", a5:"Du concret, pas du rêve. Il ne s'agit pas de te vendre un business miracle ni du e-commerce à la mode. Le guide passe en revue les vraies façons (les véhicules) de faire tes premiers revenus en ligne selon d'où tu pars, comment choisir la tienne, trouver tes premiers clients et encaisser depuis l'Afrique. Tout vient de mon expérience réelle. Et surtout : en l'achetant, tu rejoins la communauté Ex-rienneux, où tu poses tes questions et où on suit tes progrès. Tu n'es jamais laissé seul."
  },
  news:{
  eyebrow:"Le chemin · le guide pour scaler",
@@ -547,7 +571,13 @@ const I18N = {
  forwho:"Réservé à ceux qui font déjà de l'argent en ligne et veulent passer au palier au-dessus. Ce n'est pas un guide pour débutants.", price:'<span class="pnow">165 000<sup>FCFA</sup> <span class="peur">(250€)</span></span>', card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)",
  note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement."
  },
- book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour lancer ton premier business en ligne à partir de zéro, même avec juste un téléphone.", price:'<span class="pnow">35 000<sup>FCFA</sup> <span class="peur">(50€)</span></span><span class="pold">55 000 FCFA</span>', card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)", note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement." },
+ book:{ eyebrow:"Pour les débutants", h2:"Le chemin des débutants", lead:"Le guide complet pour faire tes premiers revenus en ligne, quel que soit ton point de départ. Zéro rêve, zéro blabla : du concret, tiré de mon expérience.",
+ f1t:"Tous les véhicules", f1:"Les vraies façons de faire tes premiers revenus en ligne, même à partir de zéro, même avec juste un téléphone.",
+ f2t:"Choisir le tien", f2:"Comment trouver celui qui te correspond selon ta situation, sans te disperser.",
+ f3t:"Clients & paiement", f3:"Trouver tes premiers clients et encaisser depuis l'Afrique, un mur que peu de gens t'expliquent.",
+ f4t:"Ton plan d'action", f4:"Le mindset et les étapes jour par jour, pour passer à l'action au lieu de tourner en rond.",
+ commu_t:"Tu n'es pas seul. 🤝", commu:"En prenant le guide, tu rejoins la communauté privée Ex-rienneux. Tu échanges avec les autres, tu poses toutes tes questions, et on suit tes progrès ensemble. Ce n'est pas un PDF que tu reçois et basta : tu es accompagné pour quitter la vie de rienneux.",
+ price:'<span class="pnow">35 000<sup>FCFA</sup> <span class="peur">(50€)</span></span><span class="pold">55 000 FCFA</span>', card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)", note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement." },
  buy:{ full:'Acheter le guide · <span class="bb-price">35 000<sup style="font-size:.55em;vertical-align:super;margin-left:1px">FCFA</sup> (50€)</span>' },
  final:{ h2:"Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.", cta:"Voir si je peux t'aider", micro:"2 minutes. Tu repars avec un plan, pas un argumentaire." },
  quiz:{
@@ -635,7 +665,8 @@ const I18N = {
  q1:"Who is it for?", a1:"For beginners who want to start but don't know how, and for those already doing $5k-30k+/month who want to scale. The quiz automatically points you to the right support.",
  q2:"How does the call work?", a2:"A video call. We review your situation, I pinpoint what's blocking you, and you leave with a clear, prioritized action plan.",
  q3:"What if I'm a total beginner?", a3:"That's exactly what it's for. The Starter session is built to clarify your idea and give you your first concrete steps.",
- q4:"Is the call a sales pitch?", a4:"No. It's a real diagnostic: we work on your business during the call and you leave with a concrete plan, whether you go further with me or not."
+ q4:"Is the call a sales pitch?", a4:"No. It's a real diagnostic: we work on your business during the call and you leave with a concrete plan, whether you go further with me or not.",
+ q5:"What's inside the beginners' guide?", a5:"Concrete stuff, no hype. It's not about selling you a miracle business or trendy e-commerce. The guide walks through the real ways (the vehicles) to make your first income online depending on where you start, how to choose yours, find your first clients and get paid from Africa. It all comes from real experience. And most importantly: when you buy it, you join the Ex-rienneux community, where you ask your questions and we follow your progress. You're never left on your own."
  },
  news:{
  eyebrow:"The path · the guide to scale",
@@ -644,7 +675,13 @@ const I18N = {
  forwho:"For people who already make money online and want to reach the next level. This is not a beginner's guide.", price:'<span class="pnow">165,000<sup>FCFA</sup> <span class="peur">(€250)</span></span>', card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)",
  note:"Card (international) or mobile money (Africa) · Instant access after payment."
  },
- book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to launch your first online business from zero, even with just a phone.", price:'<span class="pnow">35,000<sup>FCFA</sup> <span class="peur">(€50)</span></span><span class="pold">55,000 FCFA</span>', card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)", note:"Card (international) or mobile money (Africa) · Instant access after payment." },
+ book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to make your first income online, whatever your starting point. No hype, no fluff: concrete, from my own experience.",
+ f1t:"Every path", f1:"The real ways to make your first income online, even from zero, even with just a phone.",
+ f2t:"Pick yours", f2:"How to find the one that fits your situation, without spreading yourself thin.",
+ f3t:"Clients & payment", f3:"Find your first clients and get paid from Africa, a wall few people explain to you.",
+ f4t:"Your action plan", f4:"The mindset and day-by-day steps, to take action instead of going in circles.",
+ commu_t:"You're not alone. 🤝", commu:"When you get the guide, you join the private Ex-rienneux community. You talk with the others, ask all your questions, and we follow your progress together. It's not a PDF you get and then you're on your own: you're supported all the way.",
+ price:'<span class="pnow">35,000<sup>FCFA</sup> <span class="peur">(€50)</span></span><span class="pold">55,000 FCFA</span>', card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)", note:"Card (international) or mobile money (Africa) · Instant access after payment." },
  buy:{ full:'Buy the guide · <span class="bb-price">35,000<sup style="font-size:.55em;vertical-align:super;margin-left:1px">FCFA</sup> (€50)</span>' },
  final:{ h2:"You can stay stuck for 5 more years.<br>Or fix it this week.", cta:"See if I can help you", micro:"2 minutes. You leave with a plan, not a pitch." },
  quiz:{
