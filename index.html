@@ -253,6 +253,10 @@
  </div>
  <button class="cta" onclick="startQuiz()" data-i18n="hero.cta">Voir si je peux t'aider</button>
  <span class="micro" data-i18n="hero.micro">2 minutes pour répondre. Je ne prends pas tout le monde, voyons si c'est toi.</span>
+ <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--border)">
+ <a class="cta" href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener" style="background:#25D366;color:#fff;display:inline-flex;align-items:center;gap:9px" data-i18n="hero.wa">💬 Rejoindre gratuitement la communauté des Rienneux</a>
+ <span class="micro" data-i18n="hero.wamicro">Sur WhatsApp · gratuit · on avance ensemble</span>
+ </div>
  </div>
  </header>
 
@@ -389,6 +393,9 @@
  <h2 data-i18n-html="final.h2">Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.</h2>
  <button class="cta" onclick="startQuiz()" data-i18n="final.cta">Voir si je peux t'aider</button>
  <span class="micro" data-i18n="final.micro">2 minutes. Tu repars avec un plan, pas un argumentaire.</span>
+ <div style="margin-top:20px">
+ <a class="cta" href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener" style="background:#25D366;color:#fff;display:inline-flex;align-items:center;gap:9px" data-i18n="hero.wa">💬 Rejoindre gratuitement la communauté des Rienneux</a>
+ </div>
  </div>
  </section>
 
@@ -545,7 +552,9 @@ const I18N = {
  bullets:'Tu repars avec : <b>ce qui te bloque vraiment</b> · <b>les leviers à activer en premier</b> · <b>ton plan d\'action priorisé</b>',
  storyhook:"Parti de zéro au Bénin. Aujourd'hui, +50k€ par mois. Mon histoire, en vidéo 👇",
  cta:"Voir si je peux t'aider",
- micro:"2 minutes pour répondre. Je ne prends pas tout le monde, voyons si c'est toi."
+ micro:"2 minutes pour répondre. Je ne prends pas tout le monde, voyons si c'est toi.",
+ wa:"💬 Rejoindre gratuitement la communauté des Rienneux",
+ wamicro:"Sur WhatsApp · gratuit · on avance ensemble"
  },
  testi:{
  eyebrow:"Témoignages", h2:"Ce qu'ils en disent",
@@ -648,7 +657,9 @@ const I18N = {
  bullets:'You leave with: <b>what\'s really blocking you</b> · <b>the levers to pull first</b> · <b>your prioritized action plan</b>',
  storyhook:"From zero in Benin to over €50k a month. My story, in the video 👇",
  cta:"See if I can help you",
- micro:"2 minutes to answer. I don't take everyone, let's see if it's you."
+ micro:"2 minutes to answer. I don't take everyone, let's see if it's you.",
+ wa:"💬 Join the free Rienneux community",
+ wamicro:"On WhatsApp · free · let's grow together"
  },
  testi:{
  eyebrow:"Testimonials", h2:"What they say",
@@ -967,7 +978,8 @@ function finish(){
  source:ATTR.source, sourceCode:ATTR.code, referrer:ATTR.referrer, landing:ATTR.landing
  };
  if(!data.prenom||!data.nom||!data.email||!data.pays){ alert(t.js.alert_fill); return; }
- if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){ alert(t.js.alert_email); return; }
+ data.email = data.email.replace(/[\s ​]+/g,'');
+ if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)){ alert(t.js.alert_email); return; }
  track('lead', {pays:data.pays, revenue:data.revenue});
  sendSheet(data);
 
