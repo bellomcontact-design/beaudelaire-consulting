@@ -296,13 +296,31 @@
  <h2 data-i18n="book.h2">Le chemin des rienneux</h2>
  <p class="lead" data-i18n="book.lead">Le guide complet pour faire tes premiers revenus en ligne, quel que soit ton point de départ. Grâce à ce guide, tu sauras enfin par où commencer, sans te perdre dans les faux rêves de e-commerce ou de trading. Du concret, basé sur mon expérience. Et tu ne le fais pas seul : une communauté et une équipe avancent avec toi.</p>
 
+ <div style="max-width:580px;margin:6px auto 20px">
+ <button type="button" onclick="toggleInside(this)" aria-expanded="false" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card,#fffefb);border:1px solid var(--border);border-radius:14px;padding:15px 18px;cursor:pointer;font-family:inherit;text-align:left">
+ <b style="font-size:15px;color:var(--text)" data-i18n="book.inside_t">📘 Ce que tu obtiens dans le guide (clique pour voir)</b>
+ <span style="font-size:16px;color:var(--green-btn);transition:transform .2s;flex-shrink:0">▼</span>
+ </button>
+ <ul data-i18n-html="book.inside" style="margin:8px 0 0;padding:16px 18px;list-style:none;display:none;flex-direction:column;gap:11px;font-size:14px;line-height:1.45;background:var(--card,#fffefb);border:1px solid var(--border);border-radius:14px;text-align:left">
+ <li>✅ <b>Le bon mindset pour partir de zéro</b> : ton temps comme seule richesse, arrêter de scroller, fixer ta destination et ton plan.</li>
+ <li>✅ <b>La méthode du « véhicule »</b> : trouver ta compétence vendable (ou en apprendre une de zéro) et savoir lesquelles sont les plus demandées.</li>
+ <li>✅ <b>Trouver tes premiers clients</b> : les bonnes plateformes freelance, et comment décrocher ET réussir ton tout premier client.</li>
+ <li>✅ <b>Créer du contenu avec l'IA</b> : comment faire des vidéos avec l'IA (même sans te montrer) et les monétiser pour gagner de l'argent.</li>
+ <li>✅ <b>La vérité sur l'e-commerce et le trading</b> : ce qui marche vraiment vs les faux rêves qu'on te vend.</li>
+ <li>✅ <b>Recevoir et retirer ton argent en Afrique</b> : les vrais moyens de te faire payer et de sortir ton argent (banques, mobile money, solutions qui marchent).</li>
+ <li>✅ <b>Les pièges à éviter</b> : repérer les arnaques, avec mon histoire vécue.</li>
+ <li>✅ <b>Ton plan d'action concret</b> : tes 7 premiers jours, tes 30 premiers jours, et comment gérer ton argent.</li>
+ <li>✅ <b>L'accès à la communauté privée Ex-rienneux</b> : tu avances accompagné, jamais seul.</li>
+ </ul>
+ </div>
+
  <div class="bkcommu">
  <b data-i18n="book.commu_t">Tu n'es pas seul. 🤝</b>
  <span data-i18n="book.commu">En prenant le guide, tu rejoins ma communauté privée Ex-rienneux. Tu échanges avec les autres, qui étaient aussi des rienneux avant toi, tu poses toutes tes questions, et on progresse ensemble. On ne va pas te laisser tout seul : tu seras accompagné pour quitter ta vie de rienneux. On espère te voir de l'autre côté.</span>
  </div>
 
  <div style="margin:6px 0 18px" data-i18n-html="book.price"><span class="pnow">35 000<sup>FCFA</sup></span><span class="pold">55 000 FCFA</span></div>
- <p style="display:inline-block;background:#fff7e6;border:1px solid #f0dca8;color:#7a5a12;font-weight:700;font-size:13px;padding:6px 14px;border-radius:999px;margin:0 auto 12px" data-i18n="book.urgency">⏳ Offre disponible du 31 juillet au 4 août</p>
+ <p style="display:inline-block;background:#fff7e6;border:1px solid #f0dca8;color:#7a5a12;font-weight:700;font-size:13px;padding:6px 14px;border-radius:999px;margin:0 auto 12px" data-i18n="book.urgency">⏳ Offre jusqu'au 8 août 2026 · places limitées</p>
  <p style="font-weight:800;color:var(--text);font-size:17px;margin:0 0 12px" data-i18n="book.join">Rejoins les Ex-rienneux 👇</p>
  <div style="display:flex;flex-direction:column;gap:12px;align-items:center;max-width:440px;margin:0 auto">
  <a class="cta" style="width:100%" href="https://whop.com/checkout/plan_2YIjdBpeJTH9M" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
@@ -509,7 +527,7 @@
  <div class="name" id="rgName"></div>
  <div class="price" id="rgPrice"></div>
  <p class="anchor" id="rgLine"></p>
- <p style="display:inline-block;background:#fff7e6;border:1px solid #f0dca8;color:#7a5a12;font-weight:700;font-size:12.5px;padding:5px 12px;border-radius:999px;margin:2px 0 12px" data-i18n="book.urgency">⏳ Offre disponible du 31 juillet au 4 août</p>
+ <p style="display:inline-block;background:#fff7e6;border:1px solid #f0dca8;color:#7a5a12;font-weight:700;font-size:12.5px;padding:5px 12px;border-radius:999px;margin:2px 0 12px" data-i18n="book.urgency">⏳ Offre jusqu'au 8 août 2026 · places limitées</p>
  <div class="pay">
  <a class="paybtn" id="rgCard" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide_card')"><b id="rgCtaC">Prendre le guide</b><span>Paiement par carte · Visa / Mastercard</span></a>
  <a class="paybtn" id="rgBuy" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide')"><b id="rgCta">Prendre le guide</b><span>Paiement mobile money (Afrique) · Téléchargement immédiat</span></a>
@@ -600,7 +618,9 @@ const I18N = {
  },
  book:{ eyebrow:"Pour les rienneux", h2:"Le chemin des rienneux", lead:"Le guide complet pour faire tes premiers revenus en ligne, quel que soit ton point de départ. Grâce à ce guide, tu sauras enfin par où commencer, sans te perdre dans les faux rêves de e-commerce ou de trading. Du concret, basé sur mon expérience. Et tu ne le fais pas seul : une communauté et une équipe avancent avec toi.",
  commu_t:"Tu n'es pas seul. 🤝", commu:"En prenant le guide, tu rejoins ma communauté privée Ex-rienneux. Tu échanges avec les autres, qui étaient aussi des rienneux avant toi, tu poses toutes tes questions, et on progresse ensemble. On ne va pas te laisser tout seul : tu seras accompagné pour quitter ta vie de rienneux. On espère te voir de l'autre côté.",
- join:"Rejoins les Ex-rienneux 👇", urgency:"⏳ Offre disponible du 31 juillet au 4 août",
+ join:"Rejoins les Ex-rienneux 👇", urgency:"⏳ Offre jusqu'au 8 août 2026 · places limitées",
+ inside_t:"📘 Ce que tu obtiens dans le guide (clique pour voir)",
+ inside:'<li>✅ <b>Le bon mindset pour partir de zéro</b> : ton temps comme seule richesse, arrêter de scroller, fixer ta destination et ton plan.</li><li>✅ <b>La méthode du « véhicule »</b> : trouver ta compétence vendable (ou en apprendre une de zéro) et savoir lesquelles sont les plus demandées.</li><li>✅ <b>Trouver tes premiers clients</b> : les bonnes plateformes freelance, et comment décrocher ET réussir ton tout premier client.</li><li>✅ <b>Créer du contenu avec l\'IA</b> : comment faire des vidéos avec l\'IA (même sans te montrer) et les monétiser pour gagner de l\'argent.</li><li>✅ <b>La vérité sur l\'e-commerce et le trading</b> : ce qui marche vraiment vs les faux rêves qu\'on te vend.</li><li>✅ <b>Recevoir et retirer ton argent en Afrique</b> : les vrais moyens de te faire payer et de sortir ton argent (banques, mobile money, solutions qui marchent).</li><li>✅ <b>Les pièges à éviter</b> : repérer les arnaques, avec mon histoire vécue.</li><li>✅ <b>Ton plan d\'action concret</b> : tes 7 premiers jours, tes 30 premiers jours, et comment gérer ton argent.</li><li>✅ <b>L\'accès à la communauté privée Ex-rienneux</b> : tu avances accompagné, jamais seul.</li>',
  price:'<span class="pnow">35 000<sup>FCFA</sup> <span class="peur">(50€)</span></span><span class="pold">55 000 FCFA</span>', card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)", note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement." },
  buy:{ full:'Acheter le guide · <span class="bb-price">35 000<sup style="font-size:.55em;vertical-align:super;margin-left:1px">FCFA</sup> (50€)</span>' },
  final:{ h2:"Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.", cta:"Voir si je peux t'aider", micro:"2 minutes. Tu repars avec un plan, pas un argumentaire." },
@@ -705,7 +725,9 @@ const I18N = {
  },
  book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to make your first income online, whatever your starting point. With this guide, you'll finally know where to start, without getting lost in the false dreams of e-commerce or trading. Concrete, from my own experience. And you don't do it alone: a community and a team move forward with you.",
  commu_t:"You're not alone. 🤝", commu:"When you get the guide, you join my private Ex-rienneux community. You talk with the others, who were rienneux before you too, ask all your questions, and we move forward together. We won't leave you on your own: you're supported, all the way to leaving your rienneux life behind. Hope to see you on the other side.",
- join:"Join the Ex-rienneux 👇", urgency:"⏳ Available from July 31 to August 4",
+ join:"Join the Ex-rienneux 👇", urgency:"⏳ Until August 8, 2026 · limited spots",
+ inside_t:"📘 What you get in the guide (tap to see)",
+ inside:'<li>✅ <b>The right mindset to start from zero</b>: your time as your only wealth, stop scrolling, set your destination and your plan.</li><li>✅ <b>The « vehicle » method</b>: find your sellable skill (or learn one from scratch) and know which ones are most in demand.</li><li>✅ <b>Find your first clients</b>: the right freelance platforms, and how to land AND nail your very first client.</li><li>✅ <b>Create content with AI</b>: how to make videos with AI (even without showing your face) and monetize them to earn money.</li><li>✅ <b>The truth about e-commerce and trading</b>: what really works vs the false dreams you\'re sold.</li><li>✅ <b>Getting paid and withdrawing your money in Africa</b>: the real ways to get paid and cash out (banks, mobile money, solutions that actually work).</li><li>✅ <b>The traps to avoid</b>: spotting scams, with my real story.</li><li>✅ <b>Your concrete action plan</b>: your first 7 days, your first 30 days, and how to manage your money.</li><li>✅ <b>Access to the private Ex-rienneux community</b>: you move forward supported, never alone.</li>',
  price:'<span class="pnow">35,000<sup>FCFA</sup> <span class="peur">(€50)</span></span><span class="pold">55,000 FCFA</span>', card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)", note:"Card (international) or mobile money (Africa) · Instant access after payment." },
  buy:{ full:'Buy the guide · <span class="bb-price">35,000<sup style="font-size:.55em;vertical-align:super;margin-left:1px">FCFA</sup> (€50)</span>' },
  final:{ h2:"You can stay stuck for 5 more years.<br>Or fix it this week.", cta:"See if I can help you", micro:"2 minutes. You leave with a plan, not a pitch." },
@@ -1021,6 +1043,15 @@ function renderRes(){
 }
 function showMoreRes(){ resExpanded=!resExpanded; renderRes(); }
 renderRes();
+
+function toggleInside(btn){
+ var ul=btn.nextElementSibling;
+ var open=ul.style.display==='flex';
+ ul.style.display=open?'none':'flex';
+ btn.setAttribute('aria-expanded',open?'false':'true');
+ var arrow=btn.querySelector('span');
+ if(arrow) arrow.style.transform=open?'rotate(0deg)':'rotate(180deg)';
+}
 
 /* ---- Carousel témoignages ---- */
 (function(){
