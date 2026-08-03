@@ -313,12 +313,30 @@
  </ul>
  </div>
 
- <div style="margin:6px 0 18px" data-i18n-html="book.price"><span class="pnow">35 000<sup>FCFA</sup></span><span class="pold">55 000 FCFA</span></div>
- <p style="display:inline-block;background:#fff7e6;border:1px solid #f0dca8;color:#7a5a12;font-weight:700;font-size:13px;padding:6px 14px;border-radius:999px;margin:0 auto 12px" data-i18n="book.urgency">⏳ Offre jusqu'au 8 août 2026 · places limitées</p>
- <p style="font-weight:800;color:var(--text);font-size:17px;margin:0 0 12px" data-i18n="book.join">Rejoins les Ex-rienneux 👇</p>
- <div style="display:flex;flex-direction:column;gap:12px;align-items:center;max-width:440px;margin:0 auto">
+ <p style="display:inline-block;background:#fff7e6;border:1px solid #f0dca8;color:#7a5a12;font-weight:700;font-size:13px;padding:6px 14px;border-radius:999px;margin:6px auto 18px" data-i18n="book.urgency">⏳ Offre jusqu'au 8 août 2026 · places limitées</p>
+ <div style="display:flex;flex-direction:column;gap:16px;max-width:440px;margin:0 auto">
+
+ <div style="position:relative;background:var(--card,#fffefb);border:2px solid var(--green-btn);border-radius:16px;padding:22px 18px 18px">
+ <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--green-btn);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.05em;padding:4px 14px;border-radius:999px;white-space:nowrap" data-i18n="book.reco">⭐ RECOMMANDÉ</div>
+ <div style="font-weight:800;font-size:16px;margin:6px 0 6px" data-i18n="book.t1name">Guide + Communauté Ex-rienneux</div>
+ <div style="margin:6px 0 10px"><span class="pnow">35 000<sup>FCFA</sup> <span class="peur">(50€)</span></span><span class="pold">55 000 FCFA</span></div>
+ <div style="text-align:left;font-size:13.5px;line-height:1.7;margin-bottom:14px" data-i18n-html="book.t1feat">✅ Le guide complet (22 chapitres)<br>✅ L'accès à la communauté privée <b>Ex-rienneux</b><br>✅ Tu es accompagné, jamais seul</div>
+ <div style="display:flex;flex-direction:column;gap:10px">
  <a class="cta" style="width:100%" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n="book.momo">Payer en mobile money (Afrique)</a>
  <a class="cta" style="width:100%;background:#fffefb;color:var(--green-btn);border:2px solid var(--green-btn)" href="https://whop.com/checkout/plan_2YIjdBpeJTH9M" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
+ </div>
+ </div>
+
+ <div style="background:var(--card,#fffefb);border:1px solid var(--border);border-radius:16px;padding:18px">
+ <div style="font-weight:800;font-size:16px;margin-bottom:6px" data-i18n="book.t2name">Guide seul</div>
+ <div style="margin:6px 0 10px"><span class="pnow">15 000<sup>FCFA</sup> <span class="peur">(23€)</span></span></div>
+ <div style="text-align:left;font-size:13.5px;line-height:1.7;margin-bottom:14px" data-i18n-html="book.t2feat">✅ Le guide complet (22 chapitres)<br><span style="color:#a19b8d">✖️ Sans la communauté Ex-rienneux</span></div>
+ <div style="display:flex;flex-direction:column;gap:10px">
+ <a class="cta" style="width:100%" href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" data-i18n="book.momo">Payer en mobile money (Afrique)</a>
+ <a class="cta" style="width:100%;background:#fffefb;color:var(--green-btn);border:2px solid var(--green-btn)" href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
+ </div>
+ </div>
+
  </div>
  <span class="micro" data-i18n="book.note">Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.</span>
  </div>
@@ -525,6 +543,7 @@
  <a class="paybtn" id="rgCard" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide_card')"><b id="rgCtaC">Prendre le guide</b><span>Paiement par carte · Visa / Mastercard</span></a>
  <a class="paybtn" id="rgBuy" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide')"><b id="rgCta">Prendre le guide</b><span>Paiement mobile money (Afrique) · Téléchargement immédiat</span></a>
  </div>
+ <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0;line-height:1.5" data-i18n-html="result.guideonly">Ou juste le guide, sans la communauté (15 000 FCFA · 23€) : <a href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" style="color:var(--green-btn);font-weight:700">mobile money</a> · <a href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" style="color:var(--green-btn);font-weight:700">carte</a></p>
  </div>
  <div id="rOr" style="display:none;font-weight:800;color:var(--muted);margin:2px 0 14px;letter-spacing:.14em;font-size:13px">OU</div>
  <div class="rcard" id="rcard">
@@ -614,6 +633,8 @@ const I18N = {
  book:{ eyebrow:"Pour les rienneux", h2:"Le chemin des rienneux", lead:"Le guide complet pour faire tes premiers revenus en ligne, quel que soit ton point de départ. Du concret, pas des faux rêves.",
  commu_t:"Tu n'es pas seul. 🤝", commu:"En prenant le guide, tu rejoins ma communauté privée Ex-rienneux. Tu échanges avec les autres, qui étaient aussi des rienneux avant toi, tu poses toutes tes questions, et on progresse ensemble. On ne va pas te laisser tout seul : tu seras accompagné pour quitter ta vie de rienneux. On espère te voir de l'autre côté.",
  join:"Rejoins les Ex-rienneux 👇", urgency:"⏳ Offre jusqu'au 8 août 2026 · places limitées",
+ reco:"⭐ RECOMMANDÉ", t1name:"Guide + Communauté Ex-rienneux", t1feat:'✅ Le guide complet (22 chapitres)<br>✅ L\'accès à la communauté privée <b>Ex-rienneux</b><br>✅ Tu es accompagné, jamais seul',
+ t2name:"Guide seul", t2feat:'✅ Le guide complet (22 chapitres)<br><span style="color:#a19b8d">✖️ Sans la communauté Ex-rienneux</span>',
  inside_t:"📘 Ce que tu obtiens dans le guide (clique pour voir)",
  inside:'<li>✅ <b>Le bon mindset pour partir de zéro</b> : ton temps comme seule richesse, arrêter de scroller, fixer ta destination et ton plan.</li><li>✅ <b>La méthode du « véhicule »</b> : trouver ta compétence vendable (ou en apprendre une de zéro) et savoir lesquelles sont les plus demandées.</li><li>✅ <b>Trouver tes premiers clients en freelance</b> : le freelance, c\'est vendre tes services en ligne (design, montage vidéo, rédaction…). Les bonnes plateformes, et comment décrocher ET réussir ton premier client.</li><li>✅ <b>Devenir créateur de contenu et le monétiser</b> : comment te lancer dans la création de contenu (y compris avec l\'IA, même sans te montrer) et en vivre.</li><li>✅ <b>L\'affiliation</b> : gagner une commission en recommandant les produits des autres, sans créer ton propre produit.</li><li>✅ <b>La vérité sur l\'e-commerce et le trading</b> : ce qui marche vraiment vs les faux rêves qu\'on te vend.</li><li>✅ <b>Recevoir et retirer ton argent en Afrique</b> : les vrais moyens de te faire payer et de sortir ton argent (banques, mobile money, solutions qui marchent).</li><li>✅ <b>Les pièges à éviter</b> : repérer les arnaques, avec mon histoire vécue.</li><li>✅ <b>Ton plan d\'action concret</b> : tes 7 premiers jours, tes 30 premiers jours, et comment gérer ton argent.</li><li>✅ <b>L\'accès à la communauté privée Ex-rienneux</b> : tu avances accompagné, jamais seul.</li>',
  price:'<span class="pnow">35 000<sup>FCFA</sup> <span class="peur">(50€)</span></span><span class="pold">55 000 FCFA</span>', card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)", note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement." },
@@ -643,7 +664,8 @@ const I18N = {
  reassure:"Un vrai diagnostic de ton business, pas un argumentaire de vente déguisé. Tu repars avec un plan clair, quoi qu'il arrive.",
  book:"Réserver mon appel", card:"Paiement par carte · Visa / Mastercard", momo:"Paiement Mobile Money · Orange, MTN, Wave",
  guarantee:"Paiement sécurisé · Réservation immédiate de ton créneau", home:"Revenir à l'accueil",
- guideopt:{ name:"Le chemin des rienneux", price:'<span class="pnow">35 000<sup>FCFA</sup> <span class="peur">(50€)</span></span><span class="pold">55 000 FCFA</span>', line:"Le guide complet pour faire tes premiers revenus, quel que soit ton point de départ. Et tu n'es pas seul : tu rejoins la communauté privée Ex-rienneux, où on t'accompagne.", cta:"Rejoindre les Ex-rienneux" }
+ guideopt:{ name:"Le chemin des rienneux", price:'<span class="pnow">35 000<sup>FCFA</sup> <span class="peur">(50€)</span></span><span class="pold">55 000 FCFA</span>', line:"Le guide complet pour faire tes premiers revenus, quel que soit ton point de départ. Et tu n'es pas seul : tu rejoins la communauté privée Ex-rienneux, où on t'accompagne.", cta:"Rejoindre les Ex-rienneux" },
+ guideonly:'Ou juste le guide, sans la communauté (15 000 FCFA · 23€) : <a href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" style="color:var(--green-btn);font-weight:700">mobile money</a> · <a href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" style="color:var(--green-btn);font-weight:700">carte</a>'
  },
  js:{
  alert_fill:"Merci de remplir ton prénom, ton nom, ton email et ton pays.",
@@ -723,6 +745,8 @@ const I18N = {
  book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to make your first income online, whatever your starting point. Concrete stuff, no false dreams.",
  commu_t:"You're not alone. 🤝", commu:"When you get the guide, you join my private Ex-rienneux community. You talk with the others, who were rienneux before you too, ask all your questions, and we move forward together. We won't leave you on your own: you're supported, all the way to leaving your rienneux life behind. Hope to see you on the other side.",
  join:"Join the Ex-rienneux 👇", urgency:"⏳ Until August 8, 2026 · limited spots",
+ reco:"⭐ RECOMMENDED", t1name:"Guide + Ex-rienneux community", t1feat:'✅ The complete guide (22 chapters)<br>✅ Access to the private <b>Ex-rienneux</b> community<br>✅ You\'re supported, never alone',
+ t2name:"Guide only", t2feat:'✅ The complete guide (22 chapters)<br><span style="color:#a19b8d">✖️ Without the Ex-rienneux community</span>',
  inside_t:"📘 What you get in the guide (tap to see)",
  inside:'<li>✅ <b>The right mindset to start from zero</b>: your time as your only wealth, stop scrolling, set your destination and your plan.</li><li>✅ <b>The « vehicle » method</b>: find your sellable skill (or learn one from scratch) and know which ones are most in demand.</li><li>✅ <b>Find your first freelance clients</b>: freelancing means selling your services online (design, video editing, writing…). The right platforms, and how to land AND nail your first client.</li><li>✅ <b>Become a content creator and monetize it</b>: how to get into content creation (including with AI, even without showing your face) and make a living from it.</li><li>✅ <b>Affiliate marketing</b>: earn a commission by recommending other people\'s products, without creating your own.</li><li>✅ <b>The truth about e-commerce and trading</b>: what really works vs the false dreams you\'re sold.</li><li>✅ <b>Getting paid and withdrawing your money in Africa</b>: the real ways to get paid and cash out (banks, mobile money, solutions that actually work).</li><li>✅ <b>The traps to avoid</b>: spotting scams, with my real story.</li><li>✅ <b>Your concrete action plan</b>: your first 7 days, your first 30 days, and how to manage your money.</li><li>✅ <b>Access to the private Ex-rienneux community</b>: you move forward supported, never alone.</li>',
  price:'<span class="pnow">35,000<sup>FCFA</sup> <span class="peur">(€50)</span></span><span class="pold">55,000 FCFA</span>', card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)", note:"Card (international) or mobile money (Africa) · Instant access after payment." },
@@ -752,7 +776,8 @@ const I18N = {
  reassure:"A real diagnostic of your business, not a disguised sales pitch. You leave with a clear plan, no matter what.",
  book:"Book my call", card:"Card payment · Visa / Mastercard", momo:"Mobile Money · Orange, MTN, Wave",
  guarantee:"Secure payment · Instant slot booking · billed in EUR at checkout", home:"Back to home",
- guideopt:{ name:"Le chemin des débutants (French guide)", price:'<span class="pnow">35,000<sup>FCFA</sup> <span class="peur">(€50)</span></span><span class="pold">55,000 FCFA</span>', line:"The complete guide to make your first income online, whatever your starting point. And you're not alone: you join the private Ex-rienneux community.", cta:"Join the Ex-rienneux" }
+ guideopt:{ name:"Le chemin des débutants (French guide)", price:'<span class="pnow">35,000<sup>FCFA</sup> <span class="peur">(€50)</span></span><span class="pold">55,000 FCFA</span>', line:"The complete guide to make your first income online, whatever your starting point. And you're not alone: you join the private Ex-rienneux community.", cta:"Join the Ex-rienneux" },
+ guideonly:'Or just the guide, without the community (15,000 FCFA · €23): <a href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" style="color:var(--green-btn);font-weight:700">mobile money</a> · <a href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" style="color:var(--green-btn);font-weight:700">card</a>'
  },
  js:{
  alert_fill:"Please fill in your first name, last name, email and country.",
