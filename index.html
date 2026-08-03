@@ -126,6 +126,13 @@
  .stat span{color:var(--muted);font-size:13px}
  .stat.hl{background:#fff7e6;border-color:#f0dca8}
  .stat.hl span{color:#7a5a12;font-weight:600}
+ .otile{flex:1;min-width:0;background:var(--card,#fffefb);border:2px solid var(--border);border-radius:14px;padding:14px 8px 12px;cursor:pointer;text-align:center;font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:border-color .15s,background .15s}
+ .otile.selected{border-color:var(--green-btn);background:#eef7f0}
+ .otile .obadge{font-size:10px;font-weight:800;letter-spacing:.02em;color:var(--green-btn);margin-bottom:2px}
+ .otile .oprice{font-size:22px;font-weight:800;color:var(--green-btn);line-height:1.05}
+ .otile .oprice sup{font-size:10px}
+ .otile .oeur{font-size:13px;color:var(--muted)}
+ .otile .olabel{font-size:13.5px;font-weight:800;color:#17150f;margin-top:5px;line-height:1.2}
  .note{background:#fbfbe9;border:1px dashed #cfcf7a;border-radius:10px;padding:11px 14px;color:#6f6f1e;
  font-size:12px;margin:0 auto 24px;max-width:680px;text-align:center}
 
@@ -314,29 +321,26 @@
  </div>
 
  <p style="display:inline-block;background:#fff7e6;border:1px solid #f0dca8;color:#7a5a12;font-weight:700;font-size:13px;padding:6px 14px;border-radius:999px;margin:6px auto 18px" data-i18n="book.urgency">⏳ Offre limitée · places limitées</p>
- <div style="display:flex;flex-direction:column;gap:16px;max-width:440px;margin:0 auto">
-
- <div style="position:relative;background:var(--card,#fffefb);border:2px solid var(--green-btn);border-radius:16px;padding:22px 18px 18px">
- <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--green-btn);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.05em;padding:4px 14px;border-radius:999px;white-space:nowrap" data-i18n="book.reco">⭐ RECOMMANDÉ</div>
- <div style="font-weight:800;font-size:16px;margin:6px 0 6px" data-i18n="book.t1name">Guide + Communauté Ex-rienneux</div>
- <div style="margin:6px 0 10px"><span class="pnow">35 000<sup>FCFA</sup> <span class="peur">(50€)</span></span><span class="pold">55 000 FCFA</span></div>
- <div style="text-align:left;font-size:13.5px;line-height:1.7;margin-bottom:14px" data-i18n-html="book.t1feat">✅ Le guide complet (22 chapitres)<br>✅ L'accès à la communauté privée <b>Ex-rienneux</b><br>✅ Tu es accompagné, jamais seul</div>
+ <div style="max-width:440px;margin:0 auto">
+ <p style="font-size:13px;color:var(--muted);margin:0 0 10px" data-i18n="book.choose">Choisis ton offre 👇</p>
+ <div style="display:flex;gap:10px;margin-bottom:14px">
+ <button type="button" class="otile selected" onclick="pickOffer(this)" data-desckey="book.desc35" data-momo="https://me.fedapay.com/fz5Q_7oB" data-card="https://whop.com/checkout/plan_2YIjdBpeJTH9M">
+ <span class="obadge" data-i18n="book.reco">⭐ RECOMMANDÉ</span>
+ <span class="oprice">35 000<sup>FCFA</sup></span>
+ <span class="oeur">50€</span>
+ <span class="olabel" data-i18n="book.t1short">Guide + Communauté</span>
+ </button>
+ <button type="button" class="otile" onclick="pickOffer(this)" data-desckey="book.desc15" data-momo="https://me.fedapay.com/aAqYA_bD" data-card="https://whop.com/checkout/plan_SA8j7dIoexXwg">
+ <span class="oprice">15 000<sup>FCFA</sup></span>
+ <span class="oeur">23€</span>
+ <span class="olabel" data-i18n="book.t2short">Guide seul</span>
+ </button>
+ </div>
+ <p id="ppDesc" style="font-size:13.5px;line-height:1.5;color:var(--text);background:#f4f2ea;border-radius:10px;padding:11px 13px;margin:0 0 14px;text-align:left"></p>
  <div style="display:flex;flex-direction:column;gap:10px">
- <a class="cta" style="width:100%" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n="book.momo">Payer en mobile money (Afrique)</a>
- <a class="cta" style="width:100%;background:#fffefb;color:var(--green-btn);border:2px solid var(--green-btn)" href="https://whop.com/checkout/plan_2YIjdBpeJTH9M" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
+ <a id="ppMomo" class="cta" style="width:100%" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n="book.momo">Payer en mobile money (Afrique)</a>
+ <a id="ppCard" class="cta" style="width:100%;background:#fffefb;color:var(--green-btn);border:2px solid var(--green-btn)" href="https://whop.com/checkout/plan_2YIjdBpeJTH9M" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
  </div>
- </div>
-
- <div style="background:var(--card,#fffefb);border:1px solid var(--border);border-radius:16px;padding:18px">
- <div style="font-weight:800;font-size:16px;margin-bottom:6px" data-i18n="book.t2name">Guide seul</div>
- <div style="margin:6px 0 10px"><span class="pnow">15 000<sup>FCFA</sup> <span class="peur">(23€)</span></span></div>
- <div style="text-align:left;font-size:13.5px;line-height:1.7;margin-bottom:14px" data-i18n-html="book.t2feat">✅ Le guide complet (22 chapitres)<br><span style="color:#a19b8d">✖️ Sans la communauté Ex-rienneux</span></div>
- <div style="display:flex;flex-direction:column;gap:10px">
- <a class="cta" style="width:100%" href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" data-i18n="book.momo">Payer en mobile money (Afrique)</a>
- <a class="cta" style="width:100%;background:#fffefb;color:var(--green-btn);border:2px solid var(--green-btn)" href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
- </div>
- </div>
-
  </div>
  <span class="micro" data-i18n="book.note">Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.</span>
  </div>
@@ -534,6 +538,36 @@
  <div class="rcheck">✓</div>
  <h2 id="rHead" data-i18n="result.head">C'est bon, je peux t'aider à débloquer ça</h2>
  <p class="lead" id="rWho" style="margin-bottom:0"></p>
+
+ <div id="rTiles" style="display:none;max-width:470px;margin:10px auto 0">
+ <p style="display:inline-block;background:#fff7e6;border:1px solid #f0dca8;color:#7a5a12;font-weight:700;font-size:12.5px;padding:5px 12px;border-radius:999px;margin:0 0 12px" data-i18n="book.urgency">⏳ Offre limitée · places limitées</p>
+ <p style="font-size:13px;color:var(--muted);margin:0 0 10px" data-i18n="book.choose">Choisis ton offre 👇</p>
+ <div style="display:flex;gap:8px;margin-bottom:14px">
+ <button type="button" class="otile" onclick="pickOffer(this,'r')" data-desckey="result.descAppel" data-momo="https://me.fedapay.com/demarrage" data-card="https://whop.com/checkout/plan_bReryALMV3QYm">
+ <span class="oprice">85 000<sup>FCFA</sup></span>
+ <span class="oeur">130€</span>
+ <span class="olabel" data-i18n="result.tileAppel">Appel 1-à-1</span>
+ </button>
+ <button type="button" class="otile selected" onclick="pickOffer(this,'r')" data-desckey="book.desc35" data-momo="https://me.fedapay.com/fz5Q_7oB" data-card="https://whop.com/checkout/plan_2YIjdBpeJTH9M">
+ <span class="obadge" data-i18n="book.reco">⭐ RECOMMANDÉ</span>
+ <span class="oprice">35 000<sup>FCFA</sup></span>
+ <span class="oeur">50€</span>
+ <span class="olabel" data-i18n="book.t1short">Guide + Communauté</span>
+ </button>
+ <button type="button" class="otile" onclick="pickOffer(this,'r')" data-desckey="book.desc15" data-momo="https://me.fedapay.com/aAqYA_bD" data-card="https://whop.com/checkout/plan_SA8j7dIoexXwg">
+ <span class="oprice">15 000<sup>FCFA</sup></span>
+ <span class="oeur">23€</span>
+ <span class="olabel" data-i18n="book.t2short">Guide seul</span>
+ </button>
+ </div>
+ <p id="rpDesc" style="font-size:13.5px;line-height:1.5;color:var(--text);background:#f4f2ea;border-radius:10px;padding:11px 13px;margin:0 0 14px;text-align:left"></p>
+ <div style="display:flex;flex-direction:column;gap:10px">
+ <a id="rpMomo" class="cta" style="width:100%" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n="book.momo">Payer en mobile money (Afrique)</a>
+ <a id="rpCard" class="cta" style="width:100%;background:#fffefb;color:var(--green-btn);border:2px solid var(--green-btn)" href="https://whop.com/checkout/plan_2YIjdBpeJTH9M" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
+ </div>
+ <p style="margin-top:16px"><a href="#" onclick="backHome();return false;" style="color:var(--muted);font-size:14px;text-decoration:underline" data-i18n="result.home">Revenir à l'accueil</a></p>
+ </div>
+
  <div class="rcard" id="rGuide" style="display:none;margin-bottom:14px">
  <div class="name" id="rgName"></div>
  <div class="price" id="rgPrice"></div>
@@ -635,6 +669,9 @@ const I18N = {
  join:"Rejoins les Ex-rienneux 👇", urgency:"⏳ Offre limitée · places limitées",
  reco:"⭐ RECOMMANDÉ", t1name:"Guide + Communauté Ex-rienneux", t1feat:'✅ Le guide complet (22 chapitres)<br>✅ L\'accès à la communauté privée <b>Ex-rienneux</b><br>✅ Tu es accompagné, jamais seul',
  t2name:"Guide seul", t2feat:'✅ Le guide complet (22 chapitres)<br><span style="color:#a19b8d">✖️ Sans la communauté Ex-rienneux</span>',
+ choose:"Choisis ton offre 👇", t1short:"Guide + Communauté", t2short:"Guide seul",
+ desc35:'✅ Le guide complet (22 chapitres) <b>+ l\'accès à la communauté privée Ex-rienneux</b>, où on t\'accompagne au quotidien. Tu n\'es jamais seul.',
+ desc15:'✅ Le guide complet (22 chapitres), pour apprendre à ton rythme. <span style="color:#a19b8d">Sans l\'accès à la communauté.</span>',
  inside_t:"📘 Ce que tu obtiens dans le guide (clique pour voir)",
  inside:'<li>✅ <b>Le bon mindset pour partir de zéro</b> : ton temps comme seule richesse, arrêter de scroller, fixer ta destination et ton plan.</li><li>✅ <b>La méthode du « véhicule »</b> : trouver ta compétence vendable (ou en apprendre une de zéro) et savoir lesquelles sont les plus demandées.</li><li>✅ <b>Trouver tes premiers clients en freelance</b> : le freelance, c\'est vendre tes services en ligne (design, montage vidéo, rédaction…). Les bonnes plateformes, et comment décrocher ET réussir ton premier client.</li><li>✅ <b>Devenir créateur de contenu et le monétiser</b> : comment te lancer dans la création de contenu (y compris avec l\'IA, même sans te montrer) et en vivre.</li><li>✅ <b>L\'affiliation</b> : gagner une commission en recommandant les produits des autres, sans créer ton propre produit.</li><li>✅ <b>La vérité sur l\'e-commerce et le trading</b> : ce qui marche vraiment vs les faux rêves qu\'on te vend.</li><li>✅ <b>Recevoir et retirer ton argent en Afrique</b> : les vrais moyens de te faire payer et de sortir ton argent (banques, mobile money, solutions qui marchent).</li><li>✅ <b>Les pièges à éviter</b> : repérer les arnaques, avec mon histoire vécue.</li><li>✅ <b>Ton plan d\'action concret</b> : tes 7 premiers jours, tes 30 premiers jours, et comment gérer ton argent.</li><li>✅ <b>L\'accès à la communauté privée Ex-rienneux</b> : tu avances accompagné, jamais seul.</li>',
  price:'<span class="pnow">35 000<sup>FCFA</sup> <span class="peur">(50€)</span></span><span class="pold">55 000 FCFA</span>', card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)", note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement." },
@@ -661,7 +698,7 @@ const I18N = {
  },
  result:{
  head:"C'est bon, je peux t'aider à débloquer ça",
- reassure:"Un vrai diagnostic de ton business, pas un argumentaire de vente déguisé. Tu repars avec un plan clair, quoi qu'il arrive.",
+ reassure:"Un vrai diagnostic de ton business, pas un argumentaire de vente déguisé. Tu repars avec un plan clair, quoi qu'il arrive.", tileAppel:"Appel 1-à-1", descAppel:'✅ 60 min en direct avec moi, rien que pour ton projet. Le guide et la communauté Ex-rienneux sont inclus.',
  book:"Réserver mon appel", card:"Paiement par carte · Visa / Mastercard", momo:"Paiement Mobile Money · Orange, MTN, Wave",
  guarantee:"Paiement sécurisé · Réservation immédiate de ton créneau", home:"Revenir à l'accueil",
  guideopt:{ name:"Le chemin des rienneux", price:'<span class="pnow">35 000<sup>FCFA</sup> <span class="peur">(50€)</span></span><span class="pold">55 000 FCFA</span>', line:"Le guide complet pour faire tes premiers revenus, quel que soit ton point de départ. Et tu n'es pas seul : tu rejoins la communauté privée Ex-rienneux, où on t'accompagne.", cta:"Rejoindre les Ex-rienneux" },
@@ -747,6 +784,9 @@ const I18N = {
  join:"Join the Ex-rienneux 👇", urgency:"⏳ Limited offer · limited spots",
  reco:"⭐ RECOMMENDED", t1name:"Guide + Ex-rienneux community", t1feat:'✅ The complete guide (22 chapters)<br>✅ Access to the private <b>Ex-rienneux</b> community<br>✅ You\'re supported, never alone',
  t2name:"Guide only", t2feat:'✅ The complete guide (22 chapters)<br><span style="color:#a19b8d">✖️ Without the Ex-rienneux community</span>',
+ choose:"Choose your offer 👇", t1short:"Guide + Community", t2short:"Guide only",
+ desc35:'✅ The complete guide (22 chapters) <b>+ access to the private Ex-rienneux community</b>, where we support you daily. You\'re never alone.',
+ desc15:'✅ The complete guide (22 chapters), learn at your own pace. <span style="color:#a19b8d">Without community access.</span>',
  inside_t:"📘 What you get in the guide (tap to see)",
  inside:'<li>✅ <b>The right mindset to start from zero</b>: your time as your only wealth, stop scrolling, set your destination and your plan.</li><li>✅ <b>The « vehicle » method</b>: find your sellable skill (or learn one from scratch) and know which ones are most in demand.</li><li>✅ <b>Find your first freelance clients</b>: freelancing means selling your services online (design, video editing, writing…). The right platforms, and how to land AND nail your first client.</li><li>✅ <b>Become a content creator and monetize it</b>: how to get into content creation (including with AI, even without showing your face) and make a living from it.</li><li>✅ <b>Affiliate marketing</b>: earn a commission by recommending other people\'s products, without creating your own.</li><li>✅ <b>The truth about e-commerce and trading</b>: what really works vs the false dreams you\'re sold.</li><li>✅ <b>Getting paid and withdrawing your money in Africa</b>: the real ways to get paid and cash out (banks, mobile money, solutions that actually work).</li><li>✅ <b>The traps to avoid</b>: spotting scams, with my real story.</li><li>✅ <b>Your concrete action plan</b>: your first 7 days, your first 30 days, and how to manage your money.</li><li>✅ <b>Access to the private Ex-rienneux community</b>: you move forward supported, never alone.</li>',
  price:'<span class="pnow">35,000<sup>FCFA</sup> <span class="peur">(€50)</span></span><span class="pold">55,000 FCFA</span>', card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)", note:"Card (international) or mobile money (Africa) · Instant access after payment." },
@@ -773,7 +813,7 @@ const I18N = {
  },
  result:{
  head:"Good news, I can help you unlock this",
- reassure:"A real diagnostic of your business, not a disguised sales pitch. You leave with a clear plan, no matter what.",
+ reassure:"A real diagnostic of your business, not a disguised sales pitch. You leave with a clear plan, no matter what.", tileAppel:"1-on-1 call", descAppel:'✅ 60 min live with me, just for your project. The guide and Ex-rienneux community are included.',
  book:"Book my call", card:"Card payment · Visa / Mastercard", momo:"Mobile Money · Orange, MTN, Wave",
  guarantee:"Secure payment · Instant slot booking · billed in EUR at checkout", home:"Back to home",
  guideopt:{ name:"Le chemin des débutants (French guide)", price:'<span class="pnow">35,000<sup>FCFA</sup> <span class="peur">(€50)</span></span><span class="pold">55,000 FCFA</span>', line:"The complete guide to make your first income online, whatever your starting point. And you're not alone: you join the private Ex-rienneux community.", cta:"Join the Ex-rienneux" },
@@ -881,6 +921,7 @@ function applyI18N(){
  var lt=document.getElementById('langToggle'); if(lt) lt.textContent = LANG==='fr' ? 'EN' : 'FR';
  var dl=document.getElementById('dlLink'); if(dl){ dl.setAttribute('href', LANG==='fr'?'/le-chemin-fr.pdf':'/le-chemin-en.pdf'); dl.setAttribute('download', LANG==='fr'?'Le-chemin-Beaudelaire.pdf':'The-path-Beaudelaire.pdf'); }
  fillCountries();
+ refreshOfferDesc();
  // si le résultat est déjà affiché, on le régénère dans la bonne langue
  if(document.getElementById('result') && document.getElementById('result').classList.contains('active') && lastOfferKey){ renderResult(); }
 }
@@ -998,18 +1039,12 @@ function renderResult(){
  document.getElementById('payMomo').style.display=(links.momo&&links.momo!=='#')?'block':'none';
  var scard=document.getElementById('payCardSub'); if(scard) scard.textContent=offer.price+' · '+t.result.card;
  var smomo=document.getElementById('payMomoSub'); if(smomo) smomo.textContent=(offer.fcfa||offer.price)+' · '+t.result.momo;
- var g=t.result.guideopt; var showGuide=(lastOfferKey==='demarrage')&&g;
- var gd=document.getElementById('rGuide'), gor=document.getElementById('rOr');
- if(showGuide){
-   gd.style.display='block'; gor.style.display='block';
-   document.getElementById('rgName').textContent=g.name;
-   document.getElementById('rgPrice').innerHTML=g.price;
-   document.getElementById('rgLine').textContent=g.line;
-   document.getElementById('rgCta').textContent=g.cta;
-   document.getElementById('rgCtaC').textContent=g.cta;
-   document.getElementById('rgCard').href='https://whop.com/checkout/plan_2YIjdBpeJTH9M';
-   document.getElementById('rgBuy').href='https://me.fedapay.com/fz5Q_7oB';
- } else { gd.style.display='none'; gor.style.display='none'; }
+ var isDem=(lastOfferKey==='demarrage');
+ var rt=document.getElementById('rTiles');
+ if(rt) rt.style.display = isDem ? 'block' : 'none';
+ document.getElementById('rcard').style.display = isDem ? 'none' : 'block';
+ document.getElementById('rGuide').style.display='none';
+ document.getElementById('rOr').style.display='none';
 }
 
 function finish(){
@@ -1073,6 +1108,26 @@ function toggleInside(btn){
  btn.setAttribute('aria-expanded',open?'false':'true');
  var arrow=btn.querySelector('span');
  if(arrow) arrow.style.transform=open?'rotate(0deg)':'rotate(180deg)';
+}
+
+function pickOffer(el, scope){
+ el.parentElement.querySelectorAll('.otile').forEach(function(t){ t.classList.remove('selected'); });
+ el.classList.add('selected');
+ var m=document.getElementById(scope==='r'?'rpMomo':'ppMomo');
+ var c=document.getElementById(scope==='r'?'rpCard':'ppCard');
+ if(m) m.href=el.getAttribute('data-momo');
+ if(c) c.href=el.getAttribute('data-card');
+ var d=document.getElementById(scope==='r'?'rpDesc':'ppDesc');
+ var k=el.getAttribute('data-desckey');
+ if(d&&k){ var v=getKey(T(),k); if(v!=null) d.innerHTML=v; }
+}
+function refreshOfferDesc(){
+ document.querySelectorAll('.otile.selected').forEach(function(el){
+  var scope = el.closest('#rTiles') ? 'r' : '';
+  var d=document.getElementById(scope==='r'?'rpDesc':'ppDesc');
+  var k=el.getAttribute('data-desckey');
+  if(d&&k){ var v=getKey(T(),k); if(v!=null) d.innerHTML=v; }
+ });
 }
 
 /* ---- Compteur façon casino (rienneux sauvés) ---- */
