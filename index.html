@@ -253,7 +253,7 @@
  <!-- HERO -->
  <header>
  <div class="wrap">
- <div class="badge"><span class="stars">★★★★★</span> <span data-i18n="hero.badge_pre">Plus de</span> <span id="rcount" class="rcount">150</span> <span data-i18n="hero.badge_post">rienneux sauvés</span></div>
+ <div class="badge"><span class="stars">★★★★★</span> <span data-i18n="hero.badge_pre">Plus de</span> <span id="rcount" class="rcount">250</span> <span data-i18n="hero.badge_post">rienneux sauvés</span></div>
  <h1 data-i18n-html="hero.h1">De 0 à ton premier client en ligne,<br>même en partant de rien.</h1>
  <p class="sub" data-i18n="hero.sub">Tu veux te lancer mais tu ne sais pas par où commencer ? Je te montre le chemin exact, étape par étape, depuis l'Afrique. Et si tu gagnes déjà de l'argent, le petit test ci-dessous t'oriente vers le bon accompagnement pour passer au palier au-dessus.</p>
  <p style="font-weight:700;color:var(--text);margin:10px 0 12px;font-size:16px" data-i18n="hero.storyhook">Parti de zéro au Bénin. Aujourd'hui, +50k€ par mois. Mon histoire, en vidéo 👇</p>
@@ -286,7 +286,7 @@
  <div class="statrow">
  <div class="stat"><b data-i18n="about.stat1n">0 → 50k€+</b><span data-i18n="about.stat1l">par mois</span></div>
  <div class="stat"><b>30+</b><span data-i18n="about.stat2l">pays en 2 ans</span></div>
- <div class="stat hl"><b>150+</b><span data-i18n="about.stat3l">rienneux sauvés</span></div>
+ <div class="stat hl"><b>250+</b><span data-i18n="about.stat3l">rienneux sauvés</span></div>
  </div>
  <div style="text-align:center;margin-top:30px">
  <button class="cta" onclick="startQuiz()" data-i18n="about.cta">Réserver mon appel</button>
@@ -1133,11 +1133,11 @@ function refreshOfferDesc(){
 /* ---- Compteur façon casino (rienneux sauvés) ---- */
 (function(){
  var el=document.getElementById('rcount'); if(!el) return;
- var target=150, flicker=750, dur=1500, start=null, done=false;
+ var target=250, flicker=750, dur=1500, start=null, done=false;
  function step(ts){
   if(!start) start=ts;
   var t=ts-start;
-  if(t<flicker){ el.textContent=Math.floor(Math.random()*190); }
+  if(t<flicker){ el.textContent=Math.floor(Math.random()*300); }
   else{
    var p=Math.min((t-flicker)/(dur-flicker),1);
    el.textContent=Math.floor(p*target);
