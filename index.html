@@ -129,8 +129,11 @@
  .otile{flex:1;min-width:0;background:var(--card,#fffefb);border:2px solid var(--border);border-radius:14px;padding:14px 8px 12px;cursor:pointer;text-align:center;font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:border-color .15s,background .15s}
  .otile.selected{border-color:var(--green-btn);background:#eef7f0}
  .otile .obadge{font-size:10px;font-weight:800;letter-spacing:.02em;color:var(--green-btn);margin-bottom:2px}
- .otile .oprice{font-size:22px;font-weight:800;color:var(--green-btn);line-height:1.05}
+ .otile .oprice{font-size:21px;font-weight:800;color:var(--green-btn);line-height:1.05;white-space:nowrap}
  .otile .oprice sup{font-size:10px}
+ #rTiles .otile .oprice{font-size:16px}
+ #rTiles .otile{padding:12px 5px 11px}
+ #rTiles .otile .olabel{font-size:12px}
  .otile .oeur{font-size:13px;color:var(--muted)}
  .otile .olabel{font-size:13.5px;font-weight:800;color:#17150f;margin-top:5px;line-height:1.2}
  .note{background:#fbfbe9;border:1px dashed #cfcf7a;border-radius:10px;padding:11px 14px;color:#6f6f1e;
@@ -565,7 +568,6 @@
  <a id="rpMomo" class="cta" style="width:100%" href="https://me.fedapay.com/fz5Q_7oB" target="_blank" rel="noopener" data-i18n="book.momo">Payer en mobile money (Afrique)</a>
  <a id="rpCard" class="cta" style="width:100%;background:#fffefb;color:var(--green-btn);border:2px solid var(--green-btn)" href="https://whop.com/checkout/plan_2YIjdBpeJTH9M" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
  </div>
- <p style="margin-top:16px"><a href="#" onclick="backHome();return false;" style="color:var(--muted);font-size:14px;text-decoration:underline" data-i18n="result.home">Revenir à l'accueil</a></p>
  </div>
 
  <div class="rcard" id="rGuide" style="display:none;margin-bottom:14px">
