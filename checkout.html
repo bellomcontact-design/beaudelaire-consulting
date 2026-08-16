@@ -119,6 +119,9 @@
    opacity:.55;transform:scale(.95);z-index:1;box-shadow:0 10px 24px rgba(0,0,0,.5)}
  .fan img.petite:hover{opacity:.9;transform:scale(1)}
 
+ .merci{background:var(--bg)}
+ .merci .fan img{background:#fff}
+
  /* Visionneuse : la capture entiere, en grand */
  /* Fond translucide : on devine la page derriere, la visionneuse
     se lit comme une couche posee dessus plutot qu'un ecran noir. */
@@ -303,6 +306,54 @@
 </section>
 
 
+<!-- REMERCIEMENTS -->
+<section class="proof merci">
+ <div class="wrap">
+  <div class="eyebrow" data-i18n="mr_eyebrow">Ce qu'ils m'écrivent</div>
+  <h2 data-i18n="mr_h2">Les messages de ceux que j'ai accompagnés</h2>
+  <p class="sublead" data-i18n="mr_sub">Reçus après l'accompagnement, activité par activité.</p>
+
+  <div class="pvp" id="pvp2">
+   <div class="pvtrack">
+
+    <div class="pvslide">
+     <div class="pvtitle" data-i18n="pv_t1">Création de contenu</div>
+     <div class="pvsub" data-i18n="mr_s1">Ils ont construit leur audience</div>
+     <div class="fan">
+      <img src="/preuves/merci/vign/m1.jpg" data-full="/preuves/merci/m1.jpg" alt="" decoding="async">
+      <img src="/preuves/merci/vign/m2.jpg" data-full="/preuves/merci/m2.jpg" alt="" decoding="async">
+      <img src="/preuves/merci/vign/m3.jpg" data-full="/preuves/merci/m3.jpg" alt="" decoding="async">
+     </div>
+    </div>
+
+    <div class="pvslide">
+     <div class="pvtitle" data-i18n="pv_t2">E-commerce</div>
+     <div class="pvsub" data-i18n="mr_s2">Ils ont fait décoller leur boutique</div>
+     <div class="fan">
+      <img src="/preuves/merci/vign/m4.jpg" data-full="/preuves/merci/m4.jpg" alt="" loading="lazy" decoding="async">
+      <img src="/preuves/merci/vign/m6.jpg" data-full="/preuves/merci/m6.jpg" alt="" loading="lazy" decoding="async">
+      <img src="/preuves/merci/vign/m7.jpg" data-full="/preuves/merci/m7.jpg" alt="" loading="lazy" decoding="async">
+     </div>
+    </div>
+
+    <div class="pvslide">
+     <div class="pvtitle" data-i18n="pv_t3">Monétisation TikTok / YouTube</div>
+     <div class="pvsub" data-i18n="mr_s3">Ils vivent de leurs vues</div>
+     <div class="fan">
+      <img src="/preuves/merci/vign/m10.jpg" data-full="/preuves/merci/m10.jpg" alt="" loading="lazy" decoding="async">
+      <img src="/preuves/merci/vign/m11.jpg" data-full="/preuves/merci/m11.jpg" alt="" loading="lazy" decoding="async">
+      <img src="/preuves/merci/vign/m12.jpg" data-full="/preuves/merci/m12.jpg" alt="" loading="lazy" decoding="async">
+     </div>
+    </div>
+
+   </div>
+  </div>
+
+  <div class="pvdots"></div>
+  <p class="pvhint" data-i18n="pv_hint">Fais glisser pour changer d'activité · touche une image pour l'agrandir</p>
+ </div>
+</section>
+
 <!-- Visionneuse -->
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Preuve en grand">
  <div class="lb-box">
@@ -337,6 +388,12 @@ var I18N = {
   pv_t2:"E-commerce", pv_s2:"Des boutiques qui vendent vraiment",
   pv_t3:"Monétisation TikTok / YouTube", pv_s3:"Transformer les vues en revenus",
   pv_hint:"Fais glisser pour changer d'activité · touche une image pour l'agrandir",
+  mr_eyebrow:"Ce qu'ils m'écrivent",
+  mr_h2:"Les messages de ceux que j'ai accompagnés",
+  mr_sub:"Reçus après l'accompagnement, activité par activité.",
+  mr_s1:"Ils ont construit leur audience",
+  mr_s2:"Ils ont fait décoller leur boutique",
+  mr_s3:"Ils vivent de leurs vues",
   pv_legal:"Ces résultats sont ceux de personnes réelles et ne sont pas représentatifs de ce que tu obtiendras. Leur parcours, leur travail et leur situation ont joué. Rien ici ne constitue une garantie de revenu.",
   once:"une fois", month:"par mois", ribbon:"COMPLET",
   o1name:"Le guide du 1M CFA",
@@ -370,6 +427,12 @@ var I18N = {
   pv_t2:"E-commerce", pv_s2:"Stores that actually sell",
   pv_t3:"TikTok / YouTube monetisation", pv_s3:"Turning views into income",
   pv_hint:"Swipe to change activity · tap an image to enlarge it",
+  mr_eyebrow:"What they write to me",
+  mr_h2:"Messages from the people I coached",
+  mr_sub:"Received after the coaching, activity by activity.",
+  mr_s1:"They built their audience",
+  mr_s2:"They grew their store",
+  mr_s3:"They live off their views",
   pv_legal:"These results come from real people and are not representative of what you will achieve. Their background, work and circumstances played a part. Nothing here is a guarantee of income.",
   once:"one-off", month:"per month", ribbon:"SOLD OUT",
   o1name:"The 1M CFA guide",
@@ -461,10 +524,10 @@ function toggleDevise(){
    Deux rythmes imbriques : la preuve mise en avant change toutes les 2 s,
    et l'activite toutes les 6 s — soit apres que les trois preuves de
    l'activite ont eu leur tour. Tout se suspend des que le visiteur agit. */
-(function(){
- var piste=document.getElementById('pvtrack'), cadre=document.getElementById('pvp'),
-     pastilles=document.getElementById('pvdots');
- if(!piste||!cadre||!pastilles) return;
+[].forEach.call(document.querySelectorAll('.pvp'), function(cadre){
+ var piste=cadre.querySelector('.pvtrack'),
+     pastilles=cadre.parentNode.querySelector('.pvdots');
+ if(!piste||!pastilles) return;
  var slides=[].slice.call(piste.children), n=slides.length, idx=0, rang=0, minuteur=null;
 
  for(var i=0;i<n;i++){
@@ -525,7 +588,7 @@ function toggleDevise(){
  });
 
  rendu(); relancer();
-})();
+});
 
 /* Visionneuse : parcourt les 9 preuves d'affilee. Le titre affiche en haut
    suit l'activite de l'image courante, meme en changeant de categorie. */
@@ -534,8 +597,11 @@ function toggleDevise(){
  var img=document.getElementById('lbImg'), titre=document.getElementById('lbTitle'),
      compte=document.getElementById('lbCount'), vignettes=[], pos=0, rendu=null;
 
- function collecter(){
-  vignettes=[].slice.call(document.querySelectorAll('.fan img'));
+ /* On ne parcourt que les images du carrousel d'ou vient le clic :
+    les preuves chiffrees et les remerciements restent deux series distinctes. */
+ function collecter(depuis){
+  var racine=(depuis && depuis.closest('.pvp')) || document;
+  vignettes=[].slice.call(racine.querySelectorAll('.fan img'));
  }
  function categorie(el){
   var slide=el.closest('.pvslide');
@@ -549,7 +615,7 @@ function toggleDevise(){
   compte.textContent = (pos+1)+' / '+vignettes.length;
  }
  function ouvrir(i){
-  collecter(); pos=i; rendu=document.activeElement;
+  pos=i; rendu=document.activeElement;
   boite.hidden=false; document.body.style.overflow='hidden';
   afficher(); document.getElementById('lbClose').focus();
   track('ouvre_preuve', {activite: categorie(vignettes[pos])});
@@ -565,7 +631,7 @@ function toggleDevise(){
  document.addEventListener('click', function(e){
   var cible=e.target;
   if(cible.matches && cible.matches('.fan img')){
-   collecter(); ouvrir(vignettes.indexOf(cible)); return;
+   collecter(cible); ouvrir(vignettes.indexOf(cible)); return;
   }
   if(cible===boite || (cible.classList && cible.classList.contains('lb-box'))) fermer();
  });
