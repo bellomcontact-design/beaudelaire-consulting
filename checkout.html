@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Choisis ton chemin — Beaudelaire Consulting</title>
+<meta name="description" content="Le guide du 1M CFA et l'accompagnement mensuel de Beaudelaire. Paiement par carte ou mobile money, accès immédiat.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --bg:#060E15; --bg2:#0B141C; --card:#131B23; --border:#222E39;
+ --text:#FFFFFF; --muted:rgba(255,255,255,.64); --faint:rgba(255,255,255,.50);
+ --accent:#FFA545; --accent-strong:#FFA545; --accent-soft:rgba(255,165,69,.12);
+ --star:#FFCF23; --on-accent:#060E15;
+ --danger:#FF6B5E; --danger-bg:#A32C24;
+ --accent-grad:linear-gradient(95deg,#FFA930 0%,#FFAB23 51%,#D5AA12 113%);
+ --text-soft:rgba(255,255,255,.80);
+ --bg-veil:rgba(6,14,21,.85); --star-soft:rgba(255,207,35,.10); --star-line:rgba(255,207,35,.34);
+ }
+ *{box-sizing:border-box;margin:0;padding:0}
+ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+ background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+ .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+ a{color:inherit}
+
+ /* Barre de navigation */
+ .topnav{position:sticky;top:0;z-index:40;background:var(--bg-veil);backdrop-filter:blur(8px);
+ -webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+ .topnav-in{display:flex;align-items:center;justify-content:space-between;max-width:1000px;margin:0 auto;padding:13px 20px;gap:14px}
+ .brand{font-weight:700;font-size:20px;text-decoration:none;color:var(--text);letter-spacing:-.01em}
+ @media(max-width:560px){.brand{font-size:16px}}
+ .navctl{display:flex;align-items:center;gap:9px}
+ .navbtn{background:none;border:1px solid var(--border);border-radius:8px;color:var(--muted);
+ font-family:inherit;font-weight:700;font-size:13px;padding:7px 11px;cursor:pointer;text-decoration:none;
+ display:inline-flex;align-items:center;transition:.12s}
+ .navbtn:hover{border-color:var(--accent);color:var(--text)}
+
+ /* En-tête */
+ header{padding:56px 0 10px;text-align:center;
+ background:radial-gradient(1000px 460px at 50% -10%, rgba(255,165,69,.10), transparent 60%), var(--bg)}
+ .eyebrow{color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:12px;margin-bottom:12px}
+ h1{font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+ .lead{color:var(--muted);max-width:560px;margin:0 auto;font-size:16px}
+
+ /* Cartes d'offre */
+ section{padding:34px 0 62px}
+ .pcards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:0 auto;align-items:start}
+ @media(max-width:780px){.pcards{grid-template-columns:1fr;max-width:440px}}
+ .pcard{position:relative;background:var(--card);border:1.5px solid var(--border);border-radius:18px;overflow:hidden;text-align:left}
+ .pcard.featured{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 0 28px rgba(255,165,69,.28)}
+ .pcard .phead{padding:22px 22px 18px;border-bottom:1px solid var(--border)}
+ .pcard .pname{font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+ .pcard.full .pname{color:var(--muted)}
+ .pcard .pprice{font-size:38px;font-weight:800;letter-spacing:-.02em;line-height:1;color:var(--text)}
+ .pcard .pprice sup{font-size:.36em;font-weight:800;vertical-align:super;margin-left:3px}
+ .pcard .pper{font-size:15px;font-weight:600;color:var(--muted)}
+ .pcard .peuro{display:block;font-size:14px;color:var(--muted);margin-top:6px}
+ .pcard .pbody{padding:20px 22px 22px}
+ .pfeat{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:20px}
+ .pfeat li{display:flex;gap:10px;font-size:14.5px;line-height:1.45;color:var(--text-soft)}
+ .pfeat .ck{flex:0 0 auto;color:#3ECF7E;font-weight:800}
+ .pcard.full .pfeat li,.pcard.full .pfeat .ck{color:var(--faint)}
+ .pbtn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:14px;border-radius:12px;
+ text-decoration:none;font-weight:700;font-size:15px;font-family:inherit;cursor:pointer;border:1.5px solid var(--border);
+ background:transparent;color:var(--text);transition:border-color .12s ease,transform .12s ease}
+ .pbtn:hover{border-color:var(--accent);transform:scale(1.02)}
+ .pbtn.solid{border:0;background-image:var(--accent-grad);color:var(--on-accent)}
+ .pbtn.solid:hover{transform:scale(1.03)}
+ .pbtn+.pbtn{margin-top:10px}
+ .pbtn.off{cursor:not-allowed;color:var(--faint);border-color:var(--border);opacity:.7}
+ .pbtn.off:hover{border-color:var(--border);transform:none}
+ .pcard.full{border-color:rgba(229,84,75,.45)}
+ .pcard.full .phead{background:linear-gradient(120deg,rgba(229,84,75,.10),transparent 60%)}
+ .ribbon{position:absolute;top:24px;right:-52px;width:190px;transform:rotate(38deg);z-index:2;
+ background:rgba(229,84,75,.16);border-top:1px solid rgba(229,84,75,.5);border-bottom:1px solid rgba(229,84,75,.5);
+ color:#FF6B5E;font-size:12px;font-weight:800;letter-spacing:.14em;text-align:center;padding:6px 0}
+ .pnote{text-align:center;color:var(--muted);font-size:13px;margin-top:26px}
+ .backlink{display:inline-block;margin-top:26px;color:var(--muted);font-size:14px;text-decoration:none}
+ .backlink:hover{color:var(--accent)}
+ footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;color:var(--muted);font-size:13px}
+ @media(prefers-reduced-motion:reduce){.pbtn{transition:none}.pbtn:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+ <div class="topnav-in">
+  <a class="brand" href="/">Beaudelaire Consulting</a>
+  <div class="navctl">
+   <button class="navbtn" id="devToggle" onclick="toggleDevise()" title="Changer de devise">FCFA</button>
+   <button class="navbtn" id="langToggle" onclick="toggleLang()">EN</button>
+  </div>
+ </div>
+</nav>
+
+<header>
+ <div class="wrap">
+  <div class="eyebrow" data-i18n="eyebrow">Les offres</div>
+  <h1 data-i18n="h2">Choisis ton chemin</h1>
+  <p class="lead" data-i18n="lead">Deux façons d'avancer : apprendre seul avec le guide, ou être accompagné tous les mois.</p>
+ </div>
+</header>
+
+<section>
+ <div class="wrap">
+  <div class="pcards">
+
+   <!-- Offre 1 : le guide -->
+   <div class="pcard featured">
+    <div class="phead">
+     <div class="pname" data-i18n="o1name">Le guide du 1M CFA</div>
+     <div class="pprice" data-xof="15 000" data-eur="23"><span class="pmain"></span> <span class="pper" data-i18n="once">une fois</span></div>
+     <span class="peuro"></span>
+    </div>
+    <div class="pbody">
+     <ul class="pfeat">
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o1f1"></span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o1f2"></span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o1f3"></span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o1f4"></span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o1f5"></span></li>
+     </ul>
+     <a class="pbtn solid" href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" onclick="track('click_offre_guide_card')" data-i18n="card">Payer par carte</a>
+     <a class="pbtn" href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" onclick="track('click_offre_guide_momo')" data-i18n="momo">Payer en mobile money</a>
+    </div>
+   </div>
+
+   <!-- Offre 2 : coaching, affichée complète -->
+   <div class="pcard full">
+    <span class="ribbon" data-i18n="ribbon">COMPLET</span>
+    <div class="phead">
+     <div class="pname" data-i18n="o2name">Coaching</div>
+     <div class="pprice" data-xof="330 000" data-eur="500"><span class="pmain"></span> <span class="pper" data-i18n="month">par mois</span></div>
+     <span class="peuro"></span>
+    </div>
+    <div class="pbody">
+     <ul class="pfeat">
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o2f1"></span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o2f2"></span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o2f3"></span></li>
+     </ul>
+     <span class="pbtn off" aria-disabled="true" data-i18n="soldout">Complet pour le moment</span>
+    </div>
+   </div>
+
+  </div>
+  <p class="pnote" data-i18n="note">Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.</p>
+  <div style="text-align:center"><a class="backlink" href="/" data-i18n="back">← Revenir à l'accueil</a></div>
+ </div>
+</section>
+
+<footer><div class="wrap">Contact : <a href="mailto:beaudelaireconsulting@gmail.com" style="color:var(--accent);text-decoration:none;font-weight:600">beaudelaireconsulting@gmail.com</a><br>© <span id="yr"></span> Beaudelaire Consulting</div></footer>
+
+<script>
+/* Suivi : les mêmes destinations que la page d'accueil, silencieux si absentes. */
+function track(event, data){
+ var d = Object.assign({page:'checkout', devise:(typeof DEVISE!=='undefined'?DEVISE:'')}, data||{});
+ try{ if(window.va) window.va('event', Object.assign({name:event}, d)); }catch(e){}
+ try{ if(window.clarity) window.clarity('event', event); }catch(e){}
+}
+
+var I18N = {
+ fr:{
+  eyebrow:"Les offres", h2:"Choisis ton chemin",
+  lead:"Deux façons d'avancer : apprendre seul avec le guide, ou être accompagné tous les mois.",
+  once:"une fois", month:"par mois", ribbon:"COMPLET",
+  o1name:"Le guide du 1M CFA",
+  o1f1:"Le guide complet, 22 chapitres",
+  o1f2:"La méthode du « véhicule » pour trouver ta compétence vendable",
+  o1f3:"Trouver et réussir tes premiers clients en freelance",
+  o1f4:"Recevoir et retirer ton argent depuis l'Afrique",
+  o1f5:"L'accès à la communauté Ex-rienneux pendant 1 an",
+  o2name:"Coaching",
+  o2f1:"Tout ce que contient le guide",
+  o2f2:"Un accès direct à Beaudelaire",
+  o2f3:"Un accompagnement personnalisé, tous les mois",
+  card:"Payer par carte", momo:"Payer en mobile money",
+  soldout:"Complet pour le moment",
+  note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.",
+  back:"← Revenir à l'accueil"
+ },
+ en:{
+  eyebrow:"The offers", h2:"Choose your path",
+  lead:"Two ways forward: learn on your own with the guide, or get supported every month.",
+  once:"one-off", month:"per month", ribbon:"SOLD OUT",
+  o1name:"The 1M CFA guide",
+  o1f1:"The complete guide, 22 chapters",
+  o1f2:"The “vehicle” method to find your sellable skill",
+  o1f3:"Find and deliver your first freelance clients",
+  o1f4:"Get paid and withdraw your money from Africa",
+  o1f5:"Access to the Ex-rienneux community for 1 year",
+  o2name:"Coaching",
+  o2f1:"Everything in the guide",
+  o2f2:"Direct access to Beaudelaire",
+  o2f3:"Personalised support, every month",
+  card:"Pay by card", momo:"Pay with mobile money",
+  soldout:"Currently full",
+  note:"Card (international) or mobile money (Africa) · Instant access after payment.",
+  back:"← Back to home"
+ }
+};
+
+/* La langue est partagée avec la page d'accueil via localStorage. */
+var LANG = (function(){
+ try{ var s=localStorage.getItem('lang'); if(s==='fr'||s==='en') return s; }catch(e){}
+ return (navigator.language||'en').toLowerCase().indexOf('fr')===0 ? 'fr' : 'en';
+})();
+
+function applyI18N(){
+ var t=I18N[LANG];
+ document.querySelectorAll('[data-i18n]').forEach(function(el){
+  var v=t[el.getAttribute('data-i18n')];
+  if(v!=null) el.textContent=v;
+ });
+ document.documentElement.lang=LANG;
+ var b=document.getElementById('langToggle'); if(b) b.textContent = (LANG==='fr') ? 'EN' : 'FR';
+ document.title = (LANG==='fr') ? "Choisis ton chemin — Beaudelaire Consulting" : "Choose your path — Beaudelaire Consulting";
+}
+function toggleLang(){
+ LANG = (LANG==='fr') ? 'en' : 'fr';
+ try{ localStorage.setItem('lang', LANG); }catch(e){}
+ applyI18N(); applyDevise();
+}
+
+/* Devise : mêmes règles que la page d'accueil, choix partagé via localStorage.
+   Le franc CFA est en parité fixe avec l'euro (655,957) : rien ne périme. */
+var ZONE_FRANC = ['Africa/Porto-Novo','Africa/Abidjan','Africa/Dakar','Africa/Ouagadougou',
+ 'Africa/Bamako','Africa/Niamey','Africa/Lome','Africa/Bissau',
+ 'Africa/Douala','Africa/Libreville','Africa/Brazzaville','Africa/Bangui','Africa/Ndjamena','Africa/Malabo'];
+var PAYS_FRANC = /-(BJ|CI|SN|BF|ML|NE|TG|GW|CM|GA|CG|CF|TD|GQ)\b/i;
+var PAYS_HORS_FRANC = /-(GH|NG|GN|MR|SL|LR|GM|MA|DZ|TN|EG|KE|ZA|CD|ET|TZ|UG)\b/i;
+
+var DEVISE = (function(){
+ try{ var m=localStorage.getItem('devise'); if(m==='XOF'||m==='EUR') return m; }catch(e){}
+ try{
+  var tz=(Intl.DateTimeFormat().resolvedOptions().timeZone)||'';
+  var loc=[navigator.language||''].concat(navigator.languages||[]).join(' ');
+  if(PAYS_HORS_FRANC.test(loc)) return 'EUR';
+  if(PAYS_FRANC.test(loc)) return 'XOF';
+  if(ZONE_FRANC.indexOf(tz)>=0) return 'XOF';
+ }catch(e){}
+ return 'EUR';
+})();
+
+function applyDevise(){
+ document.querySelectorAll('.pprice[data-xof]').forEach(function(el){
+  var xof=el.getAttribute('data-xof'), eur=el.getAttribute('data-eur');
+  var gros = (DEVISE==='XOF') ? xof+'<sup>FCFA</sup>' : eur+'<sup>€</sup>';
+  var petit = (DEVISE==='XOF') ? eur+' €' : xof+' FCFA';
+  var m=el.querySelector('.pmain'); if(m) m.innerHTML=gros;
+  var p=el.parentNode.querySelector('.peuro'); if(p) p.textContent=petit;
+ });
+ var b=document.getElementById('devToggle');
+ if(b) b.textContent = (DEVISE==='XOF') ? 'FCFA' : 'EUR';
+}
+function toggleDevise(){
+ DEVISE = (DEVISE==='XOF') ? 'EUR' : 'XOF';
+ try{ localStorage.setItem('devise', DEVISE); }catch(e){}
+ track('switch_devise', {devise:DEVISE});
+ applyDevise();
+}
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+applyI18N();
+applyDevise();
+track('visit_checkout');
+</script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

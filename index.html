@@ -124,40 +124,6 @@
    color:var(--star);display:flex;align-items:center;justify-content:center;font-size:15px}
  .vslpoints b{color:var(--text);font-weight:700}
 
- /* Offres : deux cartes, la seconde affichee complete */
- .pcards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:36px auto 0;align-items:start}
- @media(max-width:780px){.pcards{grid-template-columns:1fr;max-width:440px}}
- .pcard{position:relative;background:var(--card);border:1.5px solid var(--border);border-radius:18px;overflow:hidden;text-align:left}
- .pcard.featured{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 0 28px rgba(255,165,69,.28)}
- .pcard .phead{padding:22px 22px 18px;border-bottom:1px solid var(--border)}
- .pcard .pname{font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
- .pcard.full .pname{color:var(--muted)}
- .pcard .pprice{font-size:38px;font-weight:800;letter-spacing:-.02em;line-height:1;color:var(--text)}
- .pcard .pprice sup{font-size:.36em;font-weight:800;vertical-align:super;margin-left:3px}
- .pcard .pper{font-size:15px;font-weight:600;color:var(--muted)}
- .pcard .peuro{display:block;font-size:14px;color:var(--muted);margin-top:6px}
- .pcard .pbody{padding:20px 22px 22px}
- .pfeat{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:20px}
- .pfeat li{display:flex;gap:10px;font-size:14.5px;line-height:1.45;color:var(--text-soft)}
- .pfeat .ck{flex:0 0 auto;color:var(--success);font-weight:800}
- .pcard.full .pfeat li,.pcard.full .pfeat .ck{color:var(--faint)}
- .pbtn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:14px;border-radius:12px;
-   text-decoration:none;font-weight:700;font-size:15px;font-family:inherit;cursor:pointer;border:1.5px solid var(--border);
-   background:transparent;color:var(--text);transition:border-color .12s ease,transform .12s ease}
- .pbtn:hover{border-color:var(--accent);transform:scale(1.02)}
- .pbtn.solid{border:0;background-image:var(--accent-grad);color:var(--on-accent)}
- .pbtn.solid:hover{transform:scale(1.03)}
- .pbtn+.pbtn{margin-top:10px}
- .pbtn.off{cursor:not-allowed;color:var(--faint);border-color:var(--border);opacity:.7}
- .pbtn.off:hover{border-color:var(--border);transform:none}
- /* Bandeau diagonal de l'offre complete */
- .pcard.full{border-color:rgba(229,84,75,.45)}
- .pcard.full .phead{background:linear-gradient(120deg,rgba(229,84,75,.10),transparent 60%)}
- .ribbon{position:absolute;top:24px;right:-52px;width:190px;transform:rotate(38deg);z-index:2;
-   background:rgba(229,84,75,.16);border-top:1px solid rgba(229,84,75,.5);border-bottom:1px solid rgba(229,84,75,.5);
-   color:#FF6B5E;font-size:12px;font-weight:800;letter-spacing:.14em;text-align:center;padding:6px 0}
- .pnote{text-align:center;color:var(--muted);font-size:13px;margin-top:22px}
-
  /* Section d'auto-identification */
  .honest{background:var(--bg2)}
  .honest .wrap{max-width:700px}
@@ -325,6 +291,7 @@
  <a href="#about" data-i18n="nav.about" onclick="closeMenu()">Qui je suis</a>
  <a href="#livre" data-i18n="nav.debutants" onclick="closeMenu()">Rienneux</a>
  <a href="#news" data-i18n="nav.chemin" onclick="closeMenu()">Le chemin</a>
+ <a href="/checkout" data-i18n="nav.offres">Les offres</a>
  <a class="cta nav-cta" href="#" onclick="startQuiz();closeMenu();return false;" data-i18n="nav.cta">Réserver un appel</a>
  </div>
  <div class="navctl">
@@ -393,56 +360,6 @@
  </div>
  </section>
 
-
- <!-- OFFRES -->
- <section id="offres">
- <div class="wrap wide">
- <div class="eyebrow" data-i18n="offres.eyebrow">Les offres</div>
- <h2 data-i18n="offres.h2">Choisis ton chemin</h2>
- <div class="pcards">
-
- <!-- Offre 1 : le guide -->
- <div class="pcard featured">
- <div class="phead">
- <div class="pname" data-i18n="offres.o1name">Le guide du 1M CFA</div>
- <div class="pprice" data-xof="15 000" data-eur="23"><span class="pmain"></span> <span class="pper" data-i18n="offres.once">une fois</span></div>
- <span class="peuro"></span>
- </div>
- <div class="pbody">
- <ul class="pfeat">
- <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="offres.o1f1"></span></li>
- <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="offres.o1f2"></span></li>
- <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="offres.o1f3"></span></li>
- <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="offres.o1f4"></span></li>
- <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="offres.o1f5"></span></li>
- </ul>
- <a class="pbtn solid" href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" onclick="track('click_offre_guide_card')" data-i18n="offres.card">Payer par carte</a>
- <a class="pbtn" href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" onclick="track('click_offre_guide_momo')" data-i18n="offres.momo">Payer en mobile money</a>
- </div>
- </div>
-
- <!-- Offre 2 : coaching, affichee complete -->
- <div class="pcard full">
- <span class="ribbon" data-i18n="offres.ribbon">COMPLET</span>
- <div class="phead">
- <div class="pname" data-i18n="offres.o2name">Coaching</div>
- <div class="pprice" data-xof="330 000" data-eur="500"><span class="pmain"></span> <span class="pper" data-i18n="offres.month">par mois</span></div>
- <span class="peuro"></span>
- </div>
- <div class="pbody">
- <ul class="pfeat">
- <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="offres.o2f1"></span></li>
- <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="offres.o2f2"></span></li>
- <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="offres.o2f3"></span></li>
- </ul>
- <span class="pbtn off" aria-disabled="true" data-i18n="offres.soldout">Complet pour le moment</span>
- </div>
- </div>
-
- </div>
- <p class="pnote" data-i18n="offres.note">Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.</p>
- </div>
- </section>
 
  <!-- QUI JE SUIS -->
  <section class="about" id="about">
@@ -760,24 +677,7 @@
 const I18N = {
  fr: {
  _title:"Beaudelaire Consulting · Scale ton business",
- nav:{about:"Qui je suis", debutants:"Rienneux", chemin:"Le chemin", cta:"Réserver un appel"},
- offres:{
- eyebrow:"Les offres", h2:"Choisis ton chemin",
- once:"une fois", month:"par mois", ribbon:"COMPLET",
- o1name:"Le guide du 1M CFA",
- o1f1:"Le guide complet, 22 chapitres",
- o1f2:"La méthode du « véhicule » pour trouver ta compétence vendable",
- o1f3:"Trouver et réussir tes premiers clients en freelance",
- o1f4:"Recevoir et retirer ton argent depuis l'Afrique",
- o1f5:"L'accès à la communauté Ex-rienneux pendant 1 an",
- o2name:"Coaching",
- o2f1:"Tout ce que contient le guide",
- o2f2:"Un accès direct à Beaudelaire",
- o2f3:"Un accompagnement personnalisé, tous les mois",
- card:"Payer par carte", momo:"Payer en mobile money",
- soldout:"Complet pour le moment",
- note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement."
- },
+ nav:{offres:"Les offres", about:"Qui je suis", debutants:"Rienneux", chemin:"Le chemin", cta:"Réserver un appel"},
  honest:{
  eyebrow:"Sois honnête avec toi-même",
  h2:"C'est toi, <span class='hl'>ça</span> ?",
@@ -911,24 +811,7 @@ const I18N = {
  },
  en: {
  _title:"Beaudelaire Consulting · Scale your business",
- nav:{about:"About me", debutants:"Beginners", chemin:"The path", cta:"Book a call"},
- offres:{
- eyebrow:"The offers", h2:"Choose your path",
- once:"one-off", month:"per month", ribbon:"SOLD OUT",
- o1name:"The 1M CFA guide",
- o1f1:"The complete guide, 22 chapters",
- o1f2:"The \"vehicle\" method to find your sellable skill",
- o1f3:"Find and deliver your first freelance clients",
- o1f4:"Get paid and withdraw your money from Africa",
- o1f5:"Access to the Ex-rienneux community for 1 year",
- o2name:"Coaching",
- o2f1:"Everything in the guide",
- o2f2:"Direct access to Beaudelaire",
- o2f3:"Personalised support, every month",
- card:"Pay by card", momo:"Pay with mobile money",
- soldout:"Currently full",
- note:"Card (international) or mobile money (Africa) · Instant access after payment."
- },
+ nav:{offres:"Pricing", about:"About me", debutants:"Beginners", chemin:"The path", cta:"Book a call"},
  honest:{
  eyebrow:"Be honest with yourself",
  h2:"Is this <span class='hl'>you</span>?",
