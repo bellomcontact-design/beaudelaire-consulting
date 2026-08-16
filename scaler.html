@@ -34,10 +34,6 @@
  @media(prefers-reduced-motion:reduce){ .entete .topnav{transition:none} }
  /* Bande d'annonce : elle defile avec la page, la navigation reste
     collee en haut. Sur mobile seul le bouton subsiste, faute de place. */
- /* Bouton de devise : la devise active en gros, la suivante au-dessus. */
- .dev-alt{display:block;font-style:normal;font-size:9.5px;line-height:1;opacity:.55;margin-bottom:1px}
- .dev-cur{display:block;font-style:normal;font-size:12px;line-height:1;font-weight:800}
- #devToggle{flex-direction:column;line-height:1;padding:5px 9px}
  .topbar{position:relative;background:var(--bg);border-bottom:1px solid var(--border);
    display:flex;flex-direction:column;align-items:center;padding:10px 18px 20px}
  .topbar-btn{display:inline-flex;align-items:center;justify-content:center;
@@ -125,7 +121,6 @@
  <div class="topnav-in">
   <a class="brand" href="/" aria-label="Beaudelaire Consulting"><img src="/logo.png" alt="Beaudelaire Consulting" width="36" height="36"></a>
   <div class="navctl">
-   <button class="navbtn" id="devToggle" onclick="toggleDevise()" title="Changer de devise">FCFA</button>
    <button class="navbtn" id="langToggle" onclick="toggleLang()">EN</button>
   </div>
  </div>
@@ -245,42 +240,23 @@ var ZONE_FRANC = ['Africa/Porto-Novo','Africa/Abidjan','Africa/Dakar','Africa/Ou
 var PAYS_FRANC = /-(BJ|CI|SN|BF|ML|NE|TG|GW|CM|GA|CG|CF|TD|GQ)\b/i;
 var PAYS_HORS_FRANC = /-(GH|NG|GN|MR|SL|LR|GM|MA|DZ|TN|EG|KE|ZA|CD|ET|TZ|UG)\b/i;
 
-/* Trois devises. Le franc CFA reste le defaut ; le dollar prend le relais
-   quand la page est en anglais.
-   Le montant affiche en dollars est le meme qu'en euros : c'est un prix
-   psychologique, pas une conversion. Cela evite d'avoir a suivre un taux
-   qui flotte, contrairement a la parite franc CFA / euro qui, elle, est fixe. */
-var ORDRE = ['XOF','EUR','USD'];
-
-var DEVISE = (function(){
- try{ var m=localStorage.getItem('devise'); if(ORDRE.indexOf(m)>=0) return m; }catch(e){}
- try{ var l=localStorage.getItem('lang'); if(l==='en') return 'USD'; }catch(e){}
- return (navigator.language||'').toLowerCase().indexOf('fr')===0 ? 'XOF' : 'USD';
-})();
-
+/* La devise decoule de la langue : francs CFA en francais, dollars en
+   anglais. L'equivalent en euros reste affiche juste en dessous, ce qui
+   evite d'avoir a proposer un selecteur. */
+function deviseCourante(){ return (LANG==='en') ? 'USD' : 'XOF'; }
 function montantDe(el, dev){
  return (dev==='XOF') ? el.getAttribute('data-xof') : el.getAttribute('data-eur');
 }
 function suffixeDe(dev){ return dev==='XOF' ? 'XOF' : (dev==='EUR' ? '\u20AC' : '$'); }
-function suivante(){ return ORDRE[(ORDRE.indexOf(DEVISE)+1)%ORDRE.length]; }
 
 function applyDevise(){
+ var dev = deviseCourante();
  document.querySelectorAll('.pprice[data-xof]').forEach(function(el){
-  var autre = suivante();
   var m=el.querySelector('.pmain');
-  if(m) m.innerHTML = montantDe(el, DEVISE)+'<sup>'+suffixeDe(DEVISE)+'</sup>';
+  if(m) m.innerHTML = montantDe(el, dev)+'<sup>'+suffixeDe(dev)+'</sup>';
   var p=el.parentNode.querySelector('.peuro');
-  if(p) p.textContent = montantDe(el, autre)+' '+suffixeDe(autre);
+  if(p) p.textContent = el.getAttribute('data-eur')+' \u20AC';   /* toujours l'euro en repere */
  });
- var b=document.getElementById('devToggle');
- if(b) b.innerHTML='<i class="dev-alt">'+suffixeDe(suivante())+'</i>'
-                  +'<i class="dev-cur">'+suffixeDe(DEVISE)+'</i>';
-}
-function toggleDevise(){
- DEVISE = suivante();
- try{ localStorage.setItem('devise', DEVISE); }catch(e){}
- track('switch_devise',{devise:DEVISE});
- applyDevise();
 }
 
 document.getElementById('yr').textContent = new Date().getFullYear();

@@ -41,10 +41,6 @@
  @media(prefers-reduced-motion:reduce){ .entete .topnav{transition:none} }
  /* Bande d'annonce : elle defile avec la page, la navigation reste
     collee en haut. Sur mobile seul le bouton subsiste, faute de place. */
- /* Bouton de devise : la devise active en gros, la suivante au-dessus. */
- .dev-alt{display:block;font-style:normal;font-size:9.5px;line-height:1;opacity:.55;margin-bottom:1px}
- .dev-cur{display:block;font-style:normal;font-size:12px;line-height:1;font-weight:800}
- #devToggle{flex-direction:column;line-height:1;padding:5px 9px}
  .topbar{position:relative;background:var(--bg);border-bottom:1px solid var(--border);
    display:flex;flex-direction:column;align-items:center;padding:10px 18px 20px}
  .topbar-btn{display:inline-flex;align-items:center;justify-content:center;
@@ -437,7 +433,6 @@
  <a class="cta nav-cta" href="#" onclick="startQuiz();closeMenu();return false;" data-i18n="nav.cta">Réserver un appel</a>
  </div>
  <div class="navctl">
- <button class="langtoggle" id="devToggle" onclick="toggleDevise()" title="Changer de devise">FCFA</button>
  <button class="langtoggle" id="langToggle" onclick="toggleLang()">EN</button>
  <button class="navburger" id="navBurger" onclick="toggleMenu()" aria-label="Menu">☰</button>
  </div>
@@ -1258,38 +1253,7 @@ var PAYS_FRANC = /-(BJ|CI|SN|BF|ML|NE|TG|GW|CM|GA|CG|CF|TD|GQ)\b/i;
 /* Ces pays partagent le fuseau Africa/Abidjan sans etre en zone franc */
 var PAYS_HORS_FRANC = /-(GH|NG|GN|MR|SL|LR|GM|MA|DZ|TN|EG|KE|ZA|CD|ET|TZ|UG)\b/i;
 
-/* Le franc CFA est la devise par defaut pour tout le monde : le public
-   principal est en zone franc. Le visiteur bascule en euro s'il le veut,
-   et son choix est memorise. */
-var DEVISE = (function(){
- try{ var m=localStorage.getItem('devise'); if(m==='XOF'||m==='EUR') return m; }catch(e){}
- return 'XOF';
-})();
 
-function fmtPrix(el, principale){
- var xof=el.getAttribute('data-xof'), eur=el.getAttribute('data-eur');
- if(principale==='XOF') return {gros: xof+'<sup>FCFA</sup>', petit: eur+'\u00A0\u20AC'};
- return {gros: eur+'<sup>\u20AC</sup>', petit: xof+'\u00A0FCFA'};
-}
-function applyDevise(){
- var els=document.querySelectorAll('.pprice[data-xof]');
- for(var i=0;i<els.length;i++){
-  var v=fmtPrix(els[i], DEVISE);
-  var m=els[i].querySelector('.pmain'); if(m) m.innerHTML=v.gros;
-  var carte=els[i].parentNode, p=carte&&carte.querySelector('.peuro');
-  if(p) p.textContent=v.petit;
- }
- var b=document.getElementById('devToggle');
- if(b) b.innerHTML = (DEVISE==='XOF')
-   ? '<i class="dev-alt">\u20AC</i><i class="dev-cur">XOF</i>'
-   : '<i class="dev-alt">XOF</i><i class="dev-cur">\u20AC</i>';
-}
-function toggleDevise(){
- DEVISE = (DEVISE==='XOF') ? 'EUR' : 'XOF';
- try{ localStorage.setItem('devise', DEVISE); }catch(e){}
- track('switch_devise', {devise:DEVISE});
- applyDevise();
-}
 
 function toggleLang(){
  LANG = (LANG==='fr') ? 'en' : 'fr';
@@ -1490,7 +1454,6 @@ function playVSL(){
  track('play_vsl');
 }
 initVSL();
-applyDevise();
 
 /* remplir les listes pays + indicatifs (selon la langue) */
 function fillCountries(){
@@ -1715,13 +1678,11 @@ applyI18N();
  function cible(el){
   if(el.hasAttribute('data-valeur')) return parseInt(el.getAttribute('data-valeur'), 10);
   var xof=parseInt(el.getAttribute('data-xof'),10), eur=parseInt(el.getAttribute('data-eur'),10);
-  var d=(typeof DEVISE!=='undefined') ? DEVISE : 'XOF';
-  return (d==='XOF') ? xof : eur;   /* meme montant en euros et en dollars */
+  return (typeof LANG!=='undefined' && LANG==='en') ? eur : xof;
  }
  function unite(el){
   if(!el.hasAttribute('data-xof')) return '';
-  var d=(typeof DEVISE!=='undefined') ? DEVISE : 'XOF';
-  return d==='EUR' ? '\u20AC' : (d==='USD' ? '$' : 'XOF');
+  return (typeof LANG!=='undefined' && LANG==='en') ? '$' : 'XOF';
  }
  function anime(el){
   var fin=cible(el), val=el.querySelector('.val'), uni=el.querySelector('.unite');
@@ -1772,14 +1733,6 @@ applyI18N();
   boites.forEach(function(b){ oeil.observe(b); });
  }
 
- /* Changer de devise refait defiler le montant concerne */
- var basculeOrigine = window.toggleDevise;
- if(typeof basculeOrigine==='function'){
-  window.toggleDevise=function(){
-   basculeOrigine.apply(this, arguments);
-   boites.forEach(function(b){ if(b.hasAttribute('data-xof')) anime(b); });
-  };
- }
 })();
 
 /* Les deux chiffres alternent toutes les 5 secondes, en fondu. */

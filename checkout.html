@@ -36,10 +36,6 @@
  @media(prefers-reduced-motion:reduce){ .entete .topnav{transition:none} }
  /* Bande d'annonce : elle defile avec la page, la navigation reste
     collee en haut. Sur mobile seul le bouton subsiste, faute de place. */
- /* Bouton de devise : la devise active en gros, la suivante au-dessus. */
- .dev-alt{display:block;font-style:normal;font-size:9.5px;line-height:1;opacity:.55;margin-bottom:1px}
- .dev-cur{display:block;font-style:normal;font-size:12px;line-height:1;font-weight:800}
- #devToggle{flex-direction:column;line-height:1;padding:5px 9px}
  .topbar{position:relative;background:var(--bg);border-bottom:1px solid var(--border);
    display:flex;flex-direction:column;align-items:center;padding:10px 18px 20px}
  .topbar-btn{display:inline-flex;align-items:center;justify-content:center;
@@ -127,6 +123,16 @@
    border:2px solid var(--bg2);margin-left:-9px;display:flex;align-items:center;justify-content:center;
    font-style:normal;font-weight:800;font-size:12px;color:var(--accent)}
  .avatars i:first-child{margin-left:0}
+ /* Rappel en fin de page : le visiteur qui a tout lu remonte d'un clic
+    vers les boutons de paiement, sans avoir a faire defiler. */
+ .rappel{text-align:center;padding:46px 20px 56px;border-top:1px solid var(--border)}
+ .rappel h2{font-size:clamp(22px,3.4vw,32px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+ .rappel p{color:var(--muted);font-size:15px;margin-bottom:22px}
+ .rappel .cta{display:inline-block;background-image:var(--accent-grad);color:var(--on-accent);
+   font-weight:800;font-size:16px;padding:16px 36px;border-radius:12px;text-decoration:none;
+   transition:transform .12s ease}
+ .rappel .cta:hover{transform:scale(1.04)}
+ @media(prefers-reduced-motion:reduce){ .rappel .cta{transition:none} .rappel .cta:hover{transform:none} }
  .pnote{text-align:center;color:var(--muted);font-size:13px;margin-top:10px}
  .backlink{display:inline-block;margin-top:26px;color:var(--muted);font-size:14px;text-decoration:none}
  .backlink:hover{color:var(--accent)}
@@ -224,7 +230,6 @@
  <div class="topnav-in">
   <a class="brand" href="/" aria-label="Beaudelaire Consulting"><img src="/logo.png" alt="Beaudelaire Consulting" width="36" height="36"></a>
   <div class="navctl">
-   <button class="navbtn" id="devToggle" onclick="toggleDevise()" title="Changer de devise">FCFA</button>
    <button class="navbtn" id="langToggle" onclick="toggleLang()">EN</button>
   </div>
  </div>
@@ -242,7 +247,7 @@
   <div class="pcards">
 
    <!-- Offre 1 : le guide -->
-   <div class="pcard featured">
+   <div class="pcard featured" id="offre">
     <div class="phead">
      <div class="pname" data-i18n="o1name">Le guide du premier million</div>
      <div class="pprice" data-xof="15 000" data-eur="23"><span class="pmain"></span> <span class="pper" data-i18n="once">une fois</span></div>
@@ -407,6 +412,12 @@
  <div class="lb-count" id="lbCount"></div>
 </div>
 
+<section class="rappel">
+ <h2 data-i18n="r_h2">Prêt à commencer ?</h2>
+ <p data-i18n="r_sub">Carte bancaire ou mobile money, accès immédiat.</p>
+ <a class="cta" href="#offre" onclick="track('click_rappel_bas')" data-i18n="r_cta">Prendre le guide</a>
+</section>
+
 <footer><div class="wrap">Contact : <a href="mailto:beaudelaireconsulting@gmail.com" style="color:var(--accent);text-decoration:none;font-weight:600">beaudelaireconsulting@gmail.com</a><br>© <span id="yr"></span> Beaudelaire Consulting</div></footer>
 
 <script>
@@ -422,6 +433,8 @@ var I18N = {
   i1:"Je partage de la valeur <b>tous les jours</b>, gratuitement",
   i2:"Tu poses tes questions, <b>j'y réponds</b>",
   tb_cta:"Rejoindre le groupe privé (Gratuit)",
+  r_h2:"Prêt à commencer ?", r_sub:"Carte bancaire ou mobile money, accès immédiat.",
+  r_cta:"Prendre le guide",
   h2:"Choisis ton chemin vers le succès",
   pv_eyebrow:"Ils l'ont fait",
   pv_h2:"Les résultats de ceux qui ont suivi le chemin",
@@ -464,6 +477,8 @@ var I18N = {
   i1:"I share value <b>every day</b>, for free",
   i2:"You ask, <b>I answer</b>",
   tb_cta:"Join the private group (Free)",
+  r_h2:"Ready to start?", r_sub:"Card or mobile money, instant access.",
+  r_cta:"Get the guide",
   h2:"Choose your path to success",
   pv_eyebrow:"They did it",
   pv_h2:"Results from those who followed the path",
@@ -535,42 +550,23 @@ var ZONE_FRANC = ['Africa/Porto-Novo','Africa/Abidjan','Africa/Dakar','Africa/Ou
 var PAYS_FRANC = /-(BJ|CI|SN|BF|ML|NE|TG|GW|CM|GA|CG|CF|TD|GQ)\b/i;
 var PAYS_HORS_FRANC = /-(GH|NG|GN|MR|SL|LR|GM|MA|DZ|TN|EG|KE|ZA|CD|ET|TZ|UG)\b/i;
 
-/* Trois devises. Le franc CFA reste le defaut ; le dollar prend le relais
-   quand la page est en anglais.
-   Le montant affiche en dollars est le meme qu'en euros : c'est un prix
-   psychologique, pas une conversion. Cela evite d'avoir a suivre un taux
-   qui flotte, contrairement a la parite franc CFA / euro qui, elle, est fixe. */
-var ORDRE = ['XOF','EUR','USD'];
-
-var DEVISE = (function(){
- try{ var m=localStorage.getItem('devise'); if(ORDRE.indexOf(m)>=0) return m; }catch(e){}
- try{ var l=localStorage.getItem('lang'); if(l==='en') return 'USD'; }catch(e){}
- return (navigator.language||'').toLowerCase().indexOf('fr')===0 ? 'XOF' : 'USD';
-})();
-
+/* La devise decoule de la langue : francs CFA en francais, dollars en
+   anglais. L'equivalent en euros reste affiche juste en dessous, ce qui
+   evite d'avoir a proposer un selecteur. */
+function deviseCourante(){ return (LANG==='en') ? 'USD' : 'XOF'; }
 function montantDe(el, dev){
  return (dev==='XOF') ? el.getAttribute('data-xof') : el.getAttribute('data-eur');
 }
 function suffixeDe(dev){ return dev==='XOF' ? 'XOF' : (dev==='EUR' ? '\u20AC' : '$'); }
-function suivante(){ return ORDRE[(ORDRE.indexOf(DEVISE)+1)%ORDRE.length]; }
 
 function applyDevise(){
+ var dev = deviseCourante();
  document.querySelectorAll('.pprice[data-xof]').forEach(function(el){
-  var autre = suivante();
   var m=el.querySelector('.pmain');
-  if(m) m.innerHTML = montantDe(el, DEVISE)+'<sup>'+suffixeDe(DEVISE)+'</sup>';
+  if(m) m.innerHTML = montantDe(el, dev)+'<sup>'+suffixeDe(dev)+'</sup>';
   var p=el.parentNode.querySelector('.peuro');
-  if(p) p.textContent = montantDe(el, autre)+' '+suffixeDe(autre);
+  if(p) p.textContent = el.getAttribute('data-eur')+' \u20AC';   /* toujours l'euro en repere */
  });
- var b=document.getElementById('devToggle');
- if(b) b.innerHTML='<i class="dev-alt">'+suffixeDe(suivante())+'</i>'
-                  +'<i class="dev-cur">'+suffixeDe(DEVISE)+'</i>';
-}
-function toggleDevise(){
- DEVISE = suivante();
- try{ localStorage.setItem('devise', DEVISE); }catch(e){}
- track('switch_devise',{devise:DEVISE});
- applyDevise();
 }
 
 /* Carrousel des preuves.
@@ -738,6 +734,27 @@ function basculePlus(btn){
  liste.hidden=ouvert;
  if(!ouvert) track('ouvre_details_guide');
 }
+
+/* Retour vers les boutons de paiement, en douceur, sans laisser la carte
+   collee sous l'en-tete fixe. */
+(function(){
+ var lien=document.querySelector('.rappel .cta'); if(!lien) return;
+ lien.addEventListener('click', function(e){
+  /* On vise les boutons de paiement eux-memes : atterrir en haut de la
+     carte les laisserait hors ecran sur un telephone. */
+  var carte=document.getElementById('offre'); if(!carte) return;
+  var cible=carte.querySelector('.pbtn') || carte;
+  e.preventDefault();
+  /* On se cale sous l'en-tete, dont la hauteur varie selon l'ecran. */
+  var entete=document.querySelector('.entete');
+  /* On garde un peu de contexte au-dessus du bouton : le visiteur doit
+     voir a quoi il souscrit, pas seulement le bouton. */
+  var marge=(entete ? entete.getBoundingClientRect().height : 0)+Math.min(150, window.innerHeight*0.28);
+  var haut=cible.getBoundingClientRect().top+window.scrollY-marge;
+  var doux=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  window.scrollTo({top:haut, behavior: doux ? 'smooth' : 'auto'});
+ });
+})();
 
 document.getElementById('yr').textContent = new Date().getFullYear();
 applyI18N();
