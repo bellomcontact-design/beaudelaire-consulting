@@ -117,6 +117,15 @@
  .herobullets b{color:var(--text);font-weight:700}
  .vsl{position:relative;max-width:560px;margin:0 auto 30px;aspect-ratio:16/9;background:var(--bg2);
  border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+ /* Chiffres animes : ils defilent une fois, a l'arrivee a l'ecran. */
+ .chiffres{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+ .chgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:900px;margin:0 auto;text-align:center}
+ @media(max-width:760px){.chgrid{grid-template-columns:1fr;gap:34px}}
+ .ch b{display:block;font-size:clamp(34px,6vw,58px);font-weight:800;letter-spacing:-.03em;
+   line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+ .ch span{display:block;color:var(--muted);font-size:15px;margin-top:10px}
+ .ch .unite{font-size:.5em;font-weight:800;margin-left:4px;letter-spacing:0}
+
  /* Preuves sociales : un carrousel d'activites, 3 captures en eventail */
  .proof{background:var(--bg2);border-top:1px solid var(--border)}
  .proof .eyebrow{margin-bottom:10px;text-align:center}
@@ -536,6 +545,27 @@
 </section>
 
 
+
+ <!-- CHIFFRES -->
+ <section class="chiffres" id="chiffres">
+ <div class="wrap wide">
+ <div class="chgrid">
+ <div class="ch">
+ <b data-compteur data-xof="430000000" data-eur="655000" data-suffixe="+"><span class="val">0</span><span class="unite"></span></b>
+ <span data-i18n="ch.l1">gagnés par mes élèves</span>
+ </div>
+ <div class="ch">
+ <b data-compteur data-valeur="4"><span class="val">0</span></b>
+ <span data-i18n="ch.l2">façons de gagner de l'argent en ligne</span>
+ </div>
+ <div class="ch">
+ <b data-compteur data-valeur="300" data-suffixe="+"><span class="val">0</span></b>
+ <span data-i18n="ch.l3">élèves nous ont rejoints ce mois-ci</span>
+ </div>
+ </div>
+ </div>
+ </section>
+
  <!-- FAQ -->
  <section style="background:var(--bg2)">
  <div class="wrap">
@@ -744,6 +774,8 @@
 const I18N = {
  fr: {
  _title:"Beaudelaire Consulting · Scale ton business",
+ ch:{l1:"gagnés par mes élèves", l2:"façons de gagner de l'argent en ligne",
+ l3:"élèves nous ont rejoints ce mois-ci"},
  topbar:{txt:"Chaque jour, je partage de la valeur dans le groupe <b>WhatsApp</b>", cta:"Rejoindre le groupe (gratuit)"},
  nav:{offres:"Les offres", about:"Qui je suis", debutants:"Le guide", chemin:"Le chemin", cta:"Réserver un appel"},
  pv:{
@@ -843,6 +875,8 @@ const I18N = {
  },
  en: {
  _title:"Beaudelaire Consulting · Scale your business",
+ ch:{l1:"earned by my students", l2:"ways to make money online",
+ l3:"students joined this month"},
  topbar:{txt:"Every day I share value in the <b>WhatsApp</b> group", cta:"Join the group (free)"},
  nav:{offres:"Pricing", about:"About me", debutants:"The guide", chemin:"The path", cta:"Book a call"},
  pv:{
@@ -1493,6 +1527,82 @@ function refreshOfferDesc(){
 
 /* init langue */
 applyI18N();
+
+/* Compteurs : ils partent de zero a l'arrivee a l'ecran, une seule fois.
+   Le premier suit la devise choisie — le montant en francs et son
+   equivalent en euros ne s'ecrivent pas avec le meme ordre de grandeur. */
+(function(){
+ var boites=[].slice.call(document.querySelectorAll('[data-compteur]'));
+ if(!boites.length) return;
+
+ function espace(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u202F'); }
+ function cible(el){
+  if(el.hasAttribute('data-valeur')) return parseInt(el.getAttribute('data-valeur'), 10);
+  var xof=parseInt(el.getAttribute('data-xof'),10), eur=parseInt(el.getAttribute('data-eur'),10);
+  return (typeof DEVISE!=='undefined' && DEVISE==='EUR') ? eur : xof;
+ }
+ function unite(el){
+  if(!el.hasAttribute('data-xof')) return '';
+  return (typeof DEVISE!=='undefined' && DEVISE==='EUR') ? '\u20AC' : 'FCFA';
+ }
+ function anime(el){
+  var fin=cible(el), val=el.querySelector('.val'), uni=el.querySelector('.unite');
+  var suf=el.getAttribute('data-suffixe')||'', debut=null, duree=1400;
+  if(uni) uni.textContent=unite(el);
+  function poser(){ val.textContent = espace(fin) + suf; }
+  /* Sans animation demandee, ou si le navigateur gele les rafraichissements
+     (onglet en arriere-plan), on affiche directement la valeur finale
+     plutot que de laisser un zero fige a l'ecran. */
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ poser(); return; }
+  setTimeout(function(){ if(val.textContent !== espace(fin)+suf) poser(); }, duree+300);
+  function pas(t){
+   if(debut===null) debut=t;
+   var p=Math.min((t-debut)/duree, 1);
+   p = 1-Math.pow(1-p, 3);                       /* ralentit en fin de course */
+   val.textContent = espace(Math.round(fin*p)) + (p===1 ? suf : '');
+   if(p<1) requestAnimationFrame(pas);
+  }
+  requestAnimationFrame(pas);
+ }
+
+ /* Deux declencheurs plutot qu'un : l'observateur quand il est disponible,
+    et une verification au defilement. Certains navigateurs n'emettent pas
+    l'observation attendue, le compteur resterait alors fige a zero. */
+ function visible(el){
+  var r=el.getBoundingClientRect();
+  return r.top < (window.innerHeight||0) - 40 && r.bottom > 0;
+ }
+ function verifier(){
+  var reste=false;
+  boites.forEach(function(b){
+   if(b.dataset.fait) return;
+   if(visible(b)){ b.dataset.fait='1'; anime(b); } else reste=true;
+  });
+  if(!reste) window.removeEventListener('scroll', verifier);
+ }
+ window.addEventListener('scroll', verifier, {passive:true});
+ window.addEventListener('resize', verifier, {passive:true});
+ verifier();
+ if('IntersectionObserver' in window){
+  var oeil=new IntersectionObserver(function(entrees){
+   entrees.forEach(function(e){
+    if(e.isIntersecting && !e.target.dataset.fait){
+     e.target.dataset.fait='1'; anime(e.target);
+    }
+   });
+  }, {threshold:.25});
+  boites.forEach(function(b){ oeil.observe(b); });
+ }
+
+ /* Changer de devise refait defiler le montant concerne */
+ var basculeOrigine = window.toggleDevise;
+ if(typeof basculeOrigine==='function'){
+  window.toggleDevise=function(){
+   basculeOrigine.apply(this, arguments);
+   boites.forEach(function(b){ if(b.hasAttribute('data-xof')) anime(b); });
+  };
+ }
+})();
 
 /* La navigation s'efface vers le bas, revient vers le haut. Le seuil evite
    qu'elle clignote au moindre soubresaut, frequent sur mobile. */
