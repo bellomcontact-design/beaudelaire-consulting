@@ -97,9 +97,10 @@
  padding:84px 0 70px;text-align:center;border-bottom:1px solid var(--border)}
  .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--bg2);
  color:var(--text);font-size:13px;padding:7px 16px;border-radius:999px;margin-bottom:24px;font-weight:600}
- h1{font-weight:800;font-size:clamp(30px,4.2vw,44px);line-height:1.12;margin-bottom:22px;letter-spacing:-.025em;color:var(--text)}
+ h1{font-weight:400;font-size:clamp(32px,4.6vw,50px);line-height:1.08;margin-bottom:18px;letter-spacing:-.02em;color:var(--text)}
+ .sub b,.sub strong,h1 b,h1 strong{font-weight:800}
  .nowrap{white-space:nowrap}
- .sub{font-size:clamp(16px,2.2vw,20px);color:var(--text);max-width:640px;margin:0 auto 22px;line-height:1.55}
+ .sub{font-size:clamp(17px,2.4vw,23px);color:var(--text);max-width:640px;margin:0 auto 22px;line-height:1.4;font-weight:400}
  .herobullets{color:var(--muted);font-size:14px;margin-bottom:30px}
  .herobullets b{color:var(--text);font-weight:700}
  .vsl{position:relative;max-width:560px;margin:0 auto 30px;aspect-ratio:16/9;background:var(--bg2);
@@ -305,7 +306,7 @@
  <div class="wrap">
  <div class="badge"><span class="stars">★★★★★</span> <span data-i18n="hero.badge_pre">Plus de</span> <span id="rcount" class="rcount">250</span> <span data-i18n="hero.badge_post">rienneux sauvés</span></div>
  <h1 data-i18n-html="hero.h1">De 0 à ton premier client en ligne,<br>même en partant de rien.</h1>
- <p class="sub" data-i18n="hero.sub">Tu veux te lancer mais tu ne sais pas par où commencer ? Je te montre le chemin exact, étape par étape, depuis l'Afrique. Et si tu gagnes déjà de l'argent, le petit test ci-dessous t'oriente vers le bon accompagnement pour passer au palier au-dessus.</p>
+ <p class="sub" data-i18n-html="hero.sub">Je vais t\'apprendre à la <b>maîtriser</b>.</p>
  <p style="font-weight:700;color:var(--text);margin:10px 0 12px;font-size:16px" data-i18n="hero.storyhook">Parti de zéro au Bénin. Aujourd'hui, +50k€ par mois. Mon histoire, en vidéo 👇</p>
  <div class="vsl" id="vsl">
  <button type="button" class="vslfacade" onclick="playVSL()" aria-label="Lire la vidéo">
@@ -692,8 +693,8 @@ const I18N = {
  point1:"De <b>0 à ton premier client</b>, puis au palier au-dessus",
  point2:"Des conseils <b>1-à-1</b>, adaptés à ta réalité en Afrique",
  badge_pre:"Plus de", badge_post:"rienneux sauvés",
- h1:'De 0 à ton premier client en ligne,<br>même en partant de rien.',
- sub:"Tu veux te lancer mais tu ne sais pas par où commencer ? Je te montre le chemin exact, étape par étape, depuis l'Afrique. Et si tu gagnes déjà de l'argent, le petit test ci-dessous t'oriente vers le bon accompagnement pour passer au palier au-dessus.",
+ h1:'GAGNER DE L\'ARGENT<br><b>EST UNE COMPÉTENCE</b>',
+ sub:"Je vais t'apprendre à la <b>maîtriser</b>.",
  bullets:'Tu repars avec : <b>ce qui te bloque vraiment</b> · <b>les leviers à activer en premier</b> · <b>ton plan d\'action priorisé</b>',
  storyhook:"Parti de zéro au Bénin. Aujourd'hui, +50k€ par mois. Mon histoire, en vidéo 👇",
  cta:"Voir si je peux t'aider",
@@ -825,8 +826,8 @@ const I18N = {
  point1:"From <b>0 to your first client</b>, then to the next level",
  point2:"<b>1-on-1</b> advice, adapted to your reality in Africa",
  badge_pre:"More than", badge_post:"rienneux saved",
- h1:'From 0 to your first client online,<br>even starting from nothing.',
- sub:"You want to start but don't know where to begin? I show you the exact path, step by step, from Africa. And if you already earn money, the quick quiz below points you to the right support to reach the next level.",
+ h1:'MONEY MAKING<br><b>IS A SKILL</b>',
+ sub:"I will teach you how to <b>master it</b>.",
  bullets:'You leave with: <b>what\'s really blocking you</b> · <b>the levers to pull first</b> · <b>your prioritized action plan</b>',
  storyhook:"From zero in Benin to over €50k a month. My story, in the video 👇",
  cta:"See if I can help you",
