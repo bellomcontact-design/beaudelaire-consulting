@@ -67,6 +67,8 @@
  .tb-menu a{display:block;padding:11px 13px;border-radius:9px;color:var(--text);
    text-decoration:none;font-size:15px;font-weight:600}
  .tb-menu a:hover{background:var(--accent-soft);color:var(--accent)}
+ .tb-menu a small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
+ .tb-menu a:hover small{color:var(--text-soft)}
  .tb-menu hr{border:0;border-top:1px solid var(--border);margin:7px 4px}
  .tb-lang{display:flex;gap:7px;padding:4px}
  .tb-lang button{flex:1;background:none;border:1px solid var(--border);border-radius:9px;
@@ -443,9 +445,9 @@
     onclick="track('click_whatsapp',{depuis:'accueil'})" data-i18n="topbar.cta">Rejoindre le groupe privé (Gratuit)</a>
  <button class="tb-burger" id="tbBurger" onclick="basculeMenu()" aria-label="Menu" aria-expanded="false">&#9776;</button>
  <div class="tb-menu" id="tbMenu">
-  <a href="/mon-histoire" data-i18n="nav.about">Qui je suis</a>
-  <a href="/checkout" data-i18n="nav.debutants">Le guide</a>
-  <a href="/scaler" data-i18n="nav.chemin">Le chemin</a>
+  <a href="/scaler" data-i18n-html="menu.chemin">Le chemin<small>Passer au palier au-dessus</small></a>
+  <a href="/mon-histoire" data-i18n-html="menu.histoire">Qui je suis<small>Mon histoire, de 0 à 50k€ par mois</small></a>
+  <a href="#" onclick="startQuiz();fermeMenu();return false;" data-i18n-html="menu.appel">Réserver un appel<small>2 minutes pour voir si je peux t'aider</small></a>
   <hr>
   <div class="tb-lang">
    <button type="button" data-lang="fr" onclick="choisirLangue('fr')">Français</button>
@@ -947,6 +949,9 @@ const I18N = {
  topbar:{cta:"Rejoindre le groupe privé (Gratuit)",
   i1:"Je partage de la valeur <b>tous les jours</b>, gratuitement",
   i2:"Tu poses tes questions, <b>j'y réponds</b>"},
+ menu:{chemin:"Le chemin<small>Passer au palier au-dessus</small>",
+  histoire:"Qui je suis<small>Mon histoire, de 0 à 50k€ par mois</small>",
+  appel:"Réserver un appel<small>2 minutes pour voir si je peux t'aider</small>"},
  nav:{offres:"Les offres", about:"Qui je suis", debutants:"Le guide", chemin:"Le chemin", cta:"Réserver un appel"},
  pv:{
  eyebrow:"Leurs réussites", h2:"Ceux qui m'ont suivi gagnent",
@@ -1074,6 +1079,9 @@ const I18N = {
  topbar:{cta:"Join the private group (Free)",
   i1:"I share value <b>every day</b>, for free",
   i2:"You ask, <b>I answer</b>"},
+ menu:{chemin:"The path<small>Reach the next level</small>",
+  histoire:"About me<small>My story, from 0 to €50k a month</small>",
+  appel:"Book a call<small>2 minutes to see if I can help</small>"},
  nav:{offres:"Pricing", about:"About me", debutants:"The guide", chemin:"The path", cta:"Book a call"},
  pv:{
  eyebrow:"Their wins", h2:"The people who followed me are winning",
@@ -1295,6 +1303,10 @@ function track(event, data){
  console.log('track:', event, d);
 }
 track('visit');
+
+/* Un lien "Réserver un appel" venu d'une autre page ouvre directement
+   le questionnaire. */
+try{ if(new URLSearchParams(location.search).get('appel')==='1'){ startQuiz(); } }catch(e){}
 
 /* Carrousel des preuves.
    Deux rythmes imbriques : la preuve mise en avant change toutes les 2 s,

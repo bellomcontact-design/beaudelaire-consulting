@@ -62,6 +62,8 @@
  .tb-menu a{display:block;padding:11px 13px;border-radius:9px;color:var(--text);
    text-decoration:none;font-size:15px;font-weight:600}
  .tb-menu a:hover{background:var(--accent-soft);color:var(--accent)}
+ .tb-menu a small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
+ .tb-menu a:hover small{color:var(--text-soft)}
  .tb-menu hr{border:0;border-top:1px solid var(--border);margin:7px 4px}
  .tb-lang{display:flex;gap:7px;padding:4px}
  .tb-lang button{flex:1;background:none;border:1px solid var(--border);border-radius:9px;
@@ -249,9 +251,9 @@
     onclick="track('click_whatsapp',{depuis:'checkout'})" data-i18n="tb_cta">Rejoindre le groupe privé (Gratuit)</a>
  <button class="tb-burger" id="tbBurger" onclick="basculeMenu()" aria-label="Menu" aria-expanded="false">&#9776;</button>
  <div class="tb-menu" id="tbMenu">
-  <a href="/">Accueil</a>
-  <a href="/mon-histoire">Qui je suis</a>
-  <a href="/scaler">Le chemin</a>
+  <a href="/scaler" data-i18n-html="menu_chemin">Le chemin<small>Passer au palier au-dessus</small></a>
+  <a href="/mon-histoire" data-i18n-html="menu_histoire">Qui je suis<small>Mon histoire, de 0 à 50k€ par mois</small></a>
+  <a href="/?appel=1" data-i18n-html="menu_appel">Réserver un appel<small>2 minutes pour voir si je peux t'aider</small></a>
   <hr>
   <div class="tb-lang">
    <button type="button" data-lang="fr" onclick="choisirLangue('fr')">Français</button>
@@ -459,6 +461,9 @@ var I18N = {
   i1:"Je partage de la valeur <b>tous les jours</b>, gratuitement",
   i2:"Tu poses tes questions, <b>j'y réponds</b>",
   tb_cta:"Rejoindre le groupe privé (Gratuit)",
+  menu_chemin:"Le chemin<small>Passer au palier au-dessus</small>",
+  menu_histoire:"Qui je suis<small>Mon histoire, de 0 à 50k€ par mois</small>",
+  menu_appel:"Réserver un appel<small>2 minutes pour voir si je peux t'aider</small>",
   r_cta:"Prendre le guide",
   h2:"Choisis ton chemin vers le succès",
   pv_eyebrow:"Ils l'ont fait",
@@ -502,6 +507,9 @@ var I18N = {
   i1:"I share value <b>every day</b>, for free",
   i2:"You ask, <b>I answer</b>",
   tb_cta:"Join the private group (Free)",
+  menu_chemin:"The path<small>Reach the next level</small>",
+  menu_histoire:"About me<small>My story, from 0 to €50k a month</small>",
+  menu_appel:"Book a call<small>2 minutes to see if I can help</small>",
   r_cta:"Get the guide",
   h2:"Choose your path to success",
   pv_eyebrow:"They did it",

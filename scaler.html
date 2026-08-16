@@ -60,6 +60,8 @@
  .tb-menu a{display:block;padding:11px 13px;border-radius:9px;color:var(--text);
    text-decoration:none;font-size:15px;font-weight:600}
  .tb-menu a:hover{background:var(--accent-soft);color:var(--accent)}
+ .tb-menu a small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
+ .tb-menu a:hover small{color:var(--text-soft)}
  .tb-menu hr{border:0;border-top:1px solid var(--border);margin:7px 4px}
  .tb-lang{display:flex;gap:7px;padding:4px}
  .tb-lang button{flex:1;background:none;border:1px solid var(--border);border-radius:9px;
@@ -139,9 +141,8 @@
     onclick="track('click_whatsapp',{depuis:'scaler'})" data-i18n="tb_cta">Rejoindre le groupe privé (Gratuit)</a>
  <button class="tb-burger" id="tbBurger" onclick="basculeMenu()" aria-label="Menu" aria-expanded="false">&#9776;</button>
  <div class="tb-menu" id="tbMenu">
-  <a href="/">Accueil</a>
-  <a href="/mon-histoire">Qui je suis</a>
-  <a href="/checkout">Le guide</a>
+  <a href="/mon-histoire" data-i18n-html="menu_histoire">Qui je suis<small>Mon histoire, de 0 à 50k€ par mois</small></a>
+  <a href="/?appel=1" data-i18n-html="menu_appel">Réserver un appel<small>2 minutes pour voir si je peux t'aider</small></a>
   <hr>
   <div class="tb-lang">
    <button type="button" data-lang="fr" onclick="choisirLangue('fr')">Français</button>
@@ -203,6 +204,9 @@ var I18N = {
   i1:"Je partage de la valeur <b>tous les jours</b>, gratuitement",
   i2:"Tu poses tes questions, <b>j'y réponds</b>",
   tb_cta:"Rejoindre le groupe privé (Gratuit)",
+  menu_chemin:"Le chemin<small>Passer au palier au-dessus</small>",
+  menu_histoire:"Qui je suis<small>Mon histoire, de 0 à 50k€ par mois</small>",
+  menu_appel:"Réserver un appel<small>2 minutes pour voir si je peux t'aider</small>",
   eyebrow:"Le chemin · le guide pour scaler",
   h1:"Tu bosses comme un fou et t'avances plus&nbsp;?<br><span class='nowrap'>Voilà le chemin.</span>",
   lead:"Tu gagnes déjà de l'argent mais tu plafonnes ? Le guide étape par étape pour rendre ton business irrésistible et passer au palier au-dessus, sans changer de véhicule.",
@@ -221,6 +225,9 @@ var I18N = {
   i1:"I share value <b>every day</b>, for free",
   i2:"You ask, <b>I answer</b>",
   tb_cta:"Join the private group (Free)",
+  menu_chemin:"The path<small>Reach the next level</small>",
+  menu_histoire:"About me<small>My story, from 0 to €50k a month</small>",
+  menu_appel:"Book a call<small>2 minutes to see if I can help</small>",
   eyebrow:"The path · the guide to scale",
   h1:"Working like crazy but going nowhere?<br><span class='nowrap'>Here's the path.</span>",
   lead:"Already making money but stuck at a plateau? The step-by-step guide to make your business irresistible and reach the next level, without switching vehicles.",
