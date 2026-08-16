@@ -20,14 +20,19 @@
  --accent:#FFA545; --accent-strong:#FFA545; --accent-soft:rgba(255,165,69,.12);
  --star:#FFCF23; --on-accent:#060E15;
  /* Sémantique */
- --danger:#E5544B; --danger-bg:#A32C24; --success:#3ECF7E;
+ --danger:#FF6B5E; --danger-bg:#A32C24;
+ /* Degrade des boutons, releve sur therealworld.net */
+ --accent-grad:linear-gradient(95deg,#FFA930 0%,#FFAB23 51%,#D5AA12 113%);
+ /* Variantes translucides, centralisees */
+ --text-soft:rgba(255,255,255,.80); --on-accent-soft:rgba(6,14,21,.72);
+ --bg-veil:rgba(6,14,21,.85); --star-soft:rgba(255,207,35,.10); --star-line:rgba(255,207,35,.34);
  }
  *{box-sizing:border-box;margin:0;padding:0}
  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
  background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
  .wrap{max-width:780px;margin:0 auto;padding:0 20px}
  .wide{max-width:1000px}
- .topnav{position:sticky;top:0;z-index:40;background:rgba(6,14,21,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+ .topnav{position:sticky;top:0;z-index:40;background:var(--bg-veil);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
  .topnav-in{display:flex;align-items:center;justify-content:space-between;max-width:1000px;margin:0 auto;padding:13px 20px}
  .brand{font-family:'Inter',sans-serif;font-weight:700;font-size:20px;text-decoration:none;color:var(--text);letter-spacing:-.01em;display:inline-flex;align-items:center;gap:9px}
  .brand img{width:36px;height:36px;border-radius:9px;flex-shrink:0}
@@ -43,10 +48,10 @@
  .langtoggle:hover{border-color:var(--accent);color:var(--text)}
  /* barre d'achat fixe (mobile) */
  .buybar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;text-align:center;text-decoration:none;
-   background:var(--accent-strong);color:var(--on-accent);font-weight:800;font-size:15px;letter-spacing:.01em;white-space:nowrap;
+   background:var(--accent-strong);background-image:var(--accent-grad);color:var(--on-accent);font-weight:800;font-size:15px;letter-spacing:.01em;white-space:nowrap;
    box-shadow:0 -6px 20px rgba(0,0,0,.55);
    padding:16px 16px calc(22px + env(safe-area-inset-bottom))}
- .buybar .bb-price{color:rgba(6,14,21,.72)}
+ .buybar .bb-price{color:var(--on-accent-soft)}
  .pnow{display:block;text-align:center;font-size:36px;font-weight:800;color:var(--accent);white-space:nowrap;line-height:1.02}
  .pnow sup{font-size:.4em;font-weight:800;vertical-align:super;margin-left:3px}
  .pnow .peur{font-size:.42em;font-weight:700;color:var(--muted);vertical-align:middle;margin-left:2px}
@@ -69,11 +74,11 @@
      flex-direction:column;align-items:stretch;gap:0;padding:6px 20px 14px;display:none;box-shadow:0 10px 22px rgba(0,0,0,.55)}
    .navlinks.open{display:flex}
    .navlinks a{font-size:16px;padding:13px 2px}
-   .navlinks a.nav-cta{background:var(--accent-strong);color:var(--on-accent);border-radius:10px;text-align:center;margin-top:8px;padding:13px}
+   .navlinks a.nav-cta{background:var(--accent-strong);background-image:var(--accent-grad);color:var(--on-accent);border-radius:10px;text-align:center;margin-top:8px;padding:13px}
    .buybar{display:block}
    body{padding-bottom:96px}
  }
- .cta{display:inline-block;background:var(--accent-strong);color:var(--on-accent);font-weight:700;font-size:16px;
+ .cta{display:inline-block;background:var(--accent-strong);background-image:var(--accent-grad);color:var(--on-accent);font-weight:700;font-size:16px;
  padding:16px 34px;border-radius:12px;text-decoration:none;border:none;cursor:pointer;
  font-family:inherit;transition:transform .12s ease,opacity .12s ease}
  .cta:hover{opacity:.88}
@@ -91,14 +96,49 @@
  padding:84px 0 70px;text-align:center;border-bottom:1px solid var(--border)}
  .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--bg2);
  color:var(--text);font-size:13px;padding:7px 16px;border-radius:999px;margin-bottom:24px;font-weight:600}
- h1{font-weight:800;font-size:clamp(30px,4.2vw,44px);line-height:1.12;margin-bottom:22px;letter-spacing:-.025em}
+ h1{font-weight:800;font-size:clamp(30px,4.2vw,44px);line-height:1.12;margin-bottom:22px;letter-spacing:-.025em;
+ color:var(--accent);background-image:var(--accent-grad);-webkit-background-clip:text;background-clip:text;
+ -webkit-text-fill-color:transparent;padding-bottom:.06em}
  .nowrap{white-space:nowrap}
- .sub{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:640px;margin:0 auto 22px;line-height:1.55}
+ .sub{font-size:clamp(16px,2.2vw,20px);color:var(--accent);max-width:640px;margin:0 auto 22px;line-height:1.55;
+ background-image:var(--accent-grad);-webkit-background-clip:text;background-clip:text;
+ -webkit-text-fill-color:transparent;padding-bottom:.06em}
  .herobullets{color:var(--muted);font-size:14px;margin-bottom:30px}
  .herobullets b{color:var(--text);font-weight:700}
  .vsl{position:relative;max-width:560px;margin:0 auto 30px;aspect-ratio:16/9;background:var(--bg2);
  border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden}
  .micro{display:block;color:var(--muted);font-size:13px;margin-top:14px}
+
+ /* Façade vidéo : la vignette se transforme en lecteur au clic.
+    Évite de charger le player YouTube tant que le visiteur n'a rien demande. */
+ .vslfacade{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;display:block;overflow:hidden}
+ .vslfacade img{width:100%;height:100%;object-fit:cover;display:block}
+ .vslfacade .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+   width:72px;height:72px;border-radius:50%;background-image:var(--accent-grad);color:var(--on-accent);
+   font-size:25px;line-height:1;display:flex;align-items:center;justify-content:center;
+   box-shadow:0 8px 26px rgba(0,0,0,.55);transition:transform .15s ease}
+ .vslfacade:hover .play,.vslfacade:focus-visible .play{transform:translate(-50%,-50%) scale(1.08)}
+ .vslpoints{list-style:none;display:flex;flex-direction:column;gap:11px;max-width:520px;margin:0 auto 26px;text-align:left}
+ .vslpoints li{display:flex;align-items:center;gap:12px;font-size:15.5px;color:var(--text-soft);line-height:1.4}
+ .vslpoints .ico{flex:0 0 auto;width:32px;height:32px;border-radius:9px;background:var(--accent-soft);
+   color:var(--star);display:flex;align-items:center;justify-content:center;font-size:15px}
+ .vslpoints b{color:var(--text);font-weight:700}
+
+ /* Section d'auto-identification */
+ .honest{background:var(--bg2)}
+ .honest .wrap{max-width:700px}
+ .honest h2 .hl{color:var(--accent);-webkit-text-fill-color:var(--accent)}
+ .honest ul{list-style:none;display:flex;flex-direction:column;gap:15px;margin:34px 0 30px}
+ .honest li{display:flex;gap:12px;font-size:16px;line-height:1.5;color:var(--text-soft)}
+ .honest li b{color:var(--text);font-weight:700}
+ .honest .bolt{flex:0 0 auto;color:var(--star)}
+ .honest .concl{text-align:center;font-size:17px;color:var(--text);font-weight:700;margin-bottom:8px}
+ .honest .concl2{text-align:center;color:var(--muted);font-size:15px;margin-bottom:28px}
+ @media(max-width:560px){
+   .honest li{font-size:15px}
+   .vslpoints li{font-size:14px}
+   .vslfacade .play{width:60px;height:60px;font-size:21px}
+ }
 
  /* RESULTS */
  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -128,12 +168,12 @@
  /* ABOUT */
  .about{background:var(--bg2)}
  .about .wrap{max-width:680px}
- .about p{color:rgba(255,255,255,.78);margin-bottom:16px;font-size:17px}
+ .about p{color:var(--text-soft);margin-bottom:16px;font-size:17px}
  .statrow{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px;border-top:1px solid var(--border);padding-top:30px}
  .stat{text-align:center;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;min-width:118px}
  .stat b{display:block;font-size:27px;letter-spacing:-.02em;color:var(--accent-strong)}
  .stat span{color:var(--muted);font-size:13px}
- .stat.hl{background:rgba(255,207,35,.10);border-color:rgba(255,207,35,.34)}
+ .stat.hl{background:var(--star-soft);border-color:var(--star-line)}
  .stat.hl span{color:var(--star);font-weight:600}
  .otile{flex:1;min-width:0;background:var(--card);border:2px solid var(--border);border-radius:14px;padding:14px 8px 12px;cursor:pointer;text-align:center;font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:border-color .15s,background .15s}
  .otile.selected{border-color:var(--accent-strong);background:var(--accent-soft)}
@@ -145,7 +185,7 @@
  #rTiles .otile .olabel{font-size:12px}
  .otile .oeur{font-size:13px;color:var(--muted)}
  .otile .olabel{font-size:13.5px;font-weight:800;color:var(--text);margin-top:5px;line-height:1.2}
- .note{background:rgba(255,207,35,.07);border:1px dashed rgba(255,207,35,.32);border-radius:10px;padding:11px 14px;color:var(--star);
+ .note{background:var(--star-soft);border:1px dashed var(--star-line);border-radius:10px;padding:11px 14px;color:var(--star);
  font-size:12px;margin:0 auto 24px;max-width:680px;text-align:center}
 
  /* FAQ */
@@ -208,12 +248,12 @@
  .feat{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
  .feat li{padding-left:25px;position:relative;font-size:15px}
  .feat li::before{content:"\2713";position:absolute;left:0;font-weight:800;color:var(--accent)}
- .reassure{font-size:13px;color:rgba(255,255,255,.82);margin-bottom:16px;padding:11px 13px;background:var(--accent-soft);border-radius:9px}
+ .reassure{font-size:13px;color:var(--text-soft);margin-bottom:16px;padding:11px 13px;background:var(--accent-soft);border-radius:9px}
  .pay{display:flex;flex-direction:column;gap:11px}
- .paybtn{display:block;background:var(--accent-strong);border:none;border-radius:12px;padding:16px;cursor:pointer;text-decoration:none;color:var(--on-accent);text-align:center;transition:opacity .12s}
+ .paybtn{display:block;background:var(--accent-strong);background-image:var(--accent-grad);border:none;border-radius:12px;padding:16px;cursor:pointer;text-decoration:none;color:var(--on-accent);text-align:center;transition:opacity .12s}
  .paybtn:hover{opacity:.9}
  .paybtn b{display:block;font-size:16px;color:var(--on-accent);font-weight:700}
- .paybtn span{color:rgba(6,14,21,.72);font-size:13px}
+ .paybtn span{color:var(--on-accent-soft);font-size:13px}
  .guarantee{text-align:center;color:var(--muted);font-size:12.5px;margin-top:14px}
 
  footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;color:var(--muted);font-size:13px}
@@ -269,13 +309,42 @@
  <h1 data-i18n-html="hero.h1">De 0 à ton premier client en ligne,<br>même en partant de rien.</h1>
  <p class="sub" data-i18n="hero.sub">Tu veux te lancer mais tu ne sais pas par où commencer ? Je te montre le chemin exact, étape par étape, depuis l'Afrique. Et si tu gagnes déjà de l'argent, le petit test ci-dessous t'oriente vers le bon accompagnement pour passer au palier au-dessus.</p>
  <p style="font-weight:700;color:var(--text);margin:10px 0 12px;font-size:16px" data-i18n="hero.storyhook">Parti de zéro au Bénin. Aujourd'hui, +50k€ par mois. Mon histoire, en vidéo 👇</p>
- <div class="vsl">
- <iframe src="https://www.youtube.com/embed/uznbqo-Xofw?rel=0&modestbranding=1&playsinline=1" title="Beaudelaire Consulting" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" playsinline allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+ <div class="vsl" id="vsl">
+ <button type="button" class="vslfacade" onclick="playVSL()" aria-label="Lire la vidéo">
+ <img id="vslThumb" src="" alt="" decoding="async">
+ <span class="play" aria-hidden="true">&#9654;</span>
+ </button>
  </div>
+ <ul class="vslpoints">
+ <li><span class="ico" aria-hidden="true">&#128176;</span><span data-i18n-html="hero.point1">De <b>0 à ton premier client</b>, puis au palier au-dessus</span></li>
+ <li><span class="ico" aria-hidden="true">&#128172;</span><span data-i18n-html="hero.point2">Des conseils <b>1-à-1</b>, adaptés à ta réalité en Afrique</span></li>
+ </ul>
  <button class="cta" onclick="startQuiz()" data-i18n="hero.cta">Voir si je peux t'aider</button>
  <span class="micro" data-i18n="hero.micro">2 minutes pour répondre. Je ne prends pas tout le monde, voyons si c'est toi.</span>
  </div>
  </header>
+
+ <!-- AUTO-IDENTIFICATION -->
+ <section class="honest" id="honest">
+ <div class="wrap">
+ <div class="eyebrow" data-i18n="honest.eyebrow">Sois honnête avec toi-même</div>
+ <h2 data-i18n-html="honest.h2">C'est toi, <span class='hl'>ça</span> ?</h2>
+ <ul>
+ <li><span class="bolt" aria-hidden="true">&#9889;</span><span data-i18n-html="honest.i1"></span></li>
+ <li><span class="bolt" aria-hidden="true">&#9889;</span><span data-i18n-html="honest.i2"></span></li>
+ <li><span class="bolt" aria-hidden="true">&#9889;</span><span data-i18n-html="honest.i3"></span></li>
+ <li><span class="bolt" aria-hidden="true">&#9889;</span><span data-i18n-html="honest.i4"></span></li>
+ <li><span class="bolt" aria-hidden="true">&#9889;</span><span data-i18n-html="honest.i5"></span></li>
+ <li><span class="bolt" aria-hidden="true">&#9889;</span><span data-i18n-html="honest.i6"></span></li>
+ <li><span class="bolt" aria-hidden="true">&#9889;</span><span data-i18n-html="honest.i7"></span></li>
+ <li><span class="bolt" aria-hidden="true">&#9889;</span><span data-i18n-html="honest.i8"></span></li>
+ </ul>
+ <p class="concl" data-i18n="honest.concl"></p>
+ <p class="concl2" data-i18n="honest.concl2"></p>
+ <div style="text-align:center"><button class="cta" onclick="startQuiz()" data-i18n="honest.cta">Voir si je peux t'aider</button></div>
+ </div>
+ </section>
+
 
  <!-- RESULTATS (TEMPLATE), MASQUÉ -->
  <section style="display:none">
@@ -332,7 +401,7 @@
  </ul>
  </div>
 
- <div style="background:rgba(255,207,35,.12);border:1px solid rgba(255,207,35,.34);color:var(--star);border-radius:14px;padding:14px 18px;margin:6px auto 18px;max-width:470px;font-size:14px;line-height:1.5;font-weight:600" data-i18n-html="book.promo">🔥 <b>PROMO jusqu'au 18 août 16h30</b> — avec le guide à <b>15 000 FCFA</b>, l'accès à la communauté <b>Ex-rienneux est OFFERT</b> 🎁</div>
+ <div style="background:var(--star-soft);border:1px solid var(--star-line);color:var(--star);border-radius:14px;padding:14px 18px;margin:6px auto 18px;max-width:470px;font-size:14px;line-height:1.5;font-weight:600" data-i18n-html="book.promo">🔥 <b>PROMO jusqu'au 18 août 16h30</b> — avec le guide à <b>15 000 FCFA</b>, l'accès à la communauté <b>Ex-rienneux est OFFERT</b> 🎁</div>
  <div style="max-width:440px;margin:0 auto">
  <div style="background:var(--accent-soft);border:2px solid var(--accent-strong);border-radius:16px;padding:18px 18px 16px;text-align:center;margin-bottom:14px">
  <div style="display:inline-block;background:var(--danger-bg);color:#fff;font-size:11px;font-weight:800;padding:4px 12px;border-radius:999px;margin-bottom:8px" data-i18n="book.promobadge">🎁 PROMO</div>
@@ -542,7 +611,7 @@
  <p class="lead" id="rWho" style="margin-bottom:0"></p>
 
  <div id="rTiles" style="display:none;max-width:470px;margin:10px auto 0">
- <div style="background:rgba(255,207,35,.12);border:1px solid rgba(255,207,35,.34);color:var(--star);border-radius:12px;padding:11px 14px;margin:0 auto 12px;font-size:13px;line-height:1.45;font-weight:600" data-i18n-html="book.promo">🔥 <b>PROMO jusqu'au 18 août 16h30</b> — avec le guide à <b>15 000 FCFA</b>, l'accès à la communauté <b>Ex-rienneux est OFFERT</b> 🎁</div>
+ <div style="background:var(--star-soft);border:1px solid var(--star-line);color:var(--star);border-radius:12px;padding:11px 14px;margin:0 auto 12px;font-size:13px;line-height:1.45;font-weight:600" data-i18n-html="book.promo">🔥 <b>PROMO jusqu'au 18 août 16h30</b> — avec le guide à <b>15 000 FCFA</b>, l'accès à la communauté <b>Ex-rienneux est OFFERT</b> 🎁</div>
  <p style="font-size:13px;color:var(--muted);margin:0 0 10px" data-i18n="book.choose">Choisis ton offre 👇</p>
  <div style="display:flex;gap:8px;margin-bottom:14px">
  <button type="button" class="otile" onclick="pickOffer(this,'r')" data-desckey="result.descAppel" data-momo="https://me.fedapay.com/demarrage" data-card="https://whop.com/checkout/plan_bReryALMV3QYm">
@@ -569,7 +638,7 @@
  <div class="name" id="rgName"></div>
  <div class="price" id="rgPrice"></div>
  <p class="anchor" id="rgLine"></p>
- <p style="display:inline-block;background:rgba(255,207,35,.10);border:1px solid rgba(255,207,35,.34);color:var(--star);font-weight:700;font-size:12.5px;padding:5px 12px;border-radius:999px;margin:2px 0 12px" data-i18n="book.urgency">⏳ Offre limitée · places limitées</p>
+ <p style="display:inline-block;background:var(--star-soft);border:1px solid var(--star-line);color:var(--star);font-weight:700;font-size:12.5px;padding:5px 12px;border-radius:999px;margin:2px 0 12px" data-i18n="book.urgency">⏳ Offre limitée · places limitées</p>
  <div class="pay">
  <a class="paybtn" id="rgCard" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide_card')"><b id="rgCtaC">Prendre le guide</b><span>Paiement par carte · Visa / Mastercard</span></a>
  <a class="paybtn" id="rgBuy" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide')"><b id="rgCta">Prendre le guide</b><span>Paiement mobile money (Afrique) · Téléchargement immédiat</span></a>
@@ -606,7 +675,24 @@ const I18N = {
  fr: {
  _title:"Beaudelaire Consulting · Scale ton business",
  nav:{about:"Qui je suis", debutants:"Rienneux", chemin:"Le chemin", cta:"Réserver un appel"},
+ honest:{
+ eyebrow:"Sois honnête avec toi-même",
+ h2:"C'est toi, <span class='hl'>ça</span> ?",
+ i1:"Tu es fatigué de regarder les autres avancer <b>pendant que toi, tu stagnes</b>.",
+ i2:"Tu sais que tu vaux mieux que ça, mais <b>personne autour de toi ne comprend</b>.",
+ i3:"Tu as enchaîné les vidéos gratuites et <b>tu n'as toujours rien lancé</b>.",
+ i4:"Tu veux <b>un chemin clair</b>, pas des conseils de gens qui n'ont jamais rien construit.",
+ i5:"Tu es prêt à bosser, <b>à condition qu'on te montre exactement quoi faire</b>.",
+ i6:"Tu veux <b>une compétence qui rapporte</b>, pas un diplôme qui prend la poussière.",
+ i7:"Tu ne sais pas <b>comment te faire payer depuis l'Afrique</b>.",
+ i8:"Tu veux arrêter de dépendre d'un salaire et <b>construire quelque chose à toi</b>.",
+ concl:"Si tu t'es reconnu, c'est exactement pour toi que j'ai tracé ce chemin.",
+ concl2:"Pas pour ceux qui vont y réfléchir. Pour ceux qui sont prêts à bouger.",
+ cta:"Voir si je peux t'aider"
+ },
  hero:{
+ point1:"De <b>0 à ton premier client</b>, puis au palier au-dessus",
+ point2:"Des conseils <b>1-à-1</b>, adaptés à ta réalité en Afrique",
  badge_pre:"Plus de", badge_post:"rienneux sauvés",
  h1:'De 0 à ton premier client en ligne,<br>même en partant de rien.',
  sub:"Tu veux te lancer mais tu ne sais pas par où commencer ? Je te montre le chemin exact, étape par étape, depuis l'Afrique. Et si tu gagnes déjà de l'argent, le petit test ci-dessous t'oriente vers le bon accompagnement pour passer au palier au-dessus.",
@@ -722,7 +808,24 @@ const I18N = {
  en: {
  _title:"Beaudelaire Consulting · Scale your business",
  nav:{about:"About me", debutants:"Beginners", chemin:"The path", cta:"Book a call"},
+ honest:{
+ eyebrow:"Be honest with yourself",
+ h2:"Is this <span class='hl'>you</span>?",
+ i1:"You are tired of watching others move forward <b>while you stay stuck</b>.",
+ i2:"You know you are capable of more, but <b>nobody around you gets it</b>.",
+ i3:"You have watched countless free videos and <b>still launched nothing</b>.",
+ i4:"You want <b>a clear path</b>, not advice from people who never built anything.",
+ i5:"You are ready to work, <b>as long as someone shows you exactly what to do</b>.",
+ i6:"You want <b>a skill that pays</b>, not a diploma gathering dust.",
+ i7:"You do not know <b>how to get paid from Africa</b>.",
+ i8:"You want to stop depending on a salary and <b>build something of your own</b>.",
+ concl:"If you recognised yourself, this is exactly who I mapped this path for.",
+ concl2:"Not for those who will think about it. For those ready to move.",
+ cta:"See if I can help you"
+ },
  hero:{
+ point1:"From <b>0 to your first client</b>, then to the next level",
+ point2:"<b>1-on-1</b> advice, adapted to your reality in Africa",
  badge_pre:"More than", badge_post:"rienneux saved",
  h1:'From 0 to your first client online,<br>even starting from nothing.',
  sub:"You want to start but don't know where to begin? I show you the exact path, step by step, from Africa. And if you already earn money, the quick quiz below points you to the right support to reach the next level.",
@@ -841,6 +944,8 @@ const I18N = {
  CONFIG, liens (indépendants de la langue)
  ================================================================= */
 const CONFIG = {
+ vslId: "uznbqo-Xofw",
+ vslThumb: "",   /* <- mettre ici l'URL d'une miniature personnalisée */
  offers: {
  demarrage:{ card:"https://whop.com/checkout/plan_bReryALMV3QYm", momo:"https://me.fedapay.com/demarrage" },
  croissance:{ card:"https://whop.com/checkout/plan_A8lrVLNSzejle", momo:"https://me.fedapay.com/croissance" }
@@ -941,6 +1046,20 @@ function track(event, data){
  console.log('track:', event, d);
 }
 track('visit');
+
+/* Vidéo : vignette cliquable. CONFIG.vslThumb permet de choisir une image
+   personnalisée ; laissé vide, on retombe sur la miniature YouTube. */
+function initVSL(){
+ var img=document.getElementById('vslThumb'); if(!img) return;
+ img.src = CONFIG.vslThumb || ('https://i.ytimg.com/vi/'+CONFIG.vslId+'/maxresdefault.jpg');
+ img.onerror = function(){ this.onerror=null; this.src='https://i.ytimg.com/vi/'+CONFIG.vslId+'/hqdefault.jpg'; };
+}
+function playVSL(){
+ var box=document.getElementById('vsl'); if(!box) return;
+ box.innerHTML='<iframe src="https://www.youtube.com/embed/'+CONFIG.vslId+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Beaudelaire Consulting" allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" playsinline allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>';
+ track('play_vsl');
+}
+initVSL();
 
 /* remplir les listes pays + indicatifs (selon la langue) */
 function fillCountries(){
