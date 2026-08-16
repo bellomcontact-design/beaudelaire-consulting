@@ -99,7 +99,10 @@
    font-size:13.5px;font-weight:700;color:var(--accent);text-align:left}
  .plus-ico{font-size:18px;line-height:1;transition:transform .2s ease}
  .plus[aria-expanded="true"] .plus-ico{transform:rotate(45deg)}
+/* display:flex de .pfeat l'emportait sur l'attribut hidden : la liste
+    restait visible alors qu'elle doit attendre le clic sur le "+". */
  .pmore{margin:-4px 0 18px}
+ .pmore[hidden]{display:none}
  .pbtn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:14px;border-radius:12px;
  text-decoration:none;font-weight:700;font-size:15px;font-family:inherit;cursor:pointer;border:1.5px solid var(--border);
  background:transparent;color:var(--text);transition:border-color .12s ease,transform .12s ease}
