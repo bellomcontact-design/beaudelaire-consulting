@@ -336,10 +336,6 @@
  <div class="lb-count" id="lbCount"></div>
 </div>
 
-<section class="rappel">
- <a class="cta" href="#offre" onclick="track('click_rappel_bas')" data-i18n="r_cta">Prendre le guide</a>
-</section>
-
 <footer><div class="wrap">Contact : <a href="mailto:beaudelaireconsulting@gmail.com" style="color:var(--accent);text-decoration:none;font-weight:600">beaudelaireconsulting@gmail.com</a><br>© <span id="yr"></span> Beaudelaire Consulting</div></footer>
 
 <script>
@@ -621,16 +617,7 @@ function basculePlus(btn){
  if(!ouvert) track('ouvre_details_guide');
 }
 
-/* Le bouton de bas de page ramene simplement en haut, la ou les offres
-   sont presentees. */
-(function(){
- var lien=document.querySelector('.rappel .cta'); if(!lien) return;
- lien.addEventListener('click', function(e){
-  e.preventDefault();
-  var doux=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  window.scrollTo({top:0, behavior: doux ? 'smooth' : 'auto'});
- });
-})();
+
 
 document.getElementById('yr').textContent = new Date().getFullYear();
 applyI18N();
