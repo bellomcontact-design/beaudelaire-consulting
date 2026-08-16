@@ -12,16 +12,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
  :root{
- --bg:#faf8f3; --bg2:#f1eee7; --card:#fffefb;
- --accent:#12110d; --text:#17150f; --muted:#6b675d; --border:#e7e2d6;
- --green:#159a45; --green-btn:#0e7a36; --green-soft:#e7f4ec; --star:#e0a818;
+ /* Fonds — du plus profond au plus proche */
+ --bg:#060E15; --bg2:#0B141C; --card:#131B23; --border:#222E39;
+ /* Texte — hiérarchie par opacité du blanc */
+ --text:#FFFFFF; --muted:rgba(255,255,255,.64); --faint:rgba(255,255,255,.50);
+ /* Accents */
+ --accent:#FFA545; --accent-strong:#FFA545; --accent-soft:rgba(255,165,69,.12);
+ --star:#FFCF23; --on-accent:#060E15;
+ /* Sémantique */
+ --danger:#E5544B; --danger-bg:#A32C24; --success:#3ECF7E;
  }
  *{box-sizing:border-box;margin:0;padding:0}
  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
  background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
  .wrap{max-width:780px;margin:0 auto;padding:0 20px}
  .wide{max-width:1000px}
- .topnav{position:sticky;top:0;z-index:40;background:rgba(250,248,243,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+ .topnav{position:sticky;top:0;z-index:40;background:rgba(6,14,21,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
  .topnav-in{display:flex;align-items:center;justify-content:space-between;max-width:1000px;margin:0 auto;padding:13px 20px}
  .brand{font-family:'Inter',sans-serif;font-weight:700;font-size:20px;text-decoration:none;color:var(--text);letter-spacing:-.01em;display:inline-flex;align-items:center;gap:9px}
  .brand img{width:36px;height:36px;border-radius:9px;flex-shrink:0}
@@ -29,19 +35,19 @@
  .navlinks{display:flex;align-items:center;gap:22px}
  .navlinks a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:600;transition:color .12s}
  .navlinks a:hover{color:var(--text)}
- .navlinks a.nav-cta{font-size:14px;padding:10px 18px;border-radius:10px;color:#fff}
+ .navlinks a.nav-cta{font-size:14px;padding:10px 18px;border-radius:10px;color:var(--on-accent)}
  .navctl{display:flex;align-items:center;gap:9px}
  .navburger{display:none;background:none;border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:19px;line-height:1;width:40px;height:38px;cursor:pointer}
  .langtoggle{background:none;border:1px solid var(--border);border-radius:8px;color:var(--muted);
  font-family:inherit;font-weight:700;font-size:13px;padding:7px 11px;cursor:pointer;transition:.12s}
- .langtoggle:hover{border-color:var(--green);color:var(--text)}
+ .langtoggle:hover{border-color:var(--accent);color:var(--text)}
  /* barre d'achat fixe (mobile) */
  .buybar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;text-align:center;text-decoration:none;
-   background:var(--green-btn);color:#fff;font-weight:800;font-size:15px;letter-spacing:.01em;white-space:nowrap;
-   box-shadow:0 -6px 20px rgba(0,0,0,.16);
+   background:var(--accent-strong);color:var(--on-accent);font-weight:800;font-size:15px;letter-spacing:.01em;white-space:nowrap;
+   box-shadow:0 -6px 20px rgba(0,0,0,.55);
    padding:16px 16px calc(22px + env(safe-area-inset-bottom))}
- .buybar .bb-price{color:#bfe9cd}
- .pnow{display:block;text-align:center;font-size:36px;font-weight:800;color:var(--green);white-space:nowrap;line-height:1.02}
+ .buybar .bb-price{color:rgba(6,14,21,.72)}
+ .pnow{display:block;text-align:center;font-size:36px;font-weight:800;color:var(--accent);white-space:nowrap;line-height:1.02}
  .pnow sup{font-size:.4em;font-weight:800;vertical-align:super;margin-left:3px}
  .pnow .peur{font-size:.42em;font-weight:700;color:var(--muted);vertical-align:middle;margin-left:2px}
  .bkcards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:660px;margin:24px auto 8px;text-align:left}
@@ -49,29 +55,29 @@
  .bkcard .bkico{font-size:22px;margin-bottom:6px;line-height:1}
  .bkcard b{display:block;font-size:15px;color:var(--text);margin-bottom:3px}
  .bkcard span{font-size:13.5px;color:var(--muted);line-height:1.45}
- .bkcommu{background:var(--green-soft);border:1.5px solid #b9e0c8;border-radius:14px;padding:16px 18px;max-width:660px;margin:14px auto 22px;text-align:left}
- .bkcommu b{display:block;font-size:16px;color:var(--green-btn);margin-bottom:5px}
+ .bkcommu{background:var(--accent-soft);border:1.5px solid rgba(255,165,69,.28);border-radius:14px;padding:16px 18px;max-width:660px;margin:14px auto 22px;text-align:left}
+ .bkcommu b{display:block;font-size:16px;color:var(--accent-strong);margin-bottom:5px}
  .bkcommu span{font-size:14px;color:var(--text);line-height:1.5}
  @media(max-width:560px){ .bkcards{grid-template-columns:1fr} }
- .pold{display:block;text-align:center;font-size:16px;font-weight:700;color:#9a958a;text-decoration:line-through;white-space:nowrap;margin-top:5px}
+ .pold{display:block;text-align:center;font-size:16px;font-weight:700;color:var(--faint);text-decoration:line-through;white-space:nowrap;margin-top:5px}
  @media(max-width:680px){
    .brand{font-size:16px;white-space:nowrap}
    .brand img{width:30px;height:30px}
    .topnav-in{position:relative}
    .navburger{display:block}
    .navlinks{position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:1px solid var(--border);
-     flex-direction:column;align-items:stretch;gap:0;padding:6px 20px 14px;display:none;box-shadow:0 10px 22px rgba(0,0,0,.07)}
+     flex-direction:column;align-items:stretch;gap:0;padding:6px 20px 14px;display:none;box-shadow:0 10px 22px rgba(0,0,0,.55)}
    .navlinks.open{display:flex}
    .navlinks a{font-size:16px;padding:13px 2px}
-   .navlinks a.nav-cta{background:var(--green-btn);color:#fff;border-radius:10px;text-align:center;margin-top:8px;padding:13px}
+   .navlinks a.nav-cta{background:var(--accent-strong);color:var(--on-accent);border-radius:10px;text-align:center;margin-top:8px;padding:13px}
    .buybar{display:block}
    body{padding-bottom:96px}
  }
- .cta{display:inline-block;background:var(--green-btn);color:#fff;font-weight:700;font-size:16px;
+ .cta{display:inline-block;background:var(--accent-strong);color:var(--on-accent);font-weight:700;font-size:16px;
  padding:16px 34px;border-radius:12px;text-decoration:none;border:none;cursor:pointer;
  font-family:inherit;transition:transform .12s ease,opacity .12s ease}
  .cta:hover{opacity:.88}
- .eyebrow{color:var(--green);font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+ .eyebrow{color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase;
  font-size:12px;text-align:center;margin-bottom:12px}
  h1,h2,.qtitle,.price,.stat b,.rescard .ba,.brand{font-family:'Inter',sans-serif}
  h1,h2{letter-spacing:-.02em;font-weight:800}
@@ -81,7 +87,7 @@
  .stars{color:var(--star);letter-spacing:2px}
 
  /* HERO */
- header{background:radial-gradient(1000px 460px at 50% -10%, rgba(21,154,69,.06), transparent 60%), var(--bg);
+ header{background:radial-gradient(1000px 460px at 50% -10%, rgba(255,165,69,.10), transparent 60%), var(--bg);
  padding:84px 0 70px;text-align:center;border-bottom:1px solid var(--border)}
  .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--bg2);
  color:var(--text);font-size:13px;padding:7px 16px;border-radius:999px;margin-bottom:24px;font-weight:600}
@@ -105,7 +111,7 @@
  .rescard .who span{display:block;color:var(--muted);font-size:13px;font-weight:400}
  .ba{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
  .ba .arrow{color:var(--muted);font-weight:400}
- .ba .after{color:var(--green);font-weight:800}
+ .ba .after{color:var(--accent);font-weight:800}
 
  /* TESTIMONIALS */
  .tslider{overflow:hidden;max-width:620px;margin:0 auto}
@@ -117,29 +123,29 @@
  .tcard .who span{color:var(--muted);font-weight:400}
  .tdots{display:flex;gap:8px;justify-content:center;margin-top:22px}
  .tdots b{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:.2s}
- .tdots b.on{background:var(--green);width:22px;border-radius:999px}
+ .tdots b.on{background:var(--accent);width:22px;border-radius:999px}
 
  /* ABOUT */
  .about{background:var(--bg2)}
  .about .wrap{max-width:680px}
- .about p{color:#2c2c33;margin-bottom:16px;font-size:17px}
+ .about p{color:rgba(255,255,255,.78);margin-bottom:16px;font-size:17px}
  .statrow{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px;border-top:1px solid var(--border);padding-top:30px}
- .stat{text-align:center;background:var(--card,#fffefb);border:1px solid var(--border);border-radius:12px;padding:14px 16px;min-width:118px}
- .stat b{display:block;font-size:27px;letter-spacing:-.02em;color:var(--green-btn)}
+ .stat{text-align:center;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;min-width:118px}
+ .stat b{display:block;font-size:27px;letter-spacing:-.02em;color:var(--accent-strong)}
  .stat span{color:var(--muted);font-size:13px}
- .stat.hl{background:#fff7e6;border-color:#f0dca8}
- .stat.hl span{color:#7a5a12;font-weight:600}
- .otile{flex:1;min-width:0;background:var(--card,#fffefb);border:2px solid var(--border);border-radius:14px;padding:14px 8px 12px;cursor:pointer;text-align:center;font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:border-color .15s,background .15s}
- .otile.selected{border-color:var(--green-btn);background:#eef7f0}
- .otile .obadge{font-size:10px;font-weight:800;letter-spacing:.02em;color:var(--green-btn);margin-bottom:2px}
- .otile .oprice{font-size:21px;font-weight:800;color:var(--green-btn);line-height:1.05;white-space:nowrap}
+ .stat.hl{background:rgba(255,207,35,.10);border-color:rgba(255,207,35,.34)}
+ .stat.hl span{color:var(--star);font-weight:600}
+ .otile{flex:1;min-width:0;background:var(--card);border:2px solid var(--border);border-radius:14px;padding:14px 8px 12px;cursor:pointer;text-align:center;font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:border-color .15s,background .15s}
+ .otile.selected{border-color:var(--accent-strong);background:var(--accent-soft)}
+ .otile .obadge{font-size:10px;font-weight:800;letter-spacing:.02em;color:var(--accent-strong);margin-bottom:2px}
+ .otile .oprice{font-size:21px;font-weight:800;color:var(--accent-strong);line-height:1.05;white-space:nowrap}
  .otile .oprice sup{font-size:10px}
  #rTiles .otile .oprice{font-size:16px}
  #rTiles .otile{padding:12px 5px 11px}
  #rTiles .otile .olabel{font-size:12px}
  .otile .oeur{font-size:13px;color:var(--muted)}
- .otile .olabel{font-size:13.5px;font-weight:800;color:#17150f;margin-top:5px;line-height:1.2}
- .note{background:#fbfbe9;border:1px dashed #cfcf7a;border-radius:10px;padding:11px 14px;color:#6f6f1e;
+ .otile .olabel{font-size:13.5px;font-weight:800;color:var(--text);margin-top:5px;line-height:1.2}
+ .note{background:rgba(255,207,35,.07);border:1px dashed rgba(255,207,35,.32);border-radius:10px;padding:11px 14px;color:var(--star);
  font-size:12px;margin:0 auto 24px;max-width:680px;text-align:center}
 
  /* FAQ */
@@ -147,7 +153,7 @@
  details{border:1px solid var(--border);border-radius:12px;padding:4px 18px;margin-bottom:12px;background:var(--card)}
  details summary{cursor:pointer;font-weight:600;padding:14px 0;list-style:none;display:flex;justify-content:space-between;align-items:center}
  details summary::-webkit-details-marker{display:none}
- details summary::after{content:"+";font-size:22px;color:var(--green)}
+ details summary::after{content:"+";font-size:22px;color:var(--accent)}
  details[open] summary::after{content:"\2212"}
  details p{color:var(--muted);padding:0 0 16px}
 
@@ -156,7 +162,7 @@
  .newsform{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
  .newsform input{flex:1;min-width:220px;background:var(--bg);border:1.5px solid var(--border);color:var(--text);
  padding:14px 15px;border-radius:11px;font-size:15px;outline:none;font-family:inherit}
- .newsform input:focus{border-color:var(--green)}
+ .newsform input:focus{border-color:var(--accent)}
 
  .band{text-align:center}
  .band h2{margin-bottom:18px}
@@ -165,7 +171,7 @@
  #quiz{display:none;padding:46px 0 80px}
  #quiz.active{display:flex;flex-direction:column;justify-content:center;min-height:80vh}
  .progress{height:6px;background:var(--bg2);border-radius:999px;overflow:hidden;margin:0 auto 34px;max-width:560px;width:100%}
- .progress > i{display:block;height:100%;width:0;background:var(--green);transition:width .3s ease}
+ .progress > i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s ease}
  .qbox{max-width:560px;margin:0 auto;width:100%}
  .step{display:none;animation:fade .25s ease}
  .step.active{display:block}
@@ -175,15 +181,15 @@
  .options{display:flex;flex-direction:column;gap:11px}
  .opt{display:flex;align-items:center;gap:13px;text-align:left;background:var(--card);
  border:1.5px solid var(--border);border-radius:13px;padding:16px 18px;font-size:16px;color:var(--text);cursor:pointer;transition:.12s;width:100%;font-family:inherit}
- .opt:hover{border-color:var(--green)}
- .opt.sel{border-color:var(--green);background:var(--green-soft)}
+ .opt:hover{border-color:var(--accent)}
+ .opt.sel{border-color:var(--accent);background:var(--accent-soft)}
  .opt .dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);flex:0 0 auto;position:relative}
- .opt.sel .dot{border-color:var(--green)}
- .opt.sel .dot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--green)}
+ .opt.sel .dot{border-color:var(--accent)}
+ .opt.sel .dot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--accent)}
  .field{margin-bottom:15px}
  .field label{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
  .field input,.field select{width:100%;background:var(--bg);border:1.5px solid var(--border);color:var(--text);padding:13px 14px;border-radius:11px;font-size:15px;outline:none;font-family:inherit}
- .field input:focus,.field select:focus{border-color:var(--green)}
+ .field input:focus,.field select:focus{border-color:var(--accent)}
  .field small{display:block;color:var(--muted);font-size:12px;margin-top:5px}
  .phonerow{display:flex;gap:10px}
  .phonerow select{flex:0 0 165px}
@@ -193,21 +199,21 @@
  .back:hover{color:var(--text)}
  .result{display:none;text-align:center;max-width:520px;margin:0 auto}
  .result.active{display:block;animation:fade .25s ease}
- .rcheck{width:58px;height:58px;border-radius:50%;background:var(--green);color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+ .rcheck{width:58px;height:58px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:28px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
  .result h2{margin-bottom:8px}
- .rcard{background:var(--card);border:1.5px solid var(--green);border-radius:18px;padding:28px;margin-top:24px;text-align:left}
- .rcard .name{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+ .rcard{background:var(--card);border:1.5px solid var(--accent);border-radius:18px;padding:28px;margin-top:24px;text-align:left}
+ .rcard .name{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
  .rcard .price{font-size:38px;font-weight:800;letter-spacing:-.02em;margin:4px 0 6px}
  .anchor{font-size:13px;color:var(--muted);margin-bottom:16px}
  .feat{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
  .feat li{padding-left:25px;position:relative;font-size:15px}
- .feat li::before{content:"\2713";position:absolute;left:0;font-weight:800;color:var(--green)}
- .reassure{font-size:13px;color:#2c2c33;margin-bottom:16px;padding:11px 13px;background:var(--green-soft);border-radius:9px}
+ .feat li::before{content:"\2713";position:absolute;left:0;font-weight:800;color:var(--accent)}
+ .reassure{font-size:13px;color:rgba(255,255,255,.82);margin-bottom:16px;padding:11px 13px;background:var(--accent-soft);border-radius:9px}
  .pay{display:flex;flex-direction:column;gap:11px}
- .paybtn{display:block;background:var(--green-btn);border:none;border-radius:12px;padding:16px;cursor:pointer;text-decoration:none;color:#fff;text-align:center;transition:opacity .12s}
+ .paybtn{display:block;background:var(--accent-strong);border:none;border-radius:12px;padding:16px;cursor:pointer;text-decoration:none;color:var(--on-accent);text-align:center;transition:opacity .12s}
  .paybtn:hover{opacity:.9}
- .paybtn b{display:block;font-size:16px;color:#fff;font-weight:700}
- .paybtn span{color:rgba(255,255,255,.82);font-size:13px}
+ .paybtn b{display:block;font-size:16px;color:var(--on-accent);font-weight:700}
+ .paybtn span{color:rgba(6,14,21,.72);font-size:13px}
  .guarantee{text-align:center;color:var(--muted);font-size:12.5px;margin-top:14px}
 
  footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;color:var(--muted);font-size:13px}
@@ -308,11 +314,11 @@
  <p class="lead" data-i18n="book.lead">Le guide complet pour faire tes premiers revenus en ligne, quel que soit ton point de départ. Du concret, pas des faux rêves.</p>
 
  <div style="max-width:580px;margin:6px auto 20px">
- <button type="button" onclick="toggleInside(this)" aria-expanded="false" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card,#fffefb);border:1px solid var(--border);border-radius:14px;padding:15px 18px;cursor:pointer;font-family:inherit;text-align:left">
+ <button type="button" onclick="toggleInside(this)" aria-expanded="false" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:15px 18px;cursor:pointer;font-family:inherit;text-align:left">
  <b style="font-size:15px;color:var(--text)" data-i18n="book.inside_t">📘 Ce que tu obtiens dans le guide (clique pour voir)</b>
- <span style="font-size:16px;color:var(--green-btn);transition:transform .2s;flex-shrink:0">▼</span>
+ <span style="font-size:16px;color:var(--accent-strong);transition:transform .2s;flex-shrink:0">▼</span>
  </button>
- <ul data-i18n-html="book.inside" style="margin:8px 0 0;padding:16px 18px;list-style:none;display:none;flex-direction:column;gap:11px;font-size:14px;line-height:1.45;background:var(--card,#fffefb);border:1px solid var(--border);border-radius:14px;text-align:left">
+ <ul data-i18n-html="book.inside" style="margin:8px 0 0;padding:16px 18px;list-style:none;display:none;flex-direction:column;gap:11px;font-size:14px;line-height:1.45;background:var(--card);border:1px solid var(--border);border-radius:14px;text-align:left">
  <li>✅ <b>Le bon mindset pour partir de zéro</b> : ton temps comme seule richesse, arrêter de scroller, fixer ta destination et ton plan.</li>
  <li>✅ <b>La méthode du « véhicule »</b> : trouver ta compétence vendable (ou en apprendre une de zéro) et savoir lesquelles sont les plus demandées.</li>
  <li>✅ <b>Trouver tes premiers clients en freelance</b> : le freelance, c'est vendre tes services en ligne (design, montage vidéo, rédaction…). Les bonnes plateformes, et comment décrocher ET réussir ton premier client.</li>
@@ -326,16 +332,16 @@
  </ul>
  </div>
 
- <div style="background:#0e7a36;color:#fff;border-radius:14px;padding:14px 18px;margin:6px auto 18px;max-width:470px;font-size:14px;line-height:1.5;font-weight:600" data-i18n-html="book.promo">🔥 <b>PROMO jusqu'au 18 août 16h30</b> — avec le guide à <b>15 000 FCFA</b>, l'accès à la communauté <b>Ex-rienneux est OFFERT</b> 🎁</div>
+ <div style="background:rgba(255,207,35,.12);border:1px solid rgba(255,207,35,.34);color:var(--star);border-radius:14px;padding:14px 18px;margin:6px auto 18px;max-width:470px;font-size:14px;line-height:1.5;font-weight:600" data-i18n-html="book.promo">🔥 <b>PROMO jusqu'au 18 août 16h30</b> — avec le guide à <b>15 000 FCFA</b>, l'accès à la communauté <b>Ex-rienneux est OFFERT</b> 🎁</div>
  <div style="max-width:440px;margin:0 auto">
- <div style="background:#eef7f0;border:2px solid var(--green-btn);border-radius:16px;padding:18px 18px 16px;text-align:center;margin-bottom:14px">
- <div style="display:inline-block;background:#c0392b;color:#fff;font-size:11px;font-weight:800;padding:4px 12px;border-radius:999px;margin-bottom:8px" data-i18n="book.promobadge">🎁 PROMO</div>
+ <div style="background:var(--accent-soft);border:2px solid var(--accent-strong);border-radius:16px;padding:18px 18px 16px;text-align:center;margin-bottom:14px">
+ <div style="display:inline-block;background:var(--danger-bg);color:#fff;font-size:11px;font-weight:800;padding:4px 12px;border-radius:999px;margin-bottom:8px" data-i18n="book.promobadge">🎁 PROMO</div>
  <div style="margin:2px 0 10px"><span class="pnow">15 000<sup>FCFA</sup> <span class="peur">(23€)</span></span><span class="pold">35 000 FCFA · 50€</span></div>
  <div style="font-size:14px;line-height:1.6;text-align:left" data-i18n-html="book.desc15">✅ Le guide complet (22 chapitres) <b>+ 🎁 l'accès à la communauté Ex-rienneux OFFERT</b> — promo jusqu'au 18 août 16h30 !</div>
  </div>
  <div style="display:flex;flex-direction:column;gap:10px">
  <a class="cta" style="width:100%" href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" data-i18n="book.momo">Payer en mobile money (Afrique)</a>
- <a class="cta" style="width:100%;background:#fffefb;color:var(--green-btn);border:2px solid var(--green-btn)" href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
+ <a class="cta" style="width:100%;background:transparent;color:var(--accent-strong);border:2px solid var(--accent-strong)" href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
  </div>
  </div>
  <span class="micro" data-i18n="book.note">Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.</span>
@@ -348,11 +354,11 @@
  <div class="eyebrow" data-i18n="news.eyebrow">Le chemin · le guide pour scaler</div>
  <h2 data-i18n-html="news.h2">Tu bosses comme un fou et t'avances plus ? <span class="nowrap">Voilà le chemin.</span></h2>
  <p class="lead" data-i18n="news.lead">Tu gagnes déjà de l'argent mais tu plafonnes ? Le guide étape par étape pour rendre ton business irrésistible et passer au palier au-dessus, sans changer de véhicule.</p>
- <p class="micro" style="color:var(--green-btn);font-weight:700;margin:0 0 6px" data-i18n="news.forwho">Réservé à ceux qui font déjà de l'argent en ligne et veulent passer au palier au-dessus. Ce n'est pas un guide pour rienneux.</p>
+ <p class="micro" style="color:var(--accent-strong);font-weight:700;margin:0 0 6px" data-i18n="news.forwho">Réservé à ceux qui font déjà de l'argent en ligne et veulent passer au palier au-dessus. Ce n'est pas un guide pour rienneux.</p>
  <div style="margin:8px 0 18px" data-i18n-html="news.price"><span class="pnow">165 000<sup>FCFA</sup> <span class="peur">(250€)</span></span></div>
  <div style="display:flex;flex-direction:column;gap:12px;align-items:center;max-width:440px;margin:0 auto">
  <a class="cta" style="width:100%" href="https://whop.com/checkout/plan_kWZMN4mJL7JvW" target="_blank" rel="noopener" data-i18n="news.card">Payer par carte (Visa / Mastercard)</a>
- <a class="cta" style="width:100%;background:#fffefb;color:var(--green-btn);border:2px solid var(--green-btn)" href="https://me.fedapay.com/JsnHhERQ" target="_blank" rel="noopener" data-i18n="news.momo">Payer en mobile money (Afrique)</a>
+ <a class="cta" style="width:100%;background:transparent;color:var(--accent-strong);border:2px solid var(--accent-strong)" href="https://me.fedapay.com/JsnHhERQ" target="_blank" rel="noopener" data-i18n="news.momo">Payer en mobile money (Afrique)</a>
  </div>
  <span class="micro" data-i18n="news.note">Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.</span>
  </div>
@@ -414,7 +420,7 @@
  <details><summary data-i18n="faq.q5">Qu'est-ce qu'il y a dans le guide des rienneux ?</summary><p data-i18n="faq.a5">Du concret, pas du rêve. Il ne s'agit pas de te vendre un business miracle ni du e-commerce à la mode. Le guide passe en revue les vraies façons (les véhicules) de faire tes premiers revenus en ligne selon d'où tu pars, comment choisir la tienne, trouver tes premiers clients et encaisser depuis l'Afrique. Tout vient de mon expérience réelle. Et surtout : en l'achetant, tu rejoins la communauté Ex-rienneux, où tu poses tes questions et où on suit tes progrès. Tu n'es jamais laissé seul.</p></details>
  <details><summary data-i18n="faq.q6">C'est quoi ton parcours ?</summary><p data-i18n="faq.a6">Béninois, parti de zéro juste après le bac. J'ai galéré, je me suis fait arnaquer, et je suis resté bloqué à 5k/mois pendant un an. Puis tout a basculé : 10k, 20k, jusqu'à plus de 50k€ par mois. Ce chemin m'a fait voyager dans 30+ pays et accompagner 30+ entrepreneurs. Aujourd'hui, je transmets ce que j'aurais voulu qu'on me dise au départ.</p></details>
  <details><summary data-i18n="faq.q8">C'est qui les Ex-rienneux ?</summary><p data-i18n="faq.a8">C'est ma communauté privée que tu rejoins en prenant le guide. Tu y retrouves d'anciens rienneux qui étaient à ta place avant toi. Tu poses toutes tes questions, tu échanges, et on suit tes progrès ensemble. Tu n'es jamais laissé seul : tu es accompagné pour quitter ta vie de rienneux.</p></details>
- <details><summary data-i18n="faq.q7">Je ne suis pas encore prêt à payer, je peux commencer gratuitement ?</summary><p data-i18n-html="faq.a7">Oui. Rejoins la communauté WhatsApp gratuite « Les Rienneux » : je partage de la valeur tous les jours, tu poses tes questions, et on avance ensemble. Quand tu te sens prêt, tu passes à l'étape suivante. <a href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener" style="color:var(--green-btn);font-weight:700">Rejoindre gratuitement 👉</a></p></details>
+ <details><summary data-i18n="faq.q7">Je ne suis pas encore prêt à payer, je peux commencer gratuitement ?</summary><p data-i18n-html="faq.a7">Oui. Rejoins la communauté WhatsApp gratuite « Les Rienneux » : je partage de la valeur tous les jours, tu poses tes questions, et on avance ensemble. Quand tu te sens prêt, tu passes à l'étape suivante. <a href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">Rejoindre gratuitement 👉</a></p></details>
  </div>
  </div>
  </section>
@@ -536,7 +542,7 @@
  <p class="lead" id="rWho" style="margin-bottom:0"></p>
 
  <div id="rTiles" style="display:none;max-width:470px;margin:10px auto 0">
- <div style="background:#0e7a36;color:#fff;border-radius:12px;padding:11px 14px;margin:0 auto 12px;font-size:13px;line-height:1.45;font-weight:600" data-i18n-html="book.promo">🔥 <b>PROMO jusqu'au 18 août 16h30</b> — avec le guide à <b>15 000 FCFA</b>, l'accès à la communauté <b>Ex-rienneux est OFFERT</b> 🎁</div>
+ <div style="background:rgba(255,207,35,.12);border:1px solid rgba(255,207,35,.34);color:var(--star);border-radius:12px;padding:11px 14px;margin:0 auto 12px;font-size:13px;line-height:1.45;font-weight:600" data-i18n-html="book.promo">🔥 <b>PROMO jusqu'au 18 août 16h30</b> — avec le guide à <b>15 000 FCFA</b>, l'accès à la communauté <b>Ex-rienneux est OFFERT</b> 🎁</div>
  <p style="font-size:13px;color:var(--muted);margin:0 0 10px" data-i18n="book.choose">Choisis ton offre 👇</p>
  <div style="display:flex;gap:8px;margin-bottom:14px">
  <button type="button" class="otile" onclick="pickOffer(this,'r')" data-desckey="result.descAppel" data-momo="https://me.fedapay.com/demarrage" data-card="https://whop.com/checkout/plan_bReryALMV3QYm">
@@ -545,17 +551,17 @@
  <span class="olabel" data-i18n="result.tileAppel">Appel 1-à-1</span>
  </button>
  <button type="button" class="otile selected" onclick="pickOffer(this,'r')" data-desckey="book.desc15" data-momo="https://me.fedapay.com/aAqYA_bD" data-card="https://whop.com/checkout/plan_SA8j7dIoexXwg">
- <span class="obadge" style="color:#c0392b" data-i18n="book.promobadge">🎁 PROMO</span>
+ <span class="obadge" style="color:var(--danger)" data-i18n="book.promobadge">🎁 PROMO</span>
  <span class="oprice">15 000<sup>FCFA</sup></span>
  <span class="oeur">23€</span>
- <span style="font-size:11px;color:#a19b8d;text-decoration:line-through;margin-top:1px">35 000 · 50€</span>
+ <span style="font-size:11px;color:var(--faint);text-decoration:line-through;margin-top:1px">35 000 · 50€</span>
  <span class="olabel" data-i18n="book.t2short">Guide + Communauté</span>
  </button>
  </div>
- <p id="rpDesc" style="font-size:13.5px;line-height:1.5;color:var(--text);background:#f4f2ea;border-radius:10px;padding:11px 13px;margin:0 0 14px;text-align:left"></p>
+ <p id="rpDesc" style="font-size:13.5px;line-height:1.5;color:var(--text);background:rgba(255,255,255,.05);border-radius:10px;padding:11px 13px;margin:0 0 14px;text-align:left"></p>
  <div style="display:flex;flex-direction:column;gap:10px">
  <a id="rpMomo" class="cta" style="width:100%" href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" data-i18n="book.momo">Payer en mobile money (Afrique)</a>
- <a id="rpCard" class="cta" style="width:100%;background:#fffefb;color:var(--green-btn);border:2px solid var(--green-btn)" href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
+ <a id="rpCard" class="cta" style="width:100%;background:transparent;color:var(--accent-strong);border:2px solid var(--accent-strong)" href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
  </div>
  </div>
 
@@ -563,12 +569,12 @@
  <div class="name" id="rgName"></div>
  <div class="price" id="rgPrice"></div>
  <p class="anchor" id="rgLine"></p>
- <p style="display:inline-block;background:#fff7e6;border:1px solid #f0dca8;color:#7a5a12;font-weight:700;font-size:12.5px;padding:5px 12px;border-radius:999px;margin:2px 0 12px" data-i18n="book.urgency">⏳ Offre limitée · places limitées</p>
+ <p style="display:inline-block;background:rgba(255,207,35,.10);border:1px solid rgba(255,207,35,.34);color:var(--star);font-weight:700;font-size:12.5px;padding:5px 12px;border-radius:999px;margin:2px 0 12px" data-i18n="book.urgency">⏳ Offre limitée · places limitées</p>
  <div class="pay">
  <a class="paybtn" id="rgCard" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide_card')"><b id="rgCtaC">Prendre le guide</b><span>Paiement par carte · Visa / Mastercard</span></a>
  <a class="paybtn" id="rgBuy" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide')"><b id="rgCta">Prendre le guide</b><span>Paiement mobile money (Afrique) · Téléchargement immédiat</span></a>
  </div>
- <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0;line-height:1.5" data-i18n-html="result.guideonly">Ou juste le guide, sans la communauté (15 000 FCFA · 23€) : <a href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" style="color:var(--green-btn);font-weight:700">mobile money</a> · <a href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" style="color:var(--green-btn);font-weight:700">carte</a></p>
+ <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0;line-height:1.5" data-i18n-html="result.guideonly">Ou juste le guide, sans la communauté (15 000 FCFA · 23€) : <a href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">mobile money</a> · <a href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">carte</a></p>
  </div>
  <div id="rOr" style="display:none;font-weight:800;color:var(--muted);margin:2px 0 14px;letter-spacing:.14em;font-size:13px">OU</div>
  <div class="rcard" id="rcard">
@@ -590,7 +596,7 @@
  </div>
 </div>
 
-<footer><div class="wrap">Contact : <a href="mailto:beaudelaireconsulting@gmail.com" style="color:var(--green);text-decoration:none;font-weight:600">beaudelaireconsulting@gmail.com</a><br style="margin-bottom:6px">© <span id="yr"></span> Beaudelaire Consulting</div></footer>
+<footer><div class="wrap">Contact : <a href="mailto:beaudelaireconsulting@gmail.com" style="color:var(--accent);text-decoration:none;font-weight:600">beaudelaireconsulting@gmail.com</a><br style="margin-bottom:6px">© <span id="yr"></span> Beaudelaire Consulting</div></footer>
 
 <script>
 /* =================================================================
@@ -645,7 +651,7 @@ const I18N = {
  q4:"Est-ce que l'appel est un argumentaire de vente ?", a4:"Non. C'est un vrai diagnostic : on travaille sur ton business pendant l'appel et tu repars avec un plan concret, que tu ailles plus loin avec moi ou non.",
  q5:"Qu'est-ce qu'il y a dans le guide des rienneux ?", a5:"Du concret, pas du rêve. Il ne s'agit pas de te vendre un business miracle ni du e-commerce à la mode. Le guide passe en revue les vraies façons (les véhicules) de faire tes premiers revenus en ligne selon d'où tu pars, comment choisir la tienne, trouver tes premiers clients et encaisser depuis l'Afrique. Tout vient de mon expérience réelle. Et surtout : en l'achetant, tu rejoins la communauté Ex-rienneux, où tu poses tes questions et où on suit tes progrès. Tu n'es jamais laissé seul.",
  q6:"C'est quoi ton parcours ?", a6:"Béninois, parti de zéro juste après le bac. J'ai galéré, je me suis fait arnaquer, et je suis resté bloqué à 5k/mois pendant un an. Puis tout a basculé : 10k, 20k, jusqu'à plus de 50k€ par mois. Ce chemin m'a fait voyager dans 30+ pays et accompagner 30+ entrepreneurs. Aujourd'hui, je transmets ce que j'aurais voulu qu'on me dise au départ.",
- q7:"Je ne suis pas encore prêt à payer, je peux commencer gratuitement ?", a7:'Oui. Rejoins la communauté WhatsApp gratuite « Les Rienneux » : je partage de la valeur tous les jours, tu poses tes questions, et on avance ensemble. Quand tu te sens prêt, tu passes à l\'étape suivante. <a href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener" style="color:var(--green-btn);font-weight:700">Rejoindre gratuitement 👉</a>',
+ q7:"Je ne suis pas encore prêt à payer, je peux commencer gratuitement ?", a7:'Oui. Rejoins la communauté WhatsApp gratuite « Les Rienneux » : je partage de la valeur tous les jours, tu poses tes questions, et on avance ensemble. Quand tu te sens prêt, tu passes à l\'étape suivante. <a href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">Rejoindre gratuitement 👉</a>',
  q8:"C'est qui les Ex-rienneux ?", a8:"C'est ma communauté privée que tu rejoins en prenant le guide. Tu y retrouves d'anciens rienneux qui étaient à ta place avant toi. Tu poses toutes tes questions, tu échanges, et on suit tes progrès ensemble. Ton accès est valable 1 an. Tu n'es jamais laissé seul : tu es accompagné pour quitter ta vie de rienneux."
  },
  news:{
@@ -659,7 +665,7 @@ const I18N = {
  commu_t:"Tu n'es pas seul. 🤝", commu:"En prenant le guide, tu rejoins ma communauté privée Ex-rienneux. Tu échanges avec les autres, qui étaient aussi des rienneux avant toi, tu poses toutes tes questions, et on progresse ensemble. On ne va pas te laisser tout seul : tu seras accompagné pour quitter ta vie de rienneux. On espère te voir de l'autre côté.",
  join:"Rejoins les Ex-rienneux 👇", urgency:"⏳ Offre limitée · places limitées",
  reco:"⭐ RECOMMANDÉ", t1name:"Guide + Communauté Ex-rienneux", t1feat:'✅ Le guide complet (22 chapitres)<br>✅ L\'accès à la communauté privée <b>Ex-rienneux</b><br>✅ Tu es accompagné, jamais seul',
- t2name:"Guide seul", t2feat:'✅ Le guide complet (22 chapitres)<br><span style="color:#a19b8d">✖️ Sans la communauté Ex-rienneux</span>',
+ t2name:"Guide seul", t2feat:'✅ Le guide complet (22 chapitres)<br><span style="color:var(--faint)">✖️ Sans la communauté Ex-rienneux</span>',
  choose:"Choisis ton offre 👇", t1short:"Guide + Communauté", t2short:"Guide + Communauté",
  promo:'🔥 <b>PROMO jusqu\'au 18 août 16h30</b> — avec le guide à <b>15 000 FCFA</b>, l\'accès à la communauté <b>Ex-rienneux est OFFERT</b> 🎁', promobadge:"🎁 PROMO",
  desc35:'✅ Le guide complet (22 chapitres) <b>+ l\'accès à la communauté privée Ex-rienneux pendant 1 an</b>, où on t\'accompagne au quotidien. Tu n\'es jamais seul.',
@@ -694,7 +700,7 @@ const I18N = {
  book:"Réserver mon appel", card:"Paiement par carte · Visa / Mastercard", momo:"Paiement Mobile Money · Orange, MTN, Wave",
  guarantee:"Paiement sécurisé · Réservation immédiate de ton créneau", home:"Revenir à l'accueil",
  guideopt:{ name:"Le chemin des rienneux", price:'<span class="pnow">35 000<sup>FCFA</sup> <span class="peur">(50€)</span></span><span class="pold">55 000 FCFA</span>', line:"Le guide complet pour faire tes premiers revenus, quel que soit ton point de départ. Et tu n'es pas seul : tu rejoins la communauté privée Ex-rienneux, où on t'accompagne.", cta:"Rejoindre les Ex-rienneux" },
- guideonly:'Ou juste le guide, sans la communauté (15 000 FCFA · 23€) : <a href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" style="color:var(--green-btn);font-weight:700">mobile money</a> · <a href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" style="color:var(--green-btn);font-weight:700">carte</a>'
+ guideonly:'Ou juste le guide, sans la communauté (15 000 FCFA · 23€) : <a href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">mobile money</a> · <a href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">carte</a>'
  },
  js:{
  alert_fill:"Merci de remplir ton prénom, ton nom, ton email et ton pays.",
@@ -761,7 +767,7 @@ const I18N = {
  q4:"Is the call a sales pitch?", a4:"No. It's a real diagnostic: we work on your business during the call and you leave with a concrete plan, whether you go further with me or not.",
  q5:"What's inside the beginners' guide?", a5:"Concrete stuff, no hype. It's not about selling you a miracle business or trendy e-commerce. The guide walks through the real ways (the vehicles) to make your first income online depending on where you start, how to choose yours, find your first clients and get paid from Africa. It all comes from real experience. And most importantly: when you buy it, you join the Ex-rienneux community, where you ask your questions and we follow your progress. You're never left on your own.",
  q6:"What's your story?", a6:"Beninese, started from zero right after high school. I struggled, got scammed, and stayed stuck at 5k/month for a year. Then everything shifted: 10k, 20k, up to over €50k a month. This path took me to 30+ countries and let me help 30+ entrepreneurs. Today, I pass on what I wish someone had told me at the start.",
- q7:"I'm not ready to pay yet, can I start for free?", a7:'Yes. Join the free WhatsApp community « Les Rienneux »: I share value every day, you ask your questions, and we move forward together. When you feel ready, you take the next step. <a href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener" style="color:var(--green-btn);font-weight:700">Join for free 👉</a>',
+ q7:"I'm not ready to pay yet, can I start for free?", a7:'Yes. Join the free WhatsApp community « Les Rienneux »: I share value every day, you ask your questions, and we move forward together. When you feel ready, you take the next step. <a href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">Join for free 👉</a>',
  q8:"Who are the Ex-rienneux?", a8:"It's my private community that you join when you get the guide. You'll find former rienneux who were in your shoes before you. You ask all your questions, you exchange, and we follow your progress together. Your access is valid for 1 year. You're never left alone: you're supported all the way out of your rienneux life."
  },
  news:{
@@ -775,7 +781,7 @@ const I18N = {
  commu_t:"You're not alone. 🤝", commu:"When you get the guide, you join my private Ex-rienneux community. You talk with the others, who were rienneux before you too, ask all your questions, and we move forward together. We won't leave you on your own: you're supported, all the way to leaving your rienneux life behind. Hope to see you on the other side.",
  join:"Join the Ex-rienneux 👇", urgency:"⏳ Limited offer · limited spots",
  reco:"⭐ RECOMMENDED", t1name:"Guide + Ex-rienneux community", t1feat:'✅ The complete guide (22 chapters)<br>✅ Access to the private <b>Ex-rienneux</b> community<br>✅ You\'re supported, never alone',
- t2name:"Guide only", t2feat:'✅ The complete guide (22 chapters)<br><span style="color:#a19b8d">✖️ Without the Ex-rienneux community</span>',
+ t2name:"Guide only", t2feat:'✅ The complete guide (22 chapters)<br><span style="color:var(--faint)">✖️ Without the Ex-rienneux community</span>',
  choose:"Choose your offer 👇", t1short:"Guide + Community", t2short:"Guide + Community",
  promo:'🔥 <b>DEAL until August 18, 4:30pm</b> — with the guide at <b>15,000 FCFA</b>, access to the <b>Ex-rienneux community is FREE</b> 🎁', promobadge:"🎁 DEAL",
  desc35:'✅ The complete guide (22 chapters) <b>+ access to the private Ex-rienneux community for 1 year</b>, where we support you daily. You\'re never alone.',
@@ -810,7 +816,7 @@ const I18N = {
  book:"Book my call", card:"Card payment · Visa / Mastercard", momo:"Mobile Money · Orange, MTN, Wave",
  guarantee:"Secure payment · Instant slot booking · billed in EUR at checkout", home:"Back to home",
  guideopt:{ name:"Le chemin des débutants (French guide)", price:'<span class="pnow">35,000<sup>FCFA</sup> <span class="peur">(€50)</span></span><span class="pold">55,000 FCFA</span>', line:"The complete guide to make your first income online, whatever your starting point. And you're not alone: you join the private Ex-rienneux community.", cta:"Join the Ex-rienneux" },
- guideonly:'Or just the guide, without the community (15,000 FCFA · €23): <a href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" style="color:var(--green-btn);font-weight:700">mobile money</a> · <a href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" style="color:var(--green-btn);font-weight:700">card</a>'
+ guideonly:'Or just the guide, without the community (15,000 FCFA · €23): <a href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">mobile money</a> · <a href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">card</a>'
  },
  js:{
  alert_fill:"Please fill in your first name, last name, email and country.",
