@@ -102,6 +102,35 @@
  .fan img:nth-child(3){transform:rotate(7deg) translateY(12px);z-index:2}
  .fan img:hover{transform:translateY(-16px) scale(1.1);z-index:5}
 
+ /* Visionneuse : la capture entiere, en grand */
+ .lb{position:fixed;inset:0;z-index:200;background:rgba(6,14,21,.96);
+   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+   display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px}
+ .lb[hidden]{display:none}
+ .lb-bar{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;
+   gap:14px;padding:16px 18px;background:linear-gradient(180deg,rgba(6,14,21,.92),transparent)}
+ .lb-title{font-size:15px;font-weight:800;color:var(--accent);letter-spacing:.02em}
+ .lb-close{background:rgba(255,255,255,.08);border:1px solid var(--border);color:var(--text);
+   width:40px;height:40px;border-radius:50%;font-size:19px;line-height:1;cursor:pointer;font-family:inherit;
+   display:flex;align-items:center;justify-content:center;flex:0 0 auto;transition:.12s}
+ .lb-close:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+ .lb-img{max-width:60vw;max-height:60vh;width:auto;height:auto;border-radius:14px;background:#fff;
+   box-shadow:0 30px 70px rgba(0,0,0,.6);display:block}
+ .lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.08);
+   border:1px solid var(--border);color:var(--text);width:48px;height:48px;border-radius:50%;
+   font-size:26px;line-height:1;cursor:pointer;font-family:inherit;display:flex;align-items:center;
+   justify-content:center;transition:.12s;padding:0 0 3px}
+ .lb-nav:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+ .lb-prev{left:18px} .lb-next{right:18px}
+ .lb-count{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:var(--faint);font-size:13px}
+ .fan img{cursor:zoom-in}
+ @media(max-width:700px){
+   .lb-img{max-width:92vw;max-height:64vh}
+   .lb-nav{width:42px;height:42px;font-size:22px}
+   .lb-prev{left:8px} .lb-next{right:8px}
+   .lb-title{font-size:14px}
+ }
+
  /* Pastilles de navigation */
  .pvdots{display:flex;gap:8px;justify-content:center;margin-top:26px}
  .pvdots b{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:.2s;border:0;padding:0}
@@ -203,9 +232,9 @@
      <div class="pvtitle" data-i18n="pv_t1">Création de contenu</div>
      <div class="pvsub" data-i18n="pv_s1">Construire une audience à partir de zéro</div>
      <div class="fan">
-      <img src="/preuves/contenu-2.jpg" alt="" decoding="async">
-      <img src="/preuves/contenu-1.jpg" alt="" decoding="async">
-      <img src="/preuves/contenu-3.jpg" alt="" decoding="async">
+      <img src="/preuves/vign/contenu-2.jpg" data-full="/preuves/contenu-2.jpg" alt="" decoding="async">
+      <img src="/preuves/vign/contenu-1.jpg" data-full="/preuves/contenu-1.jpg" alt="" decoding="async">
+      <img src="/preuves/vign/contenu-3.jpg" data-full="/preuves/contenu-3.jpg" alt="" decoding="async">
      </div>
     </div>
 
@@ -213,9 +242,9 @@
      <div class="pvtitle" data-i18n="pv_t2">E-commerce</div>
      <div class="pvsub" data-i18n="pv_s2">Des boutiques qui vendent vraiment</div>
      <div class="fan">
-      <img src="/preuves/ecommerce-2.jpg" alt="" loading="lazy" decoding="async">
-      <img src="/preuves/ecommerce-1.jpg" alt="" loading="lazy" decoding="async">
-      <img src="/preuves/ecommerce-3.jpg" alt="" loading="lazy" decoding="async">
+      <img src="/preuves/vign/ecommerce-2.jpg" data-full="/preuves/ecommerce-2.jpg" alt="" loading="lazy" decoding="async">
+      <img src="/preuves/vign/ecommerce-1.jpg" data-full="/preuves/ecommerce-1.jpg" alt="" loading="lazy" decoding="async">
+      <img src="/preuves/vign/ecommerce-3.jpg" data-full="/preuves/ecommerce-3.jpg" alt="" loading="lazy" decoding="async">
      </div>
     </div>
 
@@ -223,9 +252,9 @@
      <div class="pvtitle" data-i18n="pv_t3">Monétisation TikTok / YouTube</div>
      <div class="pvsub" data-i18n="pv_s3">Transformer les vues en revenus</div>
      <div class="fan">
-      <img src="/preuves/monetisation-2.jpg" alt="" loading="lazy" decoding="async">
-      <img src="/preuves/monetisation-1.jpg" alt="" loading="lazy" decoding="async">
-      <img src="/preuves/monetisation-3.jpg" alt="" loading="lazy" decoding="async">
+      <img src="/preuves/vign/monetisation-2.jpg" data-full="/preuves/monetisation-2.jpg" alt="" loading="lazy" decoding="async">
+      <img src="/preuves/vign/monetisation-1.jpg" data-full="/preuves/monetisation-1.jpg" alt="" loading="lazy" decoding="async">
+      <img src="/preuves/vign/monetisation-3.jpg" data-full="/preuves/monetisation-3.jpg" alt="" loading="lazy" decoding="async">
      </div>
     </div>
 
@@ -233,10 +262,23 @@
   </div>
 
   <div class="pvdots" id="pvdots"></div>
-  <p class="pvhint" data-i18n="pv_hint">Fais glisser pour voir les autres activités</p>
+  <p class="pvhint" data-i18n="pv_hint">Fais glisser pour changer d'activité · touche une image pour l'agrandir</p>
   <p class="pvlegal" data-i18n="pv_legal">Ces résultats sont ceux de personnes réelles et ne sont pas représentatifs de ce que tu obtiendras. Leur parcours, leur travail et leur situation ont joué. Rien ici ne constitue une garantie de revenu.</p>
  </div>
 </section>
+
+
+<!-- Visionneuse -->
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Preuve en grand">
+ <div class="lb-bar">
+  <span class="lb-title" id="lbTitle"></span>
+  <button class="lb-close" id="lbClose" aria-label="Fermer">&#10005;</button>
+ </div>
+ <button class="lb-nav lb-prev" id="lbPrev" aria-label="Précédente">&#8249;</button>
+ <img class="lb-img" id="lbImg" alt="">
+ <button class="lb-nav lb-next" id="lbNext" aria-label="Suivante">&#8250;</button>
+ <div class="lb-count" id="lbCount"></div>
+</div>
 
 <footer><div class="wrap">Contact : <a href="mailto:beaudelaireconsulting@gmail.com" style="color:var(--accent);text-decoration:none;font-weight:600">beaudelaireconsulting@gmail.com</a><br>© <span id="yr"></span> Beaudelaire Consulting</div></footer>
 
@@ -257,7 +299,7 @@ var I18N = {
   pv_t1:"Création de contenu", pv_s1:"Construire une audience à partir de zéro",
   pv_t2:"E-commerce", pv_s2:"Des boutiques qui vendent vraiment",
   pv_t3:"Monétisation TikTok / YouTube", pv_s3:"Transformer les vues en revenus",
-  pv_hint:"Fais glisser pour voir les autres activités",
+  pv_hint:"Fais glisser pour changer d'activité · touche une image pour l'agrandir",
   pv_legal:"Ces résultats sont ceux de personnes réelles et ne sont pas représentatifs de ce que tu obtiendras. Leur parcours, leur travail et leur situation ont joué. Rien ici ne constitue une garantie de revenu.",
   once:"une fois", month:"par mois", ribbon:"COMPLET",
   o1name:"Le guide du 1M CFA",
@@ -283,7 +325,7 @@ var I18N = {
   pv_t1:"Content creation", pv_s1:"Building an audience from scratch",
   pv_t2:"E-commerce", pv_s2:"Stores that actually sell",
   pv_t3:"TikTok / YouTube monetisation", pv_s3:"Turning views into income",
-  pv_hint:"Swipe to see the other activities",
+  pv_hint:"Swipe to change activity · tap an image to enlarge it",
   pv_legal:"These results come from real people and are not representative of what you will achieve. Their background, work and circumstances played a part. Nothing here is a guarantee of income.",
   once:"one-off", month:"per month", ribbon:"SOLD OUT",
   o1name:"The 1M CFA guide",
@@ -419,6 +461,70 @@ function toggleDevise(){
  });
 
  rendu(); relancer();
+})();
+
+/* Visionneuse : parcourt les 9 preuves d'affilee. Le titre affiche en haut
+   suit l'activite de l'image courante, meme en changeant de categorie. */
+(function(){
+ var boite=document.getElementById('lb'); if(!boite) return;
+ var img=document.getElementById('lbImg'), titre=document.getElementById('lbTitle'),
+     compte=document.getElementById('lbCount'), vignettes=[], pos=0, rendu=null;
+
+ function collecter(){
+  vignettes=[].slice.call(document.querySelectorAll('.fan img'));
+ }
+ function categorie(el){
+  var slide=el.closest('.pvslide');
+  return slide ? slide.querySelector('.pvtitle').textContent : '';
+ }
+ function afficher(){
+  var el=vignettes[pos];
+  img.src = el.getAttribute('data-full') || el.src;
+  img.alt = categorie(el);
+  titre.textContent = categorie(el);
+  compte.textContent = (pos+1)+' / '+vignettes.length;
+ }
+ function ouvrir(i){
+  collecter(); pos=i; rendu=document.activeElement;
+  boite.hidden=false; document.body.style.overflow='hidden';
+  afficher(); document.getElementById('lbClose').focus();
+  track('ouvre_preuve', {activite: categorie(vignettes[pos])});
+ }
+ function fermer(){
+  boite.hidden=true; document.body.style.overflow='';
+  if(rendu && rendu.focus) rendu.focus();
+ }
+ function naviguer(d){
+  pos=(pos+d+vignettes.length)%vignettes.length; afficher();
+ }
+
+ document.addEventListener('click', function(e){
+  var cible=e.target;
+  if(cible.matches && cible.matches('.fan img')){
+   collecter(); ouvrir(vignettes.indexOf(cible)); return;
+  }
+  if(cible===boite) fermer();                       /* clic sur le fond */
+ });
+ document.getElementById('lbClose').onclick=fermer;
+ document.getElementById('lbPrev').onclick=function(){ naviguer(-1); };
+ document.getElementById('lbNext').onclick=function(){ naviguer(1); };
+
+ document.addEventListener('keydown', function(e){
+  if(boite.hidden) return;
+  if(e.key==='Escape') fermer();
+  if(e.key==='ArrowRight') naviguer(1);
+  if(e.key==='ArrowLeft') naviguer(-1);
+ });
+
+ /* Glissement au doigt dans la visionneuse */
+ var x0=null;
+ boite.addEventListener('touchstart', function(e){ x0=e.touches[0].clientX; }, {passive:true});
+ boite.addEventListener('touchend', function(e){
+  if(x0===null) return;
+  var dx=e.changedTouches[0].clientX-x0;
+  if(Math.abs(dx)>45) naviguer(dx<0 ? 1 : -1);
+  x0=null;
+ });
 })();
 
 document.getElementById('yr').textContent = new Date().getFullYear();
