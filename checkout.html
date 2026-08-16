@@ -122,7 +122,11 @@
  .pcard .peuro{display:block;font-size:14px;color:var(--muted);margin-top:6px}
  /* Avertissement de fin d'offre : petit, mais en rouge pour qu'il se
     detache du reste de la carte. */
- .verrou{margin-top:10px;font-size:12.5px;line-height:1.45;color:var(--danger)}
+ /* Le triangle est ecrit sans selecteur emoji : il se rend en texte et
+    prend donc la couleur d'alerte, au lieu du jaune du systeme. */
+ .verrou{display:flex;gap:7px;align-items:flex-start;text-align:left;
+   margin-top:11px;font-size:11.5px;line-height:1.4;color:var(--danger)}
+ .verrou .ico{flex:0 0 auto;font-size:13px;line-height:1.25}
  .verrou b{font-weight:800}
  .pcard .pbody{padding:20px 22px 22px}
  .pfeat{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:20px}
@@ -293,7 +297,7 @@
      <div class="pname" data-i18n="o1name">Le guide du premier million</div>
      <div class="pprice" data-xof="15 000" data-eur="23"><span class="pmain"></span> <span class="pper" data-i18n="once">une fois</span></div>
      <span class="peuro"></span>
-     <p class="verrou" data-i18n="verrou"></p>
+     <p class="verrou"><span class="ico" aria-hidden="true">&#9888;</span><span data-i18n="verrou"></span></p>
     </div>
     <div class="pbody">
      <ul class="pfeat">
@@ -493,7 +497,7 @@ var I18N = {
   mr_s3:"Ils vivent de leurs vues",
   pv_legal:"Ces résultats sont ceux de personnes réelles et ne sont pas représentatifs de ce que tu obtiendras. Leur parcours, leur travail et leur situation ont joué. Rien ici ne constitue une garantie de revenu.",
   once:"une fois", month:"par mois", ribbon:"COMPLET",
-  verrou:"<b>Verrouille les 15 000 FCFA à vie.</b> Le mois prochain, cette offre passe à 30 000 FCFA et devient un abonnement mensuel. Si tu ne verrouilles pas maintenant, tu ne reverras plus jamais ce prix.",
+  verrou:"<b>Verrouille ce prix à vie.</b> Le mois prochain, le guide passe à 30 000 XOF et devient un abonnement mensuel (360 000 XOF par an).",
   o1name:"Le guide du premier million",
   o1f1:"Le guide complet, 22 chapitres",
   o1f2:"La méthode du « véhicule » pour trouver ta compétence vendable",
@@ -540,7 +544,7 @@ var I18N = {
   mr_s3:"They live off their views",
   pv_legal:"These results come from real people and are not representative of what you will achieve. Their background, work and circumstances played a part. Nothing here is a guarantee of income.",
   once:"one-off", month:"per month", ribbon:"SOLD OUT",
-  verrou:"<b>Lock in $23 for life.</b> Next month this offer moves to $45 and becomes a monthly subscription. If you don't lock it in now, you will never see this price again.",
+  verrou:"<b>Lock this price for life.</b> Next month the guide moves to $45 and becomes a monthly subscription ($540 a year).",
   o1name:"The first million guide",
   o1f1:"The complete guide, 22 chapters",
   o1f2:"The “vehicle” method to find your sellable skill",

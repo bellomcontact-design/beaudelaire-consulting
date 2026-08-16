@@ -186,17 +186,29 @@
  .voie p+p{margin-top:10px;color:var(--muted)}
 
  /* Chiffres animes : ils defilent une fois, a l'arrivee a l'ecran. */
- .chiffres{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+ /* Halo derriere les chiffres : ils doivent sembler eclairer la page. */
+ .chiffres{position:relative;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+   background:radial-gradient(720px 420px at 50% 42%, rgba(255,165,69,.14), transparent 68%), var(--bg)}
  /* Empiles, tous a la meme taille : c'est la repetition du format qui
     donne son rythme au bloc, pas la taille de chaque nombre. */
- .chgrid{display:flex;flex-direction:column;gap:44px;max-width:620px;margin:0 auto;text-align:center}
- .ch b{display:block;font-size:clamp(38px,9vw,56px);font-weight:800;letter-spacing:-.03em;
-   line-height:1;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
- .ch span{display:block;color:rgba(255,165,69,.72);font-size:clamp(15px,4vw,19px);margin-top:12px}
- .ch .unite{font-size:.42em;font-weight:800;margin-left:5px;letter-spacing:0}
+ .chgrid{display:flex;flex-direction:column;max-width:660px;margin:0 auto;text-align:center;position:relative}
+ .ch{padding:34px 0}
+ .ch + .ch{border-top:1px solid rgba(255,165,69,.16)}
+
+ /* Le nombre : degrade or, halo diffus, chasse fixe pour que le defilement
+    du compteur ne fasse pas trembler la ligne. */
+ .ch b{display:block;font-size:clamp(42px,12vw,84px);font-weight:900;letter-spacing:-.045em;
+   line-height:.96;font-variant-numeric:tabular-nums;white-space:nowrap;
+   color:var(--star);
+   background-image:linear-gradient(180deg,#FFE9A8 0%,#FFC24A 46%,#F08A1E 100%);
+   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+   filter:drop-shadow(0 6px 26px rgba(255,165,69,.34));padding-bottom:.05em}
+ .ch .unite{font-size:.34em;font-weight:900;margin-left:6px;letter-spacing:.01em;vertical-align:.28em}
+ .ch span{display:block;color:var(--text-soft);font-size:clamp(12px,3.2vw,14px);margin-top:14px;
+   text-transform:uppercase;letter-spacing:.16em;font-weight:700}
+ @media(max-width:400px){ .ch b{font-size:38px} .ch span{letter-spacing:.11em} }
 
  /* Sous les chiffres : l'appel a l'action, puis la preuve sociale */
- @media(max-width:400px){ .ch b{font-size:34px} }
  .chcta{text-align:center;margin-top:54px}
  .chjoined{display:flex;align-items:center;justify-content:center;gap:11px;margin-top:16px;
    color:var(--muted);font-size:14.5px;flex-wrap:wrap}
@@ -351,6 +363,27 @@
  font-size:12px;margin:0 auto 24px;max-width:680px;text-align:center}
 
  /* FAQ */
+ /* Reponses de la FAQ : des listes plutot que des blocs de texte.
+    Une pastille verte pour ce qui suffit, rouge barree pour ce qui est
+    inutile — la reponse se lit sans etre lue en entier. */
+ .fl{list-style:none;display:flex;flex-direction:column;gap:10px;margin:2px 0 14px}
+ .fl li{display:flex;align-items:flex-start;gap:11px;font-size:15px;line-height:1.4;color:var(--text-soft)}
+ .fl b{color:var(--text);font-weight:700}
+ .fl .fi{flex:0 0 auto;width:26px;height:26px;border-radius:50%;display:flex;
+   align-items:center;justify-content:center;font-size:13px;line-height:1}
+ .fl .oui{background:rgba(62,207,126,.14);border:1px solid rgba(62,207,126,.4)}
+ .fl .non{background:rgba(255,107,94,.12);border:1px solid rgba(255,107,94,.36);position:relative}
+ .fl .non::after{content:"";position:absolute;left:4px;right:4px;top:50%;height:1.5px;
+   background:var(--danger);transform:rotate(-38deg);border-radius:2px}
+ .fl .num{background:var(--accent-soft);border:1px solid rgba(255,165,69,.4);
+   color:var(--accent);font-weight:900;font-size:13px}
+ .faq .fnote{font-size:14px;color:var(--muted);margin-top:2px}
+ .faq .fbtn{display:inline-flex;align-items:center;justify-content:center;margin-top:14px;
+   background-image:var(--accent-grad);color:var(--on-accent);font-weight:800;font-size:14.5px;
+   padding:12px 22px;border-radius:999px;text-decoration:none;transition:transform .12s ease}
+ .faq .fbtn:hover{transform:scale(1.04)}
+ @media(prefers-reduced-motion:reduce){ .faq .fbtn{transition:none} .faq .fbtn:hover{transform:none} }
+
  .faq{max-width:680px;margin:0 auto}
  details{border:1px solid var(--border);border-radius:12px;padding:4px 18px;margin-bottom:12px;background:var(--card)}
  details summary{cursor:pointer;font-weight:600;padding:14px 0;list-style:none;display:flex;justify-content:space-between;align-items:center}
@@ -750,10 +783,10 @@
  <div class="eyebrow" data-i18n="faq.eyebrow">FAQ</div>
  <h2 data-i18n="faq.h2">Les questions fréquentes</h2>
  <div class="faq">
- <details><summary data-i18n="faq.q1">De quoi j'ai besoin pour commencer ?</summary><p data-i18n="faq.a1"></p></details>
- <details><summary data-i18n="faq.q2">Comment je fais pour payer ?</summary><p data-i18n="faq.a2"></p></details>
- <details><summary data-i18n="faq.q3">Qu'est-ce qu'il y a dans le guide ?</summary><p data-i18n="faq.a3"></p></details>
- <details><summary data-i18n="faq.q4">Qu'est-ce qui est gratuit ?</summary><p data-i18n-html="faq.a4"></p></details>
+ <details><summary data-i18n="faq.q1">De quoi j'ai besoin pour commencer ?</summary><div data-i18n-html="faq.a1"></div></details>
+ <details><summary data-i18n="faq.q2">Comment je fais pour payer ?</summary><div data-i18n-html="faq.a2"></div></details>
+ <details><summary data-i18n="faq.q3">Qu'est-ce qu'il y a dans le guide ?</summary><div data-i18n-html="faq.a3"></div></details>
+ <details><summary data-i18n="faq.q4">Qu'est-ce qui est gratuit ?</summary><div data-i18n-html="faq.a4"></div></details>
  </div>
  </div>
  </section>
@@ -761,7 +794,7 @@
  <!-- CTA FINALE -->
  <section class="band" style="background:var(--bg2)">
  <div class="wrap">
- <h2 data-i18n-html="final.h2">Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.</h2>
+ <h2 data-i18n-html="final.h2">Tu peux rester bloqué encore 5 ans.<br>Ou régler ça aujourd'hui.</h2>
  <a class="cta" href="/checkout" onclick="track('click_go_checkout',{depuis:'final'})" data-i18n="final.cta">Apprendre à gagner de l'argent</a>
  </div>
  </section>
@@ -1035,15 +1068,35 @@ const I18N = {
  faq:{
  eyebrow:"FAQ", h2:"Les questions fréquentes",
  q1:"De quoi j'ai besoin pour commencer ?",
- a1:"D'un téléphone et d'une connexion internet. C'est tout. Pas d'ordinateur, pas de capital de départ, pas de diplôme. J'ai commencé exactement comme ça, depuis le Bénin, et la plupart de mes élèves travaillent encore aujourd'hui uniquement depuis leur téléphone.",
+ a1:'<ul class="fl">'
+   +'<li><span class="fi oui">&#128241;</span><span><b>Un téléphone</b></span></li>'
+   +'<li><span class="fi oui">&#128246;</span><span><b>Une connexion internet</b></span></li>'
+   +'<li><span class="fi non">&#128187;</span><span>Pas besoin d\'ordinateur</span></li>'
+   +'<li><span class="fi non">&#128176;</span><span>Pas de capital de départ</span></li>'
+   +'<li><span class="fi non">&#127891;</span><span>Pas de diplôme</span></li></ul>'
+   +'<p class="fnote">J\'ai commencé exactement comme ça depuis le Bénin, et la plupart de mes élèves travaillent encore aujourd\'hui uniquement depuis leur téléphone.</p>',
  q2:"Comment je fais pour payer ?",
- a2:"Deux moyens, directement sur le site. Par carte bancaire, Visa ou Mastercard, si tu paies depuis l'international. Ou par mobile money si tu es en Afrique : Orange Money, MTN, Moov, Wave. Tu reçois ton accès immédiatement après le paiement. Je n'accepte ni espèces ni dépôt en liquide : tout passe par ces deux canaux, c'est plus sûr pour toi comme pour moi.",
+ a2:'<ul class="fl">'
+   +'<li><span class="fi num">1</span><span><b>Carte bancaire</b> — Visa ou Mastercard, depuis l\'international</span></li>'
+   +'<li><span class="fi num">2</span><span><b>Mobile money</b> — Orange Money, MTN, Moov, Wave</span></li>'
+   +'<li><span class="fi oui">&#9889;</span><span>Accès <b>immédiat</b> après le paiement</span></li>'
+   +'<li><span class="fi non">&#128181;</span><span>Ni espèces ni dépôt en liquide</span></li></ul>',
  q3:"Qu'est-ce qu'il y a dans le guide ?",
- a3:"Vingt-deux chapitres qui vont du départ à tes premiers revenus. Trouver la compétence que tu peux vendre, décrocher et réussir ton premier client en freelance, te lancer dans la création de contenu et la monétiser, gagner des commissions en affiliation, et la vérité sur l'e-commerce et le trading. Un chapitre entier sur la question que tout le monde évite : recevoir et retirer ton argent depuis l'Afrique. Plus les pièges à éviter, mon histoire d'arnaque comprise, et ton plan d'action pour tes 7 puis tes 30 premiers jours. L'accès à la communauté Ex-rienneux pendant un an est inclus.",
+ a3:'<ul class="fl">'
+   +'<li><span class="fi num">22</span><span><b>modules</b>, du départ à tes premiers revenus</span></li>'
+   +'<li><span class="fi oui">&#128188;</span><span>Trouver la compétence que tu peux <b>vendre</b>, et décrocher ton premier client</span></li>'
+   +'<li><span class="fi oui">&#127916;</span><span>Création de contenu, <b>affiliation</b>, e-commerce et la vérité sur le trading</span></li>'
+   +'<li><span class="fi oui">&#127978;</span><span><b>Encaisser depuis l\'Afrique</b> : la question que tout le monde évite</span></li>'
+   +'<li><span class="fi oui">&#128737;</span><span>Les <b>pièges à éviter</b>, mon histoire d\'arnaque comprise</span></li>'
+   +'<li><span class="fi oui">&#128101;</span><span>La communauté Ex-rienneux pendant <b>un an</b></span></li></ul>',
  q4:"Qu'est-ce qui est gratuit ?",
- a4:"Le groupe WhatsApp privé. J'y partage de la valeur tous les jours, tu poses tes questions et j'y réponds. Rien à payer, rien à justifier : tu entres, tu observes, et tu décides ensuite si tu veux aller plus loin. <a href=\"https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw\" target=\"_blank\" rel=\"noopener\" onclick=\"track('click_whatsapp',{depuis:'faq'})\" style=\"color:var(--accent);font-weight:700\">Rejoindre le groupe maintenant &#8594;</a>"
+ a4:'<ul class="fl">'
+   +'<li><span class="fi oui">&#128172;</span><span>Le <b>groupe WhatsApp privé</b>, sans rien payer</span></li>'
+   +'<li><span class="fi oui">&#128200;</span><span>De la valeur <b>tous les jours</b></span></li>'
+   +'<li><span class="fi oui">&#10004;</span><span>Tu poses tes questions, <b>j\'y réponds</b></span></li></ul>'
+   +'<a class="fbtn" href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener" onclick="track(\'click_whatsapp\',{depuis:\'faq\'})">Rejoindre le groupe maintenant</a>'
  },
- final:{ h2:"Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.", cta:"Apprendre à gagner de l'argent" },
+ final:{ h2:"Tu peux rester bloqué encore 5 ans.<br>Ou régler ça aujourd'hui.", cta:"Apprendre à gagner de l'argent" },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Où en es-tu dans ton business ?",
  stage_idee:"Je n'ai pas encore commencé, j'ai juste une idée", stage_debut:"Je viens de lancer, je cherche mes premiers clients", stage_tourne:"J'ai déjà un business qui tourne", stage_stagne:"J'ai un business qui stagne / qui plafonne",
@@ -1174,15 +1227,35 @@ const I18N = {
  faq:{
  eyebrow:"FAQ", h2:"Frequently asked questions",
  q1:"What do I need to start?",
- a1:"A phone and an internet connection. That's it. No computer, no starting capital, no diploma. That is exactly how I started, from Benin, and most of my students still work from their phone alone today.",
+ a1:'<ul class="fl">'
+   +'<li><span class="fi oui">&#128241;</span><span><b>A phone</b></span></li>'
+   +'<li><span class="fi oui">&#128246;</span><span><b>An internet connection</b></span></li>'
+   +'<li><span class="fi non">&#128187;</span><span>No computer needed</span></li>'
+   +'<li><span class="fi non">&#128176;</span><span>No starting capital</span></li>'
+   +'<li><span class="fi non">&#127891;</span><span>No diploma</span></li></ul>'
+   +'<p class="fnote">That is exactly how I started from Benin, and most of my students still work from their phone alone today.</p>',
  q2:"How do I pay?",
- a2:"Two ways, right here on the site. By card, Visa or Mastercard, if you pay from abroad. Or by mobile money if you are in Africa: Orange Money, MTN, Moov, Wave. You get access immediately after payment. I do not accept cash or cash deposits: everything goes through these two channels, which is safer for you and for me.",
+ a2:'<ul class="fl">'
+   +'<li><span class="fi num">1</span><span><b>Card</b> — Visa or Mastercard, from abroad</span></li>'
+   +'<li><span class="fi num">2</span><span><b>Mobile money</b> — Orange Money, MTN, Moov, Wave</span></li>'
+   +'<li><span class="fi oui">&#9889;</span><span><b>Instant</b> access after payment</span></li>'
+   +'<li><span class="fi non">&#128181;</span><span>No cash, no cash deposits</span></li></ul>',
  q3:"What is inside the guide?",
- a3:"Twenty-two chapters, from the very start to your first income. Finding the skill you can sell, landing and delivering your first freelance client, starting to create content and monetising it, earning commissions through affiliation, and the truth about e-commerce and trading. A full chapter on the question everyone avoids: receiving and withdrawing your money from Africa. Plus the traps to avoid, including the time I got scammed, and your action plan for your first 7 then 30 days. One year of access to the Ex-rienneux community is included.",
+ a3:'<ul class="fl">'
+   +'<li><span class="fi num">22</span><span><b>modules</b>, from the start to your first income</span></li>'
+   +'<li><span class="fi oui">&#128188;</span><span>Find the skill you can <b>sell</b>, and land your first client</span></li>'
+   +'<li><span class="fi oui">&#127916;</span><span>Content creation, <b>affiliation</b>, e-commerce and the truth about trading</span></li>'
+   +'<li><span class="fi oui">&#127978;</span><span><b>Getting paid from Africa</b>: the question everyone avoids</span></li>'
+   +'<li><span class="fi oui">&#128737;</span><span>The <b>traps to avoid</b>, including the time I got scammed</span></li>'
+   +'<li><span class="fi oui">&#128101;</span><span>The Ex-rienneux community for <b>one year</b></span></li></ul>',
  q4:"What is free?",
- a4:"The private WhatsApp group. I share value there every day, you ask your questions and I answer them. Nothing to pay, nothing to justify: you come in, you watch, and you decide afterwards whether you want to go further. <a href=\"https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw\" target=\"_blank\" rel=\"noopener\" onclick=\"track('click_whatsapp',{depuis:'faq'})\" style=\"color:var(--accent);font-weight:700\">Join the group now &#8594;</a>"
+ a4:'<ul class="fl">'
+   +'<li><span class="fi oui">&#128172;</span><span>The <b>private WhatsApp group</b>, at no cost</span></li>'
+   +'<li><span class="fi oui">&#128200;</span><span>Value <b>every single day</b></span></li>'
+   +'<li><span class="fi oui">&#10004;</span><span>You ask, <b>I answer</b></span></li></ul>'
+   +'<a class="fbtn" href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener" onclick="track(\'click_whatsapp\',{depuis:\'faq\'})">Join the group now</a>'
  },
- final:{ h2:"You can stay stuck for 5 more years.<br>Or fix it this week.", cta:"Learn to make money" },
+ final:{ h2:"You can stay stuck for 5 more years.<br>Or fix it today.", cta:"Learn to make money" },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Where are you in your business?",
  stage_idee:"I haven't started yet, I just have an idea", stage_debut:"I just launched, looking for my first clients", stage_tourne:"I already have a business running", stage_stagne:"I have a business that's stuck / plateauing",
