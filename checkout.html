@@ -280,9 +280,9 @@
      <div class="pvtitle" data-i18n="pv_t2">E-commerce</div>
      <div class="pvsub" data-i18n="pv_s2">Des boutiques qui vendent vraiment</div>
      <div class="fan">
-      <img src="/preuves/vign/ecommerce-2.jpg" data-full="/preuves/ecommerce-2.jpg" alt="" loading="lazy" decoding="async">
-      <img src="/preuves/vign/ecommerce-1.jpg" data-full="/preuves/ecommerce-1.jpg" alt="" loading="lazy" decoding="async">
-      <img src="/preuves/vign/ecommerce-3.jpg" data-full="/preuves/ecommerce-3.jpg" alt="" loading="lazy" decoding="async">
+      <img data-src="/preuves/vign/ecommerce-2.jpg" data-full="/preuves/ecommerce-2.jpg" alt="" decoding="async">
+      <img data-src="/preuves/vign/ecommerce-1.jpg" data-full="/preuves/ecommerce-1.jpg" alt="" decoding="async">
+      <img data-src="/preuves/vign/ecommerce-3.jpg" data-full="/preuves/ecommerce-3.jpg" alt="" decoding="async">
      </div>
     </div>
 
@@ -290,9 +290,9 @@
      <div class="pvtitle" data-i18n="pv_t3">Monétisation TikTok / YouTube</div>
      <div class="pvsub" data-i18n="pv_s3">Transformer les vues en revenus</div>
      <div class="fan">
-      <img src="/preuves/vign/monetisation-2.jpg" data-full="/preuves/monetisation-2.jpg" alt="" loading="lazy" decoding="async">
-      <img src="/preuves/vign/monetisation-1.jpg" data-full="/preuves/monetisation-1.jpg" alt="" loading="lazy" decoding="async">
-      <img src="/preuves/vign/monetisation-3.jpg" data-full="/preuves/monetisation-3.jpg" alt="" loading="lazy" decoding="async">
+      <img data-src="/preuves/vign/monetisation-2.jpg" data-full="/preuves/monetisation-2.jpg" alt="" decoding="async">
+      <img data-src="/preuves/vign/monetisation-1.jpg" data-full="/preuves/monetisation-1.jpg" alt="" decoding="async">
+      <img data-src="/preuves/vign/monetisation-3.jpg" data-full="/preuves/monetisation-3.jpg" alt="" decoding="async">
      </div>
     </div>
 
@@ -320,9 +320,9 @@
      <div class="pvtitle" data-i18n="pv_t1">Création de contenu</div>
      <div class="pvsub" data-i18n="mr_s1">Ils ont construit leur audience</div>
      <div class="fan">
-      <img src="/preuves/merci/vign/m1.jpg" data-full="/preuves/merci/m1.jpg" alt="" decoding="async">
-      <img src="/preuves/merci/vign/m2.jpg" data-full="/preuves/merci/m2.jpg" alt="" decoding="async">
-      <img src="/preuves/merci/vign/m3.jpg" data-full="/preuves/merci/m3.jpg" alt="" decoding="async">
+      <img data-src="/preuves/merci/vign/m1.jpg" data-full="/preuves/merci/m1.jpg" alt="" decoding="async">
+      <img data-src="/preuves/merci/vign/m2.jpg" data-full="/preuves/merci/m2.jpg" alt="" decoding="async">
+      <img data-src="/preuves/merci/vign/m3.jpg" data-full="/preuves/merci/m3.jpg" alt="" decoding="async">
      </div>
     </div>
 
@@ -330,9 +330,9 @@
      <div class="pvtitle" data-i18n="pv_t2">E-commerce</div>
      <div class="pvsub" data-i18n="mr_s2">Ils ont fait décoller leur boutique</div>
      <div class="fan">
-      <img src="/preuves/merci/vign/m4.jpg" data-full="/preuves/merci/m4.jpg" alt="" loading="lazy" decoding="async">
-      <img src="/preuves/merci/vign/m6.jpg" data-full="/preuves/merci/m6.jpg" alt="" loading="lazy" decoding="async">
-      <img src="/preuves/merci/vign/m7.jpg" data-full="/preuves/merci/m7.jpg" alt="" loading="lazy" decoding="async">
+      <img data-src="/preuves/merci/vign/m4.jpg" data-full="/preuves/merci/m4.jpg" alt="" decoding="async">
+      <img data-src="/preuves/merci/vign/m6.jpg" data-full="/preuves/merci/m6.jpg" alt="" decoding="async">
+      <img data-src="/preuves/merci/vign/m7.jpg" data-full="/preuves/merci/m7.jpg" alt="" decoding="async">
      </div>
     </div>
 
@@ -340,9 +340,9 @@
      <div class="pvtitle" data-i18n="pv_t3">Monétisation TikTok / YouTube</div>
      <div class="pvsub" data-i18n="mr_s3">Ils vivent de leurs vues</div>
      <div class="fan">
-      <img src="/preuves/merci/vign/m10.jpg" data-full="/preuves/merci/m10.jpg" alt="" loading="lazy" decoding="async">
-      <img src="/preuves/merci/vign/m11.jpg" data-full="/preuves/merci/m11.jpg" alt="" loading="lazy" decoding="async">
-      <img src="/preuves/merci/vign/m12.jpg" data-full="/preuves/merci/m12.jpg" alt="" loading="lazy" decoding="async">
+      <img data-src="/preuves/merci/vign/m10.jpg" data-full="/preuves/merci/m10.jpg" alt="" decoding="async">
+      <img data-src="/preuves/merci/vign/m11.jpg" data-full="/preuves/merci/m11.jpg" alt="" decoding="async">
+      <img data-src="/preuves/merci/vign/m12.jpg" data-full="/preuves/merci/m12.jpg" alt="" decoding="async">
      </div>
     </div>
 
@@ -546,7 +546,19 @@ function toggleDevise(){
    imgs[i].style.order = (rel===0) ? 2 : (rel===1 ? 3 : 1);
   }
  }
+ /* Une diapositive ne telecharge ses images qu'au moment ou elle est
+    demandee, plus celle d'apres en anticipation. loading="lazy" ne suffit
+    pas ici : les diapositives voisines sont a moins d'un ecran de distance,
+    le navigateur les chargeait donc immediatement. */
+ function charger(k){
+  var s=slides[(k+n)%n]; if(!s || s.dataset.pret) return;
+  [].forEach.call(s.querySelectorAll('img[data-src]'), function(im){
+   im.src=im.getAttribute('data-src'); im.removeAttribute('data-src');
+  });
+  s.dataset.pret='1';
+ }
  function rendu(){
+  charger(idx); charger(idx+1);
   piste.style.transform='translateX(-'+(idx*100)+'%)';
   for(var i=0;i<pastilles.children.length;i++)
    pastilles.children[i].className=(i===idx)?'on':'';
@@ -587,7 +599,16 @@ function toggleDevise(){
   if(document.hidden) clearInterval(minuteur); else relancer();
  });
 
- rendu(); relancer();
+ /* Le carrousel ne s'anime — et ne charge — qu'a l'approche de l'ecran. */
+ if('IntersectionObserver' in window){
+  rendu();
+  var oeil=new IntersectionObserver(function(entrees){
+   entrees.forEach(function(e){
+    if(e.isIntersecting){ relancer(); } else { clearInterval(minuteur); }
+   });
+  }, {rootMargin:'200px'});
+  oeil.observe(cadre);
+ } else { rendu(); relancer(); }
 });
 
 /* Visionneuse : parcourt les 9 preuves d'affilee. Le titre affiche en haut
