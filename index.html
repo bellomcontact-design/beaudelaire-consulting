@@ -160,12 +160,25 @@
 
  /* Chiffres animes : ils defilent une fois, a l'arrivee a l'ecran. */
  .chiffres{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
- .chgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:900px;margin:0 auto;text-align:center}
- @media(max-width:760px){.chgrid{grid-template-columns:1fr;gap:34px}}
- .ch b{display:block;font-size:clamp(34px,6vw,58px);font-weight:800;letter-spacing:-.03em;
-   line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
- .ch span{display:block;color:var(--muted);font-size:15px;margin-top:10px}
- .ch .unite{font-size:.5em;font-weight:800;margin-left:4px;letter-spacing:0}
+ /* Empiles, tous a la meme taille : c'est la repetition du format qui
+    donne son rythme au bloc, pas la taille de chaque nombre. */
+ .chgrid{display:flex;flex-direction:column;gap:44px;max-width:620px;margin:0 auto;text-align:center}
+ .ch b{display:block;font-size:clamp(38px,9vw,56px);font-weight:800;letter-spacing:-.03em;
+   line-height:1;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+ .ch span{display:block;color:rgba(255,165,69,.72);font-size:clamp(15px,4vw,19px);margin-top:12px}
+ .ch .unite{font-size:.42em;font-weight:800;margin-left:5px;letter-spacing:0}
+
+ /* Sous les chiffres : l'appel a l'action, puis la preuve sociale */
+ @media(max-width:400px){ .ch b{font-size:34px} }
+ .chcta{text-align:center;margin-top:54px}
+ .chjoined{display:flex;align-items:center;justify-content:center;gap:11px;margin-top:16px;
+   color:var(--muted);font-size:14.5px;flex-wrap:wrap}
+ .chjoined b{color:var(--text);font-weight:800}
+ .chav{display:inline-flex;flex:0 0 auto}
+ .chav i{width:30px;height:30px;border-radius:50%;background:var(--card);border:2px solid var(--bg);
+   margin-left:-9px;display:flex;align-items:center;justify-content:center;
+   font-style:normal;font-weight:800;font-size:12px;color:var(--accent)}
+ .chav i:first-child{margin-left:0}
 
  /* Preuves sociales : un carrousel d'activites, 3 captures en eventail */
  .proof{background:var(--bg2);border-top:1px solid var(--border)}
@@ -676,6 +689,13 @@
  <span data-i18n="ch.l3">élèves nous ont rejoints ce mois-ci</span>
  </div>
  </div>
+ <div class="chcta">
+ <a class="cta" href="/checkout" onclick="track('click_go_checkout',{depuis:'chiffres'})" data-i18n="hero.cta">Apprendre à gagner de l'argent</a>
+ <div class="chjoined">
+ <span class="chav" aria-hidden="true"><i>K</i><i>A</i><i>M</i><i>S</i></span>
+ <span data-i18n-html="ch.joined">Ils sont <b>300+</b> à nous avoir rejoints le mois dernier</span>
+ </div>
+ </div>
  </div>
  </section>
 
@@ -685,14 +705,10 @@
  <div class="eyebrow" data-i18n="faq.eyebrow">FAQ</div>
  <h2 data-i18n="faq.h2">Les questions fréquentes</h2>
  <div class="faq">
- <details><summary data-i18n="faq.q1">C'est pour qui ?</summary><p data-i18n="faq.a1">Pour les rienneux qui veulent se lancer sans savoir par où commencer, et pour ceux qui font déjà 5k-30k+/mois et veulent scaler. Le questionnaire t'oriente automatiquement vers le bon accompagnement.</p></details>
- <details><summary data-i18n="faq.q2">Comment se passe l'appel ?</summary><p data-i18n="faq.a2">Un appel en visioconférence. On fait le point sur ta situation, j'identifie ce qui te bloque, et tu repars avec un plan d'action clair et priorisé.</p></details>
- <details><summary data-i18n="faq.q3">Et si je débute totalement ?</summary><p data-i18n="faq.a3">C'est précisément fait pour ça. L'accompagnement Démarrage est pensé pour clarifier ton idée et te donner tes premières étapes concrètes.</p></details>
- <details><summary data-i18n="faq.q4">Est-ce que l'appel est un argumentaire de vente ?</summary><p data-i18n="faq.a4">Non. C'est un vrai diagnostic : on travaille sur ton business pendant l'appel et tu repars avec un plan concret, que tu ailles plus loin avec moi ou non.</p></details>
- <details><summary data-i18n="faq.q5">Qu'est-ce qu'il y a dans le guide des rienneux ?</summary><p data-i18n="faq.a5">Du concret, pas du rêve. Il ne s'agit pas de te vendre un business miracle ni du e-commerce à la mode. Le guide passe en revue les vraies façons (les véhicules) de faire tes premiers revenus en ligne selon d'où tu pars, comment choisir la tienne, trouver tes premiers clients et encaisser depuis l'Afrique. Tout vient de mon expérience réelle. Et surtout : en l'achetant, tu rejoins la communauté Ex-rienneux, où tu poses tes questions et où on suit tes progrès. Tu n'es jamais laissé seul.</p></details>
- <details><summary data-i18n="faq.q6">C'est quoi ton parcours ?</summary><p data-i18n="faq.a6">Béninois, parti de zéro juste après le bac. J'ai galéré, je me suis fait arnaquer, et je suis resté bloqué à 5k/mois pendant un an. Puis tout a basculé : 10k, 20k, jusqu'à plus de 50k€ par mois. Ce chemin m'a fait voyager dans 30+ pays et accompagner 30+ entrepreneurs. Aujourd'hui, je transmets ce que j'aurais voulu qu'on me dise au départ.</p></details>
- <details><summary data-i18n="faq.q8">C'est qui les Ex-rienneux ?</summary><p data-i18n="faq.a8">C'est ma communauté privée que tu rejoins en prenant le guide. Tu y retrouves d'anciens rienneux qui étaient à ta place avant toi. Tu poses toutes tes questions, tu échanges, et on suit tes progrès ensemble. Tu n'es jamais laissé seul : tu es accompagné pour quitter ta vie de rienneux.</p></details>
- <details><summary data-i18n="faq.q7">Je ne suis pas encore prêt à payer, je peux commencer gratuitement ?</summary><p data-i18n-html="faq.a7">Oui. Rejoins la communauté WhatsApp gratuite « Les Rienneux » : je partage de la valeur tous les jours, tu poses tes questions, et on avance ensemble. Quand tu te sens prêt, tu passes à l'étape suivante. <a href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">Rejoindre gratuitement 👉</a></p></details>
+ <details><summary data-i18n="faq.q1">De quoi j'ai besoin pour commencer ?</summary><p data-i18n="faq.a1"></p></details>
+ <details><summary data-i18n="faq.q2">Comment je fais pour payer ?</summary><p data-i18n="faq.a2"></p></details>
+ <details><summary data-i18n="faq.q3">Qu'est-ce qu'il y a dans le guide ?</summary><p data-i18n="faq.a3"></p></details>
+ <details><summary data-i18n="faq.q4">Qu'est-ce qui est gratuit ?</summary><p data-i18n-html="faq.a4"></p></details>
  </div>
  </div>
  </section>
@@ -911,7 +927,8 @@ const I18N = {
  p4:"<b>Te faire payer et sortir ton argent</b> quand tu n'as pas de compte bancaire classique : banques, mobile money, les solutions qui fonctionnent vraiment.",
  s4:"Le problème dont personne ne parle, et qui bloque le plus de gens."},
  ch:{l1:"gagnés par mes élèves", l2:"façons de gagner de l'argent en ligne",
- l3:"élèves nous ont rejoints ce mois-ci"},
+ l3:"élèves accompagnés depuis le début",
+ joined:"Ils sont <b>300+</b> à nous avoir rejoints le mois dernier"},
  topbar:{cta:"Rejoindre le groupe privé (Gratuit)",
   i1:"Je partage de la valeur <b>tous les jours</b>, gratuitement",
   i2:"Tu poses tes questions, <b>j'y réponds</b>"},
@@ -957,14 +974,14 @@ const I18N = {
  },
  faq:{
  eyebrow:"FAQ", h2:"Les questions fréquentes",
- q1:"C'est pour qui ?", a1:"Pour les rienneux qui veulent se lancer sans savoir par où commencer, et pour ceux qui font déjà 5k-30k+/mois et veulent scaler. Le questionnaire t'oriente automatiquement vers le bon accompagnement.",
- q2:"Comment se passe l'appel ?", a2:"Un appel en visioconférence. On fait le point sur ta situation, j'identifie ce qui te bloque, et tu repars avec un plan d'action clair et priorisé.",
- q3:"Et si je débute totalement ?", a3:"C'est précisément fait pour ça. L'accompagnement Démarrage est pensé pour clarifier ton idée et te donner tes premières étapes concrètes.",
- q4:"Est-ce que l'appel est un argumentaire de vente ?", a4:"Non. C'est un vrai diagnostic : on travaille sur ton business pendant l'appel et tu repars avec un plan concret, que tu ailles plus loin avec moi ou non.",
- q5:"Qu'est-ce qu'il y a dans le guide des rienneux ?", a5:"Du concret, pas du rêve. Il ne s'agit pas de te vendre un business miracle ni du e-commerce à la mode. Le guide passe en revue les vraies façons (les véhicules) de faire tes premiers revenus en ligne selon d'où tu pars, comment choisir la tienne, trouver tes premiers clients et encaisser depuis l'Afrique. Tout vient de mon expérience réelle. Et surtout : en l'achetant, tu rejoins la communauté Ex-rienneux, où tu poses tes questions et où on suit tes progrès. Tu n'es jamais laissé seul.",
- q6:"C'est quoi ton parcours ?", a6:"Béninois, parti de zéro juste après le bac. J'ai galéré, je me suis fait arnaquer, et je suis resté bloqué à 5k/mois pendant un an. Puis tout a basculé : 10k, 20k, jusqu'à plus de 50k€ par mois. Ce chemin m'a fait voyager dans 30+ pays et accompagner 30+ entrepreneurs. Aujourd'hui, je transmets ce que j'aurais voulu qu'on me dise au départ.",
- q7:"Je ne suis pas encore prêt à payer, je peux commencer gratuitement ?", a7:'Oui. Rejoins la communauté WhatsApp gratuite « Les Rienneux » : je partage de la valeur tous les jours, tu poses tes questions, et on avance ensemble. Quand tu te sens prêt, tu passes à l\'étape suivante. <a href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">Rejoindre gratuitement 👉</a>',
- q8:"C'est qui les Ex-rienneux ?", a8:"C'est ma communauté privée que tu rejoins en prenant le guide. Tu y retrouves d'anciens rienneux qui étaient à ta place avant toi. Tu poses toutes tes questions, tu échanges, et on suit tes progrès ensemble. Ton accès est valable 1 an. Tu n'es jamais laissé seul : tu es accompagné pour quitter ta vie de rienneux."
+ q1:"De quoi j'ai besoin pour commencer ?",
+ a1:"D'un téléphone et d'une connexion internet. C'est tout. Pas d'ordinateur, pas de capital de départ, pas de diplôme. J'ai commencé exactement comme ça, depuis le Bénin, et la plupart de mes élèves travaillent encore aujourd'hui uniquement depuis leur téléphone.",
+ q2:"Comment je fais pour payer ?",
+ a2:"Deux moyens, directement sur le site. Par carte bancaire, Visa ou Mastercard, si tu paies depuis l'international. Ou par mobile money si tu es en Afrique : Orange Money, MTN, Moov, Wave. Tu reçois ton accès immédiatement après le paiement. Je n'accepte ni espèces ni dépôt en liquide : tout passe par ces deux canaux, c'est plus sûr pour toi comme pour moi.",
+ q3:"Qu'est-ce qu'il y a dans le guide ?",
+ a3:"Vingt-deux chapitres qui vont du départ à tes premiers revenus. Trouver la compétence que tu peux vendre, décrocher et réussir ton premier client en freelance, te lancer dans la création de contenu et la monétiser, gagner des commissions en affiliation, et la vérité sur l'e-commerce et le trading. Un chapitre entier sur la question que tout le monde évite : recevoir et retirer ton argent depuis l'Afrique. Plus les pièges à éviter, mon histoire d'arnaque comprise, et ton plan d'action pour tes 7 puis tes 30 premiers jours. L'accès à la communauté Ex-rienneux pendant un an est inclus.",
+ q4:"Qu'est-ce qui est gratuit ?",
+ a4:"Le groupe WhatsApp privé. J'y partage de la valeur tous les jours, tu poses tes questions et j'y réponds. Rien à payer, rien à justifier : tu entres, tu observes, et tu décides ensuite si tu veux aller plus loin. <a href=\"https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw\" target=\"_blank\" rel=\"noopener\" onclick=\"track('click_whatsapp',{depuis:'faq'})\" style=\"color:var(--accent);font-weight:700\">Rejoindre le groupe maintenant &#8594;</a>"
  },
  final:{ h2:"Tu peux rester bloqué encore 5 ans.<br>Ou régler ça cette semaine.", cta:"Apprendre à gagner de l'argent" },
  quiz:{
@@ -1037,7 +1054,8 @@ const I18N = {
  p4:"<b>Receive and withdraw your money</b> when you have no standard bank account: banks, mobile money, the solutions that actually work.",
  s4:"The problem nobody talks about, and the one that blocks the most people."},
  ch:{l1:"earned by my students", l2:"ways to make money online",
- l3:"students joined this month"},
+ l3:"students coached since the start",
+ joined:"<b>300+</b> people joined last month"},
  topbar:{cta:"Join the private group (Free)",
   i1:"I share value <b>every day</b>, for free",
   i2:"You ask, <b>I answer</b>"},
@@ -1083,14 +1101,14 @@ const I18N = {
  },
  faq:{
  eyebrow:"FAQ", h2:"Frequently asked questions",
- q1:"Who is it for?", a1:"For beginners who want to start but don't know how, and for those already doing $5k-30k+/month who want to scale. The quiz automatically points you to the right support.",
- q2:"How does the call work?", a2:"A video call. We review your situation, I pinpoint what's blocking you, and you leave with a clear, prioritized action plan.",
- q3:"What if I'm a total beginner?", a3:"That's exactly what it's for. The Starter session is built to clarify your idea and give you your first concrete steps.",
- q4:"Is the call a sales pitch?", a4:"No. It's a real diagnostic: we work on your business during the call and you leave with a concrete plan, whether you go further with me or not.",
- q5:"What's inside the beginners' guide?", a5:"Concrete stuff, no hype. It's not about selling you a miracle business or trendy e-commerce. The guide walks through the real ways (the vehicles) to make your first income online depending on where you start, how to choose yours, find your first clients and get paid from Africa. It all comes from real experience. And most importantly: when you buy it, you join the Ex-rienneux community, where you ask your questions and we follow your progress. You're never left on your own.",
- q6:"What's your story?", a6:"Beninese, started from zero right after high school. I struggled, got scammed, and stayed stuck at 5k/month for a year. Then everything shifted: 10k, 20k, up to over €50k a month. This path took me to 30+ countries and let me help 30+ entrepreneurs. Today, I pass on what I wish someone had told me at the start.",
- q7:"I'm not ready to pay yet, can I start for free?", a7:'Yes. Join the free WhatsApp community « Les Rienneux »: I share value every day, you ask your questions, and we move forward together. When you feel ready, you take the next step. <a href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">Join for free 👉</a>',
- q8:"Who are the Ex-rienneux?", a8:"It's my private community that you join when you get the guide. You'll find former rienneux who were in your shoes before you. You ask all your questions, you exchange, and we follow your progress together. Your access is valid for 1 year. You're never left alone: you're supported all the way out of your rienneux life."
+ q1:"What do I need to start?",
+ a1:"A phone and an internet connection. That's it. No computer, no starting capital, no diploma. That is exactly how I started, from Benin, and most of my students still work from their phone alone today.",
+ q2:"How do I pay?",
+ a2:"Two ways, right here on the site. By card, Visa or Mastercard, if you pay from abroad. Or by mobile money if you are in Africa: Orange Money, MTN, Moov, Wave. You get access immediately after payment. I do not accept cash or cash deposits: everything goes through these two channels, which is safer for you and for me.",
+ q3:"What is inside the guide?",
+ a3:"Twenty-two chapters, from the very start to your first income. Finding the skill you can sell, landing and delivering your first freelance client, starting to create content and monetising it, earning commissions through affiliation, and the truth about e-commerce and trading. A full chapter on the question everyone avoids: receiving and withdrawing your money from Africa. Plus the traps to avoid, including the time I got scammed, and your action plan for your first 7 then 30 days. One year of access to the Ex-rienneux community is included.",
+ q4:"What is free?",
+ a4:"The private WhatsApp group. I share value there every day, you ask your questions and I answer them. Nothing to pay, nothing to justify: you come in, you watch, and you decide afterwards whether you want to go further. <a href=\"https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw\" target=\"_blank\" rel=\"noopener\" onclick=\"track('click_whatsapp',{depuis:'faq'})\" style=\"color:var(--accent);font-weight:700\">Join the group now &#8594;</a>"
  },
  final:{ h2:"You can stay stuck for 5 more years.<br>Or fix it this week.", cta:"Learn to make money" },
  quiz:{
