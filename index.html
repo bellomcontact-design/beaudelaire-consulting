@@ -1396,6 +1396,10 @@ try{ if(new URLSearchParams(location.search).get('appel')==='1'){ startQuiz(); }
  }
  function rendu(){
   charger(idx); charger(idx+1);
+  /* Toutes les diapositives recoivent leurs classes, pas seulement celle
+     qui est visible : sans cela les images des autres restent a leur
+     taille naturelle et debordent des qu'elles entrent dans le cadre. */
+  for(var j=0;j<n;j++){ if(j!==idx) vedette(slides[j], 0); }
   piste.style.transform='translateX(-'+(idx*100)+'%)';
   for(var i=0;i<pastilles.children.length;i++)
    pastilles.children[i].className=(i===idx)?'on':'';
