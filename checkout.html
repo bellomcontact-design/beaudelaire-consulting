@@ -81,7 +81,7 @@
  .backlink:hover{color:var(--accent)}
  /* Preuves sociales : un carrousel d'activites, 3 captures en eventail */
  .proof{background:var(--bg2);border-top:1px solid var(--border)}
- .proof .eyebrow{margin-bottom:10px}
+ .proof .eyebrow{margin-bottom:10px;text-align:center}
  .proof h2{font-size:clamp(24px,3.4vw,36px);font-weight:800;letter-spacing:-.02em;text-align:center;margin-bottom:6px}
  .proof .sublead{text-align:center;color:var(--muted);font-size:15px;margin-bottom:26px}
  .pvp{overflow:hidden;position:relative;touch-action:pan-y}
@@ -90,17 +90,19 @@
  .pvtitle{text-align:center;font-size:19px;font-weight:800;color:var(--accent);margin-bottom:4px}
  .pvsub{text-align:center;color:var(--muted);font-size:13.5px;margin-bottom:22px}
 
- /* L'eventail : 3 captures qui se chevauchent et s'inclinent */
- .fan{display:flex;justify-content:center;align-items:center;min-height:260px}
- /* Hauteur fixe : elle reserve la place avant chargement et uniformise
-    des captures aux formats tres differents (paysage et portrait). */
- .fan img{width:30%;max-width:290px;height:clamp(170px,24vw,300px);border-radius:12px;background:#fff;display:block;
-   box-shadow:0 18px 44px rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.10);
-   object-fit:cover;object-position:top;transition:transform .25s ease}
- .fan img:nth-child(1){transform:rotate(-7deg) translateY(12px);z-index:1}
- .fan img:nth-child(2){transform:translateY(-10px) scale(1.06);z-index:3;margin:0 -4%}
- .fan img:nth-child(3){transform:rotate(7deg) translateY(12px);z-index:2}
- .fan img:hover{transform:translateY(-16px) scale(1.1);z-index:5}
+ /* Une preuve en avant, deux en retrait.
+    object-fit:contain — la capture est montree entiere, jamais rognee :
+    c'est la condition pour que les chiffres restent lisibles sans clic. */
+ .fan{display:flex;align-items:center;justify-content:center;gap:14px;
+   min-height:clamp(210px,27vw,330px)}
+ .fan img{background:#fff;object-fit:contain;object-position:center;display:block;
+   border-radius:12px;border:1px solid rgba(255,255,255,.10);cursor:zoom-in;
+   transition:width .45s cubic-bezier(.22,.61,.36,1),opacity .45s ease,transform .45s ease}
+ .fan img.vedette{width:58%;max-width:540px;max-height:clamp(200px,26vw,310px);
+   order:2;opacity:1;transform:none;z-index:3;box-shadow:0 22px 50px rgba(0,0,0,.6)}
+ .fan img.petite{width:20%;max-width:200px;max-height:clamp(110px,15vw,180px);
+   opacity:.55;transform:scale(.95);z-index:1;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+ .fan img.petite:hover{opacity:.9;transform:scale(1)}
 
  /* Visionneuse : la capture entiere, en grand */
  .lb{position:fixed;inset:0;z-index:200;background:rgba(6,14,21,.96);
@@ -405,13 +407,15 @@ function toggleDevise(){
  applyDevise();
 }
 
-/* Carrousel des preuves : glissement au doigt, defilement toutes les 6 s,
-   navigation par pastilles. Le defilement se suspend des que le visiteur agit. */
+/* Carrousel des preuves.
+   Deux rythmes imbriques : la preuve mise en avant change toutes les 2 s,
+   et l'activite toutes les 6 s — soit apres que les trois preuves de
+   l'activite ont eu leur tour. Tout se suspend des que le visiteur agit. */
 (function(){
  var piste=document.getElementById('pvtrack'), cadre=document.getElementById('pvp'),
      pastilles=document.getElementById('pvdots');
  if(!piste||!cadre||!pastilles) return;
- var n=piste.children.length, idx=0, minuteur=null;
+ var slides=[].slice.call(piste.children), n=slides.length, idx=0, rang=0, minuteur=null;
 
  for(var i=0;i<n;i++){
   var b=document.createElement('b'); b.setAttribute('role','button');
@@ -419,43 +423,53 @@ function toggleDevise(){
   b.onclick=(function(k){ return function(){ aller(k); relancer(); }; })(i);
   pastilles.appendChild(b);
  }
+
+ /* Place la preuve `k` au centre et repousse les deux autres sur les cotes. */
+ function vedette(slide, k){
+  var imgs=slide.querySelectorAll('.fan img');
+  for(var i=0;i<imgs.length;i++){
+   var rel=(i-k+imgs.length)%imgs.length;
+   imgs[i].className = (rel===0) ? 'vedette' : 'petite';
+   imgs[i].style.order = (rel===0) ? 2 : (rel===1 ? 3 : 1);
+  }
+ }
  function rendu(){
   piste.style.transform='translateX(-'+(idx*100)+'%)';
   for(var i=0;i<pastilles.children.length;i++)
-   pastilles.children[i].className = (i===idx) ? 'on' : '';
+   pastilles.children[i].className=(i===idx)?'on':'';
+  vedette(slides[idx], rang);
  }
- function aller(k){ idx=(k+n)%n; rendu(); }
- function suivant(){ aller(idx+1); }
- function relancer(){ clearInterval(minuteur); minuteur=setInterval(suivant, 6000); }
+ function aller(k){ idx=(k+n)%n; rang=0; rendu(); }
+ function battement(){
+  rang++;
+  if(rang>=slides[idx].querySelectorAll('.fan img').length){ aller(idx+1); }
+  else { vedette(slides[idx], rang); }
+ }
+ function relancer(){ clearInterval(minuteur); minuteur=setInterval(battement, 2000); }
 
  /* Glissement au doigt */
- var x0=null, y0=null, dx=0, glisse=false;
+ var x0=null,y0=null,dx=0,glisse=false;
  cadre.addEventListener('touchstart', function(e){
-  x0=e.touches[0].clientX; y0=e.touches[0].clientY; dx=0; glisse=false;
-  clearInterval(minuteur);
+  x0=e.touches[0].clientX; y0=e.touches[0].clientY; dx=0; glisse=false; clearInterval(minuteur);
  }, {passive:true});
  cadre.addEventListener('touchmove', function(e){
   if(x0===null) return;
   dx=e.touches[0].clientX-x0;
   var dy=e.touches[0].clientY-y0;
-  /* on ne prend la main que si le geste est franchement horizontal */
   if(!glisse && Math.abs(dx)>Math.abs(dy) && Math.abs(dx)>12) glisse=true;
  }, {passive:true});
  cadre.addEventListener('touchend', function(){
-  if(glisse && Math.abs(dx)>45){ aller(idx + (dx<0 ? 1 : -1)); track('swipe_preuves'); }
+  if(glisse && Math.abs(dx)>45){ aller(idx+(dx<0?1:-1)); track('swipe_preuves'); }
   x0=null; relancer();
  });
 
- /* Clavier, pour qui navigue sans souris */
  cadre.setAttribute('tabindex','0');
  cadre.addEventListener('keydown', function(e){
   if(e.key==='ArrowRight'){ aller(idx+1); relancer(); }
   if(e.key==='ArrowLeft'){ aller(idx-1); relancer(); }
  });
-
  cadre.addEventListener('mouseenter', function(){ clearInterval(minuteur); });
  cadre.addEventListener('mouseleave', relancer);
- /* Inutile de faire defiler une section que personne ne regarde */
  document.addEventListener('visibilitychange', function(){
   if(document.hidden) clearInterval(minuteur); else relancer();
  });
