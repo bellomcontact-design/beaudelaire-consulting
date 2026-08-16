@@ -62,6 +62,12 @@
  .pfeat li{display:flex;gap:10px;font-size:14.5px;line-height:1.45;color:var(--text-soft)}
  .pfeat .ck{flex:0 0 auto;color:#3ECF7E;font-weight:800}
  .pcard.full .pfeat li,.pcard.full .pfeat .ck{color:var(--faint)}
+ .plus{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;
+   background:none;border:0;padding:0 0 14px;cursor:pointer;font-family:inherit;
+   font-size:13.5px;font-weight:700;color:var(--accent);text-align:left}
+ .plus-ico{font-size:18px;line-height:1;transition:transform .2s ease}
+ .plus[aria-expanded="true"] .plus-ico{transform:rotate(45deg)}
+ .pmore{margin:-4px 0 18px}
  .pbtn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:14px;border-radius:12px;
  text-decoration:none;font-weight:700;font-size:15px;font-family:inherit;cursor:pointer;border:1.5px solid var(--border);
  background:transparent;color:var(--text);transition:border-color .12s ease,transform .12s ease}
@@ -76,7 +82,16 @@
  .ribbon{position:absolute;top:24px;right:-52px;width:190px;transform:rotate(38deg);z-index:2;
  background:rgba(229,84,75,.16);border-top:1px solid rgba(229,84,75,.5);border-bottom:1px solid rgba(229,84,75,.5);
  color:#FF6B5E;font-size:12px;font-weight:800;letter-spacing:.14em;text-align:center;padding:6px 0}
- .pnote{text-align:center;color:var(--muted);font-size:13px;margin-top:26px}
+ /* Preuve sociale, calee sous les offres */
+ .joined{display:flex;align-items:center;justify-content:center;gap:11px;margin-top:26px;
+   color:var(--muted);font-size:14.5px;flex-wrap:wrap}
+ .joined b{color:var(--text);font-weight:800}
+ .avatars{display:inline-flex;flex:0 0 auto}
+ .avatars i{width:30px;height:30px;border-radius:50%;background:var(--card);
+   border:2px solid var(--bg2);margin-left:-9px;display:flex;align-items:center;justify-content:center;
+   font-style:normal;font-weight:800;font-size:12px;color:var(--accent)}
+ .avatars i:first-child{margin-left:0}
+ .pnote{text-align:center;color:var(--muted);font-size:13px;margin-top:10px}
  .backlink{display:inline-block;margin-top:26px;color:var(--muted);font-size:14px;text-decoration:none}
  .backlink:hover{color:var(--accent)}
  /* Preuves sociales : un carrousel d'activites, 3 captures en eventail */
@@ -105,14 +120,19 @@
  .fan img.petite:hover{opacity:.9;transform:scale(1)}
 
  /* Visionneuse : la capture entiere, en grand */
- .lb{position:fixed;inset:0;z-index:200;background:rgba(6,14,21,.96);
-   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+ /* Fond translucide : on devine la page derriere, la visionneuse
+    se lit comme une couche posee dessus plutot qu'un ecran noir. */
+ .lb{position:fixed;inset:0;z-index:200;background:rgba(6,14,21,.72);
+   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px}
  .lb[hidden]{display:none}
- .lb-bar{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;
-   gap:14px;padding:16px 18px;background:linear-gradient(180deg,rgba(6,14,21,.92),transparent)}
- .lb-title{font-size:15px;font-weight:800;color:var(--accent);letter-spacing:.02em}
- .lb-close{background:rgba(255,255,255,.08);border:1px solid var(--border);color:var(--text);
+ /* Le titre et la croix sont solidaires de l'image, pas des bords de l'ecran */
+ .lb-box{position:relative;display:flex;flex-direction:column;align-items:center;max-width:92vw}
+ .lb-head{position:relative;display:flex;align-items:center;justify-content:center;
+   width:100%;min-height:44px;margin-bottom:10px;padding:0 52px}
+ .lb-title{font-size:15px;font-weight:800;color:var(--accent);letter-spacing:.02em;text-align:center}
+ .lb-close{position:absolute;right:0;top:50%;transform:translateY(-50%);
+   background:rgba(255,255,255,.10);border:1px solid var(--border);color:var(--text);
    width:40px;height:40px;border-radius:50%;font-size:19px;line-height:1;cursor:pointer;font-family:inherit;
    display:flex;align-items:center;justify-content:center;flex:0 0 auto;transition:.12s}
  .lb-close:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
@@ -166,8 +186,7 @@
 
 <header>
  <div class="wrap">
-  <div class="eyebrow" data-i18n="eyebrow">Les offres</div>
-  <h1 data-i18n="h2">Choisis ton chemin</h1>
+  <h1 data-i18n="h2">Choisis ton chemin vers le succès</h1>
  </div>
 </header>
 
@@ -189,6 +208,16 @@
       <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o1f3"></span></li>
       <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o1f4"></span></li>
       <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o1f5"></span></li>
+     </ul>
+     <button type="button" class="plus" onclick="basculePlus(this)" aria-expanded="false">
+      <span data-i18n="plus">Tout ce qu'il y a dans le guide</span><span class="plus-ico" aria-hidden="true">+</span>
+     </button>
+     <ul class="pfeat pmore" hidden>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o1f6"></span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o1f7"></span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o1f8"></span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o1f9"></span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o1f10"></span></li>
      </ul>
      <a class="pbtn solid" href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" onclick="track('click_offre_guide_card')" data-i18n="card">Payer par carte</a>
      <a class="pbtn" href="https://me.fedapay.com/aAqYA_bD" target="_blank" rel="noopener" onclick="track('click_offre_guide_momo')" data-i18n="momo">Payer en mobile money</a>
@@ -213,6 +242,10 @@
     </div>
    </div>
 
+  </div>
+  <div class="joined">
+   <span class="avatars" aria-hidden="true"><i>K</i><i>A</i><i>M</i><i>S</i></span>
+   <span data-i18n="joined">Ils sont <b>300+</b> à avoir rejoint le mois dernier</span>
   </div>
   <p class="pnote" data-i18n="note">Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.</p>
   <div style="text-align:center"><a class="backlink" href="/" data-i18n="back">← Revenir à l'accueil</a></div>
@@ -272,12 +305,14 @@
 
 <!-- Visionneuse -->
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Preuve en grand">
- <div class="lb-bar">
-  <span class="lb-title" id="lbTitle"></span>
-  <button class="lb-close" id="lbClose" aria-label="Fermer">&#10005;</button>
+ <div class="lb-box">
+  <div class="lb-head">
+   <span class="lb-title" id="lbTitle"></span>
+   <button class="lb-close" id="lbClose" aria-label="Fermer">&#10005;</button>
+  </div>
+  <img class="lb-img" id="lbImg" alt="">
  </div>
  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Précédente">&#8249;</button>
- <img class="lb-img" id="lbImg" alt="">
  <button class="lb-nav lb-next" id="lbNext" aria-label="Suivante">&#8250;</button>
  <div class="lb-count" id="lbCount"></div>
 </div>
@@ -294,7 +329,7 @@ function track(event, data){
 
 var I18N = {
  fr:{
-  eyebrow:"Les offres", h2:"Choisis ton chemin",
+  h2:"Choisis ton chemin vers le succès",
   pv_eyebrow:"Ils l'ont fait",
   pv_h2:"Les résultats de ceux qui ont suivi le chemin",
   pv_sub:"Des chiffres réels, activité par activité.",
@@ -310,6 +345,13 @@ var I18N = {
   o1f3:"Trouver et réussir tes premiers clients en freelance",
   o1f4:"Recevoir et retirer ton argent depuis l'Afrique",
   o1f5:"L'accès à la communauté Ex-rienneux pendant 1 an",
+  plus:"Tout ce qu'il y a dans le guide",
+  o1f6:"Le bon mindset pour partir de zéro",
+  o1f7:"Devenir créateur de contenu et le monétiser, y compris avec l'IA",
+  o1f8:"L'affiliation : gagner une commission sans créer ton produit",
+  o1f9:"La vérité sur l'e-commerce et le trading",
+  o1f10:"Ton plan d'action : tes 7 premiers jours, puis tes 30 premiers",
+  joined:"Ils sont <b>300+</b> à avoir rejoint le mois dernier",
   o2name:"Coaching",
   o2f1:"Tout ce que contient le guide",
   o2f2:"Un accès direct à Beaudelaire",
@@ -320,7 +362,7 @@ var I18N = {
   back:"← Revenir à l'accueil"
  },
  en:{
-  eyebrow:"The offers", h2:"Choose your path",
+  h2:"Choose your path to success",
   pv_eyebrow:"They did it",
   pv_h2:"Results from those who followed the path",
   pv_sub:"Real numbers, one activity at a time.",
@@ -336,6 +378,13 @@ var I18N = {
   o1f3:"Find and deliver your first freelance clients",
   o1f4:"Get paid and withdraw your money from Africa",
   o1f5:"Access to the Ex-rienneux community for 1 year",
+  plus:"Everything inside the guide",
+  o1f6:"The right mindset to start from zero",
+  o1f7:"Becoming a content creator and monetising it, AI included",
+  o1f8:"Affiliation: earning a commission without your own product",
+  o1f9:"The truth about e-commerce and trading",
+  o1f10:"Your action plan: your first 7 days, then your first 30",
+  joined:"<b>300+</b> people joined last month",
   o2name:"Coaching",
   o2f1:"Everything in the guide",
   o2f2:"Direct access to Beaudelaire",
@@ -356,8 +405,9 @@ var LANG = (function(){
 function applyI18N(){
  var t=I18N[LANG];
  document.querySelectorAll('[data-i18n]').forEach(function(el){
-  var v=t[el.getAttribute('data-i18n')];
-  if(v!=null) el.textContent=v;
+  var k=el.getAttribute('data-i18n'), v=t[k];
+  if(v==null) return;
+  if(v.indexOf('<')>=0) el.innerHTML=v; else el.textContent=v;
  });
  document.documentElement.lang=LANG;
  var b=document.getElementById('langToggle'); if(b) b.textContent = (LANG==='fr') ? 'EN' : 'FR';
@@ -517,7 +567,7 @@ function toggleDevise(){
   if(cible.matches && cible.matches('.fan img')){
    collecter(); ouvrir(vignettes.indexOf(cible)); return;
   }
-  if(cible===boite) fermer();                       /* clic sur le fond */
+  if(cible===boite || (cible.classList && cible.classList.contains('lb-box'))) fermer();
  });
  document.getElementById('lbClose').onclick=fermer;
  document.getElementById('lbPrev').onclick=function(){ naviguer(-1); };
@@ -540,6 +590,14 @@ function toggleDevise(){
   x0=null;
  });
 })();
+
+/* Le "+" revele le reste du contenu du guide sans quitter la page. */
+function basculePlus(btn){
+ var liste=btn.nextElementSibling, ouvert=btn.getAttribute('aria-expanded')==='true';
+ btn.setAttribute('aria-expanded', ouvert ? 'false' : 'true');
+ liste.hidden=ouvert;
+ if(!ouvert) track('ouvre_details_guide');
+}
 
 document.getElementById('yr').textContent = new Date().getFullYear();
 applyI18N();
