@@ -27,11 +27,32 @@
  a{color:inherit}
 
  /* Barre de navigation */
+ /* En-tete : la bande reste visible en permanence ; la navigation
+    s'efface quand on descend et revient des qu'on remonte. */
+ .entete{position:sticky;top:0;z-index:60}
+ .entete .topnav{position:static;transition:transform .28s ease,opacity .28s ease,max-height .28s ease}
+ .entete.compacte .topnav{transform:translateY(-6px);opacity:0;max-height:0;
+   overflow:hidden;border-bottom-color:transparent;pointer-events:none}
+ @media(prefers-reduced-motion:reduce){ .entete .topnav{transition:none} }
+ /* Bande d'annonce : elle defile avec la page, la navigation reste
+    collee en haut. Sur mobile seul le bouton subsiste, faute de place. */
+ .topbar{background:var(--accent-soft);border-bottom:1px solid rgba(255,165,69,.26);
+   display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+   padding:9px 20px;text-align:center}
+ .topbar span{color:var(--text-soft);font-size:13.5px}
+ .topbar b{color:var(--text);font-weight:700}
+ .topbar-btn{display:inline-flex;align-items:center;gap:7px;background-image:var(--accent-grad);
+   color:var(--on-accent);font-weight:800;font-size:13px;padding:7px 15px;border-radius:999px;
+   text-decoration:none;white-space:nowrap;transition:transform .12s ease}
+ .topbar-btn:hover{transform:scale(1.04)}
+ @media(max-width:640px){ .topbar span{display:none} .topbar{padding:8px 16px} }
+ @media(prefers-reduced-motion:reduce){ .topbar-btn{transition:none} .topbar-btn:hover{transform:none} }
  .topnav{position:sticky;top:0;z-index:40;background:var(--bg-veil);backdrop-filter:blur(8px);
  -webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
  .topnav-in{display:flex;align-items:center;justify-content:space-between;max-width:1000px;margin:0 auto;padding:13px 20px;gap:14px}
- .brand{font-weight:700;font-size:20px;text-decoration:none;color:var(--text);letter-spacing:-.01em}
- @media(max-width:560px){.brand{font-size:16px}}
+ .brand{display:inline-flex;align-items:center;text-decoration:none}
+ .brand img{width:36px;height:36px;border-radius:9px;display:block}
+ @media(max-width:560px){.brand img{width:30px;height:30px}}
  .navctl{display:flex;align-items:center;gap:9px}
  .navbtn{background:none;border:1px solid var(--border);border-radius:8px;color:var(--muted);
  font-family:inherit;font-weight:700;font-size:13px;padding:7px 11px;cursor:pointer;text-decoration:none;
@@ -177,15 +198,23 @@
 </head>
 <body>
 
+<div class="entete">
+<div class="topbar">
+ <span data-i18n-html="tb_txt">Chaque jour, je partage de la valeur dans le groupe <b>WhatsApp</b></span>
+ <a class="topbar-btn" href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener"
+    onclick="track('click_whatsapp',{depuis:'checkout'})" data-i18n="tb_cta">Rejoindre le groupe (gratuit)</a>
+</div>
+
 <nav class="topnav">
  <div class="topnav-in">
-  <a class="brand" href="/">Beaudelaire Consulting</a>
+  <a class="brand" href="/" aria-label="Beaudelaire Consulting"><img src="/logo.png" alt="Beaudelaire Consulting" width="36" height="36"></a>
   <div class="navctl">
    <button class="navbtn" id="devToggle" onclick="toggleDevise()" title="Changer de devise">FCFA</button>
    <button class="navbtn" id="langToggle" onclick="toggleLang()">EN</button>
   </div>
  </div>
 </nav>
+</div>
 
 <header>
  <div class="wrap">
@@ -378,6 +407,8 @@ function track(event, data){
 
 var I18N = {
  fr:{
+  tb_txt:"Chaque jour, je partage de la valeur dans le groupe <b>WhatsApp</b>",
+  tb_cta:"Rejoindre le groupe (gratuit)",
   h2:"Choisis ton chemin vers le succès",
   pv_eyebrow:"Ils l'ont fait",
   pv_h2:"Les résultats de ceux qui ont suivi le chemin",
@@ -417,6 +448,8 @@ var I18N = {
   back:"← Revenir à l'accueil"
  },
  en:{
+  tb_txt:"Every day I share value in the <b>WhatsApp</b> group",
+  tb_cta:"Join the group (free)",
   h2:"Choose your path to success",
   pv_eyebrow:"They did it",
   pv_h2:"Results from those who followed the path",
@@ -688,6 +721,20 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 applyI18N();
 applyDevise();
 track('visit_checkout');
+
+/* La navigation s'efface vers le bas, revient vers le haut. Le seuil evite
+   qu'elle clignote au moindre soubresaut, frequent sur mobile. */
+(function(){
+ var entete=document.querySelector('.entete'); if(!entete) return;
+ var dernier=window.scrollY||0;
+ window.addEventListener('scroll', function(){
+  var y=window.scrollY||0;
+  if(Math.abs(y-dernier)<6) return;
+  if(y>120 && y>dernier) entete.classList.add('compacte');
+  else if(y<dernier) entete.classList.remove('compacte');
+  dernier=y;
+ }, {passive:true});
+})();
 </script>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer src="/_vercel/insights/script.js"></script>
