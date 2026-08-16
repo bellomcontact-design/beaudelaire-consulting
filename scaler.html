@@ -34,17 +34,39 @@
  @media(prefers-reduced-motion:reduce){ .entete .topnav{transition:none} }
  /* Bande d'annonce : elle defile avec la page, la navigation reste
     collee en haut. Sur mobile seul le bouton subsiste, faute de place. */
+ /* Une seule barre : logo a gauche, appel a l'action au centre, menu a
+    droite. Le choix de langue vit dans le menu, il n'a pas besoin d'etre
+    visible en permanence. */
  .topbar{position:relative;background:var(--bg);border-bottom:1px solid var(--border);
-   display:flex;flex-direction:column;align-items:center;padding:10px 18px 20px}
+   display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 18px 20px}
+ .tb-logo{display:inline-flex;align-items:center;text-decoration:none;flex:0 0 auto}
+ .tb-logo img{width:34px;height:34px;border-radius:9px;display:block}
  .topbar-btn{display:inline-flex;align-items:center;justify-content:center;
-   background-image:var(--accent-grad);color:var(--on-accent);font-weight:800;font-size:13.5px;
-   padding:9px 20px;border-radius:999px;text-decoration:none;white-space:nowrap;
+   background-image:var(--accent-grad);color:var(--on-accent);font-weight:800;font-size:13px;
+   padding:9px 16px;border-radius:999px;text-decoration:none;text-align:center;
    transition:transform .12s ease}
  .topbar-btn:hover{transform:scale(1.04)}
- /* Meme silhouette que le bouton, en creux : les chiffres se lisent comme
-    un prolongement de l'appel a l'action, sans lui voler l'attention. */
- /* A cheval sur la bordure : le cadre mord sur la navigation, ce qui
-    l'accroche a la bande plutot que de l'empiler sous le bouton. */
+ .tb-burger{flex:0 0 auto;background:none;border:1px solid var(--border);border-radius:9px;
+   color:var(--text);font-size:18px;line-height:1;width:40px;height:38px;cursor:pointer;
+   font-family:inherit}
+ .tb-burger:hover{border-color:var(--accent)}
+ @media(max-width:420px){ .topbar-btn{font-size:11.5px;padding:8px 11px} .tb-logo img{width:30px;height:30px} }
+
+ /* Menu deroulant : liens de navigation puis choix de langue */
+ .tb-menu{position:absolute;top:100%;right:12px;z-index:70;min-width:212px;
+   background:var(--card);border:1px solid var(--border);border-radius:14px;
+   box-shadow:0 18px 40px rgba(0,0,0,.6);padding:8px;display:none}
+ .tb-menu.ouvert{display:block}
+ .tb-menu a{display:block;padding:11px 13px;border-radius:9px;color:var(--text);
+   text-decoration:none;font-size:15px;font-weight:600}
+ .tb-menu a:hover{background:var(--accent-soft);color:var(--accent)}
+ .tb-menu hr{border:0;border-top:1px solid var(--border);margin:7px 4px}
+ .tb-lang{display:flex;gap:7px;padding:4px}
+ .tb-lang button{flex:1;background:none;border:1px solid var(--border);border-radius:9px;
+   color:var(--muted);font-family:inherit;font-weight:800;font-size:13px;padding:9px 0;cursor:pointer}
+ .tb-lang button.actif{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+ @media(prefers-reduced-motion:reduce){ .topbar-btn{transition:none} .topbar-btn:hover{transform:none} }
+
  .topbar-info{position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);z-index:2;
    display:inline-flex;align-items:center;justify-content:center;
    border:1px solid var(--border);border-radius:999px;padding:6px 18px;
@@ -112,19 +134,24 @@
 
 <div class="entete">
 <div class="topbar">
+ <a class="tb-logo" href="/" aria-label="Beaudelaire Consulting"><img src="/logo.png" alt="Beaudelaire Consulting" width="34" height="34"></a>
  <a class="topbar-btn" href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener"
     onclick="track('click_whatsapp',{depuis:'scaler'})" data-i18n="tb_cta">Rejoindre le groupe privé (Gratuit)</a>
- <div class="topbar-info"><span id="tbInfo">300+ élèves nous ont rejoints ce mois-ci</span></div>
-</div>
-
-<nav class="topnav">
- <div class="topnav-in">
-  <a class="brand" href="/" aria-label="Beaudelaire Consulting"><img src="/logo.png" alt="Beaudelaire Consulting" width="36" height="36"></a>
-  <div class="navctl">
-   <button class="navbtn" id="langToggle" onclick="toggleLang()">EN</button>
+ <button class="tb-burger" id="tbBurger" onclick="basculeMenu()" aria-label="Menu" aria-expanded="false">&#9776;</button>
+ <div class="tb-menu" id="tbMenu">
+  <a href="/">Accueil</a>
+  <a href="/mon-histoire">Qui je suis</a>
+  <a href="/checkout">Le guide</a>
+  <hr>
+  <div class="tb-lang">
+   <button type="button" data-lang="fr" onclick="choisirLangue('fr')">Français</button>
+   <button type="button" data-lang="en" onclick="choisirLangue('en')">English</button>
   </div>
  </div>
-</nav>
+ <div class="topbar-info"><span id="tbInfo"></span></div>
+</div>
+
+
 </div>
 
 <header>
@@ -230,7 +257,7 @@ function applyI18N(){
 function toggleLang(){
  LANG=(LANG==='fr')?'en':'fr';
  try{ localStorage.setItem('lang',LANG); }catch(e){}
- applyI18N(); applyDevise();
+ applyI18N(); applyDevise(); marqueLangue();
 }
 
 /* Devise : mêmes règles que le reste du site, choix partagé via localStorage. */
@@ -261,6 +288,7 @@ function applyDevise(){
 
 document.getElementById('yr').textContent = new Date().getFullYear();
 applyI18N();
+marqueLangue();
 applyDevise();
 track('visit_scaler');
 
@@ -288,19 +316,33 @@ track('visit_scaler');
  window.majBandeInfo=function(){ var m=messages(); if(m.length) zone.innerHTML=m[i%m.length]; };
 })();
 
-/* La navigation s'efface vers le bas, revient vers le haut. Le seuil evite
-   qu'elle clignote au moindre soubresaut, frequent sur mobile. */
-(function(){
- var entete=document.querySelector('.entete'); if(!entete) return;
- var dernier=window.scrollY||0;
- window.addEventListener('scroll', function(){
-  var y=window.scrollY||0;
-  if(Math.abs(y-dernier)<6) return;
-  if(y>120 && y>dernier) entete.classList.add('compacte');
-  else if(y<dernier) entete.classList.remove('compacte');
-  dernier=y;
- }, {passive:true});
-})();
+/* Menu : ouverture, fermeture au clic exterieur et a la touche Echap. */
+function basculeMenu(){
+ var m=document.getElementById('tbMenu'), b=document.getElementById('tbBurger');
+ var ouvert=m.classList.toggle('ouvert');
+ b.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+}
+function fermeMenu(){
+ var m=document.getElementById('tbMenu'), b=document.getElementById('tbBurger');
+ if(m){ m.classList.remove('ouvert'); b.setAttribute('aria-expanded','false'); }
+}
+function choisirLangue(l){
+ if(typeof LANG!=='undefined' && LANG!==l && typeof toggleLang==='function') toggleLang();
+ marqueLangue(); fermeMenu();
+}
+function marqueLangue(){
+ var b=document.querySelectorAll('.tb-lang button');
+ for(var i=0;i<b.length;i++)
+  b[i].className = (b[i].getAttribute('data-lang')===LANG) ? 'actif' : '';
+}
+document.addEventListener('click', function(e){
+ var m=document.getElementById('tbMenu'), b=document.getElementById('tbBurger');
+ if(!m||!b) return;
+ if(!m.contains(e.target) && !b.contains(e.target)) fermeMenu();
+});
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') fermeMenu(); });
+
+
 </script>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer src="/_vercel/insights/script.js"></script>
