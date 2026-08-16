@@ -118,11 +118,6 @@
  .vslfacade:hover .play,.vslfacade:focus-visible .play{transform:translate(-50%,-50%) scale(1.08)}
  .vsldesc{max-width:600px;margin:0 auto 20px;font-size:16.5px;line-height:1.5;color:var(--text-soft);text-align:center}
  .vsldesc b{color:var(--text);font-weight:700}
- .vslpoints{list-style:none;display:flex;flex-direction:column;gap:11px;max-width:520px;margin:0 auto 26px;text-align:left}
- .vslpoints li{display:flex;align-items:center;gap:12px;font-size:15.5px;color:var(--text-soft);line-height:1.4}
- .vslpoints .ico{flex:0 0 auto;width:32px;height:32px;border-radius:9px;background:var(--accent-soft);
-   color:var(--star);display:flex;align-items:center;justify-content:center;font-size:15px}
- .vslpoints b{color:var(--text);font-weight:700}
 
  /* Section d'auto-identification */
  .honest{background:var(--bg2)}
@@ -136,7 +131,6 @@
  .honest .concl2{text-align:center;color:var(--muted);font-size:15px;margin-bottom:28px}
  @media(max-width:560px){
    .honest li{font-size:15px}
-   .vslpoints li{font-size:14px}
    .vslfacade .play{width:60px;height:60px;font-size:21px}
  }
 
@@ -317,10 +311,6 @@
  </button>
  </div>
  <p class="vsldesc" data-i18n-html="hero.desc">C'est un cours qui t'apprend exactement <b>quelles actions mettre en place</b> pour faire tes premiers 1 000 €.</p>
- <ul class="vslpoints">
- <li><span class="ico" aria-hidden="true">&#128176;</span><span data-i18n-html="hero.point1">De <b>0 à ton premier client</b>, puis au palier au-dessus</span></li>
- <li><span class="ico" aria-hidden="true">&#128172;</span><span data-i18n-html="hero.point2">Des conseils <b>1-à-1</b>, adaptés à ta réalité en Afrique</span></li>
- </ul>
  <a class="cta" href="/checkout" onclick="track('click_go_checkout',{depuis:'hero'})" data-i18n="hero.cta">Apprendre à gagner de l'argent</a>
  <span class="micro" data-i18n="hero.micro">Accès immédiat après paiement · carte ou mobile money.</span>
  </div>
@@ -330,7 +320,7 @@
  <section class="honest" id="honest">
  <div class="wrap">
  <div class="eyebrow" data-i18n="honest.eyebrow">Sois honnête avec toi-même</div>
- <h2 data-i18n-html="honest.h2">C'est toi, <span class='hl'>ça</span> ?</h2>
+ <h2 data-i18n-html="honest.h2">C'est toi, <span class='hl'>ça&nbsp;?</span></h2>
  <ul>
  <li><span class="bolt" aria-hidden="true">&#9889;</span><span data-i18n-html="honest.i1"></span></li>
  <li><span class="bolt" aria-hidden="true">&#9889;</span><span data-i18n-html="honest.i2"></span></li>
@@ -680,7 +670,7 @@ const I18N = {
  nav:{offres:"Les offres", about:"Qui je suis", debutants:"Rienneux", chemin:"Le chemin", cta:"Réserver un appel"},
  honest:{
  eyebrow:"Sois honnête avec toi-même",
- h2:"C'est toi, <span class='hl'>ça</span> ?",
+ h2:"C'est toi, <span class='hl'>ça&nbsp;?</span>",
  i1:"Tu es fatigué de regarder les autres avancer <b>pendant que toi, tu stagnes</b>.",
  i2:"Tu sais que tu vaux mieux que ça, mais <b>personne autour de toi ne comprend</b>.",
  i3:"Tu as enchaîné les vidéos gratuites et <b>tu n'as toujours rien lancé</b>.",
@@ -695,8 +685,6 @@ const I18N = {
  },
  hero:{
  desc:"C'est un cours qui t'apprend exactement <b>quelles actions mettre en place</b> pour faire tes premiers 1 000 €.",
- point1:"De <b>0 à ton premier client</b>, puis au palier au-dessus",
- point2:"Des conseils <b>1-à-1</b>, adaptés à ta réalité en Afrique",
  badge_pre:"Plus de", badge_post:"rienneux sauvés",
  h1:'GAGNER DE L\'ARGENT<br><b>EST UNE COMPÉTENCE</b>',
  sub:"Je vais t'apprendre à la <b>maîtriser</b>.",
@@ -814,7 +802,7 @@ const I18N = {
  nav:{offres:"Pricing", about:"About me", debutants:"Beginners", chemin:"The path", cta:"Book a call"},
  honest:{
  eyebrow:"Be honest with yourself",
- h2:"Is this <span class='hl'>you</span>?",
+ h2:"Is this <span class='hl'>you?</span>",
  i1:"You are tired of watching others move forward <b>while you stay stuck</b>.",
  i2:"You know you are capable of more, but <b>nobody around you gets it</b>.",
  i3:"You have watched countless free videos and <b>still launched nothing</b>.",
@@ -829,8 +817,6 @@ const I18N = {
  },
  hero:{
  desc:"A course that teaches you exactly <b>which actions to take</b> to make your first €1,000.",
- point1:"From <b>0 to your first client</b>, then to the next level",
- point2:"<b>1-on-1</b> advice, adapted to your reality in Africa",
  badge_pre:"More than", badge_post:"rienneux saved",
  h1:'MONEY MAKING<br><b>IS A SKILL</b>',
  sub:"I will teach you how to <b>master it</b>.",

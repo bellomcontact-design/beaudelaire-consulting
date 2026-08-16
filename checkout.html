@@ -79,6 +79,44 @@
  .pnote{text-align:center;color:var(--muted);font-size:13px;margin-top:26px}
  .backlink{display:inline-block;margin-top:26px;color:var(--muted);font-size:14px;text-decoration:none}
  .backlink:hover{color:var(--accent)}
+ /* Preuves sociales : un carrousel d'activites, 3 captures en eventail */
+ .proof{background:var(--bg2);border-top:1px solid var(--border)}
+ .proof .eyebrow{margin-bottom:10px}
+ .proof h2{font-size:clamp(24px,3.4vw,36px);font-weight:800;letter-spacing:-.02em;text-align:center;margin-bottom:6px}
+ .proof .sublead{text-align:center;color:var(--muted);font-size:15px;margin-bottom:26px}
+ .pvp{overflow:hidden;position:relative;touch-action:pan-y}
+ .pvtrack{display:flex;transition:transform .45s cubic-bezier(.22,.61,.36,1);will-change:transform}
+ .pvslide{min-width:100%;padding:0 4px;user-select:none}
+ .pvtitle{text-align:center;font-size:19px;font-weight:800;color:var(--accent);margin-bottom:4px}
+ .pvsub{text-align:center;color:var(--muted);font-size:13.5px;margin-bottom:22px}
+
+ /* L'eventail : 3 captures qui se chevauchent et s'inclinent */
+ .fan{display:flex;justify-content:center;align-items:center;min-height:260px}
+ /* Hauteur fixe : elle reserve la place avant chargement et uniformise
+    des captures aux formats tres differents (paysage et portrait). */
+ .fan img{width:30%;max-width:290px;height:clamp(170px,24vw,300px);border-radius:12px;background:#fff;display:block;
+   box-shadow:0 18px 44px rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.10);
+   object-fit:cover;object-position:top;transition:transform .25s ease}
+ .fan img:nth-child(1){transform:rotate(-7deg) translateY(12px);z-index:1}
+ .fan img:nth-child(2){transform:translateY(-10px) scale(1.06);z-index:3;margin:0 -4%}
+ .fan img:nth-child(3){transform:rotate(7deg) translateY(12px);z-index:2}
+ .fan img:hover{transform:translateY(-16px) scale(1.1);z-index:5}
+
+ /* Pastilles de navigation */
+ .pvdots{display:flex;gap:8px;justify-content:center;margin-top:26px}
+ .pvdots b{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:.2s;border:0;padding:0}
+ .pvdots b.on{background:var(--accent);width:24px;border-radius:999px}
+ .pvhint{text-align:center;color:var(--faint);font-size:12px;margin-top:14px}
+ .pvlegal{max-width:640px;margin:26px auto 0;text-align:center;color:var(--faint);font-size:11.5px;line-height:1.5}
+
+ @media(max-width:700px){
+   .fan{min-height:200px}
+    .fan img{width:36%;height:clamp(150px,42vw,210px);border-radius:10px;box-shadow:0 12px 28px rgba(0,0,0,.55)}
+   .fan img:nth-child(2){margin:0 -7%}
+   .pvtitle{font-size:17px}
+ }
+ @media(prefers-reduced-motion:reduce){.pvtrack{transition:none}.fan img{transition:none}}
+
  footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;color:var(--muted);font-size:13px}
  @media(prefers-reduced-motion:reduce){.pbtn{transition:none}.pbtn:hover{transform:none}}
 </style>
@@ -150,6 +188,56 @@
  </div>
 </section>
 
+
+<!-- PREUVES SOCIALES -->
+<section class="proof">
+ <div class="wrap">
+  <div class="eyebrow" data-i18n="pv_eyebrow">Ils l'ont fait</div>
+  <h2 data-i18n="pv_h2">Les résultats de ceux qui ont suivi le chemin</h2>
+  <p class="sublead" data-i18n="pv_sub">Des chiffres réels, activité par activité.</p>
+
+  <div class="pvp" id="pvp">
+   <div class="pvtrack" id="pvtrack">
+
+    <div class="pvslide">
+     <div class="pvtitle" data-i18n="pv_t1">Création de contenu</div>
+     <div class="pvsub" data-i18n="pv_s1">Construire une audience à partir de zéro</div>
+     <div class="fan">
+      <img src="/preuves/contenu-2.jpg" alt="" decoding="async">
+      <img src="/preuves/contenu-1.jpg" alt="" decoding="async">
+      <img src="/preuves/contenu-3.jpg" alt="" decoding="async">
+     </div>
+    </div>
+
+    <div class="pvslide">
+     <div class="pvtitle" data-i18n="pv_t2">E-commerce</div>
+     <div class="pvsub" data-i18n="pv_s2">Des boutiques qui vendent vraiment</div>
+     <div class="fan">
+      <img src="/preuves/ecommerce-2.jpg" alt="" loading="lazy" decoding="async">
+      <img src="/preuves/ecommerce-1.jpg" alt="" loading="lazy" decoding="async">
+      <img src="/preuves/ecommerce-3.jpg" alt="" loading="lazy" decoding="async">
+     </div>
+    </div>
+
+    <div class="pvslide">
+     <div class="pvtitle" data-i18n="pv_t3">Monétisation TikTok / YouTube</div>
+     <div class="pvsub" data-i18n="pv_s3">Transformer les vues en revenus</div>
+     <div class="fan">
+      <img src="/preuves/monetisation-2.jpg" alt="" loading="lazy" decoding="async">
+      <img src="/preuves/monetisation-1.jpg" alt="" loading="lazy" decoding="async">
+      <img src="/preuves/monetisation-3.jpg" alt="" loading="lazy" decoding="async">
+     </div>
+    </div>
+
+   </div>
+  </div>
+
+  <div class="pvdots" id="pvdots"></div>
+  <p class="pvhint" data-i18n="pv_hint">Fais glisser pour voir les autres activités</p>
+  <p class="pvlegal" data-i18n="pv_legal">Ces résultats sont ceux de personnes réelles et ne sont pas représentatifs de ce que tu obtiendras. Leur parcours, leur travail et leur situation ont joué. Rien ici ne constitue une garantie de revenu.</p>
+ </div>
+</section>
+
 <footer><div class="wrap">Contact : <a href="mailto:beaudelaireconsulting@gmail.com" style="color:var(--accent);text-decoration:none;font-weight:600">beaudelaireconsulting@gmail.com</a><br>© <span id="yr"></span> Beaudelaire Consulting</div></footer>
 
 <script>
@@ -163,6 +251,14 @@ function track(event, data){
 var I18N = {
  fr:{
   eyebrow:"Les offres", h2:"Choisis ton chemin",
+  pv_eyebrow:"Ils l'ont fait",
+  pv_h2:"Les résultats de ceux qui ont suivi le chemin",
+  pv_sub:"Des chiffres réels, activité par activité.",
+  pv_t1:"Création de contenu", pv_s1:"Construire une audience à partir de zéro",
+  pv_t2:"E-commerce", pv_s2:"Des boutiques qui vendent vraiment",
+  pv_t3:"Monétisation TikTok / YouTube", pv_s3:"Transformer les vues en revenus",
+  pv_hint:"Fais glisser pour voir les autres activités",
+  pv_legal:"Ces résultats sont ceux de personnes réelles et ne sont pas représentatifs de ce que tu obtiendras. Leur parcours, leur travail et leur situation ont joué. Rien ici ne constitue une garantie de revenu.",
   once:"une fois", month:"par mois", ribbon:"COMPLET",
   o1name:"Le guide du 1M CFA",
   o1f1:"Le guide complet, 22 chapitres",
@@ -181,6 +277,14 @@ var I18N = {
  },
  en:{
   eyebrow:"The offers", h2:"Choose your path",
+  pv_eyebrow:"They did it",
+  pv_h2:"Results from those who followed the path",
+  pv_sub:"Real numbers, one activity at a time.",
+  pv_t1:"Content creation", pv_s1:"Building an audience from scratch",
+  pv_t2:"E-commerce", pv_s2:"Stores that actually sell",
+  pv_t3:"TikTok / YouTube monetisation", pv_s3:"Turning views into income",
+  pv_hint:"Swipe to see the other activities",
+  pv_legal:"These results come from real people and are not representative of what you will achieve. Their background, work and circumstances played a part. Nothing here is a guarantee of income.",
   once:"one-off", month:"per month", ribbon:"SOLD OUT",
   o1name:"The 1M CFA guide",
   o1f1:"The complete guide, 22 chapters",
@@ -258,6 +362,64 @@ function toggleDevise(){
  track('switch_devise', {devise:DEVISE});
  applyDevise();
 }
+
+/* Carrousel des preuves : glissement au doigt, defilement toutes les 6 s,
+   navigation par pastilles. Le defilement se suspend des que le visiteur agit. */
+(function(){
+ var piste=document.getElementById('pvtrack'), cadre=document.getElementById('pvp'),
+     pastilles=document.getElementById('pvdots');
+ if(!piste||!cadre||!pastilles) return;
+ var n=piste.children.length, idx=0, minuteur=null;
+
+ for(var i=0;i<n;i++){
+  var b=document.createElement('b'); b.setAttribute('role','button');
+  b.setAttribute('aria-label','Activité '+(i+1));
+  b.onclick=(function(k){ return function(){ aller(k); relancer(); }; })(i);
+  pastilles.appendChild(b);
+ }
+ function rendu(){
+  piste.style.transform='translateX(-'+(idx*100)+'%)';
+  for(var i=0;i<pastilles.children.length;i++)
+   pastilles.children[i].className = (i===idx) ? 'on' : '';
+ }
+ function aller(k){ idx=(k+n)%n; rendu(); }
+ function suivant(){ aller(idx+1); }
+ function relancer(){ clearInterval(minuteur); minuteur=setInterval(suivant, 6000); }
+
+ /* Glissement au doigt */
+ var x0=null, y0=null, dx=0, glisse=false;
+ cadre.addEventListener('touchstart', function(e){
+  x0=e.touches[0].clientX; y0=e.touches[0].clientY; dx=0; glisse=false;
+  clearInterval(minuteur);
+ }, {passive:true});
+ cadre.addEventListener('touchmove', function(e){
+  if(x0===null) return;
+  dx=e.touches[0].clientX-x0;
+  var dy=e.touches[0].clientY-y0;
+  /* on ne prend la main que si le geste est franchement horizontal */
+  if(!glisse && Math.abs(dx)>Math.abs(dy) && Math.abs(dx)>12) glisse=true;
+ }, {passive:true});
+ cadre.addEventListener('touchend', function(){
+  if(glisse && Math.abs(dx)>45){ aller(idx + (dx<0 ? 1 : -1)); track('swipe_preuves'); }
+  x0=null; relancer();
+ });
+
+ /* Clavier, pour qui navigue sans souris */
+ cadre.setAttribute('tabindex','0');
+ cadre.addEventListener('keydown', function(e){
+  if(e.key==='ArrowRight'){ aller(idx+1); relancer(); }
+  if(e.key==='ArrowLeft'){ aller(idx-1); relancer(); }
+ });
+
+ cadre.addEventListener('mouseenter', function(){ clearInterval(minuteur); });
+ cadre.addEventListener('mouseleave', relancer);
+ /* Inutile de faire defiler une section que personne ne regarde */
+ document.addEventListener('visibilitychange', function(){
+  if(document.hidden) clearInterval(minuteur); else relancer();
+ });
+
+ rendu(); relancer();
+})();
 
 document.getElementById('yr').textContent = new Date().getFullYear();
 applyI18N();
