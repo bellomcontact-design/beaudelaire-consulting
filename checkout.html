@@ -129,8 +129,6 @@
  /* Rappel en fin de page : le visiteur qui a tout lu remonte d'un clic
     vers les boutons de paiement, sans avoir a faire defiler. */
  .rappel{text-align:center;padding:46px 20px 56px;border-top:1px solid var(--border)}
- .rappel h2{font-size:clamp(22px,3.4vw,32px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
- .rappel p{color:var(--muted);font-size:15px;margin-bottom:22px}
  .rappel .cta{display:inline-block;background-image:var(--accent-grad);color:var(--on-accent);
    font-weight:800;font-size:16px;padding:16px 36px;border-radius:12px;text-decoration:none;
    transition:transform .12s ease}
@@ -416,8 +414,6 @@
 </div>
 
 <section class="rappel">
- <h2 data-i18n="r_h2">Prêt à commencer ?</h2>
- <p data-i18n="r_sub">Carte bancaire ou mobile money, accès immédiat.</p>
  <a class="cta" href="#offre" onclick="track('click_rappel_bas')" data-i18n="r_cta">Prendre le guide</a>
 </section>
 
@@ -436,7 +432,6 @@ var I18N = {
   i1:"Je partage de la valeur <b>tous les jours</b>, gratuitement",
   i2:"Tu poses tes questions, <b>j'y réponds</b>",
   tb_cta:"Rejoindre le groupe privé (Gratuit)",
-  r_h2:"Prêt à commencer ?", r_sub:"Carte bancaire ou mobile money, accès immédiat.",
   r_cta:"Prendre le guide",
   h2:"Choisis ton chemin vers le succès",
   pv_eyebrow:"Ils l'ont fait",
@@ -480,7 +475,6 @@ var I18N = {
   i1:"I share value <b>every day</b>, for free",
   i2:"You ask, <b>I answer</b>",
   tb_cta:"Join the private group (Free)",
-  r_h2:"Ready to start?", r_sub:"Card or mobile money, instant access.",
   r_cta:"Get the guide",
   h2:"Choose your path to success",
   pv_eyebrow:"They did it",
@@ -738,24 +732,14 @@ function basculePlus(btn){
  if(!ouvert) track('ouvre_details_guide');
 }
 
-/* Retour vers les boutons de paiement, en douceur, sans laisser la carte
-   collee sous l'en-tete fixe. */
+/* Le bouton de bas de page ramene simplement en haut, la ou les offres
+   sont presentees. */
 (function(){
  var lien=document.querySelector('.rappel .cta'); if(!lien) return;
  lien.addEventListener('click', function(e){
-  /* On vise les boutons de paiement eux-memes : atterrir en haut de la
-     carte les laisserait hors ecran sur un telephone. */
-  var carte=document.getElementById('offre'); if(!carte) return;
-  var cible=carte.querySelector('.pbtn') || carte;
   e.preventDefault();
-  /* On se cale sous l'en-tete, dont la hauteur varie selon l'ecran. */
-  var entete=document.querySelector('.entete');
-  /* On garde un peu de contexte au-dessus du bouton : le visiteur doit
-     voir a quoi il souscrit, pas seulement le bouton. */
-  var marge=(entete ? entete.getBoundingClientRect().height : 0)+Math.min(150, window.innerHeight*0.28);
-  var haut=cible.getBoundingClientRect().top+window.scrollY-marge;
   var doux=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  window.scrollTo({top:haut, behavior: doux ? 'smooth' : 'auto'});
+  window.scrollTo({top:0, behavior: doux ? 'smooth' : 'auto'});
  });
 })();
 
