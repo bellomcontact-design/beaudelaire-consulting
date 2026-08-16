@@ -203,10 +203,15 @@
    background-image:linear-gradient(180deg,#FFE9A8 0%,#FFC24A 46%,#F08A1E 100%);
    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
    filter:drop-shadow(0 6px 26px rgba(255,165,69,.34));padding-bottom:.05em}
- .ch .unite{font-size:.34em;font-weight:900;margin-left:6px;letter-spacing:.01em;vertical-align:.28em}
- .ch span{display:block;color:var(--text-soft);font-size:clamp(12px,3.2vw,14px);margin-top:14px;
-   text-transform:uppercase;letter-spacing:.16em;font-weight:700}
- @media(max-width:400px){ .ch b{font-size:38px} .ch span{letter-spacing:.11em} }
+ /* Le nombre et sa devise restent sur la meme ligne : les elements
+    internes du chiffre ne doivent pas heriter du style des libelles,
+    d'ou le selecteur d'enfant direct plus bas. */
+ .ch b .val,.ch b .unite{display:inline}
+ .ch .unite{font-size:.32em;font-weight:900;margin-left:6px;letter-spacing:.01em;vertical-align:.3em}
+ .ch > span{display:block;color:var(--text-soft);font-size:clamp(11px,2.9vw,14px);margin-top:14px;
+   text-transform:uppercase;letter-spacing:.14em;font-weight:700;
+   padding:0 14px;max-width:100%;overflow-wrap:break-word}
+ @media(max-width:430px){ .ch b{font-size:34px} .ch > span{letter-spacing:.08em;font-size:11px;padding:0 8px} }
 
  /* Sous les chiffres : l'appel a l'action, puis la preuve sociale */
  .chcta{text-align:center;margin-top:54px}
