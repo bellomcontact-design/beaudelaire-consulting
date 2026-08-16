@@ -328,6 +328,7 @@
  <a class="cta nav-cta" href="#" onclick="startQuiz();closeMenu();return false;" data-i18n="nav.cta">Réserver un appel</a>
  </div>
  <div class="navctl">
+ <button class="langtoggle" id="devToggle" onclick="toggleDevise()" title="Changer de devise">FCFA</button>
  <button class="langtoggle" id="langToggle" onclick="toggleLang()">EN</button>
  <button class="navburger" id="navBurger" onclick="toggleMenu()" aria-label="Menu">☰</button>
  </div>
@@ -404,8 +405,8 @@
  <div class="pcard featured">
  <div class="phead">
  <div class="pname" data-i18n="offres.o1name">Le guide du 1M CFA</div>
- <div class="pprice">15 000<sup>FCFA</sup> <span class="pper" data-i18n="offres.once">une fois</span></div>
- <span class="peuro">23 €</span>
+ <div class="pprice" data-xof="15 000" data-eur="23"><span class="pmain"></span> <span class="pper" data-i18n="offres.once">une fois</span></div>
+ <span class="peuro"></span>
  </div>
  <div class="pbody">
  <ul class="pfeat">
@@ -425,8 +426,8 @@
  <span class="ribbon" data-i18n="offres.ribbon">COMPLET</span>
  <div class="phead">
  <div class="pname" data-i18n="offres.o2name">Coaching</div>
- <div class="pprice">330 000<sup>FCFA</sup> <span class="pper" data-i18n="offres.month">par mois</span></div>
- <span class="peuro">500 €</span>
+ <div class="pprice" data-xof="330 000" data-eur="500"><span class="pmain"></span> <span class="pper" data-i18n="offres.month">par mois</span></div>
+ <span class="peuro"></span>
  </div>
  <div class="pbody">
  <ul class="pfeat">
@@ -1150,6 +1151,56 @@ function applyI18N(){
  // si le résultat est déjà affiché, on le régénère dans la bonne langue
  if(document.getElementById('result') && document.getElementById('result').classList.contains('active') && lastOfferKey){ renderResult(); }
 }
+/* ---- Devise : FCFA en zone franc, euro ailleurs ----
+   Le franc CFA est en parite fixe avec l'euro (655,957), donc la conversion
+   ne perime pas. Les deux montants sont ecrits dans le HTML (data-xof /
+   data-eur) plutot que calcules : les arrondis sont commerciaux (23 EUR,
+   pas 22,87). Le visiteur peut forcer son choix, memorise ensuite. */
+/* Zone franc uniquement : la Guinee et la Mauritanie l'ont quittee,
+   et un fuseau africain quelconque (Maroc, Nigeria, Kenya...) n'a rien
+   a voir avec le FCFA — d'ou l'absence de repli "Africa/*". */
+var ZONE_FRANC = ['Africa/Porto-Novo','Africa/Abidjan','Africa/Dakar','Africa/Ouagadougou',
+ 'Africa/Bamako','Africa/Niamey','Africa/Lome','Africa/Bissau',
+ 'Africa/Douala','Africa/Libreville','Africa/Brazzaville','Africa/Bangui','Africa/Ndjamena','Africa/Malabo'];
+var PAYS_FRANC = /-(BJ|CI|SN|BF|ML|NE|TG|GW|CM|GA|CG|CF|TD|GQ)\b/i;
+/* Ces pays partagent le fuseau Africa/Abidjan sans etre en zone franc */
+var PAYS_HORS_FRANC = /-(GH|NG|GN|MR|SL|LR|GM|MA|DZ|TN|EG|KE|ZA|CD|ET|TZ|UG)\b/i;
+
+var DEVISE = (function(){
+ try{ var m=localStorage.getItem('devise'); if(m==='XOF'||m==='EUR') return m; }catch(e){}
+ try{
+  var tz=(Intl.DateTimeFormat().resolvedOptions().timeZone)||'';
+  var loc=[navigator.language||''].concat(navigator.languages||[]).join(' ');
+  if(PAYS_HORS_FRANC.test(loc)) return 'EUR';
+  if(PAYS_FRANC.test(loc)) return 'XOF';
+  if(ZONE_FRANC.indexOf(tz)>=0) return 'XOF';
+ }catch(e){}
+ return 'EUR';
+})();
+
+function fmtPrix(el, principale){
+ var xof=el.getAttribute('data-xof'), eur=el.getAttribute('data-eur');
+ if(principale==='XOF') return {gros: xof+'<sup>FCFA</sup>', petit: eur+'\u00A0\u20AC'};
+ return {gros: eur+'<sup>\u20AC</sup>', petit: xof+'\u00A0FCFA'};
+}
+function applyDevise(){
+ var els=document.querySelectorAll('.pprice[data-xof]');
+ for(var i=0;i<els.length;i++){
+  var v=fmtPrix(els[i], DEVISE);
+  var m=els[i].querySelector('.pmain'); if(m) m.innerHTML=v.gros;
+  var carte=els[i].parentNode, p=carte&&carte.querySelector('.peuro');
+  if(p) p.textContent=v.petit;
+ }
+ var b=document.getElementById('devToggle');
+ if(b) b.textContent = (DEVISE==='XOF') ? 'FCFA' : 'EUR';
+}
+function toggleDevise(){
+ DEVISE = (DEVISE==='XOF') ? 'EUR' : 'XOF';
+ try{ localStorage.setItem('devise', DEVISE); }catch(e){}
+ track('switch_devise', {devise:DEVISE});
+ applyDevise();
+}
+
 function toggleLang(){
  LANG = (LANG==='fr') ? 'en' : 'fr';
  try{ localStorage.setItem('lang',LANG); }catch(e){}
@@ -1181,6 +1232,7 @@ function playVSL(){
  track('play_vsl');
 }
 initVSL();
+applyDevise();
 
 /* remplir les listes pays + indicatifs (selon la langue) */
 function fillCountries(){
