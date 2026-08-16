@@ -116,6 +116,8 @@
    font-size:25px;line-height:1;display:flex;align-items:center;justify-content:center;
    box-shadow:0 8px 26px rgba(0,0,0,.55);transition:transform .15s ease}
  .vslfacade:hover .play,.vslfacade:focus-visible .play{transform:translate(-50%,-50%) scale(1.08)}
+ .vsldesc{max-width:600px;margin:0 auto 20px;font-size:16.5px;line-height:1.5;color:var(--text-soft);text-align:center}
+ .vsldesc b{color:var(--text);font-weight:700}
  .vslpoints{list-style:none;display:flex;flex-direction:column;gap:11px;max-width:520px;margin:0 auto 26px;text-align:left}
  .vslpoints li{display:flex;align-items:center;gap:12px;font-size:15.5px;color:var(--text-soft);line-height:1.4}
  .vslpoints .ico{flex:0 0 auto;width:32px;height:32px;border-radius:9px;background:var(--accent-soft);
@@ -312,6 +314,7 @@
  <span class="play" aria-hidden="true">&#9654;</span>
  </button>
  </div>
+ <p class="vsldesc" data-i18n-html="hero.desc">C'est un cours qui t'apprend exactement <b>quelles actions mettre en place</b> pour faire tes premiers 1 000 €, par Beaudelaire et ses équipes, sur tous les business qu'il a montés.</p>
  <ul class="vslpoints">
  <li><span class="ico" aria-hidden="true">&#128176;</span><span data-i18n-html="hero.point1">De <b>0 à ton premier client</b>, puis au palier au-dessus</span></li>
  <li><span class="ico" aria-hidden="true">&#128172;</span><span data-i18n-html="hero.point2">Des conseils <b>1-à-1</b>, adaptés à ta réalité en Afrique</span></li>
@@ -688,6 +691,7 @@ const I18N = {
  cta:"Voir si je peux t'aider"
  },
  hero:{
+ desc:"C'est un cours qui t'apprend exactement <b>quelles actions mettre en place</b> pour faire tes premiers 1 000 €, par Beaudelaire et ses équipes, sur tous les business qu'il a montés.",
  point1:"De <b>0 à ton premier client</b>, puis au palier au-dessus",
  point2:"Des conseils <b>1-à-1</b>, adaptés à ta réalité en Afrique",
  badge_pre:"Plus de", badge_post:"rienneux sauvés",
@@ -821,6 +825,7 @@ const I18N = {
  cta:"See if I can help you"
  },
  hero:{
+ desc:"A course that teaches you exactly <b>which actions to take</b> to make your first €1,000, by Beaudelaire and his teams, across every business he has built.",
  point1:"From <b>0 to your first client</b>, then to the next level",
  point2:"<b>1-on-1</b> advice, adapted to your reality in Africa",
  badge_pre:"More than", badge_post:"rienneux saved",
