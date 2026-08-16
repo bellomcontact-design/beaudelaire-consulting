@@ -36,17 +36,25 @@
  @media(prefers-reduced-motion:reduce){ .entete .topnav{transition:none} }
  /* Bande d'annonce : elle defile avec la page, la navigation reste
     collee en haut. Sur mobile seul le bouton subsiste, faute de place. */
- .topbar{background:var(--accent-soft);border-bottom:1px solid rgba(255,165,69,.26);
-   display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
-   padding:9px 20px;text-align:center}
- .topbar span{color:var(--text-soft);font-size:13.5px}
- .topbar b{color:var(--text);font-weight:700}
- .topbar-btn{display:inline-flex;align-items:center;gap:7px;background-image:var(--accent-grad);
-   color:var(--on-accent);font-weight:800;font-size:13px;padding:7px 15px;border-radius:999px;
-   text-decoration:none;white-space:nowrap;transition:transform .12s ease}
+ .topbar{background:var(--bg);border-bottom:1px solid var(--border);
+   display:flex;flex-direction:column;align-items:center;gap:7px;padding:10px 18px 11px}
+ .topbar-btn{display:inline-flex;align-items:center;justify-content:center;
+   background-image:var(--accent-grad);color:var(--on-accent);font-weight:800;font-size:13.5px;
+   padding:9px 20px;border-radius:999px;text-decoration:none;white-space:nowrap;
+   transition:transform .12s ease}
  .topbar-btn:hover{transform:scale(1.04)}
- @media(max-width:640px){ .topbar span{display:none} .topbar{padding:8px 16px} }
- @media(prefers-reduced-motion:reduce){ .topbar-btn{transition:none} .topbar-btn:hover{transform:none} }
+ /* Meme silhouette que le bouton, en creux : les chiffres se lisent comme
+    un prolongement de l'appel a l'action, sans lui voler l'attention. */
+ .topbar-info{display:inline-flex;align-items:center;justify-content:center;
+   border:1px solid var(--border);border-radius:999px;padding:5px 16px;
+   background:rgba(255,255,255,.03);max-width:94vw}
+ .topbar-info span{color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;
+   text-overflow:ellipsis;transition:opacity .4s ease}
+ .topbar-info span.efface{opacity:0}
+ .topbar-info b{color:var(--accent);font-weight:800}
+ @media(max-width:420px){ .topbar-info span{font-size:11.5px} .topbar-btn{font-size:12.5px} }
+ @media(prefers-reduced-motion:reduce){
+   .topbar-btn,.topbar-info span{transition:none} .topbar-btn:hover{transform:none} }
  .topnav{position:sticky;top:0;z-index:40;background:var(--bg-veil);backdrop-filter:blur(8px);
  -webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
  .topnav-in{display:flex;align-items:center;justify-content:space-between;max-width:1000px;margin:0 auto;padding:13px 20px;gap:14px}
@@ -200,9 +208,9 @@
 
 <div class="entete">
 <div class="topbar">
- <span data-i18n-html="tb_txt">Chaque jour, je partage de la valeur dans le groupe <b>WhatsApp</b></span>
  <a class="topbar-btn" href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener"
-    onclick="track('click_whatsapp',{depuis:'checkout'})" data-i18n="tb_cta">Rejoindre le groupe (gratuit)</a>
+    onclick="track('click_whatsapp',{depuis:'checkout'})" data-i18n="tb_cta">Rejoindre le groupe privé (Gratuit)</a>
+ <div class="topbar-info"><span id="tbInfo">300+ élèves nous ont rejoints ce mois-ci</span></div>
 </div>
 
 <nav class="topnav">
@@ -407,8 +415,9 @@ function track(event, data){
 
 var I18N = {
  fr:{
-  tb_txt:"Chaque jour, je partage de la valeur dans le groupe <b>WhatsApp</b>",
-  tb_cta:"Rejoindre le groupe (gratuit)",
+  i1:"<b>300+</b> élèves nous ont rejoints ce mois-ci",
+  i2:"<b>430 000 000+</b> FCFA gagnés par mes élèves",
+  tb_cta:"Rejoindre le groupe privé (Gratuit)",
   h2:"Choisis ton chemin vers le succès",
   pv_eyebrow:"Ils l'ont fait",
   pv_h2:"Les résultats de ceux qui ont suivi le chemin",
@@ -448,8 +457,9 @@ var I18N = {
   back:"← Revenir à l'accueil"
  },
  en:{
-  tb_txt:"Every day I share value in the <b>WhatsApp</b> group",
-  tb_cta:"Join the group (free)",
+  i1:"<b>300+</b> students joined this month",
+  i2:"<b>430,000,000+</b> XOF earned by my students",
+  tb_cta:"Join the private group (Free)",
   h2:"Choose your path to success",
   pv_eyebrow:"They did it",
   pv_h2:"Results from those who followed the path",
@@ -721,6 +731,30 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 applyI18N();
 applyDevise();
 track('visit_checkout');
+
+/* Les deux chiffres alternent toutes les 5 secondes, en fondu. */
+(function(){
+ var zone=document.getElementById('tbInfo'); if(!zone) return;
+ var i=0;
+ function messages(){
+  var t=(typeof I18N!=='undefined' && typeof LANG!=='undefined') ? I18N[LANG] : null;
+  if(!t) return [];
+  var src = t.topbar || t;                 /* selon la page, plat ou imbrique */
+  return [src.i1, src.i2].filter(Boolean);
+ }
+ function afficher(){
+  var m=messages(); if(m.length<2) return;
+  zone.classList.add('efface');
+  setTimeout(function(){
+   i=(i+1)%m.length;
+   zone.innerHTML=m[i];
+   zone.classList.remove('efface');
+  }, 400);
+ }
+ var m=messages(); if(m.length) zone.innerHTML=m[0];
+ setInterval(afficher, 5000);
+ window.majBandeInfo=function(){ var m=messages(); if(m.length) zone.innerHTML=m[i%m.length]; };
+})();
 
 /* La navigation s'efface vers le bas, revient vers le haut. Le seuil evite
    qu'elle clignote au moindre soubresaut, frequent sur mobile. */
