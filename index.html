@@ -225,18 +225,6 @@
  .ba .arrow{color:var(--muted);font-weight:400}
  .ba .after{color:var(--accent);font-weight:800}
 
- /* TESTIMONIALS */
- .tslider{overflow:hidden;max-width:620px;margin:0 auto}
- .ttrack{display:flex;transition:transform .6s ease}
- .tslide{min-width:100%;padding:0 6px}
- .tcard{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:14px;min-height:200px}
- .tcard p{font-family:'Inter',sans-serif;font-style:italic;font-size:18px;line-height:1.5}
- .tcard .who{display:flex;align-items:center;gap:12px;font-weight:700;font-size:14px}
- .tcard .who span{color:var(--muted);font-weight:400}
- .tdots{display:flex;gap:8px;justify-content:center;margin-top:22px}
- .tdots b{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:.2s}
- .tdots b.on{background:var(--accent);width:22px;border-radius:999px}
-
  /* ABOUT */
  .about{background:var(--bg2)}
  .about .wrap{max-width:680px}
@@ -362,7 +350,7 @@
  <div class="navlinks" id="navlinks">
  <a href="#about" data-i18n="nav.about" onclick="closeMenu()">Qui je suis</a>
  <a href="#livre" data-i18n="nav.debutants" onclick="closeMenu()">Rienneux</a>
- <a href="#news" data-i18n="nav.chemin" onclick="closeMenu()">Le chemin</a>
+ <a href="/scaler" data-i18n="nav.chemin">Le chemin</a>
  <a href="/checkout" data-i18n="nav.offres">Les offres</a>
  <a class="cta nav-cta" href="#" onclick="startQuiz();closeMenu();return false;" data-i18n="nav.cta">Réserver un appel</a>
  </div>
@@ -585,65 +573,6 @@
  </div>
  </div>
  <span class="micro" data-i18n="book.note">Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.</span>
- </div>
- </section>
-
- <!-- NEWSLETTER (guide gratuit scaling) -->
- <section class="news" id="news">
- <div class="wrap">
- <div class="eyebrow" data-i18n="news.eyebrow">Le chemin · le guide pour scaler</div>
- <h2 data-i18n-html="news.h2">Tu bosses comme un fou et t'avances plus ? <span class="nowrap">Voilà le chemin.</span></h2>
- <p class="lead" data-i18n="news.lead">Tu gagnes déjà de l'argent mais tu plafonnes ? Le guide étape par étape pour rendre ton business irrésistible et passer au palier au-dessus, sans changer de véhicule.</p>
- <p class="micro" style="color:var(--accent-strong);font-weight:700;margin:0 0 6px" data-i18n="news.forwho">Réservé à ceux qui font déjà de l'argent en ligne et veulent passer au palier au-dessus. Ce n'est pas un guide pour rienneux.</p>
- <div style="margin:8px 0 18px" data-i18n-html="news.price"><span class="pnow">165 000<sup>FCFA</sup> <span class="peur">(250€)</span></span></div>
- <div style="display:flex;flex-direction:column;gap:12px;align-items:center;max-width:440px;margin:0 auto">
- <a class="cta" style="width:100%" href="https://whop.com/checkout/plan_kWZMN4mJL7JvW" target="_blank" rel="noopener" data-i18n="news.card">Payer par carte (Visa / Mastercard)</a>
- <a class="cta" style="width:100%;background:transparent;color:var(--accent-strong);border:2px solid var(--accent-strong)" href="https://me.fedapay.com/JsnHhERQ" target="_blank" rel="noopener" data-i18n="news.momo">Payer en mobile money (Afrique)</a>
- </div>
- <span class="micro" data-i18n="news.note">Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.</span>
- </div>
- </section>
-
- <!-- TEMOIGNAGES (placeholders, à remplacer par de VRAIS avis) -->
- <section style="background:var(--bg2)">
- <div class="wrap">
- <div class="eyebrow" data-i18n="testi.eyebrow">Témoignages</div>
- <h2 data-i18n="testi.h2">Ce qu'ils en disent</h2>
- <div class="tslider">
- <div class="ttrack" id="ttrack">
- <div class="tslide"><div class="tcard">
- <div class="stars">★★★★★</div>
- <p data-i18n="testi.t1">"Je pensais galérer sur l'acquisition. En vrai, c'était mon offre qui clochait. Il l'a vu en dix minutes, j'ai tout retravaillé et mon closing a doublé."</p>
- <div class="who" data-i18n-html="testi.w1">Lucas M. <span>· Agence · France</span></div>
- </div></div>
- <div class="tslide"><div class="tcard">
- <div class="stars">★★★★★</div>
- <p data-i18n="testi.t2">"Au Congo, mon vrai blocage c'était d'encaisser et de livrer. On a mis en place le mobile money et clarifié mon offre. Je suis passé de 0 à 3k€/mois."</p>
- <div class="who" data-i18n-html="testi.w2">Gloire K. <span>· E-commerce · RDC</span></div>
- </div></div>
- <div class="tslide"><div class="tcard">
- <div class="stars">★★★★★</div>
- <p data-i18n="testi.t3">"En Côte d'Ivoire, tout le monde fait du dropshipping de la même façon. Il m'a aidé à me différencier et à cibler le bon produit. +18k€/mois en deux mois."</p>
- <div class="who" data-i18n-html="testi.w3">Yann K. <span>· Dropshipping · Côte d'Ivoire</span></div>
- </div></div>
- <div class="tslide"><div class="tcard">
- <div class="stars">★★★★★</div>
- <p data-i18n="testi.t4">"Je n'arrivais pas à fixer mes prix face à des clients qui négocient tout. On a posé une offre claire et j'ai enfin osé augmenter. Mon chiffre a suivi."</p>
- <div class="who" data-i18n-html="testi.w4">Awa D. <span>· Coaching · Sénégal</span></div>
- </div></div>
- <div class="tslide"><div class="tcard">
- <div class="stars">★★★★★</div>
- <p data-i18n="testi.t5">"Mes clients étaient à l'étranger et je galérais à me faire payer depuis le Cameroun. On a réglé ça et structuré mon activité. De 1k à 7k€/mois."</p>
- <div class="who" data-i18n-html="testi.w5">Boris N. <span>· Freelance · Cameroun</span></div>
- </div></div>
- <div class="tslide"><div class="tcard">
- <div class="stars">★★★★★</div>
- <p data-i18n="testi.t6">"Le plus cash des appels que j'ai faits. Zéro blabla, que de l'actionnable, adapté à ma réalité et pas du copié-collé américain."</p>
- <div class="who" data-i18n-html="testi.w6">Mehdi T. <span>· Infoproduit · Belgique</span></div>
- </div></div>
- </div>
- </div>
- <div class="tdots" id="tdots"></div>
  </div>
  </section>
 
@@ -900,21 +829,6 @@ const I18N = {
  wa:"Rejoindre gratuitement la communauté des Rienneux",
  wamicro:"Sur WhatsApp · gratuit · on avance ensemble"
  },
- testi:{
- eyebrow:"Témoignages", h2:"Ce qu'ils en disent",
- t1:'"Je pensais galérer sur l\'acquisition. En vrai, c\'était mon offre qui clochait. Il l\'a vu en dix minutes, j\'ai tout retravaillé et mon closing a doublé."',
- w1:'Lucas M. <span>· Agence · France</span>',
- t2:'"Au Congo, mon vrai blocage c\'était d\'encaisser et de livrer. On a mis en place le mobile money et clarifié mon offre. Je suis passé de 0 à 3k€/mois."',
- w2:'Gloire K. <span>· E-commerce · RDC</span>',
- t3:'"En Côte d\'Ivoire, tout le monde fait du dropshipping de la même façon. Il m\'a aidé à me différencier et à cibler le bon produit. +18k€/mois en deux mois."',
- w3:'Yann K. <span>· Dropshipping · Côte d\'Ivoire</span>',
- t4:'"Je n\'arrivais pas à fixer mes prix face à des clients qui négocient tout. On a posé une offre claire et j\'ai enfin osé augmenter. Mon chiffre a suivi."',
- w4:'Awa D. <span>· Coaching · Sénégal</span>',
- t5:'"Mes clients étaient à l\'étranger et je galérais à me faire payer depuis le Cameroun. On a réglé ça et structuré mon activité. De 1k à 7k€/mois."',
- w5:'Boris N. <span>· Freelance · Cameroun</span>',
- t6:'"Le plus cash des appels que j\'ai faits. Zéro blabla, que de l\'actionnable, adapté à ma réalité et pas du copié-collé américain."',
- w6:'Mehdi T. <span>· Infoproduit · Belgique</span>'
- },
  about:{
  eyebrow:"Mon histoire",
  h2:'Parti de 0 au Bénin. <span class="nowrap">Aujourd\'hui, +50k€ par mois.</span>',
@@ -936,13 +850,6 @@ const I18N = {
  q6:"C'est quoi ton parcours ?", a6:"Béninois, parti de zéro juste après le bac. J'ai galéré, je me suis fait arnaquer, et je suis resté bloqué à 5k/mois pendant un an. Puis tout a basculé : 10k, 20k, jusqu'à plus de 50k€ par mois. Ce chemin m'a fait voyager dans 30+ pays et accompagner 30+ entrepreneurs. Aujourd'hui, je transmets ce que j'aurais voulu qu'on me dise au départ.",
  q7:"Je ne suis pas encore prêt à payer, je peux commencer gratuitement ?", a7:'Oui. Rejoins la communauté WhatsApp gratuite « Les Rienneux » : je partage de la valeur tous les jours, tu poses tes questions, et on avance ensemble. Quand tu te sens prêt, tu passes à l\'étape suivante. <a href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">Rejoindre gratuitement 👉</a>',
  q8:"C'est qui les Ex-rienneux ?", a8:"C'est ma communauté privée que tu rejoins en prenant le guide. Tu y retrouves d'anciens rienneux qui étaient à ta place avant toi. Tu poses toutes tes questions, tu échanges, et on suit tes progrès ensemble. Ton accès est valable 1 an. Tu n'es jamais laissé seul : tu es accompagné pour quitter ta vie de rienneux."
- },
- news:{
- eyebrow:"Le chemin · le guide pour scaler",
- h2:'Tu bosses comme un fou et t\'avances plus ? <span class="nowrap">Voilà le chemin.</span>',
- lead:"Tu gagnes déjà de l'argent mais tu plafonnes ? Le guide étape par étape pour rendre ton business irrésistible et passer au palier au-dessus, sans changer de véhicule.",
- forwho:"Réservé à ceux qui font déjà de l'argent en ligne et veulent passer au palier au-dessus. Ce n'est pas un guide pour rienneux.", price:'<span class="pnow">165 000<sup>FCFA</sup> <span class="peur">(250€)</span></span>', card:"Payer par carte (Visa / Mastercard)", momo:"Payer en mobile money (Afrique)",
- note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement."
  },
  book:{ eyebrow:"Pour les rienneux", h2:"Le chemin des rienneux", lead:"Le guide complet pour faire tes premiers revenus en ligne, quel que soit ton point de départ. Du concret, pas des faux rêves.",
  commu_t:"Tu n'es pas seul. 🤝", commu:"En prenant le guide, tu rejoins ma communauté privée Ex-rienneux. Tu échanges avec les autres, qui étaient aussi des rienneux avant toi, tu poses toutes tes questions, et on progresse ensemble. On ne va pas te laisser tout seul : tu seras accompagné pour quitter ta vie de rienneux. On espère te voir de l'autre côté.",
@@ -1045,21 +952,6 @@ const I18N = {
  wa:"Join the free Rienneux community",
  wamicro:"On WhatsApp · free · let's grow together"
  },
- testi:{
- eyebrow:"Testimonials", h2:"What they say",
- t1:'"I thought my problem was getting clients. Turns out it was my offer. He spotted it in ten minutes, I reworked everything and my closing rate doubled."',
- w1:'Lucas M. <span>· Agency · France</span>',
- t2:'"My real blocker was getting paid and delivering. We set up mobile money and clarified my offer. I went from 0 to $3k/month."',
- w2:'Gloire K. <span>· E-commerce · DRC</span>',
- t3:'"Everyone in my market does dropshipping the same way. He helped me stand out and target the right product. +$18k/month in two months."',
- w3:'Yann K. <span>· Dropshipping · Ivory Coast</span>',
- t4:'"I couldn\'t set my prices with clients who negotiate everything. We built a clear offer and I finally dared to raise them. My revenue followed."',
- w4:'Awa D. <span>· Coaching · Senegal</span>',
- t5:'"My clients were abroad and I struggled to get paid. We fixed it and structured my business. From $1k to $7k/month."',
- w5:'Boris N. <span>· Freelance · Cameroon</span>',
- t6:'"The most no-BS call I\'ve done. Zero fluff, all actionable, adapted to my reality, not copy-pasted American advice."',
- w6:'Mehdi T. <span>· Info-product · Belgium</span>'
- },
  about:{
  eyebrow:"My story",
  h2:'Started from 0 in Benin. <span class="nowrap">Today, $50k+ a month.</span>',
@@ -1081,13 +973,6 @@ const I18N = {
  q6:"What's your story?", a6:"Beninese, started from zero right after high school. I struggled, got scammed, and stayed stuck at 5k/month for a year. Then everything shifted: 10k, 20k, up to over €50k a month. This path took me to 30+ countries and let me help 30+ entrepreneurs. Today, I pass on what I wish someone had told me at the start.",
  q7:"I'm not ready to pay yet, can I start for free?", a7:'Yes. Join the free WhatsApp community « Les Rienneux »: I share value every day, you ask your questions, and we move forward together. When you feel ready, you take the next step. <a href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">Join for free 👉</a>',
  q8:"Who are the Ex-rienneux?", a8:"It's my private community that you join when you get the guide. You'll find former rienneux who were in your shoes before you. You ask all your questions, you exchange, and we follow your progress together. Your access is valid for 1 year. You're never left alone: you're supported all the way out of your rienneux life."
- },
- news:{
- eyebrow:"The path · the guide to scale",
- h2:'Working like crazy but going nowhere? <span class="nowrap">Here\'s the path.</span>',
- lead:"Already making money but stuck at a plateau? The step-by-step guide to make your business irresistible and reach the next level, without switching vehicles.",
- forwho:"For people who already make money online and want to reach the next level. This is not a beginner's guide.", price:'<span class="pnow">165,000<sup>FCFA</sup> <span class="peur">(€250)</span></span>', card:"Pay by card (Visa / Mastercard)", momo:"Pay with mobile money (Africa)",
- note:"Card (international) or mobile money (Africa) · Instant access after payment."
  },
  book:{ eyebrow:"For beginners", h2:"Le chemin des débutants", lead:"The complete guide (in French) to make your first income online, whatever your starting point. Concrete stuff, no false dreams.",
  commu_t:"You're not alone. 🤝", commu:"When you get the guide, you join my private Ex-rienneux community. You talk with the others, who were rienneux before you too, ask all your questions, and we move forward together. We won't leave you on your own: you're supported, all the way to leaving your rienneux life behind. Hope to see you on the other side.",
@@ -1696,20 +1581,6 @@ function refreshOfferDesc(){
   var io=new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ go(); io.disconnect(); } }); });
   io.observe(el);
  } else { go(); }
-})();
-
-/* ---- Carousel témoignages ---- */
-(function(){
- var track=document.getElementById('ttrack');
- var slides=track?track.children.length:0;
- var dotsBox=document.getElementById('tdots');
- var idx=0;
- if(!track||!slides) return;
- for(var i=0;i<slides;i++){var b=document.createElement('b');if(i===0)b.className='on';(function(k){b.onclick=function(){idx=k;render();reset();};})(i);dotsBox.appendChild(b);}
- function render(){ track.style.transform='translateX(-'+(idx*100)+'%)'; [].forEach.call(dotsBox.children,function(d,i){d.classList.toggle('on',i===idx);}); }
- var timer=setInterval(next,8000);
- function next(){idx=(idx+1)%slides;render();}
- function reset(){clearInterval(timer);timer=setInterval(next,8000);}
 })();
 
 /* init langue */

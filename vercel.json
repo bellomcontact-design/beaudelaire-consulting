@@ -11,6 +11,10 @@
     {
       "source": "/checkout",
       "destination": "/checkout.html"
+    },
+    {
+      "source": "/scaler",
+      "destination": "/scaler.html"
     }
   ]
 }

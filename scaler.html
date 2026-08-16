@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Le chemin — passer au palier au-dessus</title>
+<meta name="description" content="Le guide pour scaler quand tu gagnes déjà de l'argent en ligne. Rendre ton business irrésistible et passer au palier au-dessus, sans changer de véhicule.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --bg:#060E15; --bg2:#0B141C; --card:#131B23; --border:#222E39;
+ --text:#FFFFFF; --muted:rgba(255,255,255,.64); --faint:rgba(255,255,255,.50);
+ --accent:#FFA545; --accent-strong:#FFA545; --accent-soft:rgba(255,165,69,.12);
+ --star:#FFCF23; --on-accent:#060E15;
+ --accent-grad:linear-gradient(95deg,#FFA930 0%,#FFAB23 51%,#D5AA12 113%);
+ --text-soft:rgba(255,255,255,.80);
+ --bg-veil:rgba(6,14,21,.85); --star-soft:rgba(255,207,35,.10); --star-line:rgba(255,207,35,.34);
+ }
+ *{box-sizing:border-box;margin:0;padding:0}
+ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+ background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+ .wrap{max-width:700px;margin:0 auto;padding:0 20px}
+ a{color:inherit}
+
+ .topnav{position:sticky;top:0;z-index:40;background:var(--bg-veil);backdrop-filter:blur(8px);
+ -webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+ .topnav-in{display:flex;align-items:center;justify-content:space-between;max-width:1000px;margin:0 auto;padding:13px 20px;gap:14px}
+ .brand{font-weight:700;font-size:20px;text-decoration:none;color:var(--text);letter-spacing:-.01em}
+ @media(max-width:560px){.brand{font-size:16px}}
+ .navctl{display:flex;align-items:center;gap:9px}
+ .navbtn{background:none;border:1px solid var(--border);border-radius:8px;color:var(--muted);
+ font-family:inherit;font-weight:700;font-size:13px;padding:7px 11px;cursor:pointer;text-decoration:none;
+ display:inline-flex;align-items:center;transition:.12s}
+ .navbtn:hover{border-color:var(--accent);color:var(--text)}
+
+ header{padding:60px 0 6px;text-align:center;
+ background:radial-gradient(1000px 460px at 50% -10%, rgba(255,165,69,.10), transparent 60%), var(--bg)}
+ .eyebrow{color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+ font-size:12px;margin-bottom:12px;text-align:center}
+ h1{font-size:clamp(28px,4.2vw,44px);font-weight:800;letter-spacing:-.02em;line-height:1.12;margin-bottom:16px}
+ .nowrap{white-space:nowrap}
+ .lead{color:var(--muted);max-width:560px;margin:0 auto;font-size:16.5px}
+
+ section{padding:30px 0 64px}
+ .forwho{max-width:560px;margin:0 auto 26px;background:var(--accent-soft);
+ border:1px solid rgba(255,165,69,.28);border-radius:12px;padding:13px 16px;
+ color:var(--text-soft);font-size:14px;text-align:center}
+ .forwho b{color:var(--accent);font-weight:800}
+
+ .card{max-width:520px;margin:0 auto;background:var(--card);border:1.5px solid var(--accent);
+ border-radius:18px;overflow:hidden;box-shadow:0 0 0 1px var(--accent),0 0 28px rgba(255,165,69,.24)}
+ .chead{padding:24px 24px 20px;border-bottom:1px solid var(--border);text-align:center}
+ .cname{font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+ .pprice{font-size:42px;font-weight:800;letter-spacing:-.02em;line-height:1;color:var(--text)}
+ .pprice sup{font-size:.34em;font-weight:800;vertical-align:super;margin-left:3px}
+ .peuro{display:block;font-size:14px;color:var(--muted);margin-top:7px}
+ .cbody{padding:22px 24px 24px}
+ .feat{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:22px}
+ .feat li{display:flex;gap:10px;font-size:15px;line-height:1.45;color:var(--text-soft)}
+ .ck{flex:0 0 auto;color:#3ECF7E;font-weight:800}
+ .pbtn{display:flex;align-items:center;justify-content:center;width:100%;padding:15px;border-radius:12px;
+ text-decoration:none;font-weight:700;font-size:15.5px;font-family:inherit;cursor:pointer;
+ border:1.5px solid var(--border);background:transparent;color:var(--text);
+ transition:border-color .12s ease,transform .12s ease}
+ .pbtn:hover{border-color:var(--accent);transform:scale(1.02)}
+ .pbtn.solid{border:0;background-image:var(--accent-grad);color:var(--on-accent)}
+ .pbtn.solid:hover{transform:scale(1.03)}
+ .pbtn+.pbtn{margin-top:11px}
+ .note{text-align:center;color:var(--muted);font-size:13px;margin-top:18px}
+ .backlink{display:inline-block;margin-top:26px;color:var(--muted);font-size:14px;text-decoration:none}
+ .backlink:hover{color:var(--accent)}
+ footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;color:var(--muted);font-size:13px}
+ @media(prefers-reduced-motion:reduce){.pbtn{transition:none}.pbtn:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+ <div class="topnav-in">
+  <a class="brand" href="/">Beaudelaire Consulting</a>
+  <div class="navctl">
+   <button class="navbtn" id="devToggle" onclick="toggleDevise()" title="Changer de devise">FCFA</button>
+   <button class="navbtn" id="langToggle" onclick="toggleLang()">EN</button>
+  </div>
+ </div>
+</nav>
+
+<header>
+ <div class="wrap">
+  <div class="eyebrow" data-i18n="eyebrow">Le chemin · le guide pour scaler</div>
+  <h1 data-i18n-html="h1">Tu bosses comme un fou et t'avances plus&nbsp;?<br><span class="nowrap">Voilà le chemin.</span></h1>
+  <p class="lead" data-i18n="lead">Tu gagnes déjà de l'argent mais tu plafonnes ? Le guide étape par étape pour rendre ton business irrésistible et passer au palier au-dessus, sans changer de véhicule.</p>
+ </div>
+</header>
+
+<section>
+ <div class="wrap">
+  <p class="forwho" data-i18n-html="forwho"><b>Réservé à ceux qui font déjà de l'argent en ligne</b> et veulent passer au palier au-dessus. Ce n'est pas un guide pour débuter.</p>
+
+  <div class="card">
+   <div class="chead">
+    <div class="cname" data-i18n="cname">Le chemin</div>
+    <div class="pprice" data-xof="165 000" data-eur="250"><span class="pmain"></span></div>
+    <span class="peuro"></span>
+   </div>
+   <div class="cbody">
+    <ul class="feat">
+     <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="f1"></span></li>
+     <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="f2"></span></li>
+     <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="f3"></span></li>
+     <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="f4"></span></li>
+    </ul>
+    <a class="pbtn solid" href="https://whop.com/checkout/plan_kWZMN4mJL7JvW" target="_blank" rel="noopener" onclick="track('click_scaler_card')" data-i18n="card">Payer par carte (Visa / Mastercard)</a>
+    <a class="pbtn" href="https://me.fedapay.com/JsnHhERQ" target="_blank" rel="noopener" onclick="track('click_scaler_momo')" data-i18n="momo">Payer en mobile money (Afrique)</a>
+   </div>
+  </div>
+
+  <p class="note" data-i18n="note">Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.</p>
+  <div style="text-align:center"><a class="backlink" href="/" data-i18n="back">← Revenir à l'accueil</a></div>
+ </div>
+</section>
+
+<footer><div class="wrap">Contact : <a href="mailto:beaudelaireconsulting@gmail.com" style="color:var(--accent);text-decoration:none;font-weight:600">beaudelaireconsulting@gmail.com</a><br>© <span id="yr"></span> Beaudelaire Consulting</div></footer>
+
+<script>
+function track(event, data){
+ var d = Object.assign({page:'scaler', devise:(typeof DEVISE!=='undefined'?DEVISE:'')}, data||{});
+ try{ if(window.va) window.va('event', Object.assign({name:event}, d)); }catch(e){}
+ try{ if(window.clarity) window.clarity('event', event); }catch(e){}
+}
+
+var I18N = {
+ fr:{
+  eyebrow:"Le chemin · le guide pour scaler",
+  h1:"Tu bosses comme un fou et t'avances plus&nbsp;?<br><span class='nowrap'>Voilà le chemin.</span>",
+  lead:"Tu gagnes déjà de l'argent mais tu plafonnes ? Le guide étape par étape pour rendre ton business irrésistible et passer au palier au-dessus, sans changer de véhicule.",
+  forwho:"<b>Réservé à ceux qui font déjà de l'argent en ligne</b> et veulent passer au palier au-dessus. Ce n'est pas un guide pour débuter.",
+  cname:"Le chemin",
+  f1:"Rendre ton offre irrésistible plutôt que de courir après plus de trafic",
+  f2:"Identifier ce qui te bloque vraiment à ton palier actuel",
+  f3:"Structurer ton business pour qu'il tienne la montée en charge",
+  f4:"Passer au palier au-dessus sans changer de véhicule",
+  card:"Payer par carte (Visa / Mastercard)",
+  momo:"Payer en mobile money (Afrique)",
+  note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.",
+  back:"← Revenir à l'accueil"
+ },
+ en:{
+  eyebrow:"The path · the guide to scale",
+  h1:"Working like crazy but going nowhere?<br><span class='nowrap'>Here's the path.</span>",
+  lead:"Already making money but stuck at a plateau? The step-by-step guide to make your business irresistible and reach the next level, without switching vehicles.",
+  forwho:"<b>For people who already make money online</b> and want to reach the next level. This is not a guide for beginners.",
+  cname:"The path",
+  f1:"Make your offer irresistible instead of chasing more traffic",
+  f2:"Identify what is really keeping you at your current level",
+  f3:"Structure your business so it holds under growth",
+  f4:"Reach the next level without switching vehicles",
+  card:"Pay by card (Visa / Mastercard)",
+  momo:"Pay with mobile money (Africa)",
+  note:"Card (international) or mobile money (Africa) · Instant access after payment.",
+  back:"← Back to home"
+ }
+};
+
+var LANG = (function(){
+ try{ var s=localStorage.getItem('lang'); if(s==='fr'||s==='en') return s; }catch(e){}
+ return (navigator.language||'en').toLowerCase().indexOf('fr')===0 ? 'fr' : 'en';
+})();
+
+function applyI18N(){
+ var t=I18N[LANG];
+ document.querySelectorAll('[data-i18n],[data-i18n-html]').forEach(function(el){
+  var k=el.getAttribute('data-i18n')||el.getAttribute('data-i18n-html'), v=t[k];
+  if(v==null) return;
+  if(el.hasAttribute('data-i18n-html')||v.indexOf('<')>=0) el.innerHTML=v; else el.textContent=v;
+ });
+ document.documentElement.lang=LANG;
+ var b=document.getElementById('langToggle'); if(b) b.textContent=(LANG==='fr')?'EN':'FR';
+ document.title=(LANG==='fr') ? "Le chemin — passer au palier au-dessus"
+                              : "The path — reach the next level";
+}
+function toggleLang(){
+ LANG=(LANG==='fr')?'en':'fr';
+ try{ localStorage.setItem('lang',LANG); }catch(e){}
+ applyI18N(); applyDevise();
+}
+
+/* Devise : mêmes règles que le reste du site, choix partagé via localStorage. */
+var ZONE_FRANC = ['Africa/Porto-Novo','Africa/Abidjan','Africa/Dakar','Africa/Ouagadougou',
+ 'Africa/Bamako','Africa/Niamey','Africa/Lome','Africa/Bissau',
+ 'Africa/Douala','Africa/Libreville','Africa/Brazzaville','Africa/Bangui','Africa/Ndjamena','Africa/Malabo'];
+var PAYS_FRANC = /-(BJ|CI|SN|BF|ML|NE|TG|GW|CM|GA|CG|CF|TD|GQ)\b/i;
+var PAYS_HORS_FRANC = /-(GH|NG|GN|MR|SL|LR|GM|MA|DZ|TN|EG|KE|ZA|CD|ET|TZ|UG)\b/i;
+
+var DEVISE = (function(){
+ try{ var m=localStorage.getItem('devise'); if(m==='XOF'||m==='EUR') return m; }catch(e){}
+ try{
+  var tz=(Intl.DateTimeFormat().resolvedOptions().timeZone)||'';
+  var loc=[navigator.language||''].concat(navigator.languages||[]).join(' ');
+  if(PAYS_HORS_FRANC.test(loc)) return 'EUR';
+  if(PAYS_FRANC.test(loc)) return 'XOF';
+  if(ZONE_FRANC.indexOf(tz)>=0) return 'XOF';
+ }catch(e){}
+ return 'EUR';
+})();
+
+function applyDevise(){
+ document.querySelectorAll('.pprice[data-xof]').forEach(function(el){
+  var xof=el.getAttribute('data-xof'), eur=el.getAttribute('data-eur');
+  var m=el.querySelector('.pmain');
+  if(m) m.innerHTML=(DEVISE==='XOF') ? xof+'<sup>FCFA</sup>' : eur+'<sup>€</sup>';
+  var p=el.parentNode.querySelector('.peuro');
+  if(p) p.textContent=(DEVISE==='XOF') ? eur+' €' : xof+' FCFA';
+ });
+ var b=document.getElementById('devToggle');
+ if(b) b.textContent=(DEVISE==='XOF')?'FCFA':'EUR';
+}
+function toggleDevise(){
+ DEVISE=(DEVISE==='XOF')?'EUR':'XOF';
+ try{ localStorage.setItem('devise',DEVISE); }catch(e){}
+ track('switch_devise',{devise:DEVISE});
+ applyDevise();
+}
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+applyI18N();
+applyDevise();
+track('visit_scaler');
+</script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
