@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mon histoire — Beaudelaire Consulting</title>
+<meta name="description" content="Parti de zéro au Bénin juste après le bac, aujourd'hui plus de 50k€ par mois. Le parcours complet, sans filtre.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --bg:#060E15; --bg2:#0B141C; --card:#131B23; --border:#222E39;
+ --text:#FFFFFF; --muted:rgba(255,255,255,.64); --faint:rgba(255,255,255,.50);
+ --accent:#FFA545; --accent-strong:#FFA545; --accent-soft:rgba(255,165,69,.12);
+ --star:#FFCF23; --on-accent:#060E15;
+ --accent-grad:linear-gradient(95deg,#FFA930 0%,#FFAB23 51%,#D5AA12 113%);
+ --text-soft:rgba(255,255,255,.80);
+ --bg-veil:rgba(6,14,21,.85); --star-soft:rgba(255,207,35,.10); --star-line:rgba(255,207,35,.34);
+ }
+ *{box-sizing:border-box;margin:0;padding:0}
+ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+ background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+ .wrap{max-width:680px;margin:0 auto;padding:0 20px}
+ a{color:inherit}
+
+ .topnav{position:sticky;top:0;z-index:40;background:var(--bg-veil);backdrop-filter:blur(8px);
+ -webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+ .topnav-in{display:flex;align-items:center;justify-content:space-between;max-width:1000px;margin:0 auto;padding:13px 20px;gap:14px}
+ .brand{font-weight:700;font-size:20px;text-decoration:none;color:var(--text);letter-spacing:-.01em}
+ @media(max-width:560px){.brand{font-size:16px}}
+ .navbtn{background:none;border:1px solid var(--border);border-radius:8px;color:var(--muted);
+ font-family:inherit;font-weight:700;font-size:13px;padding:7px 11px;cursor:pointer;transition:.12s}
+ .navbtn:hover{border-color:var(--accent);color:var(--text)}
+
+ header{padding:58px 0 0;text-align:center;
+ background:radial-gradient(1000px 460px at 50% -10%, rgba(255,165,69,.10), transparent 60%), var(--bg)}
+ .eyebrow{color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+ font-size:12px;margin-bottom:12px;text-align:center}
+ h1{font-size:clamp(27px,4.2vw,42px);font-weight:800;letter-spacing:-.02em;line-height:1.14;margin-bottom:26px}
+ .nowrap{white-space:nowrap}
+
+ /* Vidéo : la vignette se transforme en lecteur au clic, comme sur l'accueil. */
+ .vsl{position:relative;max-width:600px;margin:0 auto;aspect-ratio:16/9;background:var(--bg2);
+ border:1px solid var(--border);border-radius:16px;overflow:hidden}
+ .vslfacade{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;display:block;overflow:hidden}
+ .vslfacade img{width:100%;height:100%;object-fit:cover;display:block}
+ .vslfacade .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+ width:72px;height:72px;border-radius:50%;background-image:var(--accent-grad);color:var(--on-accent);
+ font-size:25px;line-height:1;display:flex;align-items:center;justify-content:center;
+ box-shadow:0 8px 26px rgba(0,0,0,.55);transition:transform .15s ease}
+ .vslfacade:hover .play,.vslfacade:focus-visible .play{transform:translate(-50%,-50%) scale(1.08)}
+ @media(max-width:560px){.vslfacade .play{width:60px;height:60px;font-size:21px}}
+
+ section{padding:44px 0 64px}
+ .recit p{color:var(--text-soft);font-size:17px;margin-bottom:18px}
+ .recit p strong{color:var(--text);font-weight:700}
+ .recit p:last-of-type{margin-bottom:0}
+
+ .statrow{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:40px;
+ border-top:1px solid var(--border);padding-top:32px}
+ .stat{text-align:center;background:var(--card);border:1px solid var(--border);
+ border-radius:12px;padding:14px 16px;min-width:118px}
+ .stat b{display:block;font-size:27px;letter-spacing:-.02em;color:var(--accent)}
+ .stat span{color:var(--muted);font-size:13px}
+ .stat.hl{background:var(--star-soft);border-color:var(--star-line)}
+ .stat.hl span{color:var(--star);font-weight:600}
+ @media(max-width:560px){.statrow{gap:8px}.stat{min-width:92px;padding:11px 8px}.stat b{font-size:21px}}
+
+ .cta{display:inline-block;background-image:var(--accent-grad);color:var(--on-accent);
+ font-weight:700;font-size:16px;padding:16px 34px;border-radius:12px;text-decoration:none;
+ border:none;cursor:pointer;font-family:inherit;transition:transform .12s ease,opacity .12s ease}
+ .cta:hover{opacity:.94;transform:scale(1.04)}
+ .backlink{display:inline-block;margin-top:24px;color:var(--muted);font-size:14px;text-decoration:none}
+ .backlink:hover{color:var(--accent)}
+ footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;color:var(--muted);font-size:13px}
+ @media(prefers-reduced-motion:reduce){.cta,.vslfacade .play{transition:none}.cta:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+ <div class="topnav-in">
+  <a class="brand" href="/">Beaudelaire Consulting</a>
+  <button class="navbtn" id="langToggle" onclick="toggleLang()">EN</button>
+ </div>
+</nav>
+
+<header>
+ <div class="wrap">
+  <div class="eyebrow" data-i18n="eyebrow">Mon histoire</div>
+  <h1 data-i18n-html="h1">Parti de 0 au Bénin. <span class="nowrap">Aujourd'hui, +50k€ par mois.</span></h1>
+  <div class="vsl" id="vsl">
+   <button type="button" class="vslfacade" onclick="playVSL()" aria-label="Lire la vidéo">
+    <img id="vslThumb" src="" alt="" decoding="async">
+    <span class="play" aria-hidden="true">&#9654;</span>
+   </button>
+  </div>
+ </div>
+</header>
+
+<section>
+ <div class="wrap">
+  <div class="recit">
+   <p data-i18n="p1"></p>
+   <p data-i18n="p2"></p>
+   <p data-i18n="p3"></p>
+   <p data-i18n="p4"></p>
+   <p data-i18n-html="p5"></p>
+  </div>
+
+  <div class="statrow">
+   <div class="stat"><b data-i18n="stat1n">0 → 50k€+</b><span data-i18n="stat1l">par mois</span></div>
+   <div class="stat"><b>30+</b><span data-i18n="stat2l">pays en 2 ans</span></div>
+   <div class="stat hl"><b>250+</b><span data-i18n="stat3l">rienneux sauvés</span></div>
+  </div>
+
+  <div style="text-align:center;margin-top:34px">
+   <a class="cta" href="/checkout" onclick="track('click_go_checkout',{depuis:'histoire'})" data-i18n="cta">Apprendre à gagner de l'argent</a>
+   <br><a class="backlink" href="/" data-i18n="back">← Revenir à l'accueil</a>
+  </div>
+ </div>
+</section>
+
+<footer><div class="wrap">Contact : <a href="mailto:beaudelaireconsulting@gmail.com" style="color:var(--accent);text-decoration:none;font-weight:600">beaudelaireconsulting@gmail.com</a><br>© <span id="yr"></span> Beaudelaire Consulting</div></footer>
+
+<script>
+var CONFIG = { vslId:"uznbqo-Xofw", vslThumb:"" };
+
+function track(event, data){
+ var d = Object.assign({page:'histoire'}, data||{});
+ try{ if(window.va) window.va('event', Object.assign({name:event}, d)); }catch(e){}
+ try{ if(window.clarity) window.clarity('event', event); }catch(e){}
+}
+
+var I18N = {
+ fr:{
+  eyebrow:"Mon histoire",
+  h1:'Parti de 0 au Bénin. <span class="nowrap">Aujourd\'hui, +50k€ par mois.</span>',
+  p1:"Je m'appelle Beaudelaire. Béninois, parti de 0 juste après le bac. Au lieu de suivre la voie tracée, j'ai choisi d'entreprendre en ligne, sans savoir par où commencer.",
+  p2:"J'ai pris ce qui passait : traduction, gestion de comptes, gestion d'équipe. Je me faisais arnaquer. Et même payé, je ne pouvais souvent pas toucher l'argent : encaisser depuis l'Afrique sans compte bancaire classique, c'est un problème que personne ne t'explique.",
+  p3:"Bloqué à 5k/mois pendant un an. Puis tout a basculé : 10k, 20k, jusqu'à plus de 50k€ par mois.",
+  p4:"Ce chemin m'a fait voyager dans 30+ pays en 2 ans, rencontrer des entrepreneurs en vrai, visiter leurs business jusque dans les usines en Chine, et accompagner 30+ entrepreneurs à se lancer et à grandir.",
+  p5:"<strong>Ma mission est simple : transmettre aux entrepreneurs ce que j'aurais voulu qu'on me dise au départ. Je ne te dis pas quel business monter. Je te montre comment passer au niveau supérieur, à partir d'où tu es exactement.</strong>",
+  stat1n:"0 → 50k€+", stat1l:"par mois", stat2l:"pays en 2 ans", stat3l:"rienneux sauvés",
+  cta:"Apprendre à gagner de l'argent", back:"← Revenir à l'accueil"
+ },
+ en:{
+  eyebrow:"My story",
+  h1:'Started from 0 in Benin. <span class="nowrap">Today, €50k+ a month.</span>',
+  p1:"I'm Beaudelaire. From Benin, I started from zero right after high school. Instead of following the usual path, I chose to build online, with no idea where to start.",
+  p2:"I took whatever came: translation, account management, team management. I got scammed. And even when I was paid, I often couldn't touch the money: getting paid from Africa without a standard bank account is a problem nobody warns you about.",
+  p3:"Stuck at 5k a month for a year. Then everything shifted: 10k, 20k, up to over €50k a month.",
+  p4:"This path took me to 30+ countries in 2 years, meeting entrepreneurs in person, visiting their businesses down to the factories in China, and helping 30+ entrepreneurs launch and grow.",
+  p5:"<strong>My mission is simple: give entrepreneurs what I wish someone had told me at the start. I don't tell you which business to build. I show you how to reach the next level, from exactly where you are.</strong>",
+  stat1n:"0 → €50k+", stat1l:"per month", stat2l:"countries in 2 years", stat3l:"rienneux saved",
+  cta:"Learn to make money", back:"← Back to home"
+ }
+};
+
+var LANG = (function(){
+ try{ var s=localStorage.getItem('lang'); if(s==='fr'||s==='en') return s; }catch(e){}
+ return (navigator.language||'en').toLowerCase().indexOf('fr')===0 ? 'fr' : 'en';
+})();
+
+function applyI18N(){
+ var t=I18N[LANG];
+ document.querySelectorAll('[data-i18n],[data-i18n-html]').forEach(function(el){
+  var k=el.getAttribute('data-i18n')||el.getAttribute('data-i18n-html'), v=t[k];
+  if(v==null) return;
+  if(el.hasAttribute('data-i18n-html')||v.indexOf('<')>=0) el.innerHTML=v; else el.textContent=v;
+ });
+ document.documentElement.lang=LANG;
+ var b=document.getElementById('langToggle'); if(b) b.textContent=(LANG==='fr')?'EN':'FR';
+ document.title=(LANG==='fr') ? "Mon histoire — Beaudelaire Consulting"
+                              : "My story — Beaudelaire Consulting";
+}
+function toggleLang(){
+ LANG=(LANG==='fr')?'en':'fr';
+ try{ localStorage.setItem('lang',LANG); }catch(e){}
+ applyI18N();
+}
+
+function initVSL(){
+ var img=document.getElementById('vslThumb'); if(!img) return;
+ img.src = CONFIG.vslThumb || ('https://i.ytimg.com/vi/'+CONFIG.vslId+'/maxresdefault.jpg');
+ img.onerror = function(){ this.onerror=null; this.src='https://i.ytimg.com/vi/'+CONFIG.vslId+'/hqdefault.jpg'; };
+}
+function playVSL(){
+ var box=document.getElementById('vsl'); if(!box) return;
+ box.innerHTML='<iframe src="https://www.youtube.com/embed/'+CONFIG.vslId+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Beaudelaire Consulting" allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" playsinline allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>';
+ track('play_vsl');
+}
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+applyI18N();
+initVSL();
+track('visit_histoire');
+</script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
