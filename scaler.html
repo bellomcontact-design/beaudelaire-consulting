@@ -220,7 +220,7 @@
 <div class="entete">
 <div class="topbar">
  <a class="tb-logo" href="/" aria-label="Beaudelaire Consulting"><img src="/logo.png" alt="Beaudelaire Consulting" width="34" height="34"></a>
- <a class="topbar-btn" href="https://chat.whatsapp.com/G5dE1DyvQdY00xE74kbPGw" target="_blank" rel="noopener"
+ <a class="topbar-btn" href="https://chat.whatsapp.com/JYVxirLzZdfBw3m5YAbxVq" target="_blank" rel="noopener"
     onclick="track('click_whatsapp',{depuis:'scaler'})" data-i18n="tb_cta">Rejoindre le groupe privé (Gratuit)</a>
  <button class="tb-burger" id="tbBurger" onclick="basculeMenu()" aria-label="Menu" aria-expanded="false">&#9776;</button>
  <div class="tb-menu" id="tbMenu">
@@ -451,7 +451,7 @@ function deviseCourante(){ return (LANG==='en') ? 'USD' : 'XOF'; }
 function montantDe(el, dev){
  return (dev==='XOF') ? el.getAttribute('data-xof') : el.getAttribute('data-eur');
 }
-function suffixeDe(dev){ return dev==='XOF' ? 'XOF' : (dev==='EUR' ? '\u20AC' : '$'); }
+function suffixeDe(dev){ return dev==='XOF' ? 'XOF' : (dev==='EUR' ? '€' : '$'); }
 
 function applyDevise(){
  var dev = deviseCourante();
@@ -459,7 +459,7 @@ function applyDevise(){
   var m=el.querySelector('.pmain');
   if(m) m.innerHTML = montantDe(el, dev)+'<sup>'+suffixeDe(dev)+'</sup>';
   var p=el.parentNode.querySelector('.peuro');
-  if(p) p.textContent = el.getAttribute('data-eur')+' \u20AC';   /* toujours l'euro en repere */
+  if(p) p.textContent = el.getAttribute('data-eur')+' €';   /* toujours l'euro en repere */
  });
 }
 
