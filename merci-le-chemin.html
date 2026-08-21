@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
-<title>Merci · Ton guide t'attend dans le Discord</title>
+<title>Merci · Active ton accès</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -13,35 +13,44 @@
     --bg:#faf8f3; --card:#fffefb; --text:#17150f; --muted:#6b675d; --border:#e7e2d6;
     --green:#159a45; --green-soft:#e7f4ec;
     --discord:#5865F2; --discord-dark:#4752c4;
+    --red:#e23b3b; --red-soft:#fdecec;
   }
   *{box-sizing:border-box}
   body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);
     font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-    display:flex;align-items:center;justify-content:center;padding:24px;line-height:1.5}
-  .wrap{width:100%;max-width:520px;text-align:center}
-  .card{background:var(--card);border:1.5px solid var(--border);border-radius:20px;
-    padding:40px 30px;box-shadow:0 10px 40px rgba(20,40,25,.06)}
-  .check{width:64px;height:64px;border-radius:50%;background:var(--green-soft);
-    display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
-  .check svg{width:34px;height:34px}
-  h1{font-size:26px;font-weight:800;margin:0 0 8px;letter-spacing:-.01em}
-  .sub{color:var(--muted);font-size:16px;margin:0 0 28px}
-  .choose{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--discord);margin:0 0 14px}
-  .btns{display:flex;flex-direction:column;gap:12px}
-  a.dl{display:flex;align-items:center;justify-content:center;gap:10px;
-    text-decoration:none;font-weight:800;font-size:17px;padding:18px 18px;border-radius:13px;
-    transition:transform .12s ease,opacity .12s ease}
-  a.dl:hover{transform:translateY(-1px);opacity:.94}
-  a.discord{background:var(--discord);color:#fff}
-  a.discord:hover{background:var(--discord-dark);opacity:1}
-  .ico{width:24px;height:24px;flex:0 0 auto}
-  .note{margin-top:16px;font-size:14px;color:var(--text);background:var(--green-soft);
-    border-radius:11px;padding:12px 14px}
-  .note b{color:var(--green)}
-  .foot{margin-top:24px;font-size:13.5px;color:var(--muted)}
-  .foot a{color:var(--discord-dark);text-decoration:none;font-weight:600}
-  .brand{margin-top:22px;font-size:13px;color:var(--muted);font-weight:600}
+    display:flex;align-items:center;justify-content:center;padding:18px;line-height:1.55}
+  .wrap{width:100%;max-width:460px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:20px;
+    padding:28px 22px 26px;box-shadow:0 8px 34px rgba(20,40,25,.07);text-align:center}
+
+  .check{width:56px;height:56px;border-radius:50%;background:var(--green-soft);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+  .check svg{width:30px;height:30px}
+  h1{font-size:23px;font-weight:800;margin:0 0 16px}
+
+  .warnbig{background:var(--red-soft);border:1.5px solid var(--red);color:var(--red);
+    font-weight:800;font-size:16px;border-radius:13px;padding:14px 12px;margin:0 0 18px;line-height:1.35}
+
+  .intro{color:var(--muted);font-size:16px;margin:0 0 24px}
+
+  .block{text-align:left;margin-bottom:22px}
+  .blabel{font-size:15px;font-weight:800;color:var(--text);margin:0 0 12px}
+  .blabel span{color:var(--discord)}
+
+  a.btn{display:block;width:100%;text-align:center;text-decoration:none;
+    font-weight:700;font-size:16px;padding:16px 14px;border-radius:13px;margin-bottom:11px;
+    line-height:1.3;transition:transform .12s ease,opacity .12s ease,background .12s ease}
+  a.btn:last-child{margin-bottom:0}
+  a.light{background:#fff;color:var(--text);border:1.6px solid var(--border)}
+  a.light:hover{border-color:var(--discord)}
+  a.discord{background:var(--discord);color:#fff;font-weight:800;font-size:18px;padding:18px 14px}
+  a.discord:hover{background:var(--discord-dark)}
+
+  .hint{color:var(--muted);font-size:14px;margin:10px 2px 0}
+
+  .note{color:var(--muted);font-size:14px;margin:22px 0 0;text-align:center}
+  .note a{color:var(--discord-dark);text-decoration:none;font-weight:600}
+  .brand{text-align:center;margin-top:18px;font-size:13px;color:var(--muted);font-weight:600}
 </style>
 </head>
 <body>
@@ -51,16 +60,24 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="#159a45" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
       </div>
       <h1>Paiement réussi ! 🎉</h1>
-      <p class="sub">Ton guide t'attend <b>à l'intérieur du Discord privé</b>. Clique ci-dessous pour activer ton accès, récupérer ton guide et rejoindre la communauté.</p>
-      <p class="choose">Dernière étape</p>
-      <div class="btns">
-        <a class="dl discord" href="https://bot.beaudelaireconsulting.com/activer" rel="noopener">
-          <svg class="ico" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M20.317 4.369A19.79 19.79 0 0016.558 3.2a.074.074 0 00-.079.037c-.34.607-.719 1.4-.984 2.022a18.27 18.27 0 00-5.49 0 12.6 12.6 0 00-.997-2.022.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.369a.07.07 0 00-.032.027C1.533 7.55.9 10.65 1.21 13.708a.082.082 0 00.031.056 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.1 13.1 0 01-1.872-.892.077.077 0 01-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 01.078.009c.12.099.246.198.373.292a.077.077 0 01-.006.127c-.598.35-1.22.645-1.873.892a.076.076 0 00-.04.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.84 19.84 0 006.002-3.03.077.077 0 00.032-.055c.5-3.667-.838-6.741-2.442-9.312a.061.061 0 00-.031-.028zM8.02 12.65c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.211 0 2.176 1.096 2.157 2.42 0 1.332-.955 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.211 0 2.176 1.096 2.157 2.42 0 1.332-.946 2.418-2.157 2.418z"/></svg>
-          Activer mon accès Discord &amp; récupérer mon guide
-        </a>
+
+      <div class="warnbig">⚠️ NE FERME PAS CETTE PAGE</div>
+
+      <p class="intro">Encore une petite étape pour recevoir ton guide et entrer dans la communauté.</p>
+
+      <div class="block">
+        <div class="blabel"><span>1.</span> Installe Discord (si tu ne l'as pas encore)</div>
+        <a class="btn light" href="https://apps.apple.com/app/discord/id985746746" target="_blank" rel="noopener">Si tu as un iPhone, clique ici</a>
+        <a class="btn light" href="https://play.google.com/store/apps/details?id=com.discord" target="_blank" rel="noopener">Si tu as un Android, clique ici</a>
+        <p class="hint">Crée ton compte, puis reviens sur cette page.</p>
       </div>
-      <p class="note">Tout est dedans : <b>ton guide</b> + l'accès à la communauté <b>Ex-rienneux</b>. En 1 clic, tu rejoins le serveur et ton accès s'active automatiquement. 🔓</p>
-      <p class="foot">Un souci pour activer ? Écris-moi : <a href="mailto:beaudelaireconsulting@gmail.com">beaudelaireconsulting@gmail.com</a></p>
+
+      <div class="block">
+        <div class="blabel"><span>2.</span> Active ton accès</div>
+        <a class="btn discord" href="https://bot.beaudelaireconsulting.com/activer" rel="noopener">Activer mon accès</a>
+      </div>
+
+      <p class="note">Un souci ? Écris-moi : <a href="mailto:beaudelaireconsulting@gmail.com">beaudelaireconsulting@gmail.com</a></p>
     </div>
     <p class="brand">Beaudelaire Consulting</p>
   </div>
