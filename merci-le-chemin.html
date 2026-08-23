@@ -7,50 +7,78 @@
 <title>Merci · Active ton accès</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#faf8f3; --card:#fffefb; --text:#17150f; --muted:#6b675d; --border:#e7e2d6;
-    --green:#159a45; --green-soft:#e7f4ec;
+    --bg:#faf8f3; --card:#fffefb; --text:#1a1813; --muted:#7a766c; --border:#eae5d9;
+    --green:#159a45; --green-soft:#e9f5ee;
     --discord:#5865F2; --discord-dark:#4752c4;
-    --red:#e23b3b; --red-soft:#fdecec;
+    --red:#d62828;
   }
   *{box-sizing:border-box}
   body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);
     font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-    display:flex;align-items:center;justify-content:center;padding:18px;line-height:1.55}
-  .wrap{width:100%;max-width:460px}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:20px;
-    padding:28px 22px 26px;box-shadow:0 8px 34px rgba(20,40,25,.07);text-align:center}
+    display:flex;align-items:center;justify-content:center;padding:16px;line-height:1.5}
+  .wrap{width:100%;max-width:390px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:18px;
+    padding:26px 20px 22px;box-shadow:0 6px 26px rgba(20,40,25,.06);text-align:center}
 
-  .check{width:56px;height:56px;border-radius:50%;background:var(--green-soft);
-    display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
-  .check svg{width:30px;height:30px}
-  h1{font-size:23px;font-weight:800;margin:0 0 16px}
+  .check{width:46px;height:46px;border-radius:50%;background:var(--green-soft);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+  .check svg{width:24px;height:24px}
+  h1{font-size:19px;font-weight:800;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 18px}
 
-  .warnbig{background:var(--red-soft);border:1.5px solid var(--red);color:var(--red);
-    font-weight:800;font-size:16px;border-radius:13px;padding:14px 12px;margin:0 0 18px;line-height:1.35}
+  .noclose{display:inline-flex;align-items:center;gap:7px;
+    background:#fff6e0;border:1px solid #f0d089;color:#8a5a00;
+    font-weight:700;font-size:12.5px;border-radius:999px;padding:7px 14px;margin:0 0 16px}
 
-  .intro{color:var(--muted);font-size:16px;margin:0 0 24px}
+  .stopbox{display:flex;gap:11px;text-align:left;border:1px solid var(--border);
+    border-left:3px solid var(--red);background:#fff;border-radius:12px;padding:12px 14px;margin:0 0 22px}
+  .stopbox .ico{font-size:17px;line-height:1.3;flex:0 0 auto}
+  .stopbox .txt{font-size:13px;color:var(--text);line-height:1.5}
+  .stopbox .txt b.red{color:var(--red);font-weight:800}
 
-  .block{text-align:left;margin-bottom:22px}
-  .blabel{font-size:15px;font-weight:800;color:var(--text);margin:0 0 12px}
-  .blabel span{color:var(--discord)}
+  .steptitle{font-size:11.5px;font-weight:700;color:var(--muted);text-transform:uppercase;
+    letter-spacing:.06em;text-align:left;margin:0 0 12px}
+
+  .block{text-align:left;margin-bottom:18px}
+  .blabel{display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:700;color:var(--text);margin:0 0 10px}
+  .blabel .n{display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;background:var(--discord);color:#fff;
+    font-size:12.5px;font-weight:800;flex:0 0 auto}
 
   a.btn{display:block;width:100%;text-align:center;text-decoration:none;
-    font-weight:700;font-size:16px;padding:16px 14px;border-radius:13px;margin-bottom:11px;
-    line-height:1.3;transition:transform .12s ease,opacity .12s ease,background .12s ease}
+    font-weight:600;font-size:14.5px;padding:12px 14px;border-radius:11px;margin-bottom:8px;
+    line-height:1.3;transition:border-color .12s ease,background .12s ease,opacity .12s ease}
   a.btn:last-child{margin-bottom:0}
-  a.light{background:#fff;color:var(--text);border:1.6px solid var(--border)}
+  a.light{background:#f6f3ec;color:var(--text);border:1px solid var(--border)}
   a.light:hover{border-color:var(--discord)}
-  a.discord{background:var(--discord);color:#fff;font-weight:800;font-size:18px;padding:18px 14px}
+  a.discord{background:var(--discord);color:#fff;font-weight:700;font-size:15.5px;padding:14px}
   a.discord:hover{background:var(--discord-dark)}
+  a.btn.locked{opacity:.4;cursor:not-allowed}
 
-  .hint{color:var(--muted);font-size:14px;margin:10px 2px 0}
+  .acc{margin-bottom:8px;border:1px solid var(--border);border-radius:11px;background:#f6f3ec;overflow:hidden}
+  .acc summary{list-style:none;cursor:pointer;padding:12px 14px;font-size:14.5px;font-weight:600;
+    display:flex;align-items:center;justify-content:space-between}
+  .acc summary::-webkit-details-marker{display:none}
+  .acc summary::after{content:'⌄';font-size:15px;color:var(--muted);transition:transform .15s ease}
+  .acc[open] summary::after{transform:rotate(180deg)}
+  .acc[open]{background:#fff}
+  .accbody{padding:2px 14px 13px}
+  .accbody ol{margin:6px 0 0;padding-left:19px}
+  .accbody li{font-size:13px;color:var(--text);margin-bottom:6px;line-height:1.45}
+  .accbody li:last-child{margin-bottom:0}
 
-  .note{color:var(--muted);font-size:14px;margin:22px 0 0;text-align:center}
+  .readcheck{display:flex;align-items:center;gap:10px;text-align:left;
+    background:#fff8e6;border:1px solid #f0d089;border-radius:11px;
+    padding:11px 13px;margin-bottom:9px;font-size:13.5px;font-weight:600;cursor:pointer}
+  .readcheck input{width:20px;height:20px;margin:0;flex:0 0 auto;accent-color:var(--green);cursor:pointer}
+
+  .hint{color:var(--muted);font-size:12.5px;margin:8px 2px 0}
+  .note{color:var(--muted);font-size:12.5px;margin:20px 0 0}
   .note a{color:var(--discord-dark);text-decoration:none;font-weight:600}
-  .brand{text-align:center;margin-top:18px;font-size:13px;color:var(--muted);font-weight:600}
+  .brand{text-align:center;margin-top:14px;font-size:12px;color:var(--muted);font-weight:600}
 </style>
 </head>
 <body>
@@ -59,27 +87,76 @@
       <div class="check">
         <svg viewBox="0 0 24 24" fill="none" stroke="#159a45" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
       </div>
-      <h1>Paiement réussi ! 🎉</h1>
+      <h1>Paiement réussi 🎉</h1>
+      <p class="sub">Encore 2 étapes pour entrer dans la communauté.</p>
 
-      <div class="warnbig">⚠️ NE FERME PAS CETTE PAGE</div>
+      <div class="noclose">⚠️ Ne ferme pas cette page</div>
 
-      <p class="intro">Encore une petite étape pour recevoir ton guide et entrer dans la communauté.</p>
+      <div class="stopbox">
+        <span class="ico">🛑</span>
+        <span class="txt"><b class="red">STOP — lis avant de cliquer.</b> Ne clique sur rien avant d'avoir fait les 2 étapes ci-dessous, dans l'ordre. Si tu en sautes une, tu risques de ne pas entrer dans la communauté.</span>
+      </div>
+
+      <p class="steptitle">À faire dans l'ordre</p>
 
       <div class="block">
-        <div class="blabel"><span>1.</span> Installe Discord (si tu ne l'as pas encore)</div>
-        <a class="btn light" href="https://apps.apple.com/app/discord/id985746746" target="_blank" rel="noopener">Si tu as un iPhone, clique ici</a>
-        <a class="btn light" href="https://play.google.com/store/apps/details?id=com.discord" target="_blank" rel="noopener">Si tu as un Android, clique ici</a>
-        <p class="hint">Crée ton compte, puis reviens sur cette page.</p>
+        <div class="blabel"><span class="n">1</span> Installe Discord</div>
+        <details class="acc">
+          <summary>📱 iPhone</summary>
+          <div class="accbody">
+            <ol>
+              <li>Ouvre l'<b>App Store</b>.</li>
+              <li>Cherche <b>Discord</b> et installe l'appli.</li>
+              <li>Ouvre Discord et <b>crée ton compte</b>.</li>
+              <li><b>Vérifie ton e-mail</b> : Discord t'envoie un mail, ouvre-le et clique sur le lien.</li>
+              <li><b>Reviens sur cette page.</b></li>
+            </ol>
+          </div>
+        </details>
+        <details class="acc">
+          <summary>🤖 Android</summary>
+          <div class="accbody">
+            <ol>
+              <li>Ouvre le <b>Play Store</b>.</li>
+              <li>Cherche <b>Discord</b> et installe l'appli.</li>
+              <li>Ouvre Discord et <b>crée ton compte</b>.</li>
+              <li><b>Vérifie ton e-mail</b> : Discord t'envoie un mail, ouvre-le et clique sur le lien.</li>
+              <li><b>Reviens sur cette page.</b></li>
+            </ol>
+          </div>
+        </details>
+        <p class="hint">Appuie sur iPhone ou Android pour voir les étapes.</p>
       </div>
 
       <div class="block">
-        <div class="blabel"><span>2.</span> Active ton accès</div>
-        <a class="btn discord" href="https://bot.beaudelaireconsulting.com/activer" rel="noopener">Activer mon accès</a>
+        <div class="blabel"><span class="n">2</span> Active ton accès</div>
+        <label class="readcheck" for="agree">
+          <input type="checkbox" id="agree">
+          <span>J'ai lu et j'ai Discord installé.</span>
+        </label>
+        <a class="btn discord locked" id="activateBtn" href="https://bot.beaudelaireconsulting.com/activer" rel="noopener" aria-disabled="true">Activer mon accès</a>
+        <p class="hint">Coche la case pour débloquer le bouton.</p>
       </div>
 
-      <p class="note">Un souci ? Écris-moi : <a href="mailto:beaudelaireconsulting@gmail.com">beaudelaireconsulting@gmail.com</a></p>
+      <p class="note">Un souci ? <a href="mailto:beaudelaireconsulting@gmail.com">beaudelaireconsulting@gmail.com</a></p>
     </div>
     <p class="brand">Beaudelaire Consulting</p>
   </div>
+
+  <script>
+    (function(){
+      var cb = document.getElementById('agree');
+      var btn = document.getElementById('activateBtn');
+      function update(){
+        if (cb.checked){ btn.classList.remove('locked'); btn.removeAttribute('aria-disabled'); }
+        else { btn.classList.add('locked'); btn.setAttribute('aria-disabled','true'); }
+      }
+      btn.addEventListener('click', function(e){
+        if (!cb.checked){ e.preventDefault(); cb.focus(); alert("Coche d'abord la case juste au-dessus 👆"); }
+      });
+      cb.addEventListener('change', update);
+      update();
+    })();
+  </script>
 </body>
 </html>
