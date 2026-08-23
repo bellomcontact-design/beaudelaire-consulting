@@ -780,15 +780,15 @@
  <div class="wrap wide">
  <div class="chgrid">
  <div class="ch">
- <b data-compteur data-xof="430000000" data-eur="655000" data-suffixe="+"><span class="val">0</span><span class="unite"></span></b>
+ <b data-compteur data-xof="432829000" data-eur="660000" data-suffixe="+"><span class="val">0</span><span class="unite"></span></b>
  <span data-i18n="ch.l1">gagnés par mes élèves</span>
  </div>
  <div class="ch">
- <b data-compteur data-valeur="4"><span class="val">0</span></b>
+ <b data-compteur data-valeur="8"><span class="val">0</span></b>
  <span data-i18n="ch.l2">façons de gagner de l'argent en ligne</span>
  </div>
  <div class="ch">
- <b data-compteur data-valeur="300" data-suffixe="+"><span class="val">0</span></b>
+ <b data-compteur data-valeur="370" data-suffixe="+"><span class="val">0</span></b>
  <span data-i18n="ch.l3">élèves nous ont rejoints ce mois-ci</span>
  </div>
  </div>
@@ -813,6 +813,44 @@
  <details><summary data-i18n="faq.q3">Qu'est-ce qu'il y a dans le guide ?</summary><div data-i18n-html="faq.a3"></div></details>
  <details><summary data-i18n="faq.q4">Qu'est-ce qui est gratuit ?</summary><div data-i18n-html="faq.a4"></div></details>
  </div>
+ </div>
+ </section>
+
+ <!-- CATALOGUE : tout ce que tu débloques -->
+ <style>
+  .catalogue2{background:#0B141C;padding:44px 0 58px}
+  .catgrid2{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));margin:0}
+  .catitem2{display:flex;align-items:center;gap:10px;background:#131B23;border:1px solid #222E39;border-radius:12px;padding:14px;font-weight:700;font-size:14px;color:#fff}
+  .catitem2 .e{font-size:22px;flex:0 0 auto}
+  .catitem2.bonus2{background:transparent;border-style:dashed}
+  .grouptitle2{font-size:14px;font-weight:800;color:#fff;margin:22px 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .grouptitle2 .tag2{font-size:11px;font-weight:700;color:#FFA545;background:rgba(255,165,69,.12);border:1px solid rgba(255,165,69,.3);padding:3px 9px;border-radius:999px}
+  .grouphint2{font-size:13px;color:rgba(255,255,255,.64);margin:24px 0 12px}
+  .catcta2{max-width:340px;margin:28px auto 0}
+ </style>
+ <section class="catalogue2" id="catalogue">
+ <div class="wrap wide">
+  <div class="eyebrow" data-i18n="cat.eyebrow">En résumé</div>
+  <h2 data-i18n="cat.h2">Tout est inclus dans ton abonnement</h2>
+  <p class="lead" data-i18n="cat.sub">Un seul abonnement — tous les moyens de gagner de l'argent en ligne, réunis au même endroit.</p>
+  <div class="grouptitle2">💸 <span data-i18n="cat.g1">Les moyens de gagner de l'argent</span> <span class="tag2" data-i18n="cat.g1tag">8 façons</span></div>
+  <div class="catgrid2">
+   <div class="catitem2"><span class="e" aria-hidden="true">🤖</span><span data-i18n="cat.ia">Intelligence artificielle</span></div>
+   <div class="catitem2"><span class="e" aria-hidden="true">🎥</span><span data-i18n="cat.contenu">Création de contenu</span></div>
+   <div class="catitem2"><span class="e" aria-hidden="true">💼</span><span data-i18n="cat.freelance">Freelance</span></div>
+   <div class="catitem2"><span class="e" aria-hidden="true">🎬</span><span data-i18n="cat.montage">Montage vidéo</span></div>
+   <div class="catitem2"><span class="e" aria-hidden="true">🛒</span><span data-i18n="cat.ecom">E-commerce</span></div>
+   <div class="catitem2"><span class="e" aria-hidden="true">📦</span><span data-i18n="cat.produits">Produits digitaux</span></div>
+   <div class="catitem2"><span class="e" aria-hidden="true">🎨</span><span data-i18n="cat.graph">Création graphique</span></div>
+   <div class="catitem2"><span class="e" aria-hidden="true">🤝</span><span data-i18n="cat.affiliation">Affiliation</span></div>
+  </div>
+  <div class="grouphint2" data-i18n="cat.g2">Et tout ce qu'il faut autour pour réussir :</div>
+  <div class="catgrid2">
+   <div class="catitem2 bonus2"><span class="e" aria-hidden="true">🏢</span><span data-i18n="cat.societe">Création de société</span></div>
+   <div class="catitem2 bonus2"><span class="e" aria-hidden="true">✈️</span><span data-i18n="cat.visas">Visas & expatriation</span></div>
+   <div class="catitem2 bonus2"><span class="e" aria-hidden="true">🏦</span><span data-i18n="cat.banques">Recevoir son argent</span></div>
+  </div>
+  <div style="text-align:center"><a class="cta catcta2" href="/checkout" onclick="track('click_go_checkout',{depuis:'catalogue'})" data-i18n="cat.cta">Voir tout et rejoindre</a></div>
  </div>
  </section>
 
@@ -932,7 +970,7 @@
  <p class="lead" id="rWho" style="margin-bottom:0"></p>
 
  <div id="rTiles" style="display:none;max-width:470px;margin:10px auto 0">
- <div style="background:var(--star-soft);border:1px solid var(--star-line);color:var(--star);border-radius:12px;padding:11px 14px;margin:0 auto 12px;font-size:13px;line-height:1.45;font-weight:600" data-i18n-html="book.promo">🎁 <b>Prix de lancement</b> — le guide + la communauté <b>Ex-rienneux pendant 1 an</b> à <b>3 500 FCFA</b>. Le mois prochain, ça passe à <b>10 000 FCFA/mois</b>.</div>
+ <div style="background:var(--star-soft);border:1px solid var(--star-line);color:var(--star);border-radius:12px;padding:11px 14px;margin:0 auto 12px;font-size:13px;line-height:1.45;font-weight:600" data-i18n-html="book.promo">🎁 <b>Prix de lancement</b> — le guide + l'accès à la communauté <b>Ex-rienneux</b> à <b>3 500 FCFA/mois</b>. Le mois prochain, l'abonnement passe à <b>10 000 FCFA/mois</b>.</div>
  <p style="font-size:13px;color:var(--muted);margin:0 0 10px" data-i18n="book.choose">Choisis ton offre 👇</p>
  <div style="display:flex;gap:8px;margin-bottom:14px">
  <button type="button" class="otile" onclick="pickOffer(this,'r')" data-desckey="result.descAppel" data-momo="https://me.fedapay.com/demarrage" data-card="https://whop.com/checkout/plan_bReryALMV3QYm">
@@ -942,8 +980,8 @@
  </button>
  <button type="button" class="otile selected" onclick="pickOffer(this,'r')" data-desckey="book.desc15" data-momo="https://me.fedapay.com/ur-1Di_k" data-card="https://whop.com/checkout/plan_SA8j7dIoexXwg">
  <span class="obadge" style="color:var(--danger)" data-i18n="book.promobadge">🎁 PROMO</span>
- <span class="oprice">3 500<sup>FCFA</sup></span>
- <span class="oeur">5€</span>
+ <span class="oprice">3 500<sup>FCFA</sup><span style="font-size:.42em;font-weight:700"> /mois</span></span>
+ <span class="oeur">5€ / mois</span>
  
  <span class="olabel" data-i18n="book.t2short">Guide + Communauté</span>
  </button>
@@ -1019,7 +1057,7 @@ const I18N = {
  b2:"Tes questions, mes réponses, <b>tous les jours</b>",
  b3:"On suit tes progrès : tu ne restes pas <b>bloqué dans ton coin</b>"},
  vo:{eyebrow:"Le contenu", h2:"Ce que tu vas apprendre",
- lead:"Quatre façons de gagner de l'argent en ligne, et tout ce qu'il faut autour pour que ça tienne.",
+ lead:"Huit façons de gagner de l'argent en ligne, et tout ce qu'il faut autour pour que ça tienne.",
  t1:"Freelance &amp; <b>services</b>",
  p1:"<b>Vendre une compétence</b> avant même d'avoir un produit. Design, montage, rédaction, gestion : les plateformes qui marchent, et comment décrocher ton premier client.",
  s1:"C'est le chemin le plus court quand tu pars sans rien.",
@@ -1043,10 +1081,17 @@ const I18N = {
  s4:"Le problème dont personne ne parle, et qui bloque le plus de gens."},
  ch:{l1:"gagnés par mes élèves", l2:"façons de gagner de l'argent en ligne",
  l3:"élèves accompagnés sur les 30 derniers jours",
- joined:"Ils sont <b>300+</b> à nous avoir rejoints le mois dernier"},
+ joined:"Ils sont <b>370+</b> à nous avoir rejoints le mois dernier"},
  topbar:{cta:"Rejoindre le groupe privé (Gratuit)",
-  i1:"<b>430 000 000+</b> XOF générés par les élèves",
-  i2:"<b>300</b> élèves ont rejoint le mois dernier"},
+  i1:"<b>432 829 000+</b> XOF générés par les élèves",
+  i2:"<b>370</b> élèves ont rejoint le mois dernier"},
+ cat:{eyebrow:"En résumé", h2:"Tout est inclus dans ton abonnement",
+  sub:"Un seul abonnement — tous les moyens de gagner de l'argent en ligne, plus tout ce qu'il faut autour pour que ça tienne.",
+  cta:"Voir tout et rejoindre", g1:"Les moyens de gagner de l'argent", g1tag:"8 façons", g2:"Et tout ce qu'il faut autour pour réussir :",
+  ia:"Intelligence artificielle", contenu:"Création de contenu", freelance:"Freelance",
+  montage:"Montage vidéo", ecom:"E-commerce", produits:"Produits digitaux",
+  graph:"Création graphique", societe:"Création de société", visas:"Visas & expatriation",
+  affiliation:"Affiliation", banques:"Recevoir son argent"},
  menu:{chemin:"Le chemin<small>Le plan pour scaler ton business</small>",
   histoire:"Qui je suis<small>Mon histoire, de 0 à 50k€ par mois</small>",
   appel:"Réserver un appel<small>2 minutes pour voir si je peux t'aider</small>"},
@@ -1115,7 +1160,7 @@ const I18N = {
    +'<li><span class="fi oui">&#127916;</span><span>Création de contenu, <b>affiliation</b>, e-commerce et la vérité sur le trading</span></li>'
    +'<li><span class="fi oui">&#127978;</span><span><b>Encaisser depuis l\'Afrique</b> : la question que tout le monde évite</span></li>'
    +'<li><span class="fi oui">&#128737;</span><span>Les <b>pièges à éviter</b>, mon histoire d\'arnaque comprise</span></li>'
-   +'<li><span class="fi oui">&#128101;</span><span>La communauté Ex-rienneux pendant <b>un an</b></span></li></ul>',
+   +'<li><span class="fi oui">&#128101;</span><span>La communauté Ex-rienneux, <b>accès mensuel</b></span></li></ul>',
  q4:"Qu'est-ce qui est gratuit ?",
  a4:'<ul class="fl">'
    +'<li><span class="fi oui">&#128172;</span><span>Le <b>groupe WhatsApp privé</b>, sans rien payer</span></li>'
@@ -1180,7 +1225,7 @@ const I18N = {
  b2:"Your questions, my answers, <b>every day</b>",
  b3:"We track your progress: you never stay <b>stuck on your own</b>"},
  vo:{eyebrow:"The content", h2:"What you will learn",
- lead:"Four ways to make money online, plus everything around them that keeps it standing.",
+ lead:"Eight ways to make money online, plus everything around them that keeps it standing.",
  t1:"Freelancing &amp; <b>services</b>",
  p1:"<b>Sell a skill</b> before you even have a product. Design, editing, writing, management: the platforms that work, and how to land your first client.",
  s1:"The shortest path when you start with nothing.",
@@ -1204,10 +1249,17 @@ const I18N = {
  s4:"The problem nobody talks about, and the one that blocks the most people."},
  ch:{l1:"earned by my students", l2:"ways to make money online",
  l3:"students coached in the last 30 days",
- joined:"<b>300+</b> people joined last month"},
+ joined:"<b>370+</b> people joined last month"},
  topbar:{cta:"Join the private group (Free)",
-  i1:"<b>430,000,000+</b> XOF generated by students",
-  i2:"<b>300</b> students joined last month"},
+  i1:"<b>432,829,000+</b> XOF generated by students",
+  i2:"<b>370</b> students joined last month"},
+ cat:{eyebrow:"In short", h2:"Everything is included in your subscription",
+  sub:"One subscription — every way to make money online, plus everything around it to make it last.",
+  cta:"See everything and join", g1:"The ways to make money", g1tag:"8 methods", g2:"Plus everything you need around it:",
+  ia:"Artificial intelligence", contenu:"Content creation", freelance:"Freelancing",
+  montage:"Video editing", ecom:"E-commerce", produits:"Digital products",
+  graph:"Graphic design", societe:"Company setup", visas:"Visas & expat",
+  affiliation:"Affiliate marketing", banques:"Getting paid"},
  menu:{chemin:"The path<small>The plan to scale your business</small>",
   histoire:"About me<small>My story, from 0 to €50k a month</small>",
   appel:"Book a call<small>2 minutes to see if I can help</small>"},
@@ -1276,7 +1328,7 @@ const I18N = {
    +'<li><span class="fi oui">&#127916;</span><span>Content creation, <b>affiliation</b>, e-commerce and the truth about trading</span></li>'
    +'<li><span class="fi oui">&#127978;</span><span><b>Getting paid from Africa</b>: the question everyone avoids</span></li>'
    +'<li><span class="fi oui">&#128737;</span><span>The <b>traps to avoid</b>, including the time I got scammed</span></li>'
-   +'<li><span class="fi oui">&#128101;</span><span>The Ex-rienneux community for <b>one year</b></span></li></ul>',
+   +'<li><span class="fi oui">&#128101;</span><span>The Ex-rienneux community, <b>monthly access</b></span></li></ul>',
  q4:"What is free?",
  a4:'<ul class="fl">'
    +'<li><span class="fi oui">&#128172;</span><span>The <b>private WhatsApp group</b>, at no cost</span></li>'
