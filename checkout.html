@@ -191,6 +191,9 @@
  .rappel .cta:hover{transform:scale(1.04)}
  @media(prefers-reduced-motion:reduce){ .rappel .cta{transition:none} .rappel .cta:hover{transform:none} }
  .pnote{text-align:center;color:var(--muted);font-size:13px;margin-top:10px}
+ .paysbloque{text-align:center;font-size:13px;color:var(--muted);margin-top:14px;line-height:1.55;border-top:1px dashed var(--border);padding-top:13px}
+ .paysbloque a{color:var(--accent);font-weight:800;text-decoration:none}
+ .paysbloque a:hover{text-decoration:underline}
  .backlink{display:inline-block;margin-top:26px;color:var(--muted);font-size:14px;text-decoration:none}
  .backlink:hover{color:var(--accent)}
  /* Preuves sociales : un carrousel d'activites, 3 captures en eventail */
@@ -335,6 +338,10 @@
      </ul>
      <a class="pbtn solid" href="https://me.fedapay.com/ur-1Di_k" target="_blank" rel="noopener" onclick="track('click_offre_guide_momo')" data-i18n="momo">Payer en mobile money</a>
      <a class="pbtn" href="https://whop.com/checkout/plan_SA8j7dIoexXwg" target="_blank" rel="noopener" onclick="track('click_offre_guide_card')" data-i18n="card">Payer par carte</a>
+     <p class="paysbloque">
+      <span data-i18n="fbq">Ton opérateur n'est pas là ?</span><br>
+      <a href="https://bot.beaudelaireconsulting.com/pawapay" target="_blank" rel="noopener" onclick="track('click_offre_guide_pawapay')" data-i18n="fblink">Autre méthode de paiement</a>
+     </p>
     </div>
    </div>
 
@@ -604,6 +611,7 @@ var I18N = {
   o2f2:"Un accès direct à Beaudelaire",
   o2f3:"Un accompagnement personnalisé, tous les mois",
   card:"Payer par carte", momo:"Payer en mobile money",
+  fbq:"Ton opérateur n'est pas là ?", fblink:"Autre méthode de paiement",
   soldout:"Complet pour le moment",
   note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.",
   back:"← Revenir à l'accueil"
@@ -676,6 +684,7 @@ var I18N = {
   o2f2:"Direct access to Beaudelaire",
   o2f3:"Personalised support, every month",
   card:"Pay by card", momo:"Pay with mobile money",
+  fbq:"Your operator isn't listed?", fblink:"Other payment method",
   soldout:"Currently full",
   note:"Card (international) or mobile money (Africa) · Instant access after payment.",
   back:"← Back to home"
