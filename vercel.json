@@ -1,24 +1,9 @@
 {
   "rewrites": [
-    {
-      "source": "/fr",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/en",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/checkout",
-      "destination": "/checkout.html"
-    },
-    {
-      "source": "/scaler",
-      "destination": "/scaler.html"
-    },
-    {
-      "source": "/mon-histoire",
-      "destination": "/mon-histoire.html"
-    }
+    { "source": "/fr", "destination": "/index.html" },
+    { "source": "/en", "destination": "/index.html" }
+  ],
+  "redirects": [
+    { "source": "/communaute", "destination": "https://chat.whatsapp.com/HXGPBtNurir08cxCDR8j4O", "permanent": false }
   ]
 }
