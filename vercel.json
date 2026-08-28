@@ -5,6 +5,6 @@
     { "source": "/en", "destination": "/index.html" }
   ],
   "redirects": [
-    { "source": "/communaute", "destination": "https://chat.whatsapp.com/HXGPBtNurir08cxCDR8j4O", "permanent": false }
+    { "source": "/communaute", "destination": "https://chat.whatsapp.com/EUbHWuZviEB5b32s7wLQT5", "permanent": false }
   ]
 }
