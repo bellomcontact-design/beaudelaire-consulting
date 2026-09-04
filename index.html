@@ -317,6 +317,17 @@
  .vslfacade:hover .play,.vslfacade:focus-visible .play{transform:translate(-50%,-50%) scale(1.08)}
  .vsldesc{max-width:600px;margin:0 auto 20px;font-size:16.5px;line-height:1.5;color:var(--text-soft);text-align:center}
  .vsldesc b{color:var(--text);font-weight:700}
+ .vslblock{position:absolute;inset:0;z-index:5}
+ .vslbarwrap{position:absolute;left:0;right:0;bottom:0;z-index:6;height:6px;background:rgba(255,255,255,.15)}
+ .vslbar{height:100%;width:0;background-image:var(--accent-grad);transition:width .25s linear}
+ .vslend{position:absolute;inset:0;z-index:9;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(6,14,21,.94);padding:20px;text-align:center}
+ .vslend.show{display:flex}
+ .vslend h3{font-size:clamp(17px,3vw,24px);font-weight:800;margin-bottom:14px;max-width:520px}
+ .hsocial{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:16px;flex-wrap:wrap}
+ .havs{display:flex}
+ .havs i{width:30px;height:30px;border-radius:50%;border:2px solid var(--bg2);margin-left:-9px;display:block}
+ .havs i:first-child{margin-left:0}
+ .hsocial .ht{color:var(--text-soft);font-size:14px}.hsocial .ht b{color:var(--text);font-weight:800}
 
  /* Section d'auto-identification */
  .honest{background:var(--bg2)}
@@ -512,16 +523,20 @@
  <!-- HERO -->
  <header>
  <div class="wrap">
- <h1 data-i18n-html="hero.h1">De 0 à ton premier client en ligne,<br>même en partant de rien.</h1>
- <p class="sub" data-i18n-html="hero.sub">Je vais t\'apprendre à la <b>maîtriser</b>.</p>
+ <h1 data-i18n-html="hero.h1">Comment faire de l'argent en ligne <b>sans compétences</b>&nbsp;?</h1>
+ <p class="sub" data-i18n-html="hero.sub">Rejoins le guide et apprends à faire ton <b>premier million</b> en ligne.</p>
  <div class="vsl" id="vsl">
- <button type="button" class="vslfacade" onclick="playVSL()" aria-label="Lire la vidéo">
+ <div id="vslPlayer"></div>
+ <div class="vslblock" aria-hidden="true"></div>
+ <div class="vslbarwrap"><div class="vslbar" id="vslBar"></div></div>
+ <button type="button" class="vslfacade" id="vslStart" onclick="playVSL()" aria-label="Lire la vidéo">
  <img id="vslThumb" src="" alt="" decoding="async">
  <span class="play" aria-hidden="true">&#9654;</span>
  </button>
+ <div class="vslend" id="vslEnd"><h3 data-i18n="hero.endq">Prêt à faire ton premier million en ligne&nbsp;?</h3><a class="cta" href="/checkout" onclick="track('click_go_checkout',{depuis:'vslend'})" data-i18n="hero.cta">Apprendre à gagner de l'argent</a></div>
  </div>
- <p class="vsldesc" data-i18n-html="hero.desc">C'est un cours qui t'apprend exactement <b>quelles actions mettre en place</b> pour faire tes premiers 1 000 000 XOF (1 500 €).</p>
  <a class="cta" href="/checkout" onclick="track('click_go_checkout',{depuis:'hero'})" data-i18n="hero.cta">Apprendre à gagner de l'argent</a>
+ <div class="hsocial"><span class="havs"><i style="background:linear-gradient(135deg,#f0997b,#d85a30)"></i><i style="background:linear-gradient(135deg,#5dcaa5,#0f6e56)"></i><i style="background:linear-gradient(135deg,#85b7eb,#185fa5)"></i><i style="background:linear-gradient(135deg,#f4c0d1,#993556)"></i></span><span class="ht" data-i18n-html="hero.social">Rejoins <b>2 340+</b> élèves qui apprennent à gagner leur vie en ligne</span></div>
  </div>
  </header>
 
@@ -1103,8 +1118,10 @@ const I18N = {
  hero:{
  desc:"C'est un cours qui t'apprend exactement <b>quelles actions mettre en place</b> pour faire tes premiers 1 000 000 XOF (1 500 €).",
  badge_pre:"Plus de", badge_post:"rienneux sauvés",
- h1:'GAGNER DE L\'ARGENT<br><b>EST UNE COMPÉTENCE</b>',
- sub:"Je vais t'apprendre à la <b>maîtriser</b>.",
+ h1:"Comment faire de l'argent en ligne <b>sans compétences</b>&nbsp;?",
+ sub:"Rejoins le guide et apprends à faire ton <b>premier million</b> en ligne.",
+ social:"Rejoins <b>2 340+</b> élèves qui apprennent à gagner leur vie en ligne",
+ endq:"Prêt à faire ton premier million en ligne ?",
  bullets:'Tu repars avec : <b>ce qui te bloque vraiment</b> · <b>les leviers à activer en premier</b> · <b>ton plan d\'action priorisé</b>',
  storyhook:"Parti de zéro au Bénin. Aujourd'hui, +50k€ par mois. Mon histoire, en vidéo 👇",
  cta:"Apprendre à gagner de l'argent",
@@ -1296,8 +1313,10 @@ const I18N = {
  hero:{
  desc:"A course that teaches you exactly <b>which actions to take</b> to make your first 1,000,000 XOF (€1,500).",
  badge_pre:"More than", badge_post:"rienneux saved",
- h1:'MONEY MAKING<br><b>IS A SKILL</b>',
- sub:"I will teach you how to <b>master it</b>.",
+ h1:"How to make money online <b>with no skills</b>?",
+ sub:"Join the guide and learn to make your <b>first million</b> online.",
+ social:"Join <b>2,340+</b> students learning to earn a living online",
+ endq:"Ready to make your first million online?",
  bullets:'You leave with: <b>what\'s really blocking you</b> · <b>the levers to pull first</b> · <b>your prioritized action plan</b>',
  storyhook:"From zero in Benin to over €50k a month. My story, in the video 👇",
  cta:"Learn to make money",
@@ -1391,7 +1410,7 @@ const I18N = {
  CONFIG, liens (indépendants de la langue)
  ================================================================= */
 const CONFIG = {
- vslId: "uznbqo-Xofw",
+ vslId: "oXJcbCklSmw",
  vslThumb: "",   /* <- mettre ici l'URL d'une miniature personnalisée */
  offers: {
  demarrage:{ card:"https://whop.com/checkout/plan_bReryALMV3QYm", momo:"https://me.fedapay.com/demarrage" },
@@ -1695,10 +1714,18 @@ function initVSL(){
  img.src = CONFIG.vslThumb || ('https://i.ytimg.com/vi/'+CONFIG.vslId+'/maxresdefault.jpg');
  img.onerror = function(){ this.onerror=null; this.src='https://i.ytimg.com/vi/'+CONFIG.vslId+'/hqdefault.jpg'; };
 }
+var _vslP=null,_vslTimer=null;
+function _vslCurve(x){x=Math.max(0,Math.min(1,x));return Math.pow(x,0.55);}
+function _vslTick(){if(!_vslP||!_vslP.getDuration)return;var d=_vslP.getDuration()||1,t=_vslP.getCurrentTime()||0;var b=document.getElementById('vslBar');if(b)b.style.width=(_vslCurve(t/d)*100).toFixed(2)+'%';}
+function _vslState(e){if(e.data===1&&!_vslTimer){_vslTimer=setInterval(_vslTick,250);}if(e.data===0){clearInterval(_vslTimer);_vslTimer=null;var b=document.getElementById('vslBar');if(b)b.style.width='100%';var ec=document.getElementById('vslEnd');if(ec)ec.classList.add('show');}}
 function playVSL(){
- var box=document.getElementById('vsl'); if(!box) return;
- box.innerHTML='<iframe src="https://www.youtube.com/embed/'+CONFIG.vslId+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Beaudelaire Consulting" allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" playsinline allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>';
+ var start=document.getElementById('vslStart'); if(start) start.style.display='none';
  track('play_vsl');
+ function make(){ _vslP=new YT.Player('vslPlayer',{videoId:CONFIG.vslId,
+   playerVars:{controls:0,rel:0,modestbranding:1,disablekb:1,fs:0,iv_load_policy:3,playsinline:1,autoplay:1},
+   events:{onReady:function(e){try{e.target.unMute();e.target.setVolume(100);}catch(x){}e.target.playVideo();},onStateChange:_vslState}}); }
+ if(window.YT&&window.YT.Player){ make(); }
+ else { window.onYouTubeIframeAPIReady=make; var s=document.createElement('script'); s.src='https://www.youtube.com/iframe_api'; document.head.appendChild(s); }
 }
 initVSL();
 
