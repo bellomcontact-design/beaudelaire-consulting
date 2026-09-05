@@ -1904,7 +1904,7 @@ function renderResult(){
  var ul=document.getElementById('rFeat'); ul.innerHTML="";
  offer.feat.forEach(function(f){var li=document.createElement('li');li.textContent=f;ul.appendChild(li);});
  document.getElementById('payCard').href=links.card;
- document.getElementById('payMomo').href=links.momo;
+ document.getElementById('payMomo').href=addVariant(links.momo);
  document.getElementById('payCard').style.display=(links.card&&links.card!=='#')?'block':'none';
  document.getElementById('payMomo').style.display=(links.momo&&links.momo!=='#')?'block':'none';
  var scard=document.getElementById('payCardSub'); if(scard) scard.textContent=offer.price+' · '+t.result.card;
@@ -1980,12 +1980,13 @@ function toggleInside(btn){
  if(arrow) arrow.style.transform=open?'rotate(0deg)':'rotate(180deg)';
 }
 
+function addVariant(url){try{var vv=typeof _vslVariant!=='undefined'?_vslVariant:'';if(!url||url==='#'||!vv)return url;return url+(url.indexOf('?')>=0?'&':'?')+'v='+vv;}catch(e){return url;}}
 function pickOffer(el, scope){
  el.parentElement.querySelectorAll('.otile').forEach(function(t){ t.classList.remove('selected'); });
  el.classList.add('selected');
  var m=document.getElementById(scope==='r'?'rpMomo':'ppMomo');
  var c=document.getElementById(scope==='r'?'rpCard':'ppCard');
- if(m) m.href=el.getAttribute('data-momo');
+ if(m) m.href=addVariant(el.getAttribute('data-momo'));
  if(c) c.href=el.getAttribute('data-card');
  var d=document.getElementById(scope==='r'?'rpDesc':'ppDesc');
  var k=el.getAttribute('data-desckey');
