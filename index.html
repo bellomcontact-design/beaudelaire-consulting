@@ -1794,8 +1794,9 @@ function initVSL(){
  });
 }
 function playVSL(){
- /* Supprimer l'overlay complètement pour laisser l'iframe accessible */
  var start=document.getElementById('vslStart');if(start)start.parentNode&&start.parentNode.removeChild(start);
+ /* Désactiver le vslblock pour que les clics passent jusqu'à l'iframe */
+ var block=document.querySelector('.vslblock');if(block)block.style.pointerEvents='none';
  track('play_vsl',{v:_vslVariant});
  _vslWanted=true;
  _vslCmd('play');
