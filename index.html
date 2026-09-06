@@ -318,6 +318,9 @@
  .vsldesc{max-width:600px;margin:0 auto 20px;font-size:16.5px;line-height:1.5;color:var(--text-soft);text-align:center}
  .vsldesc b{color:var(--text);font-weight:700}
  .vslblock{position:absolute;inset:0;z-index:5;pointer-events:none}
+/* Bandes pour masquer logo YT (bas-droite) et titre (haut) */
+.vslblock::before{content:'';position:absolute;top:0;left:0;right:0;height:15%;background:var(--bg2);pointer-events:none}
+.vslblock::after{content:'';position:absolute;bottom:0;left:0;right:0;height:18%;background:var(--bg2);pointer-events:none}
  .vslbarwrap{position:absolute;left:0;right:0;bottom:0;z-index:6;height:6px;background:rgba(255,255,255,.15);pointer-events:none}
  .vslbar{height:100%;width:0;background-image:var(--accent-grad);transition:width .25s linear}
  .vslend{position:absolute;inset:0;z-index:9;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(6,14,21,.94);padding:20px;text-align:center}
@@ -1746,7 +1749,9 @@ function _vslReport(t,d){_vslDur=Math.round(d)||_vslDur;var pct=Math.max(0,Math.
 function _vslCurve(x){x=Math.max(0,Math.min(1,x));return Math.pow(x,0.55);}
 var _ytPlayer=null,_vslPlaying=false,_vslCurTime=0,_ytTimer=null;
 function initVSL(){
- if(CONFIG.vslThumb){var th=document.getElementById('vslThumb');if(th)th.src=CONFIG.vslThumb;}
+ /* Miniature YouTube automatique si pas de thumb custom */
+ var th=document.getElementById('vslThumb');
+ if(th) th.src=CONFIG.vslThumb||('https://img.youtube.com/vi/'+CONFIG.vslId+'/maxresdefault.jpg');
 }
 function playVSL(){
  track('play_vsl',{v:_vslVariant});
