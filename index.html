@@ -1762,23 +1762,17 @@ function initVSL(){
  container.innerHTML='';
  container.appendChild(iframe);
  _bunnyIframe=iframe;
- /* Façade transparente : la miniature Bunny est visible dessous */
- var startEl=document.getElementById('vslStart');
- if(startEl&&!CONFIG.vslThumb){startEl.style.background='transparent';}
- /* Charger player.js officiel Bunny (events + commandes) */
+ if(_vslVariant==='A'){
+   var f=document.getElementById('vslStart');if(f)f.style.display='none';
+   vslPing({ev:'autoplay_start'});
+   setTimeout(function(){if(!_vslPlaying){var f=document.getElementById('vslStart');if(f)f.style.display='';}},2500);
+ }
+ /* player.js Bunny pour events (tracking) */
  var pjs=document.createElement('script');
  pjs.src='https://assets.mediadelivery.net/playerjs/playerjs-latest.min.js';
  pjs.onload=function(){
    _bunnyPlayer=new playerjs.Player(iframe);
-   _bunnyPlayer.on('ready',function(){
-     _vslReady=true;
-     if(_vslVariant==='A'){
-       var f=document.getElementById('vslStart');if(f)f.style.display='none';
-       vslPing({ev:'autoplay_start'});
-       setTimeout(function(){_bunnyPlayer.getPaused(function(p){if(p){var f=document.getElementById('vslStart');if(f)f.style.display='';}});},2500);
-     }
-     if(_vslWanted)_bunnyPlayer.play();
-   });
+   _bunnyPlayer.on('ready',function(){ _vslReady=true; });
    _bunnyPlayer.on('play',function(){
      _vslPlaying=true;
      var c=document.getElementById('vslCtrl');if(c)c.classList.add('show');
@@ -1808,11 +1802,12 @@ function playVSL(){
  var start=document.getElementById('vslStart');if(start)start.parentNode&&start.parentNode.removeChild(start);
  track('play_vsl',{v:_vslVariant});
  _vslWanted=true;
- if(_bunnyPlayer&&_vslReady){
-   _bunnyPlayer.play();
- } else if(_bunnyIframe&&_bunnyIframe.src.indexOf('autoplay=true')<0){
-   _bunnyIframe.src=_bunnyIframe.src+'&autoplay=true';
- }
+ /* Recharger avec autoplay dans le geste utilisateur = 100% fiable */
+ if(_bunnyIframe){_bunnyIframe.src=_bunnyIframe.src.replace(/&?autoplay=[^&]*/,'')+'&autoplay=true';}
+ /* Afficher nos contrôles immédiatement */
+ var c=document.getElementById('vslCtrl');if(c)c.classList.add('show');
+ var t=document.getElementById('vslToggle');if(t)t.textContent='⏸';
+ _vslPlaying=true;
 }
 initVSL();
 /* Contrôles custom : reculer 15s / pause — PAS d'avance possible */
