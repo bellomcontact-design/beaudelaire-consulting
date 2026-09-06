@@ -1744,78 +1744,85 @@ function vslPing(params){try{params.sid=_vsid();params.v=_vslVariant;var qs=Obje
 function vslNow(){return _vslDur||'';}
 function _vslReport(t,d){_vslDur=Math.round(d)||_vslDur;var pct=Math.max(0,Math.min(100,Math.floor((t/d)*100)));var bucket=Math.floor(pct/5)*5;if(!_vslSent[bucket]){_vslSent[bucket]=1;vslPing({ev:'p',pct:bucket,t:Math.round(t),dur:_vslDur});}}
 function _vslCurve(x){x=Math.max(0,Math.min(1,x));return Math.pow(x,0.55);}
-var _bunnyIframe=null,_vslPlaying=false,_vslCurTime=0;
-function _vslCmd(cmd,arg){try{if(_bunnyIframe)_bunnyIframe.contentWindow.postMessage(JSON.stringify({event:'command',func:cmd,args:arg===undefined?'':arg}),'*');}catch(x){}}
+var _bunnyIframe=null,_bunnyPlayer=null,_vslPlaying=false,_vslCurTime=0;
 function initVSL(){
  var img=document.getElementById('vslThumb');
  if(img&&CONFIG.vslThumb){img.src=CONFIG.vslThumb;}
  var container=document.getElementById('vslPlayer');
  if(!container)return;
- var url='https://iframe.mediadelivery.net/embed/'+CONFIG.vslLib+'/'+CONFIG.vslId+'?responsive=true&preload=true&controls=false';
+ var url='https://iframe.mediadelivery.net/embed/'+CONFIG.vslLib+'/'+CONFIG.vslId+'?responsive=true&preload=true';
  if(_vslVariant==='A'){url+='&autoplay=true';}
  var iframe=document.createElement('iframe');
  iframe.src=url;
  iframe.allow='accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen';
  iframe.allowFullscreen=true;
- iframe.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
+ /* Étendre l'iframe de 52px vers le bas pour cacher la barre de contrôle Bunny */
+ iframe.style.cssText='position:absolute;left:0;top:0;width:100%;height:calc(100% + 52px);border:0;';
+ container.style.overflow='hidden';
  container.innerHTML='';
  container.appendChild(iframe);
  _bunnyIframe=iframe;
- _vslReady=true;
- /* Rendre la façade transparente pour laisser voir la miniature Bunny */
+ /* Façade transparente : la miniature Bunny est visible dessous */
  var startEl=document.getElementById('vslStart');
  if(startEl&&!CONFIG.vslThumb){startEl.style.background='transparent';}
- if(_vslVariant==='A'){
-   var s=document.getElementById('vslStart');if(s)s.style.display='none';
-   vslPing({ev:'autoplay_start'});
-   setTimeout(function(){try{if(!_vslPlaying){var s=document.getElementById('vslStart');if(s)s.style.display='';}}catch(x){}},2500);
- }
- /* Écouter les événements Bunny via postMessage */
- window.addEventListener('message',function(e){
-   var d;try{d=typeof e.data==='string'?JSON.parse(e.data):e.data;}catch(ex){return;}
-   if(!d||!d.event)return;
-   if(d.event==='play'){
+ /* Charger player.js officiel Bunny (events + commandes) */
+ var pjs=document.createElement('script');
+ pjs.src='https://assets.mediadelivery.net/playerjs/playerjs-latest.min.js';
+ pjs.onload=function(){
+   _bunnyPlayer=new playerjs.Player(iframe);
+   _bunnyPlayer.on('ready',function(){
+     _vslReady=true;
+     if(_vslVariant==='A'){
+       var f=document.getElementById('vslStart');if(f)f.style.display='none';
+       vslPing({ev:'autoplay_start'});
+       setTimeout(function(){_bunnyPlayer.getPaused(function(p){if(p){var f=document.getElementById('vslStart');if(f)f.style.display='';}});},2500);
+     }
+     if(_vslWanted)_bunnyPlayer.play();
+   });
+   _bunnyPlayer.on('play',function(){
      _vslPlaying=true;
-     var ctrl=document.getElementById('vslCtrl');if(ctrl)ctrl.classList.add('show');
-     var tog=document.getElementById('vslToggle');if(tog)tog.textContent='⏸';
-   }
-   if(d.event==='pause'){_vslPlaying=false;var tog=document.getElementById('vslToggle');if(tog)tog.textContent='▶';}
-   if(d.event==='timeupdate'&&d.data){
-     var t=d.data.currentTime||0,dur=d.data.duration||1;
+     var c=document.getElementById('vslCtrl');if(c)c.classList.add('show');
+     var t=document.getElementById('vslToggle');if(t)t.textContent='⏸';
+   });
+   _bunnyPlayer.on('pause',function(){
+     _vslPlaying=false;
+     var t=document.getElementById('vslToggle');if(t)t.textContent='▶';
+   });
+   _bunnyPlayer.on('timeupdate',function(d){
+     var t=d.seconds||0,dur=d.duration||1;
      _vslCurTime=t;
      var b=document.getElementById('vslBar');if(b)b.style.width=(_vslCurve(t/dur)*100).toFixed(2)+'%';
      _vslReport(t,dur);
-   }
-   if(d.event==='ended'){
-     _vslPlaying=false;clearInterval(_vslTimer);_vslTimer=null;
+   });
+   _bunnyPlayer.on('ended',function(){
+     _vslPlaying=false;
      var b=document.getElementById('vslBar');if(b)b.style.width='100%';
      var ec=document.getElementById('vslEnd');if(ec)ec.classList.add('show');
-     var ctrl=document.getElementById('vslCtrl');if(ctrl)ctrl.classList.remove('show');
+     var c=document.getElementById('vslCtrl');if(c)c.classList.remove('show');
      vslPing({ev:'end',pct:100,t:_vslDur,dur:_vslDur});
-   }
- });
+   });
+ };
+ document.head.appendChild(pjs);
 }
 function playVSL(){
  var start=document.getElementById('vslStart');if(start)start.parentNode&&start.parentNode.removeChild(start);
  track('play_vsl',{v:_vslVariant});
  _vslWanted=true;
- _vslPlaying=true;
- /* Afficher nos contrôles custom tout de suite */
- var ctrl=document.getElementById('vslCtrl');if(ctrl)ctrl.classList.add('show');
- var tog=document.getElementById('vslToggle');if(tog)tog.textContent='⏸';
- /* Recharger l'iframe avec autoplay dans le geste utilisateur = garanti */
- if(_bunnyIframe&&_bunnyIframe.src.indexOf('autoplay=true')<0){
+ if(_bunnyPlayer&&_vslReady){
+   _bunnyPlayer.play();
+ } else if(_bunnyIframe&&_bunnyIframe.src.indexOf('autoplay=true')<0){
    _bunnyIframe.src=_bunnyIframe.src+'&autoplay=true';
  }
 }
 initVSL();
-/* Contrôles custom : reculer 15s / pause */
+/* Contrôles custom : reculer 15s / pause — PAS d'avance possible */
 (function(){
   document.getElementById('vslBack')&&document.getElementById('vslBack').addEventListener('click',function(){
-    _vslCmd('seekTo',Math.max(0,_vslCurTime-15));
+    if(_bunnyPlayer)_bunnyPlayer.setCurrentTime(Math.max(0,_vslCurTime-15));
   });
   document.getElementById('vslToggle')&&document.getElementById('vslToggle').addEventListener('click',function(){
-    _vslPlaying?_vslCmd('pause'):_vslCmd('play');
+    if(!_bunnyPlayer)return;
+    _vslPlaying?_bunnyPlayer.pause():_bunnyPlayer.play();
   });
 })();
 
