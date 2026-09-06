@@ -318,9 +318,6 @@
  .vsldesc{max-width:600px;margin:0 auto 20px;font-size:16.5px;line-height:1.5;color:var(--text-soft);text-align:center}
  .vsldesc b{color:var(--text);font-weight:700}
  .vslblock{position:absolute;inset:0;z-index:5;pointer-events:none}
-/* Bandes pour masquer logo YT (bas-droite) et titre (haut) */
-.vslblock::before{content:'';position:absolute;top:0;left:0;right:0;height:15%;background:var(--bg2);pointer-events:none}
-.vslblock::after{content:'';position:absolute;bottom:0;left:0;right:0;height:18%;background:var(--bg2);pointer-events:none}
  .vslbarwrap{position:absolute;left:0;right:0;bottom:0;z-index:6;height:6px;background:rgba(255,255,255,.15);pointer-events:none}
  .vslbar{height:100%;width:0;background-image:var(--accent-grad);transition:width .25s linear}
  .vslend{position:absolute;inset:0;z-index:9;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(6,14,21,.94);padding:20px;text-align:center}
@@ -1762,10 +1759,11 @@ function playVSL(){
  if(_vslVariant==='A')vslPing({ev:'autoplay_start'});
  var iframe=document.createElement('iframe');
  iframe.id='yt-iframe';
- iframe.src='https://www.youtube.com/embed/'+CONFIG.vslId+'?autoplay=1&rel=0&modestbranding=1&controls=0&disablekb=1&enablejsapi=1&origin='+encodeURIComponent(location.origin);
+ iframe.src='https://www.youtube.com/embed/'+CONFIG.vslId+'?autoplay=1&rel=0&modestbranding=1&controls=0&disablekb=1&iv_load_policy=3&fs=0&enablejsapi=1&origin='+encodeURIComponent(location.origin);
  iframe.allow='autoplay;encrypted-media;picture-in-picture;fullscreen';
  iframe.allowFullscreen=true;
- iframe.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
+ /* Dépasse le container haut+bas → overflow:hidden coupe les overlays YouTube */
+ iframe.style.cssText='position:absolute;top:-12%;left:0;width:100%;height:124%;border:0;';
  container.innerHTML='';
  container.appendChild(iframe);
  /* YouTube iframe API */
