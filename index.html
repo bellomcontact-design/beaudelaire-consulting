@@ -1751,8 +1751,7 @@ function initVSL(){
  if(img&&CONFIG.vslThumb){img.src=CONFIG.vslThumb;}
  var container=document.getElementById('vslPlayer');
  if(!container)return;
- /* Précharger l'iframe immédiatement (sans autoplay) pour les 2 variantes */
- var url='https://iframe.mediadelivery.net/embed/'+CONFIG.vslLib+'/'+CONFIG.vslId+'?responsive=true&preload=true';
+ var url='https://iframe.mediadelivery.net/embed/'+CONFIG.vslLib+'/'+CONFIG.vslId+'?responsive=true&preload=true&controls=false';
  if(_vslVariant==='A'){url+='&autoplay=true';}
  var iframe=document.createElement('iframe');
  iframe.src=url;
@@ -1763,6 +1762,9 @@ function initVSL(){
  container.appendChild(iframe);
  _bunnyIframe=iframe;
  _vslReady=true;
+ /* Rendre la façade transparente pour laisser voir la miniature Bunny */
+ var startEl=document.getElementById('vslStart');
+ if(startEl&&!CONFIG.vslThumb){startEl.style.background='transparent';}
  if(_vslVariant==='A'){
    var s=document.getElementById('vslStart');if(s)s.style.display='none';
    vslPing({ev:'autoplay_start'});
@@ -1795,11 +1797,16 @@ function initVSL(){
 }
 function playVSL(){
  var start=document.getElementById('vslStart');if(start)start.parentNode&&start.parentNode.removeChild(start);
- /* Désactiver le vslblock pour que les clics passent jusqu'à l'iframe */
- var block=document.querySelector('.vslblock');if(block)block.style.pointerEvents='none';
  track('play_vsl',{v:_vslVariant});
  _vslWanted=true;
- _vslCmd('play');
+ _vslPlaying=true;
+ /* Afficher nos contrôles custom tout de suite */
+ var ctrl=document.getElementById('vslCtrl');if(ctrl)ctrl.classList.add('show');
+ var tog=document.getElementById('vslToggle');if(tog)tog.textContent='⏸';
+ /* Recharger l'iframe avec autoplay dans le geste utilisateur = garanti */
+ if(_bunnyIframe&&_bunnyIframe.src.indexOf('autoplay=true')<0){
+   _bunnyIframe.src=_bunnyIframe.src+'&autoplay=true';
+ }
 }
 initVSL();
 /* Contrôles custom : reculer 15s / pause */
