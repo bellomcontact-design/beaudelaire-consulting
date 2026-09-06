@@ -9,6 +9,9 @@
 <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xub6l9orf8");</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://iframe.mediadelivery.net">
+<link rel="preconnect" href="https://assets.mediadelivery.net">
+<link rel="preconnect" href="https://vz-624ebb34-95c.b-cdn.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
  :root{
@@ -322,8 +325,8 @@
  .vslbar{height:100%;width:0;background-image:var(--accent-grad);transition:width .25s linear}
  .vslend{position:absolute;inset:0;z-index:9;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(6,14,21,.94);padding:20px;text-align:center}
  .vslend.show{display:flex}
-.vsl-ctrl{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:10;display:none;gap:8px;align-items:center}
-.vsl-ctrl.show{display:flex}
+.vsl-ctrl{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:8px;align-items:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.vsl-ctrl.show{opacity:1;pointer-events:auto}
 .vsl-cbtn{background:rgba(6,14,21,.72);border:1px solid rgba(255,255,255,.18);color:#fff;padding:7px 14px;border-radius:99px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;backdrop-filter:blur(6px);transition:.12s;line-height:1}
 .vsl-cbtn:hover{border-color:var(--accent);color:var(--accent)}
 .vsl-unmute{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:10;background:rgba(6,14,21,.85);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:13px;font-weight:700;padding:7px 16px;border-radius:99px;cursor:pointer;display:none;backdrop-filter:blur(6px);font-family:inherit;white-space:nowrap}
@@ -1744,19 +1747,80 @@ function vslPing(params){try{params.sid=_vsid();params.v=_vslVariant;var qs=Obje
 function vslNow(){return _vslDur||'';}
 function _vslReport(t,d){_vslDur=Math.round(d)||_vslDur;var pct=Math.max(0,Math.min(100,Math.floor((t/d)*100)));var bucket=Math.floor(pct/5)*5;if(!_vslSent[bucket]){_vslSent[bucket]=1;vslPing({ev:'p',pct:bucket,t:Math.round(t),dur:_vslDur});}}
 function _vslCurve(x){x=Math.max(0,Math.min(1,x));return Math.pow(x,0.55);}
-var _bunnyPlayer=null;
+var _bunnyPlayer=null,_vslPlaying=false,_vslCurTime=0;
 function initVSL(){
  var container=document.getElementById('vslPlayer');
  if(!container)return;
  var start=document.getElementById('vslStart');if(start)start.style.display='none';
- var url='https://iframe.mediadelivery.net/embed/'+CONFIG.vslLib+'/'+CONFIG.vslId+'?responsive=true&preload=true&autoplay=false';
+ var url='https://iframe.mediadelivery.net/embed/'+CONFIG.vslLib+'/'+CONFIG.vslId+'?responsive=true&preload=true&autoplay=false&defaultQuality=720&initialBitrate=1000';
  var iframe=document.createElement('iframe');
  iframe.src=url;
- iframe.allow='accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen';
+ iframe.allow='autoplay;encrypted-media;picture-in-picture;fullscreen';
  iframe.allowFullscreen=true;
  iframe.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
  container.innerHTML='';
  container.appendChild(iframe);
+ /* Charger player.js pour contrôles custom + tracking */
+ var pjs=document.createElement('script');
+ pjs.src='https://assets.mediadelivery.net/playerjs/playerjs-latest.min.js';
+ pjs.onload=function(){
+   _bunnyPlayer=new playerjs.Player(iframe);
+   var ctrl=document.getElementById('vslCtrl');
+   var toggle=document.getElementById('vslToggle');
+   var back=document.getElementById('vslBack');
+   /* Afficher nos boutons dès que prêt */
+   _bunnyPlayer.on('ready',function(){
+     if(ctrl)ctrl.classList.add('show');
+   });
+   _bunnyPlayer.on('play',function(){
+     _vslPlaying=true;
+     if(toggle)toggle.textContent='⏸';
+     vslPing({ev:'play',pct:0,t:0,dur:_vslDur});
+   });
+   _bunnyPlayer.on('pause',function(){
+     _vslPlaying=false;
+     if(toggle)toggle.textContent='▶';
+   });
+   _bunnyPlayer.on('timeupdate',function(d){
+     var t=d.seconds||0,dur=d.duration||1;
+     _vslCurTime=t;
+     var b=document.getElementById('vslBar');
+     if(b)b.style.width=(_vslCurve(t/dur)*100).toFixed(2)+'%';
+     _vslReport(t,dur);
+   });
+   _bunnyPlayer.on('ended',function(){
+     _vslPlaying=false;
+     if(toggle)toggle.textContent='▶';
+     var b=document.getElementById('vslBar');if(b)b.style.width='100%';
+     var ec=document.getElementById('vslEnd');if(ec)ec.classList.add('show');
+     vslPing({ev:'end',pct:100,t:_vslDur,dur:_vslDur});
+   });
+   /* Bouton ⏸/▶ */
+   if(toggle)toggle.addEventListener('click',function(){
+     if(_vslPlaying){_bunnyPlayer.pause();}else{_bunnyPlayer.play();}
+   });
+   /* Bouton −15s */
+   if(back)back.addEventListener('click',function(){
+     _bunnyPlayer.getCurrentTime(function(t){
+       _bunnyPlayer.setCurrentTime(Math.max(0,t-15));
+     });
+   });
+   /* Auto-hide : disparaît après 3s, réapparaît au survol/touch/pause */
+   var _hideTimer=null;
+   function showCtrl(){
+     if(ctrl)ctrl.classList.add('show');
+     clearTimeout(_hideTimer);
+     if(_vslPlaying)_hideTimer=setTimeout(function(){if(ctrl)ctrl.classList.remove('show');},3000);
+   }
+   var vslEl=document.getElementById('vsl');
+   if(vslEl){
+     vslEl.addEventListener('mousemove',showCtrl);
+     vslEl.addEventListener('touchstart',showCtrl,{passive:true});
+   }
+   _bunnyPlayer.on('pause',function(){ if(ctrl)ctrl.classList.add('show'); clearTimeout(_hideTimer); });
+   _bunnyPlayer.on('play',function(){ showCtrl(); });
+ };
+ document.head.appendChild(pjs);
 }
 function playVSL(){}
 initVSL();
