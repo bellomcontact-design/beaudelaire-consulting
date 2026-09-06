@@ -1746,15 +1746,11 @@ function _vslReport(t,d){_vslDur=Math.round(d)||_vslDur;var pct=Math.max(0,Math.
 function _vslCurve(x){x=Math.max(0,Math.min(1,x));return Math.pow(x,0.55);}
 var _bunnyIframe=null,_vslPlaying=false,_vslCurTime=0;
 function _vslCmd(cmd,arg){try{if(_bunnyIframe)_bunnyIframe.contentWindow.postMessage(JSON.stringify({event:'command',func:cmd,args:arg===undefined?'':arg}),'*');}catch(x){}}
-function _vslGo(){_vslCmd('play');}
-function initVSL(){
- var img=document.getElementById('vslThumb');
- if(img&&CONFIG.vslThumb){img.src=CONFIG.vslThumb;}
+function _buildBunny(autoplay){
  var container=document.getElementById('vslPlayer');
- if(!container)return;
- /* controls=false : on cache la barre native Bunny, on garde nos contrôles custom */
- var url='https://iframe.mediadelivery.net/embed/'+CONFIG.vslLib+'/'+CONFIG.vslId+'?preload=true&responsive=true&controls=false';
- if(_vslVariant==='A'){url+='&autoplay=true&muted=false';}
+ if(!container||_bunnyIframe)return;
+ var url='https://iframe.mediadelivery.net/embed/'+CONFIG.vslLib+'/'+CONFIG.vslId+'?responsive=true&controls=false&preload=true';
+ if(autoplay)url+='&autoplay=true&muted=false';
  var iframe=document.createElement('iframe');
  iframe.src=url;
  iframe.allow='accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen';
@@ -1764,12 +1760,6 @@ function initVSL(){
  container.appendChild(iframe);
  _bunnyIframe=iframe;
  _vslReady=true;
- if(_vslVariant==='A'){
-   var s=document.getElementById('vslStart');if(s)s.style.display='none';
-   vslPing({ev:'autoplay_start'});
-   setTimeout(function(){try{if(!_vslPlaying){var s=document.getElementById('vslStart');if(s)s.style.display='';}}catch(x){}},2000);
- }
- if(_vslWanted)_vslGo();
  /* Écouter les événements Bunny via postMessage */
  window.addEventListener('message',function(e){
    var d;try{d=typeof e.data==='string'?JSON.parse(e.data):e.data;}catch(ex){return;}
@@ -1782,7 +1772,7 @@ function initVSL(){
    if(d.event==='pause'){_vslPlaying=false;var tog=document.getElementById('vslToggle');if(tog)tog.textContent='▶';}
    if(d.event==='timeupdate'&&d.data){
      var t=d.data.currentTime||0,dur=d.data.duration||1;
-     _vslCurTime=t; /* on mémorise le temps actuel pour le reculer 15s */
+     _vslCurTime=t;
      var b=document.getElementById('vslBar');if(b)b.style.width=(_vslCurve(t/dur)*100).toFixed(2)+'%';
      _vslReport(t,dur);
    }
@@ -1795,11 +1785,25 @@ function initVSL(){
    }
  });
 }
+function initVSL(){
+ var img=document.getElementById('vslThumb');
+ if(img&&CONFIG.vslThumb){img.src=CONFIG.vslThumb;}
+ if(_vslVariant==='A'){
+   /* Variante A : on crée l'iframe tout de suite avec autoplay */
+   _buildBunny(true);
+   var s=document.getElementById('vslStart');if(s)s.style.display='none';
+   vslPing({ev:'autoplay_start'});
+   /* Si l'autoplay est bloqué par le nav, on remet la façade */
+   setTimeout(function(){try{if(!_vslPlaying){var s=document.getElementById('vslStart');if(s)s.style.display='';}}catch(x){}},2500);
+ }
+ /* Variante B : on attend le clic (playVSL) avant de créer l'iframe */
+}
 function playVSL(){
  var start=document.getElementById('vslStart');if(start)start.style.display='none';
  track('play_vsl',{v:_vslVariant});
  _vslWanted=true;
- if(_vslReady)_vslGo();
+ /* Créer l'iframe dans le geste utilisateur → autoplay avec son garanti */
+ _buildBunny(true);
 }
 initVSL();
 /* Contrôles custom : reculer 15s / pause — PAS d'avance possible */
