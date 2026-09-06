@@ -1433,8 +1433,8 @@ const I18N = {
  CONFIG, liens (indépendants de la langue)
  ================================================================= */
 const CONFIG = {
- vslId: "oXJcbCklSmw",
- vslLib: "",
+ vslId: "0ca2aa34-f3dc-430c-97bf-0be8c64db6e7",
+ vslLib: "744803",
  vslThumb: "",
  offers: {
  demarrage:{ card:"https://whop.com/checkout/plan_bReryALMV3QYm", momo:"https://me.fedapay.com/demarrage" },
@@ -1744,81 +1744,21 @@ function vslPing(params){try{params.sid=_vsid();params.v=_vslVariant;var qs=Obje
 function vslNow(){return _vslDur||'';}
 function _vslReport(t,d){_vslDur=Math.round(d)||_vslDur;var pct=Math.max(0,Math.min(100,Math.floor((t/d)*100)));var bucket=Math.floor(pct/5)*5;if(!_vslSent[bucket]){_vslSent[bucket]=1;vslPing({ev:'p',pct:bucket,t:Math.round(t),dur:_vslDur});}}
 function _vslCurve(x){x=Math.max(0,Math.min(1,x));return Math.pow(x,0.55);}
-var _ytPlayer=null,_vslPlaying=false,_vslCurTime=0,_ytTimer=null;
+var _bunnyPlayer=null;
 function initVSL(){
- /* Miniature YouTube automatique si pas de thumb custom */
- var th=document.getElementById('vslThumb');
- if(th) th.src=CONFIG.vslThumb||('https://img.youtube.com/vi/'+CONFIG.vslId+'/maxresdefault.jpg');
-}
-function playVSL(){
- track('play_vsl',{v:_vslVariant});
- var start=document.getElementById('vslStart');if(start)start.style.display='none';
  var container=document.getElementById('vslPlayer');
  if(!container)return;
- var autoplay=_vslVariant==='A'?1:1;
- if(_vslVariant==='A')vslPing({ev:'autoplay_start'});
+ var start=document.getElementById('vslStart');if(start)start.style.display='none';
+ var url='https://iframe.mediadelivery.net/embed/'+CONFIG.vslLib+'/'+CONFIG.vslId+'?responsive=true&preload=true&autoplay=false';
  var iframe=document.createElement('iframe');
- iframe.id='yt-iframe';
- iframe.src='https://www.youtube.com/embed/'+CONFIG.vslId+'?autoplay=1&rel=0&modestbranding=1&controls=0&disablekb=1&iv_load_policy=3&fs=0&enablejsapi=1&origin='+encodeURIComponent(location.origin);
- iframe.allow='autoplay;encrypted-media;picture-in-picture;fullscreen';
+ iframe.src=url;
+ iframe.allow='accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen';
  iframe.allowFullscreen=true;
- /* Dépasse le container haut+bas → overflow:hidden coupe les overlays YouTube */
- iframe.style.cssText='position:absolute;top:-12%;left:0;width:100%;height:124%;border:0;';
+ iframe.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
  container.innerHTML='';
  container.appendChild(iframe);
- /* YouTube iframe API */
- if(!window.YT){
-   var tag=document.createElement('script');
-   tag.src='https://www.youtube.com/iframe_api';
-   document.head.appendChild(tag);
- }
- window.onYouTubeIframeAPIReady=function(){
-   _ytPlayer=new YT.Player('yt-iframe',{
-     events:{
-       onStateChange:function(e){
-         if(e.data===YT.PlayerState.PLAYING){
-           _vslPlaying=true;
-           vslPing({ev:'play',pct:0,t:0,dur:_vslDur});
-           var ctrl=document.getElementById('vslCtrl');if(ctrl)ctrl.classList.add('show');
-           var tog=document.getElementById('vslToggle');if(tog)tog.textContent='⏸';
-           _ytTimer=setInterval(function(){
-             if(!_ytPlayer)return;
-             var t=_ytPlayer.getCurrentTime()||0;
-             var dur=_ytPlayer.getDuration()||1;
-             _vslCurTime=t;
-             var b=document.getElementById('vslBar');if(b)b.style.width=(_vslCurve(t/dur)*100).toFixed(2)+'%';
-             _vslReport(t,dur);
-           },500);
-         }
-         if(e.data===YT.PlayerState.PAUSED){
-           _vslPlaying=false;
-           var tog=document.getElementById('vslToggle');if(tog)tog.textContent='▶';
-           if(_ytTimer){clearInterval(_ytTimer);_ytTimer=null;}
-         }
-         if(e.data===YT.PlayerState.ENDED){
-           _vslPlaying=false;
-           if(_ytTimer){clearInterval(_ytTimer);_ytTimer=null;}
-           var b=document.getElementById('vslBar');if(b)b.style.width='100%';
-           var ec=document.getElementById('vslEnd');if(ec)ec.classList.add('show');
-           vslPing({ev:'end',pct:100,t:_vslDur,dur:_vslDur});
-         }
-       }
-     }
-   });
-   /* Bouton toggle */
-   var tog=document.getElementById('vslToggle');
-   if(tog)tog.addEventListener('click',function(){
-     if(_vslPlaying){_ytPlayer.pauseVideo();}else{_ytPlayer.playVideo();}
-   });
-   /* Bouton -15s */
-   var back=document.getElementById('vslBack');
-   if(back)back.addEventListener('click',function(){
-     var t=_ytPlayer.getCurrentTime()||0;
-     _ytPlayer.seekTo(Math.max(0,t-15),true);
-   });
- };
- if(window.YT&&window.YT.Player)window.onYouTubeIframeAPIReady();
 }
+function playVSL(){}
 initVSL();
 
 /* remplir les listes pays + indicatifs (selon la langue) */
