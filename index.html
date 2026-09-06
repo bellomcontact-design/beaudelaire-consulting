@@ -1746,11 +1746,14 @@ function _vslReport(t,d){_vslDur=Math.round(d)||_vslDur;var pct=Math.max(0,Math.
 function _vslCurve(x){x=Math.max(0,Math.min(1,x));return Math.pow(x,0.55);}
 var _bunnyIframe=null,_vslPlaying=false,_vslCurTime=0;
 function _vslCmd(cmd,arg){try{if(_bunnyIframe)_bunnyIframe.contentWindow.postMessage(JSON.stringify({event:'command',func:cmd,args:arg===undefined?'':arg}),'*');}catch(x){}}
-function _buildBunny(autoplay){
+function initVSL(){
+ var img=document.getElementById('vslThumb');
+ if(img&&CONFIG.vslThumb){img.src=CONFIG.vslThumb;}
  var container=document.getElementById('vslPlayer');
- if(!container||_bunnyIframe)return;
+ if(!container)return;
+ /* Précharger l'iframe immédiatement (sans autoplay) pour les 2 variantes */
  var url='https://iframe.mediadelivery.net/embed/'+CONFIG.vslLib+'/'+CONFIG.vslId+'?responsive=true&preload=true';
- if(autoplay)url+='&autoplay=true&muted=false';
+ if(_vslVariant==='A'){url+='&autoplay=true';}
  var iframe=document.createElement('iframe');
  iframe.src=url;
  iframe.allow='accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen';
@@ -1760,6 +1763,11 @@ function _buildBunny(autoplay){
  container.appendChild(iframe);
  _bunnyIframe=iframe;
  _vslReady=true;
+ if(_vslVariant==='A'){
+   var s=document.getElementById('vslStart');if(s)s.style.display='none';
+   vslPing({ev:'autoplay_start'});
+   setTimeout(function(){try{if(!_vslPlaying){var s=document.getElementById('vslStart');if(s)s.style.display='';}}catch(x){}},2500);
+ }
  /* Écouter les événements Bunny via postMessage */
  window.addEventListener('message',function(e){
    var d;try{d=typeof e.data==='string'?JSON.parse(e.data):e.data;}catch(ex){return;}
@@ -1785,28 +1793,15 @@ function _buildBunny(autoplay){
    }
  });
 }
-function initVSL(){
- var img=document.getElementById('vslThumb');
- if(img&&CONFIG.vslThumb){img.src=CONFIG.vslThumb;}
- if(_vslVariant==='A'){
-   /* Variante A : on crée l'iframe tout de suite avec autoplay */
-   _buildBunny(true);
-   var s=document.getElementById('vslStart');if(s)s.style.display='none';
-   vslPing({ev:'autoplay_start'});
-   /* Si l'autoplay est bloqué par le nav, on remet la façade */
-   setTimeout(function(){try{if(!_vslPlaying){var s=document.getElementById('vslStart');if(s)s.style.display='';}}catch(x){}},2500);
- }
- /* Variante B : on attend le clic (playVSL) avant de créer l'iframe */
-}
 function playVSL(){
- var start=document.getElementById('vslStart');if(start)start.style.display='none';
+ /* Supprimer l'overlay complètement pour laisser l'iframe accessible */
+ var start=document.getElementById('vslStart');if(start)start.parentNode&&start.parentNode.removeChild(start);
  track('play_vsl',{v:_vslVariant});
  _vslWanted=true;
- /* Créer l'iframe dans le geste utilisateur → autoplay avec son garanti */
- _buildBunny(true);
+ _vslCmd('play');
 }
 initVSL();
-/* Contrôles custom : reculer 15s / pause — PAS d'avance possible */
+/* Contrôles custom : reculer 15s / pause */
 (function(){
   document.getElementById('vslBack')&&document.getElementById('vslBack').addEventListener('click',function(){
     _vslCmd('seekTo',Math.max(0,_vslCurTime-15));
