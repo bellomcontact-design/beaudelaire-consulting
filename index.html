@@ -1749,7 +1749,7 @@ function _vslCmd(cmd,arg){try{if(_bunnyIframe)_bunnyIframe.contentWindow.postMes
 function _buildBunny(autoplay){
  var container=document.getElementById('vslPlayer');
  if(!container||_bunnyIframe)return;
- var url='https://iframe.mediadelivery.net/embed/'+CONFIG.vslLib+'/'+CONFIG.vslId+'?responsive=true&controls=false&preload=true';
+ var url='https://iframe.mediadelivery.net/embed/'+CONFIG.vslLib+'/'+CONFIG.vslId+'?responsive=true&preload=true';
  if(autoplay)url+='&autoplay=true&muted=false';
  var iframe=document.createElement('iframe');
  iframe.src=url;
