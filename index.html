@@ -1917,6 +1917,8 @@ function renderResult(){
  offer.feat.forEach(function(f){var li=document.createElement('li');li.textContent=f;ul.appendChild(li);});
  document.getElementById('payCard').href=addVariant(links.card);
  document.getElementById('payMomo').href=addVariant(links.momo);
+ var rpMomo=document.getElementById('rpMomo'); if(rpMomo) rpMomo.href=addVariant(rpMomo.getAttribute('href'));
+ var rpCard=document.getElementById('rpCard'); if(rpCard) rpCard.href=addVariant(rpCard.getAttribute('href'));
  document.getElementById('payCard').style.display=(links.card&&links.card!=='#')?'block':'none';
  document.getElementById('payMomo').style.display=(links.momo&&links.momo!=='#')?'block':'none';
  var scard=document.getElementById('payCardSub'); if(scard) scard.textContent=offer.price+' · '+t.result.card;
