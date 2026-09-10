@@ -164,6 +164,17 @@
     (function(){
       var cb = document.getElementById('agree');
       var btn = document.getElementById('activateBtn');
+
+      // FedaPay ajoute l'identifiant de la transaction à l'adresse de cette page
+      // (?id=… ou ?transaction_id=…). On le transmet au bouton : depuis la
+      // fermeture de l'activation libre, le bot exige cette référence pour
+      // ouvrir un accès. Sans elle, il affiche « il manque la référence ».
+      try {
+        var p = new URLSearchParams(location.search);
+        var tx = p.get('id') || p.get('transaction_id') || p.get('tx') || '';
+        if (tx) { btn.href = btn.href.split('?')[0] + '?tx=' + encodeURIComponent(tx); }
+      } catch (e) {}
+
       function update(){
         if (cb.checked){ btn.classList.remove('locked'); btn.removeAttribute('aria-disabled'); }
         else { btn.classList.add('locked'); btn.setAttribute('aria-disabled','true'); }
