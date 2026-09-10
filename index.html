@@ -1436,8 +1436,12 @@ const I18N = {
  CONFIG, liens (indépendants de la langue)
  ================================================================= */
 const CONFIG = {
- vslId: "0ca2aa34-f3dc-430c-97bf-0be8c64db6e7",
- vslLib: "744803",
+ // VSL dans SA PROPRE bibliothèque (749525), séparée des formations (744803).
+ // Les réglages du lecteur Bunny s'appliquent à toute une bibliothèque : tant que
+ // la VSL et les formations la partageaient, verrouiller l'avance rapide sur la
+ // VSL supprimait aussi les contrôles des formations. À garder séparées.
+ vslId: "23e97573-7a41-4698-bb0b-02415ebc6ab6",
+ vslLib: "749525",
  vslThumb: "",
  offers: {
  demarrage:{ card:"https://whop.com/checkout/plan_bReryALMV3QYm", momo:"https://me.fedapay.com/demarrage" },
@@ -1995,6 +1999,9 @@ function toggleInside(btn){
 }
 
 function addVariant(url){try{var vv=typeof _vslVariant!=='undefined'?_vslVariant:'';var ss=typeof _vsid==='function'?_vsid():'';if(!url||url==='#'||!vv)return url;var sep=url.indexOf('?')>=0?'&':'?';return url+sep+'v='+vv+(ss?'&sid='+encodeURIComponent(ss):'');}catch(e){return url;}}
+// Injecte le variant+sid dans TOUS les boutons de paiement dès le chargement
+// (pas seulement après le quiz, pour ne rater aucune vente)
+(function(){function applyVariants(){['rpMomo','rpCard','ppMomo','ppCard','payMomo','payCard'].forEach(function(id){var el=document.getElementById(id);if(el&&el.href&&el.href!=='#'){var updated=addVariant(el.href);if(updated!==el.href)el.href=updated;}});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',applyVariants);}else{applyVariants();}})();
 function pickOffer(el, scope){
  el.parentElement.querySelectorAll('.otile').forEach(function(t){ t.classList.remove('selected'); });
  el.classList.add('selected');
