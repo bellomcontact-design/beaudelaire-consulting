@@ -315,7 +315,7 @@
    <div class="pcard featured" id="offre">
     <div class="phead">
      <div class="pname" data-i18n="o1name">Le guide pour faire 1 million</div>
-     <div class="pprice" data-xof="5 000" data-eur="8"><span class="pmain"></span> <span class="pper" data-i18n="month">par mois</span></div>
+     <div class="pprice" data-xof="6 500" data-eur="10" data-usd="12"><span class="pmain"></span> <span class="pper" data-i18n="month">par mois</span></div>
      <span class="peuro"></span>
      <p class="verrou"><span class="ico" aria-hidden="true">&#9888;</span><span data-i18n="verrou"></span></p>
      <p class="ptag" style="margin-top:12px;font-weight:700;font-size:15px" data-i18n="o1tag"></p>
@@ -350,7 +350,7 @@
     <span class="ribbon" data-i18n="ribbon">COMPLET</span>
     <div class="phead">
      <div class="pname" data-i18n="o2name">Coaching</div>
-     <div class="pprice" data-xof="330 000" data-eur="500"><span class="pmain"></span> <span class="pper" data-i18n="month">par mois</span></div>
+     <div class="pprice" data-xof="330 000" data-eur="500" data-usd="550"><span class="pmain"></span> <span class="pper" data-i18n="month">par mois</span></div>
      <span class="peuro"></span>
     </div>
     <div class="pbody">
@@ -745,8 +745,15 @@ var PAYS_HORS_FRANC = /-(GH|NG|GN|MR|SL|LR|GM|MA|DZ|TN|EG|KE|ZA|CD|ET|TZ|UG)\b/i
    anglais. L'equivalent en euros reste affiche juste en dessous, ce qui
    evite d'avoir a proposer un selecteur. */
 function deviseCourante(){ return (LANG==='en') ? 'USD' : 'XOF'; }
+/* Chaque devise a SON montant. Avant, le dollar reprenait la valeur en euros :
+   la page anglaise affichait donc « 10$ » pour un prix fixe a 10 EUR, soit
+   environ deux dollars de moins que prevu, sur chaque vente. Corrige le
+   14/09/2026. En l'absence de montant en dollars, on retombe sur l'euro
+   plutot que de n'afficher aucun prix. */
 function montantDe(el, dev){
- return (dev==='XOF') ? el.getAttribute('data-xof') : el.getAttribute('data-eur');
+ if(dev==='XOF') return el.getAttribute('data-xof');
+ if(dev==='USD') return el.getAttribute('data-usd') || el.getAttribute('data-eur');
+ return el.getAttribute('data-eur');
 }
 function suffixeDe(dev){ return dev==='XOF' ? 'XOF' : (dev==='EUR' ? '\u20AC' : '$'); }
 
@@ -1002,5 +1009,47 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') fermeMenu
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script>try{new Image().src='https://bot.beaudelaireconsulting.com/track?p=checkout&t='+Date.now();}catch(e){}</script>
+<script>
+/* ── Attribution A/B : récupère le variant + sid stockés par index.html ──────
+   Les boutons /pay et /pawapay doivent embarquer ?v=A&sid=xxx pour que le
+   webhook FedaPay/PawaPay puisse appeler markVslPaid() et attribuer la vente. */
+(function(){
+  try{
+    var v=localStorage.getItem('bc_v')||'';
+    var sid=sessionStorage.getItem('bc_vsid')||'';
+    if(!sid){sid=Date.now().toString(36)+Math.random().toString(36).slice(2,8);sessionStorage.setItem('bc_vsid',sid);}
+    /* Identifiant visiteur persistant (survit à la fermeture de l'onglet) */
+    var uid=localStorage.getItem('bc_uid')||'';
+    if(!uid){uid=Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('bc_uid',uid);}
+    document.querySelectorAll('a[href]').forEach(function(el){
+      var h=el.getAttribute('href')||'';
+      if(h.indexOf('bot.beaudelaireconsulting.com/pay')>=0||h.indexOf('bot.beaudelaireconsulting.com/pawapay')>=0){
+        var sep=h.indexOf('?')>=0?'&':'?';
+        var params='uid='+encodeURIComponent(uid)+'&sid='+encodeURIComponent(sid);
+        if(v)params+='&v='+encodeURIComponent(v);
+        el.href=h+sep+params;
+        /* Enregistre le clic comme "panier abandonné potentiel" → sera annulé si le paiement aboutit */
+        el.addEventListener('click',function(){
+          /* Le clic redirige aussitôt vers le paiement : un fetch classique serait
+             annulé par la navigation. sendBeacon est fait pour ça — il part en
+             text/plain, ce qui évite aussi le préflight CORS. */
+          var url='https://bot.beaudelaireconsulting.com/track/checkout';
+          var payload=JSON.stringify({uid:uid,sid:sid,variant:v||'?',ts:Date.now()});
+          var sent=false;
+          try{
+            if(navigator.sendBeacon){
+              sent=navigator.sendBeacon(url,new Blob([payload],{type:'text/plain;charset=UTF-8'}));
+            }
+          }catch(e2){}
+          if(!sent){
+            /* Repli : keepalive demande au navigateur de finir l'envoi malgré la navigation */
+            try{fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:payload,keepalive:true}).catch(function(){});}catch(e3){}
+          }
+        },{once:true});
+      }
+    });
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
