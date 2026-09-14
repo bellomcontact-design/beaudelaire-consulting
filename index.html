@@ -1747,7 +1747,24 @@ var _vslVariant=(function(){try{var k='bc_v',s=localStorage.getItem(k);if(!s){s=
 /* --- Rétention : on envoie au bot le plus loin regardé (par session) --- */
 var _VSL_ENDPOINT='https://bot.beaudelaireconsulting.com/vsl';
 function _vsid(){try{var k='bc_vsid',v=sessionStorage.getItem(k);if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8);sessionStorage.setItem(k,v);}return v;}catch(e){return 's'+Math.random().toString(36).slice(2,8);}}
-function vslPing(params){try{params.sid=_vsid();params.v=_vslVariant;var qs=Object.keys(params).map(function(k){return k+'='+encodeURIComponent(params[k]);}).join('&');var url=_VSL_ENDPOINT+'?'+qs+'&_='+Date.now();if(navigator.sendBeacon){navigator.sendBeacon(url);}else{new Image().src=url;}}catch(e){}}
+/* D'ou vient ce visiteur.
+   Un lien marque (?src=tiktok, ou utm_source) fait foi : c'est une intention
+   explicite. A defaut, on retient le site precedent — mais les navigateurs
+   integres de TikTok et d'Instagram ne le transmettent presque jamais, d'ou
+   une part de trafic qui restera « non identifie ». On garde la valeur pour
+   toute la session : la source d'une visite ne change pas en cours de route. */
+function _bcSrc(){try{
+ var u=new URLSearchParams(location.search);
+ var m=u.get('src')||u.get('utm_source')||u.get('source')||'';
+ if(m){sessionStorage.setItem('bc_src',m.slice(0,40));}
+ return (sessionStorage.getItem('bc_src')||'').slice(0,40);
+}catch(e){return '';}}
+function _bcRef(){try{
+ var v=sessionStorage.getItem('bc_ref');
+ if(v===null){v=(document.referrer||'').slice(0,120);sessionStorage.setItem('bc_ref',v);}
+ return v;
+}catch(e){return (document.referrer||'').slice(0,120);}}
+function vslPing(params){try{params.sid=_vsid();params.v=_vslVariant;params.src=_bcSrc();params.ref=_bcRef();params.hote=location.hostname;var qs=Object.keys(params).map(function(k){return k+'='+encodeURIComponent(params[k]);}).join('&');var url=_VSL_ENDPOINT+'?'+qs+'&_='+Date.now();if(navigator.sendBeacon){navigator.sendBeacon(url);}else{new Image().src=url;}}catch(e){}}
 function vslNow(){return _vslDur||'';}
 function _vslReport(t,d){_vslDur=Math.round(d)||_vslDur;var pct=Math.max(0,Math.min(100,Math.floor((t/d)*100)));var bucket=Math.floor(pct/5)*5;if(!_vslSent[bucket]){_vslSent[bucket]=1;vslPing({ev:'p',pct:bucket,t:Math.round(t),dur:_vslDur});}}
 function _vslCurve(x){x=Math.max(0,Math.min(1,x));return Math.pow(x,0.55);}
@@ -2171,6 +2188,10 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') fermeMenu
 <!-- Vercel Web Analytics -->
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer src="/_vercel/insights/script.js"></script>
-<script>try{new Image().src='https://bot.beaudelaireconsulting.com/track?p=home&t='+Date.now();}catch(e){}</script>
+<script>try{new Image().src='https://bot.beaudelaireconsulting.com/track?p=home&t='+Date.now();}catch(e){}
+/* Une visite, meme sans lancer la video, doit compter dans « d'ou viennent mes
+   visiteurs ». Sans ce signal, seuls ceux qui regardaient la video avaient une
+   origine, et le denominateur du taux de conversion etait faux. */
+try{if(typeof vslPing==='function'){vslPing({ev:'v',t:0,pct:0});}}catch(e){}</script>
 </body>
 </html>
