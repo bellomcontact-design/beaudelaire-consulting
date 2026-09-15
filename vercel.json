@@ -5,6 +5,7 @@
     { "source": "/en", "destination": "/index.html" }
   ],
   "redirects": [
-    { "source": "/communaute", "destination": "https://whatsapp.com/channel/0029VbDh1GNHQbRxUobuaM3Q", "permanent": false }
+    { "source": "/communaute", "destination": "https://whatsapp.com/channel/0029VbDh1GNHQbRxUobuaM3Q", "permanent": false },
+    { "source": "/r/:code", "destination": "https://bot.beaudelaireconsulting.com/r/:code", "permanent": false }
   ]
 }
