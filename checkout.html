@@ -949,6 +949,36 @@ function basculePlus(btn){
 })();
 
 document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ===== TEST DU MOT DE L'OFFRE — meme tirage que index.html ================= */
+(function(){
+  var W=(function(){try{var x=localStorage.getItem('bc_w');
+    if(x==='G'||x==='C'||x==='E')return x;}catch(e){}return 'G';})();
+  var M={
+    C:{fr:{o1name:'La communauté des Ex-rienneux',
+           rcta:'Rejoindre la communauté', o2f1:'Tout ce que contient la communauté'},
+       en:{o1name:'The Ex-rienneux community',
+           rcta:'Join the community', o2f1:'Everything in the community'}},
+    E:{fr:{o1name:"L'école des Ex-rienneux",
+           rcta:"Rejoindre l'école", o2f1:"Tout ce que contient l'école"},
+       en:{o1name:'The Ex-rienneux school',
+           rcta:'Join the school', o2f1:'Everything in the school'}}
+  };
+  if(!M[W]) return;
+  function poser(){
+    try{
+      var L=(document.documentElement.lang==='en')?'en':'fr';
+      var m=M[W][L];
+      try{var d=I18N[L]; d.o1name=m.o1name; d.r_cta=m.rcta; d.o2f1=m.o2f1;}catch(e){}
+      var maj=function(cle,txt){document.querySelectorAll('[data-i18n="'+cle+'"]').forEach(function(el){el.textContent=txt;});};
+      maj('o1name',m.o1name); maj('r_cta',m.rcta); maj('o2f1',m.o2f1);
+    }catch(e){}
+  }
+  if(typeof applyI18N==='function'){var _o=applyI18N;applyI18N=function(){var r=_o.apply(this,arguments);poser();return r;};}
+  poser();
+  document.addEventListener('DOMContentLoaded',poser);
+})();
+
 applyI18N();
 marqueLangue();
 applyDevise();
@@ -1016,6 +1046,11 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') fermeMenu
 (function(){
   try{
     var v=localStorage.getItem('bc_v')||'';
+    /* Le MOT de l'offre, tire par index.html et partage via la meme cle.
+       Deux axes de test, deux champs : le reglage video (v) et le mot (w).
+       Ajoute le 16/09/2026. */
+    var w=localStorage.getItem('bc_w')||'';
+    if(w!=='G'&&w!=='C'&&w!=='E')w='';
     var sid=sessionStorage.getItem('bc_vsid')||'';
     if(!sid){sid=Date.now().toString(36)+Math.random().toString(36).slice(2,8);sessionStorage.setItem('bc_vsid',sid);}
     /* Identifiant visiteur persistant (survit à la fermeture de l'onglet) */
@@ -1027,6 +1062,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') fermeMenu
         var sep=h.indexOf('?')>=0?'&':'?';
         var params='uid='+encodeURIComponent(uid)+'&sid='+encodeURIComponent(sid);
         if(v)params+='&v='+encodeURIComponent(v);
+        if(w)params+='&w='+encodeURIComponent(w);
         el.href=h+sep+params;
         /* Enregistre le clic comme "panier abandonné potentiel" → sera annulé si le paiement aboutit */
         el.addEventListener('click',function(){
@@ -1034,7 +1070,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') fermeMenu
              annulé par la navigation. sendBeacon est fait pour ça — il part en
              text/plain, ce qui évite aussi le préflight CORS. */
           var url='https://bot.beaudelaireconsulting.com/track/checkout';
-          var payload=JSON.stringify({uid:uid,sid:sid,variant:v||'?',ts:Date.now()});
+          var payload=JSON.stringify({uid:uid,sid:sid,variant:v||'?',mot:w||'',ts:Date.now()});
           var sent=false;
           try{
             if(navigator.sendBeacon){

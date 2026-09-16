@@ -1744,6 +1744,72 @@ function basculePlus(btn){
    personnalisée ; laissé vide, on retombe sur la miniature YouTube. */
 var _vslP=null,_vslTimer=null,_vslReady=false,_vslWanted=false,_vslSent={},_vslDur=0;
 var _vslVariant=(function(){try{var k='bc_v',s=localStorage.getItem(k);if(!s){s=Math.random()<.5?'A':'B';localStorage.setItem(k,s);}return s;}catch(e){return 'B';}})();
+/* ===== TEST DU MOT DE L'OFFRE — G guide, C communaute, E ecole ==============
+   Axe INDEPENDANT du reglage video : deux champs separes, pas une lettre
+   combinee. Croiser les deux donnerait six groupes, et a ce volume chaque
+   groupe recevrait environ deux ventes par mois — illisible. Avec deux champs,
+   chaque axe s'analyse sur la totalite du trafic.
+   Pourquoi ce test : « rejoins le guide » se lit comme un PDF, et un PDF ne
+   justifie pas un abonnement mensuel. Lance le 16/09/2026.
+   Cle neuve (bc_w) : personne ne reste coince sur une ancienne etiquette. */
+var _vslMot=(function(){try{var k='bc_w',s=localStorage.getItem(k);
+ if(s!=='G'&&s!=='C'&&s!=='E'){s='GCE'.charAt(Math.floor(Math.random()*3));localStorage.setItem(k,s);}
+ return s;}catch(e){return 'G';}})();
+var MOTS={
+ G:{fr:{},en:{}},
+ C:{fr:{nav:'La communauté',
+   sub:'Rejoins la communauté et apprends à faire ton <b>premier million</b> en ligne.',
+   cta:'Rejoindre la communauté', q3:"Qu'est-ce qu'il y a dans la communauté ?",
+   promo:"🎁 L'accès à la communauté <b>Ex-rienneux</b> à <b>6 500 FCFA/mois</b>. Ton tarif est bloqué tant que tu restes abonné.",
+   oname:'La communauté des Ex-rienneux',
+   oline:"Tu rejoins la communauté privée où on t'accompagne pour faire tes premiers revenus, quel que soit ton point de départ. Tout le programme est dedans.",
+   octa:'Rejoindre la communauté', btn:'Rejoindre la communauté',
+   sous:'Paiement mobile money (Afrique) · Accès immédiat'},
+  en:{nav:'The community', sub:'Join the community and learn to make your <b>first million</b> online.',
+   cta:'Join the community', q3:"What's inside the community?",
+   promo:"🎁 Access to the <b>Ex-rienneux</b> community for <b>6,500 FCFA/month</b>. Your rate is locked as long as you stay.",
+   oname:'The Ex-rienneux community',
+   oline:"You join the private community where we walk you through making your first income online.",
+   octa:'Join the community', btn:'Join the community',
+   sous:'Mobile money (Africa) · Instant access'}},
+ E:{fr:{nav:"L'école",
+   sub:"Rejoins l'école et apprends à faire ton <b>premier million</b> en ligne.",
+   cta:"Rejoindre l'école", q3:"Qu'est-ce qu'il y a dans l'école ?",
+   promo:"🎁 L'accès à l'école <b>Ex-rienneux</b> à <b>6 500 FCFA/mois</b>. Ton tarif est bloqué tant que tu restes abonné.",
+   oname:"L'école des Ex-rienneux",
+   oline:"On t'apprend, étape par étape, à faire tes premiers revenus en ligne. Les cours, la méthode et la communauté privée : tout est dedans.",
+   octa:"Rejoindre l'école", btn:"Rejoindre l'école",
+   sous:'Paiement mobile money (Afrique) · Accès immédiat'},
+  en:{nav:'The school', sub:"Join the school and learn to make your <b>first million</b> online.",
+   cta:'Join the school', q3:"What's inside the school?",
+   promo:"🎁 Access to the <b>Ex-rienneux</b> school for <b>6,500 FCFA/month</b>. Your rate is locked as long as you stay.",
+   oname:'The Ex-rienneux school',
+   oline:"We teach you, step by step, how to make your first income online.",
+   octa:'Join the school', btn:'Join the school',
+   sous:'Mobile money (Africa) · Instant access'}}
+};
+/* On repasse APRES applyI18N : insensible a l'ordre d'execution. */
+function _poserMot(){
+ try{
+  var m=(MOTS[_vslMot]||{})[(document.documentElement.lang==='en')?'en':'fr'];
+  if(!m||!m.cta)return;
+  try{var d=I18N[(document.documentElement.lang==='en')?'en':'fr'];
+   d.nav.debutants=m.nav; d.hero.sub=m.sub; d.hero.vslcta=m.cta;
+   d.faq.q3=m.q3; d.book.promo=m.promo;
+   d.result.guideopt.name=m.oname; d.result.guideopt.line=m.oline;
+   d.result.guideopt.cta=m.octa; d.result.guideonly='';
+  }catch(e){}
+  var maj=function(sel,txt,html){document.querySelectorAll(sel).forEach(function(el){if(html){el.innerHTML=txt;}else{el.textContent=txt;}});};
+  maj('[data-i18n="hero.vslcta"]',m.cta);
+  maj('[data-i18n-html="hero.sub"]',m.sub,1);
+  maj('[data-i18n="faq.q3"]',m.q3);
+  maj('[data-i18n-html="book.promo"]',m.promo,1);
+  maj('[data-i18n="nav.debutants"]',m.nav);
+  document.querySelectorAll('[data-i18n-html="result.guideonly"]').forEach(function(el){el.innerHTML='';el.style.display='none';});
+  var b=document.getElementById('rgCta'); if(b){b.textContent=m.btn; var sp=b.parentNode.querySelector('span'); if(sp)sp.textContent=m.sous;}
+  var c=document.getElementById('rgCtaC'); if(c){c.textContent=m.btn;}
+ }catch(e){}
+}
 /* --- Rétention : on envoie au bot le plus loin regardé (par session) --- */
 var _VSL_ENDPOINT='https://bot.beaudelaireconsulting.com/vsl';
 function _vsid(){try{var k='bc_vsid',v=sessionStorage.getItem(k);if(!v){v=Date.now().toString(36)+Math.random().toString(36).slice(2,8);sessionStorage.setItem(k,v);}return v;}catch(e){return 's'+Math.random().toString(36).slice(2,8);}}
@@ -1764,7 +1830,7 @@ function _bcRef(){try{
  if(v===null){v=(document.referrer||'').slice(0,120);sessionStorage.setItem('bc_ref',v);}
  return v;
 }catch(e){return (document.referrer||'').slice(0,120);}}
-function vslPing(params){try{params.sid=_vsid();params.v=_vslVariant;params.src=_bcSrc();params.ref=_bcRef();params.hote=location.hostname;var qs=Object.keys(params).map(function(k){return k+'='+encodeURIComponent(params[k]);}).join('&');var url=_VSL_ENDPOINT+'?'+qs+'&_='+Date.now();if(navigator.sendBeacon){navigator.sendBeacon(url);}else{new Image().src=url;}}catch(e){}}
+function vslPing(params){try{params.sid=_vsid();params.v=_vslVariant;params.w=_vslMot;params.src=_bcSrc();params.ref=_bcRef();params.hote=location.hostname;var qs=Object.keys(params).map(function(k){return k+'='+encodeURIComponent(params[k]);}).join('&');var url=_VSL_ENDPOINT+'?'+qs+'&_='+Date.now();if(navigator.sendBeacon){navigator.sendBeacon(url);}else{new Image().src=url;}}catch(e){}}
 function vslNow(){return _vslDur||'';}
 function _vslReport(t,d){_vslDur=Math.round(d)||_vslDur;var pct=Math.max(0,Math.min(100,Math.floor((t/d)*100)));var bucket=Math.floor(pct/5)*5;if(!_vslSent[bucket]){_vslSent[bucket]=1;vslPing({ev:'p',pct:bucket,t:Math.round(t),dur:_vslDur});}}
 function _vslCurve(x){x=Math.max(0,Math.min(1,x));return Math.pow(x,0.55);}
@@ -2015,7 +2081,7 @@ function toggleInside(btn){
  if(arrow) arrow.style.transform=open?'rotate(0deg)':'rotate(180deg)';
 }
 
-function addVariant(url){try{var vv=typeof _vslVariant!=='undefined'?_vslVariant:'';var ss=typeof _vsid==='function'?_vsid():'';if(!url||url==='#'||!vv)return url;var sep=url.indexOf('?')>=0?'&':'?';return url+sep+'v='+vv+(ss?'&sid='+encodeURIComponent(ss):'');}catch(e){return url;}}
+function addVariant(url){try{var vv=typeof _vslVariant!=='undefined'?_vslVariant:'';var ss=typeof _vsid==='function'?_vsid():'';if(!url||url==='#'||!vv)return url;var sep=url.indexOf('?')>=0?'&':'?';return url+sep+'v='+vv+'&w='+(typeof _vslMot!=='undefined'?_vslMot:'')+(ss?'&sid='+encodeURIComponent(ss):'');}catch(e){return url;}}
 // Injecte le variant+sid dans TOUS les boutons de paiement dès le chargement
 // (pas seulement après le quiz, pour ne rater aucune vente)
 (function(){function applyVariants(){['rpMomo','rpCard','ppMomo','ppCard','payMomo','payCard'].forEach(function(id){var el=document.getElementById(id);if(el&&el.href&&el.href!=='#'){var updated=addVariant(el.href);if(updated!==el.href)el.href=updated;}});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',applyVariants);}else{applyVariants();}})();
@@ -2062,6 +2128,8 @@ function refreshOfferDesc(){
 })();
 
 /* init langue */
+(function(){var _o=applyI18N;applyI18N=function(){var r=_o.apply(this,arguments);_poserMot();return r;};})();
+
 applyI18N();
 marqueLangue();
 
