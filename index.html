@@ -1789,9 +1789,19 @@ var MOTS={
    sous:'Mobile money (Africa) · Instant access'}}
 };
 /* On repasse APRES applyI18N : insensible a l'ordre d'execution. */
+/* Forcer un mot pour VERIFIER, sans fausser les chiffres.
+   ?w=G|C|E change ce qui est AFFICHE, et rien d'autre : le tirage memorise
+   n'est pas modifie, et le ping continue d'annoncer le vrai bras. Sans cette
+   porte, il fallait ouvrir des fenetres privees au hasard jusqu'a tomber sur
+   la bonne variante. Ajoute le 16/09/2026. */
+function _motAffiche(){
+ try{var q=(location.search.match(/[?&]w=([GCE])/i)||[])[1];
+  if(q)return q.toUpperCase();}catch(e){}
+ return _vslMot;
+}
 function _poserMot(){
  try{
-  var m=(MOTS[_vslMot]||{})[(document.documentElement.lang==='en')?'en':'fr'];
+  var m=(MOTS[_motAffiche()]||{})[(document.documentElement.lang==='en')?'en':'fr'];
   if(!m||!m.cta)return;
   try{var d=I18N[(document.documentElement.lang==='en')?'en':'fr'];
    d.nav.debutants=m.nav; d.hero.sub=m.sub; d.hero.vslcta=m.cta;

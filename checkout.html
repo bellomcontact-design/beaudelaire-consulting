@@ -952,8 +952,14 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 
 /* ===== TEST DU MOT DE L'OFFRE — meme tirage que index.html ================= */
 (function(){
-  var W=(function(){try{var x=localStorage.getItem('bc_w');
-    if(x==='G'||x==='C'||x==='E')return x;}catch(e){}return 'G';})();
+  /* ?w=G|C|E force l'AFFICHAGE pour verification, sans toucher au tirage
+     memorise ni a ce qui est remonte au serveur. Ajoute le 16/09/2026. */
+  var W=(function(){
+    try{var q=(location.search.match(/[?&]w=([GCE])/i)||[])[1];
+      if(q)return q.toUpperCase();}catch(e){}
+    try{var x=localStorage.getItem('bc_w');
+      if(x==='G'||x==='C'||x==='E')return x;}catch(e){}
+    return 'G';})();
   var M={
     C:{fr:{o1name:'La communauté des Ex-rienneux',
            rcta:'Rejoindre la communauté', o2f1:'Tout ce que contient la communauté'},
