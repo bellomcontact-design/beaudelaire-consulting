@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Programme Créateur · Beaudelaire Consulting</title>
+<meta name="description" content="Clippe les vidéos de Beaudelaire et poste-les sur TikTok. L'entrée est gratuite : à 2 000 vues, tu gagnes ton mois de communauté. Ensuite, tes vues sont payées.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060E15; --bg2:#0B141C; --card:#131B23; --border:#222E39;
+  --text:#FFFFFF; --muted:rgba(255,255,255,.64); --faint:rgba(255,255,255,.50);
+  --accent:#FFA545; --accent-soft:rgba(255,165,69,.12); --on-accent:#060E15;
+  --accent-grad:linear-gradient(95deg,#FFA930 0%,#FFAB23 51%,#D5AA12 113%);
+  --green:#3ECF7B; --danger:#FF6B5E;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
+  radial-gradient(1100px 500px at 50% -160px,rgba(255,165,69,.07),transparent),var(--bg);
+  color:var(--text);line-height:1.62;font-size:16px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:780px;margin:0 auto;padding:0 20px}
+a{color:var(--accent)}
+header{padding:26px 0 0}
+.top{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.top img{width:34px;height:34px;border-radius:9px;object-fit:cover}
+.top b{font-size:15px;font-weight:800}
+.top b span{color:var(--accent)}
+h1{font-size:clamp(28px,6vw,42px);font-weight:900;line-height:1.14;letter-spacing:-.02em;margin:34px 0 14px}
+.lede{font-size:17.5px;color:var(--muted);margin-bottom:8px}
+h2{font-size:clamp(21px,4vw,27px);font-weight:800;letter-spacing:-.01em;margin:44px 0 14px;scroll-margin-top:20px}
+h3{font-size:17px;font-weight:800;margin:24px 0 8px}
+p{margin-bottom:14px;color:var(--text-soft,rgba(255,255,255,.86))}
+ul{margin:0 0 16px 20px}li{margin-bottom:8px;color:rgba(255,255,255,.86)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;text-align:center}
+.kpi b{display:block;font-size:25px;font-weight:900;color:var(--accent);line-height:1.2}
+.kpi span{font-size:12.5px;color:var(--muted)}
+.step{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--border)}
+.step:last-child{border-bottom:0}
+.step .n{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--accent-soft);
+  color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px}
+.step .t{flex:1;min-width:0;font-size:15px}
+.step .t b{color:var(--text)}
+.btn{display:inline-block;background-image:var(--accent-grad);color:var(--on-accent);font-weight:800;
+  text-decoration:none;border-radius:12px;padding:14px 24px;font-size:16px;margin:6px 0}
+.btn.ghost{background-image:none;background:transparent;border:1px solid var(--border);color:var(--text)}
+.note{background:var(--accent-soft);border:1px solid rgba(255,165,69,.35);border-radius:13px;
+  padding:15px 17px;font-size:14.5px;margin:16px 0}
+.warn{background:rgba(255,107,94,.09);border:1px solid rgba(255,107,94,.34);border-radius:13px;
+  padding:15px 17px;font-size:14.5px;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin-bottom:14px}
+th,td{padding:11px 8px;border-bottom:1px solid var(--border);text-align:left}
+th{color:var(--muted);font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+.faq summary{cursor:pointer;font-weight:700;padding:14px 0;border-bottom:1px solid var(--border);font-size:15.5px}
+.faq p{margin:12px 0 18px;color:var(--muted);font-size:15px}
+footer{border-top:1px solid var(--border);margin-top:52px;padding:28px 0 40px;text-align:center;
+  color:var(--muted);font-size:13px}
+footer a{color:var(--accent);text-decoration:none;font-weight:600}
+.sticky{position:sticky;bottom:0;background:linear-gradient(180deg,transparent,var(--bg) 40%);
+  padding:18px 0 22px;text-align:center}
+.acc{background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:12px;overflow:hidden}
+.acc summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:800;font-size:15.5px;display:flex;align-items:center;justify-content:space-between}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:'+';font-size:20px;color:var(--accent);font-weight:400;line-height:1}
+.acc[open] summary::after{content:'–'}
+.acc .in{padding:0 18px 18px}
+.deal{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:14px;padding:18px 20px;margin:18px 0}
+.deal .l{display:flex;gap:13px;padding:11px 0;border-bottom:1px solid var(--border);font-size:15.5px}
+.deal .l:last-child{border-bottom:0;padding-bottom:0}
+.deal .l .d{flex:0 0 auto;color:var(--accent);font-weight:900}
+.pay{display:flex;gap:13px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border)}
+.pay:last-child{border-bottom:0}
+.pay .ic{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px}
+.pay .tx{flex:1;min-width:0;font-size:15px}
+.pay .tx b{color:var(--text)}
+
+/* ── RESPIRATION SUR TÉLÉPHONE ─────────────────────────────────────────────
+ * La page empile des blocs bordés : le deal, les cinq étapes, les trois
+ * sources de gains, le tableau. Sur un écran large ils sont séparés par du
+ * blanc ; sur 390 pixels ils se touchent et forment un mur qu'on ne lit plus.
+ * On écarte donc tout ce qui est vertical, et on casse le tableau en lignes
+ * empilées — deux colonnes sur un téléphone, c'est illisible quelle que soit
+ * la taille de police. */
+@media (max-width:640px){
+  body{font-size:16.5px;line-height:1.7}
+  .wrap{padding:0 18px}
+  p{margin-bottom:18px}
+  h1{margin:28px 0 16px}
+  h2{margin:52px 0 16px}
+  h3{margin:28px 0 10px}
+  .card{padding:6px 18px;margin-bottom:20px}
+  .step{padding:18px 0;gap:15px}
+  .step .t{font-size:15.5px;line-height:1.6}
+  .deal{padding:8px 20px;margin:24px 0}
+  .deal .l{padding:17px 0;font-size:16px;line-height:1.6}
+  .deal .l:last-child{padding-bottom:17px}
+  .pay{padding:18px 0;gap:15px}
+  .pay .tx{font-size:15.5px;line-height:1.6}
+  .note,.warn{padding:17px 18px;margin:22px 0;line-height:1.65}
+  .acc summary{padding:18px}
+  .acc .in{padding:0 18px 20px}
+  .faq summary{padding:18px 0}
+  .btn{display:block;text-align:center;padding:16px 20px}
+
+  /* Le tableau devient une suite de lignes : intitulé au-dessus, montant en
+     dessous et en gros. Plus de colonnes qui se compriment. */
+  table,thead,tbody,tr,th,td{display:block;width:100%}
+  thead{display:none}
+  table{margin-bottom:20px}
+  tbody tr{background:var(--card);border:1px solid var(--border);border-radius:13px;
+    padding:15px 17px;margin-bottom:11px}
+  tbody td{border:0;padding:0;font-size:15.5px}
+  tbody td:first-child{color:var(--muted);margin-bottom:5px}
+  tbody td:last-child{font-size:21px;font-weight:900;color:var(--accent);line-height:1.25}
+}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <a class="top" href="/">
+    <img src="/app-icon.png" alt="" onerror="this.style.display='none'">
+    <b><span>Ex</span>-Rienneux · Beaudelaire Consulting</b>
+  </a>
+</div></header>
+
+<main class="wrap">
+
+<h1>Programme Créateur</h1>
+<p class="lede">Tu découpes mes vidéos en formats courts, tu les postes sur ton TikTok, et tes vues te rapportent de l'argent. Pas de diplôme, pas d'expérience, pas de caméra. Un téléphone suffit.</p>
+
+<h2 id="deal">Le deal, en clair</h2>
+<p>Je te le dis tout de suite, avant les chiffres, pour que tu saches exactement où tu mets les pieds.</p>
+
+<div class="deal">
+  <div class="l"><span class="d">1</span><span><b>Tu clippes gratuitement.</b> L'inscription au programme ne coûte rien, et tu peux poster autant que tu veux dès le premier jour.</span></div>
+  <div class="l"><span class="d">2</span><span><b>À 2 000 vues cumulées, tu gagnes un mois de communauté offert.</b> C'est ta porte d'entrée, et elle se mérite au travail, pas à l'argent.</span></div>
+  <div class="l"><span class="d">3</span><span><b>À partir de là, tes vues sont payées.</b> La rémunération est réservée aux membres de la communauté — que tu y sois entré gratuitement ou en t'abonnant.</span></div>
+</div>
+
+<p>Autrement dit : tant que tu n'es pas membre, tes vues sont comptées et s'accumulent, mais elles ne te rapportent pas encore. Tu peux franchir la porte en atteignant 2 000 vues, ou t'abonner directement à <b>5 000 FCFA par mois</b> si tu ne veux pas attendre.</p>
+
+<p>Je préfère que tu le lises ici, maintenant, plutôt que de le découvrir après avoir posté vingt vidéos.</p>
+
+<h2 id="cest-quoi">Comment ça marche</h2>
+<p>Je publie des vidéos longues. Toi, tu en tires des extraits courts, tu les montes, et tu les postes sur un compte TikTok que tu crées pour ça.</p>
+
+<div class="card">
+  <div class="step"><div class="n">1</div><div class="t"><b>Tu télécharges mes vidéos</b> depuis ton espace clippeur. Elles y sont rangées par thème.</div></div>
+  <div class="step"><div class="n">2</div><div class="t"><b>Tu montes un clip de 10 à 30 secondes.</b> 15 secondes, c'est le format qui marche le mieux.</div></div>
+  <div class="step"><div class="n">3</div><div class="t"><b>Tu postes sur ton TikTok.</b></div></div>
+  <div class="step"><div class="n">4</div><div class="t"><b>Tu colles le lien dans ton espace, dans les 24 heures.</b> Passé ce délai, la vidéo ne compte plus.</div></div>
+  <div class="step"><div class="n">5</div><div class="t"><b>On compte tes vues pendant 7 jours</b>, et tu es payé à la fin du mois.</div></div>
+</div>
+
+<div class="warn">
+  <b>Le délai de 24 h n'est pas négociable.</b> C'est ce qui permet de vérifier que la vidéo est bien à toi et de suivre ses vues depuis le début. Une vidéo collée trois jours après avoir été postée ne rapporte rien, même si elle fait un million de vues.
+</div>
+
+<p>Tu postes autant que tu veux. Il n'y a pas de quota, pas d'horaire, pas de compte à rendre. Plus tu postes, plus tu gagnes. C'est tout le contrat.</p>
+
+<h2 id="combien">Combien tu gagnes</h2>
+<p>Trois choses te rapportent, et elles s'additionnent.</p>
+
+<div class="card">
+  <div class="pay"><div class="ic">1</div><div class="tx"><b>Tes vues : 50 F pour 1 000 vues.</b><br>Une vidéo à 10 000 vues rapporte 500 F. Chaque vidéo est comptée jusqu'à 2 millions de vues.</div></div>
+  <div class="pay"><div class="ic">2</div><div class="tx"><b>Ton volume : 500 F à 5 vidéos validées, 2 000 F à 15.</b><br>Ce bonus tombe même si aucune vidéo ne perce. Il récompense le fait de poster, pas la chance.</div></div>
+  <div class="pay"><div class="ic">3</div><div class="tx"><b>Ton tarif monte : 75 F au lieu de 50 F.</b><br>À partir de 50 000 vues cumulées dans le mois, <b>tout ton mois</b> est recalculé à 75 F les 1 000 vues — tes premières vidéos comprises.</div></div>
+</div>
+
+<table>
+  <thead><tr><th>Ce que tu fais dans le mois</th><th>Ce que ça rapporte</th></tr></thead>
+  <tbody>
+    <tr><td>5 vidéos, 1 000 vues chacune</td><td>750 F</td></tr>
+    <tr><td>15 vidéos, 1 000 vues chacune</td><td>3 250 F</td></tr>
+    <tr><td>20 vidéos, 50 000 vues au total</td><td>6 250 F</td></tr>
+    <tr><td>15 vidéos, 5 000 vues chacune</td><td>8 125 F</td></tr>
+  </tbody>
+</table>
+
+<p>Ce qui fait un revenu, ce n'est pas une vidéo qui explose. C'est le nombre de vidéos postées. Vingt clips à 30 000 vues rapportent bien plus qu'un seul à 200 000 vues — et en chemin, tu décroches le bonus de volume et le tarif haut.</p>
+
+<p>Il faut <b>2 000 F de solde</b> pour demander un retrait. En dessous, le solde reste et s'accumule. Paiement par mobile money, à la fin du mois.</p>
+
+<h2 id="rejoindre">Comment t'inscrire</h2>
+<p>Quatre étapes. Compte une quinzaine de minutes la première fois, puis tu n'y reviens plus jamais.</p>
+
+<details class="acc" open>
+  <summary>1. Crée un compte Discord</summary>
+  <div class="in">
+    <p>Toute la communauté vit sur Discord. C'est là que se passent les échanges, les annonces et le support, et c'est gratuit.</p>
+    <ul>
+      <li><b>Sur Android :</b> <a href="https://play.google.com/store/apps/details?id=com.discord" target="_blank" rel="noopener">télécharger Discord sur le Play Store</a></li>
+      <li><b>Sur iPhone :</b> <a href="https://apps.apple.com/app/discord/id985746746" target="_blank" rel="noopener">télécharger Discord sur l'App Store</a></li>
+      <li><b>Sur ordinateur :</b> <a href="https://discord.com/download" target="_blank" rel="noopener">discord.com/download</a></li>
+    </ul>
+    <p style="margin-bottom:0">À l'inscription, utilise une <b>vraie adresse e-mail à toi</b>, que tu peux ouvrir. Tu en auras besoin à l'étape suivante.</p>
+  </div>
+</details>
+
+<details class="acc">
+  <summary>2. Vérifie ton adresse e-mail</summary>
+  <div class="in">
+    <p>C'est l'étape où presque tout le monde bloque. Ce n'est pas compliqué, c'est juste mal indiqué. Suis exactement ceci.</p>
+    <div class="card" style="margin-bottom:14px">
+      <div class="step"><div class="n">1</div><div class="t">Ouvre Discord et appuie sur la <b>roue crantée</b>, le petit engrenage. C'est le bouton <b>Paramètres</b>. En anglais : <b>Settings</b>.</div></div>
+      <div class="step"><div class="n">2</div><div class="t">Dans la liste, appuie sur <b>Mon compte</b>. En anglais : <b>My Account</b>.</div></div>
+      <div class="step"><div class="n">3</div><div class="t">En haut de cette page, tu vois un <b>bandeau qui dit que ton e-mail n'est pas vérifié</b>. Appuie sur le bouton dedans.</div></div>
+      <div class="step"><div class="n">4</div><div class="t">Discord t'envoie alors un message <b>dans ta boîte e-mail</b>. Sors de Discord et ouvre ta boîte (Gmail, Yahoo, celle que tu as mise).</div></div>
+      <div class="step"><div class="n">5</div><div class="t">Ouvre le message de Discord. Il y a un gros bouton écrit <b>Verify Email</b>. C'est de l'anglais, ça veut dire « vérifier l'e-mail ». Appuie dessus.</div></div>
+      <div class="step"><div class="n">6</div><div class="t">Une page s'ouvre et confirme. <b>C'est fait.</b> Reviens dans Discord, le bandeau a disparu.</div></div>
+    </div>
+    <div class="warn">
+      <b>Tu ne trouves pas le message dans ta boîte ?</b><br>
+      Regarde dans <b>Spam</b>, ou <b>Courrier indésirable</b>, ou <b>Promotions</b> si tu es sur Gmail. Il s'y range souvent.<br><br>
+      Toujours rien après cinq minutes : refais les étapes 1 à 3, le bouton renvoie un nouveau message.
+    </div>
+    <div class="note" style="margin-bottom:0">
+      <b>Tant que ce bandeau est là, ton accès ne pourra pas s'ouvrir.</b> Tu auras l'impression que le site est cassé, alors qu'il attend juste ce clic. Fais-le maintenant, avant de continuer.
+    </div>
+  </div>
+</details>
+
+<details class="acc">
+  <summary>3. Prépare ton compte TikTok</summary>
+  <div class="in">
+    <p>Crée un compte TikTok dédié aux clips. Une seule contrainte, et elle compte :</p>
+    <div class="note">
+      Le <b>nom affiché</b> de ton compte doit contenir <b>Beaudelaire</b>, <b>Ex-Rienneux</b> ou <b>Rienneux</b>.<br>
+      Par exemple : <i>Beaudelaire Clip</i> · <i>Ex-Rienneux</i> · <i>Sauve les Rienneux</i> · <i>Rienneux Motivation</i>.<br><br>
+      Ton <b>@username</b>, lui, est libre. Mets ce que tu veux.
+    </div>
+    <p style="margin-bottom:0">C'est ce qui permet de reconnaître les comptes du programme et d'éviter que quelqu'un réclame les vues d'une vidéo qui n'est pas à lui.</p>
+  </div>
+</details>
+
+<details class="acc">
+  <summary>4. Inscris-toi au programme</summary>
+  <div class="in">
+    <p style="margin-bottom:0">Ouvre le lien ci-dessous, connecte-toi avec ton compte Discord, et renseigne ton compte TikTok. Ta demande arrive chez moi, je la valide, et ton espace s'ouvre.</p>
+  </div>
+</details>
+
+<p style="text-align:center;margin:26px 0">
+  <a class="btn" href="https://bot.beaudelaireconsulting.com/createur">Rejoindre le Programme Créateur →</a>
+</p>
+
+<h2 id="regles">Les règles</h2>
+<div class="card">
+  <ul style="margin-bottom:0">
+    <li>Clips de <b>10 à 30 secondes</b>. 15 secondes, c'est le bon format.</li>
+    <li>Poste <b>autant que tu veux</b>. Aucune limite.</li>
+    <li>Le <b>nom de ton compte TikTok</b> doit contenir Beaudelaire, Ex-Rienneux ou Rienneux.</li>
+    <li>Colle le lien <b>dans les 24 h</b> après avoir posté, sinon la vidéo ne compte pas.</li>
+    <li>Les vues sont comptées <b>7 jours</b> par vidéo. Paiement à la fin du mois.</li>
+    <li>Une vidéo par lien. Reposter la même vidéo ne double pas les gains.</li>
+  </ul>
+</div>
+
+<h2 id="plus">Aller plus loin</h2>
+<p>À <b>2 000 000 de vues cumulées</b>, un <b>lien personnel</b> se débloque dans ton espace.</p>
+<div class="note">
+  Chaque nouvel élève qui s'abonne en passant par ton lien te rapporte <b>25 % de son premier mois d'abonnement</b>.<br><br>
+  C'est une commission <b>unique par personne</b>, versée sur le premier mois seulement, pas sur ses renouvellements. Elle s'ajoute à tes gains sur les vues et part avec le même virement.
+</div>
+<p>Ce n'est pas la porte d'entrée du programme : deux millions de vues, ça se construit. C'est ce qui arrive après, quand tu tournes déjà bien. Tu verras le lien apparaître tout seul dans ton espace.</p>
+
+<h2 id="questions">Questions fréquentes</h2>
+<div class="faq">
+  <details><summary>Ça coûte quelque chose de s'inscrire ?</summary>
+    <p>Non. L'inscription au programme est gratuite, et tu peux poster dès le premier jour. Ce qui est payant, c'est l'abonnement à la communauté, et c'est lui qui débloque la rémunération de tes vues. Tu peux aussi l'obtenir gratuitement en atteignant 2 000 vues cumulées.</p></details>
+  <details><summary>Pourquoi mes vues ne me rapportent rien pour l'instant ?</summary>
+    <p>Parce que tu n'es pas encore membre de la communauté. Tes vues sont bien comptées et s'accumulent — le compteur de ton espace te montre où tu en es. À 2 000 vues cumulées, tu gagnes ton mois offert et tes gains se débloquent. Tu peux aussi t'abonner directement pour ne pas attendre.</p></details>
+  <details><summary>Il me faut du matériel ?</summary>
+    <p>Un téléphone et une connexion. Le montage se fait sur CapCut, qui est gratuit. Des tutoriels et des modèles prêts à remplir sont dans ton espace clippeur.</p></details>
+  <details><summary>Je peux utiliser mon compte TikTok actuel ?</summary>
+    <p>Oui, à condition d'en changer le nom affiché pour qu'il contienne Beaudelaire, Ex-Rienneux ou Rienneux. La plupart préfèrent créer un compte à part. C'est plus propre, et ça évite de mélanger avec leurs publications personnelles.</p></details>
+  <details><summary>Quand suis-je payé ?</summary>
+    <p>À la fin du mois, par mobile money, sur le numéro que tu renseignes dans ton espace. Il faut au moins 2 000 F de solde pour demander un retrait.</p></details>
+  <details><summary>Et si ma vidéo est refusée ?</summary>
+    <p>Tu vois le motif dans ton espace. Les motifs les plus courants : lien collé trop tard, clip hors sujet, ou compte au nom non conforme. Tu peux corriger et reposter.</p></details>
+  <details><summary>Je peux poster sur Instagram ou YouTube aussi ?</summary>
+    <p>Tu peux poster où tu veux, mais aujourd'hui seules les vues TikTok sont comptées et rémunérées. Les autres plateformes ne sont pas encore reliées au programme.</p></details>
+</div>
+
+<div class="sticky">
+  <a class="btn" href="https://bot.beaudelaireconsulting.com/createur">Rejoindre le Programme Créateur →</a>
+  <div style="font-size:13px;color:var(--muted);margin-top:8px">Inscription gratuite · Connexion avec Discord</div>
+</div>
+
+</main>
+
+<footer><div class="wrap">
+  <a href="/">Retour à l'accueil</a> · <a href="/programme-createur.html">Programme Créateur</a><br>
+  Contact : <a href="mailto:beaudelaireconsulting@gmail.com">beaudelaireconsulting@gmail.com</a><br>
+  © <span id="yr"></span> Beaudelaire Consulting
+</div></footer>
+
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
