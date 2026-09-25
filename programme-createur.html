@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Programme Créateur · Beaudelaire Consulting</title>
-<meta name="description" content="Clippe les vidéos de Beaudelaire, poste sur TikTok, sois payé aux vues. 50 F pour 1 000 vues. Comment rejoindre, étape par étape.">
+<meta name="description" content="Clippe les vidéos de Beaudelaire et poste-les sur TikTok. L'entrée est gratuite : à 2 000 vues, tu gagnes ton mois de communauté. Ensuite, tes vues sont payées.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -61,6 +61,61 @@ footer{border-top:1px solid var(--border);margin-top:52px;padding:28px 0 40px;te
 footer a{color:var(--accent);text-decoration:none;font-weight:600}
 .sticky{position:sticky;bottom:0;background:linear-gradient(180deg,transparent,var(--bg) 40%);
   padding:18px 0 22px;text-align:center}
+.acc{background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:12px;overflow:hidden}
+.acc summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:800;font-size:15.5px;display:flex;align-items:center;justify-content:space-between}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:'+';font-size:20px;color:var(--accent);font-weight:400;line-height:1}
+.acc[open] summary::after{content:'–'}
+.acc .in{padding:0 18px 18px}
+.deal{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:14px;padding:18px 20px;margin:18px 0}
+.deal .l{display:flex;gap:13px;padding:11px 0;border-bottom:1px solid var(--border);font-size:15.5px}
+.deal .l:last-child{border-bottom:0;padding-bottom:0}
+.deal .l .d{flex:0 0 auto;color:var(--accent);font-weight:900}
+.pay{display:flex;gap:13px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border)}
+.pay:last-child{border-bottom:0}
+.pay .ic{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px}
+.pay .tx{flex:1;min-width:0;font-size:15px}
+.pay .tx b{color:var(--text)}
+
+/* ── RESPIRATION SUR TÉLÉPHONE ─────────────────────────────────────────────
+ * La page empile des blocs bordés : le deal, les cinq étapes, les trois
+ * sources de gains, le tableau. Sur un écran large ils sont séparés par du
+ * blanc ; sur 390 pixels ils se touchent et forment un mur qu'on ne lit plus.
+ * On écarte donc tout ce qui est vertical, et on casse le tableau en lignes
+ * empilées — deux colonnes sur un téléphone, c'est illisible quelle que soit
+ * la taille de police. */
+@media (max-width:640px){
+  body{font-size:16.5px;line-height:1.7}
+  .wrap{padding:0 18px}
+  p{margin-bottom:18px}
+  h1{margin:28px 0 16px}
+  h2{margin:52px 0 16px}
+  h3{margin:28px 0 10px}
+  .card{padding:6px 18px;margin-bottom:20px}
+  .step{padding:18px 0;gap:15px}
+  .step .t{font-size:15.5px;line-height:1.6}
+  .deal{padding:8px 20px;margin:24px 0}
+  .deal .l{padding:17px 0;font-size:16px;line-height:1.6}
+  .deal .l:last-child{padding-bottom:17px}
+  .pay{padding:18px 0;gap:15px}
+  .pay .tx{font-size:15.5px;line-height:1.6}
+  .note,.warn{padding:17px 18px;margin:22px 0;line-height:1.65}
+  .acc summary{padding:18px}
+  .acc .in{padding:0 18px 20px}
+  .faq summary{padding:18px 0}
+  .btn{display:block;text-align:center;padding:16px 20px}
+
+  /* Le tableau devient une suite de lignes : intitulé au-dessus, montant en
+     dessous et en gros. Plus de colonnes qui se compriment. */
+  table,thead,tbody,tr,th,td{display:block;width:100%}
+  thead{display:none}
+  table{margin-bottom:20px}
+  tbody tr{background:var(--card);border:1px solid var(--border);border-radius:13px;
+    padding:15px 17px;margin-bottom:11px}
+  tbody td{border:0;padding:0;font-size:15.5px}
+  tbody td:first-child{color:var(--muted);margin-bottom:5px}
+  tbody td:last-child{font-size:21px;font-weight:900;color:var(--accent);line-height:1.25}
+}
 </style>
 </head>
 <body>
@@ -75,18 +130,23 @@ footer a{color:var(--accent);text-decoration:none;font-weight:600}
 <main class="wrap">
 
 <h1>Programme Créateur</h1>
-<p class="lede">Tu découpes mes vidéos en formats courts, tu les postes sur ton TikTok, et tu es payé aux vues. Pas de diplôme, pas d'expérience, pas de caméra. Un téléphone suffit.</p>
+<p class="lede">Tu découpes mes vidéos en formats courts, tu les postes sur ton TikTok, et tes vues te rapportent de l'argent. Pas de diplôme, pas d'expérience, pas de caméra. Un téléphone suffit.</p>
 
-<div class="grid">
-  <div class="kpi"><b>50 F</b><span>pour 1 000 vues</span></div>
-  <div class="kpi"><b>10 à 30 s</b><span>par clip</span></div>
-  <div class="kpi"><b>2 000 F</b><span>pour demander un retrait</span></div>
-  <div class="kpi"><b>Fin de mois</b><span>date de paiement</span></div>
+<h2 id="deal">Le deal, en clair</h2>
+<p>Je te le dis tout de suite, avant les chiffres, pour que tu saches exactement où tu mets les pieds.</p>
+
+<div class="deal">
+  <div class="l"><span class="d">1</span><span><b>Tu clippes gratuitement.</b> L'inscription au programme ne coûte rien, et tu peux poster autant que tu veux dès le premier jour.</span></div>
+  <div class="l"><span class="d">2</span><span><b>À 2 000 vues cumulées, tu gagnes un mois de communauté offert.</b> C'est ta porte d'entrée, et elle se mérite au travail, pas à l'argent.</span></div>
+  <div class="l"><span class="d">3</span><span><b>À partir de là, tes vues sont payées.</b> La rémunération est réservée aux membres de la communauté — que tu y sois entré gratuitement ou en t'abonnant.</span></div>
 </div>
 
-<h2 id="cest-quoi">C'est quoi, exactement</h2>
-<p>Je publie des vidéos longues. Toi, tu en tires des extraits courts, tu les montes, et tu les postes sur un compte TikTok que tu crées pour ça. Chaque vue compte, et chaque millier de vues te rapporte <b>50 F</b>.</p>
-<p>Tu postes autant que tu veux. Il n'y a pas de quota, pas d'horaire, pas de compte à rendre. Plus tu postes, plus tu gagnes. C'est tout le contrat.</p>
+<p>Autrement dit : tant que tu n'es pas membre, tes vues sont comptées et s'accumulent, mais elles ne te rapportent pas encore. Tu peux franchir la porte en atteignant 2 000 vues, ou t'abonner directement à <b>5 000 FCFA par mois</b> si tu ne veux pas attendre.</p>
+
+<p>Je préfère que tu le lises ici, maintenant, plutôt que de le découvrir après avoir posté vingt vidéos.</p>
+
+<h2 id="cest-quoi">Comment ça marche</h2>
+<p>Je publie des vidéos longues. Toi, tu en tires des extraits courts, tu les montes, et tu les postes sur un compte TikTok que tu crées pour ça.</p>
 
 <div class="card">
   <div class="step"><div class="n">1</div><div class="t"><b>Tu télécharges mes vidéos</b> depuis ton espace clippeur. Elles y sont rangées par thème.</div></div>
@@ -100,73 +160,91 @@ footer a{color:var(--accent);text-decoration:none;font-weight:600}
   <b>Le délai de 24 h n'est pas négociable.</b> C'est ce qui permet de vérifier que la vidéo est bien à toi et de suivre ses vues depuis le début. Une vidéo collée trois jours après avoir été postée ne rapporte rien, même si elle fait un million de vues.
 </div>
 
-<h2 id="combien">Combien tu gagnes vraiment</h2>
-<table>
-  <thead><tr><th>Vues sur une vidéo</th><th>Ce que ça rapporte</th></tr></thead>
-  <tbody>
-    <tr><td>10 000</td><td>500 F</td></tr>
-    <tr><td>50 000</td><td>2 500 F</td></tr>
-    <tr><td>100 000</td><td>5 000 F</td></tr>
-    <tr><td>500 000</td><td>25 000 F</td></tr>
-    <tr><td>1 000 000</td><td>50 000 F</td></tr>
-  </tbody>
-</table>
-<p>Ces chiffres sont bruts et honnêtes : une vidéo à 10 000 vues rapporte 500 F. Ce qui fait un revenu, ce n'est pas une vidéo qui explose. C'est le nombre de vidéos postées. Vingt clips à 30 000 vues rapportent 30 000 F, bien plus qu'un seul à 200 000 vues.</p>
-<p>Il faut <b>2 000 F de solde</b> pour demander un retrait. En dessous, le solde reste et s'accumule.</p>
+<p>Tu postes autant que tu veux. Il n'y a pas de quota, pas d'horaire, pas de compte à rendre. Plus tu postes, plus tu gagnes. C'est tout le contrat.</p>
 
-<h2 id="abonnement">Le point le plus important</h2>
-<div class="note">
-  <b>Les gains sur les vues sont réservés aux membres abonnés à la communauté.</b><br>
-  Tu peux rejoindre le programme et poster gratuitement, mais tes vues ne sont pas rémunérées tant que tu n'es pas abonné.
-</div>
-<p>Il y a une porte d'entrée sans payer : <b>atteins 2 000 vues cumulées</b> et tu reçois un mois d'abonnement offert. Tes gains se débloquent à ce moment-là.</p>
-<p>Je préfère te le dire ici, en clair, plutôt que tu le découvres après avoir posté vingt vidéos.</p>
-
-<h2 id="rejoindre">Comment rejoindre, étape par étape</h2>
-
-<h3>1. Crée un compte Discord</h3>
-<p>Toute la communauté vit sur Discord. C'est là que se passent les échanges, les annonces et le support, et c'est gratuit.</p>
-<ul>
-  <li><b>Sur Android :</b> <a href="https://play.google.com/store/apps/details?id=com.discord" target="_blank" rel="noopener">télécharger Discord sur le Play Store</a></li>
-  <li><b>Sur iPhone :</b> <a href="https://apps.apple.com/app/discord/id985746746" target="_blank" rel="noopener">télécharger Discord sur l'App Store</a></li>
-  <li><b>Sur ordinateur :</b> <a href="https://discord.com/download" target="_blank" rel="noopener">discord.com/download</a></li>
-</ul>
-<p>À l'inscription, utilise une <b>vraie adresse e-mail à toi</b>, que tu peux ouvrir. Tu en auras besoin à l'étape suivante.</p>
-
-<h3>2. Vérifie ton adresse e-mail</h3>
-<p>C'est l'étape où presque tout le monde bloque. Ce n'est pas compliqué, c'est juste mal indiqué. Suis exactement ceci.</p>
+<h2 id="combien">Combien tu gagnes</h2>
+<p>Trois choses te rapportent, et elles s'additionnent.</p>
 
 <div class="card">
-  <div class="step"><div class="n">1</div><div class="t">Ouvre Discord et appuie sur la <b>roue crantée</b>, le petit engrenage. C'est le bouton <b>Paramètres</b>. En anglais : <b>Settings</b>.</div></div>
-  <div class="step"><div class="n">2</div><div class="t">Dans la liste, appuie sur <b>Mon compte</b>. En anglais : <b>My Account</b>.</div></div>
-  <div class="step"><div class="n">3</div><div class="t">En haut de cette page, tu vois un <b>bandeau qui dit que ton e-mail n'est pas vérifié</b>. Appuie sur le bouton dedans.</div></div>
-  <div class="step"><div class="n">4</div><div class="t">Discord t'envoie alors un message <b>dans ta boîte e-mail</b>. Sors de Discord et ouvre ta boîte (Gmail, Yahoo, celle que tu as mise).</div></div>
-  <div class="step"><div class="n">5</div><div class="t">Ouvre le message de Discord. Il y a un gros bouton écrit <b>Verify Email</b>. C'est de l'anglais, ça veut dire « vérifier l'e-mail ». Appuie dessus.</div></div>
-  <div class="step"><div class="n">6</div><div class="t">Une page s'ouvre et confirme. <b>C'est fait.</b> Reviens dans Discord, le bandeau a disparu.</div></div>
+  <div class="pay"><div class="ic">1</div><div class="tx"><b>Tes vues : 50 F pour 1 000 vues.</b><br>Une vidéo à 10 000 vues rapporte 500 F. Chaque vidéo est comptée jusqu'à 2 millions de vues.</div></div>
+  <div class="pay"><div class="ic">2</div><div class="tx"><b>Ton volume : 500 F à 5 vidéos validées, 2 000 F à 15.</b><br>Ce bonus tombe même si aucune vidéo ne perce. Il récompense le fait de poster, pas la chance.</div></div>
+  <div class="pay"><div class="ic">3</div><div class="tx"><b>Ton tarif monte : 75 F au lieu de 50 F.</b><br>À partir de 50 000 vues cumulées dans le mois, <b>tout ton mois</b> est recalculé à 75 F les 1 000 vues — tes premières vidéos comprises.</div></div>
 </div>
 
-<div class="warn">
-  <b>Tu ne trouves pas le message dans ta boîte ?</b><br>
-  Regarde dans <b>Spam</b>, ou <b>Courrier indésirable</b>, ou <b>Promotions</b> si tu es sur Gmail. Il s'y range souvent.<br><br>
-  Toujours rien après cinq minutes : refais les étapes 1 à 3, le bouton renvoie un nouveau message.
-</div>
+<table>
+  <thead><tr><th>Ce que tu fais dans le mois</th><th>Ce que ça rapporte</th></tr></thead>
+  <tbody>
+    <tr><td>5 vidéos, 1 000 vues chacune</td><td>750 F</td></tr>
+    <tr><td>15 vidéos, 1 000 vues chacune</td><td>3 250 F</td></tr>
+    <tr><td>20 vidéos, 50 000 vues au total</td><td>6 250 F</td></tr>
+    <tr><td>15 vidéos, 5 000 vues chacune</td><td>8 125 F</td></tr>
+  </tbody>
+</table>
 
-<div class="note">
-  <b>Tant que ce bandeau est là, ton accès ne pourra pas s'ouvrir.</b> Tu auras l'impression que le site est cassé, alors qu'il attend juste ce clic. Fais-le maintenant, avant de continuer.
-</div>
+<p>Ce qui fait un revenu, ce n'est pas une vidéo qui explose. C'est le nombre de vidéos postées. Vingt clips à 30 000 vues rapportent bien plus qu'un seul à 200 000 vues — et en chemin, tu décroches le bonus de volume et le tarif haut.</p>
 
-<h3>3. Prépare ton compte TikTok</h3>
-<p>Crée un compte TikTok dédié aux clips. Une seule contrainte, et elle compte :</p>
-<div class="note">
-  Le <b>nom affiché</b> de ton compte doit contenir <b>Beaudelaire</b>, <b>Ex-Rienneux</b> ou <b>Rienneux</b>.<br>
-  Par exemple : <i>Beaudelaire Clip</i> · <i>Ex-Rienneux</i> · <i>Sauve les Rienneux</i> · <i>Rienneux Motivation</i>.<br><br>
-  Ton <b>@username</b>, lui, est libre. Mets ce que tu veux.
-</div>
-<p>C'est ce qui permet de reconnaître les comptes du programme et d'éviter que quelqu'un réclame les vues d'une vidéo qui n'est pas à lui.</p>
+<p>Il faut <b>2 000 F de solde</b> pour demander un retrait. En dessous, le solde reste et s'accumule. Paiement par mobile money, à la fin du mois.</p>
 
-<h3>4. Inscris-toi au programme</h3>
-<p>Ouvre le lien ci-dessous, connecte-toi avec ton compte Discord, et renseigne ton compte TikTok. Ta demande arrive chez moi, je la valide, et ton espace s'ouvre.</p>
-<p style="text-align:center;margin:22px 0">
+<h2 id="rejoindre">Comment t'inscrire</h2>
+<p>Quatre étapes. Compte une quinzaine de minutes la première fois, puis tu n'y reviens plus jamais.</p>
+
+<details class="acc" open>
+  <summary>1. Crée un compte Discord</summary>
+  <div class="in">
+    <p>Toute la communauté vit sur Discord. C'est là que se passent les échanges, les annonces et le support, et c'est gratuit.</p>
+    <ul>
+      <li><b>Sur Android :</b> <a href="https://play.google.com/store/apps/details?id=com.discord" target="_blank" rel="noopener">télécharger Discord sur le Play Store</a></li>
+      <li><b>Sur iPhone :</b> <a href="https://apps.apple.com/app/discord/id985746746" target="_blank" rel="noopener">télécharger Discord sur l'App Store</a></li>
+      <li><b>Sur ordinateur :</b> <a href="https://discord.com/download" target="_blank" rel="noopener">discord.com/download</a></li>
+    </ul>
+    <p style="margin-bottom:0">À l'inscription, utilise une <b>vraie adresse e-mail à toi</b>, que tu peux ouvrir. Tu en auras besoin à l'étape suivante.</p>
+  </div>
+</details>
+
+<details class="acc">
+  <summary>2. Vérifie ton adresse e-mail</summary>
+  <div class="in">
+    <p>C'est l'étape où presque tout le monde bloque. Ce n'est pas compliqué, c'est juste mal indiqué. Suis exactement ceci.</p>
+    <div class="card" style="margin-bottom:14px">
+      <div class="step"><div class="n">1</div><div class="t">Ouvre Discord et appuie sur la <b>roue crantée</b>, le petit engrenage. C'est le bouton <b>Paramètres</b>. En anglais : <b>Settings</b>.</div></div>
+      <div class="step"><div class="n">2</div><div class="t">Dans la liste, appuie sur <b>Mon compte</b>. En anglais : <b>My Account</b>.</div></div>
+      <div class="step"><div class="n">3</div><div class="t">En haut de cette page, tu vois un <b>bandeau qui dit que ton e-mail n'est pas vérifié</b>. Appuie sur le bouton dedans.</div></div>
+      <div class="step"><div class="n">4</div><div class="t">Discord t'envoie alors un message <b>dans ta boîte e-mail</b>. Sors de Discord et ouvre ta boîte (Gmail, Yahoo, celle que tu as mise).</div></div>
+      <div class="step"><div class="n">5</div><div class="t">Ouvre le message de Discord. Il y a un gros bouton écrit <b>Verify Email</b>. C'est de l'anglais, ça veut dire « vérifier l'e-mail ». Appuie dessus.</div></div>
+      <div class="step"><div class="n">6</div><div class="t">Une page s'ouvre et confirme. <b>C'est fait.</b> Reviens dans Discord, le bandeau a disparu.</div></div>
+    </div>
+    <div class="warn">
+      <b>Tu ne trouves pas le message dans ta boîte ?</b><br>
+      Regarde dans <b>Spam</b>, ou <b>Courrier indésirable</b>, ou <b>Promotions</b> si tu es sur Gmail. Il s'y range souvent.<br><br>
+      Toujours rien après cinq minutes : refais les étapes 1 à 3, le bouton renvoie un nouveau message.
+    </div>
+    <div class="note" style="margin-bottom:0">
+      <b>Tant que ce bandeau est là, ton accès ne pourra pas s'ouvrir.</b> Tu auras l'impression que le site est cassé, alors qu'il attend juste ce clic. Fais-le maintenant, avant de continuer.
+    </div>
+  </div>
+</details>
+
+<details class="acc">
+  <summary>3. Prépare ton compte TikTok</summary>
+  <div class="in">
+    <p>Crée un compte TikTok dédié aux clips. Une seule contrainte, et elle compte :</p>
+    <div class="note">
+      Le <b>nom affiché</b> de ton compte doit contenir <b>Beaudelaire</b>, <b>Ex-Rienneux</b> ou <b>Rienneux</b>.<br>
+      Par exemple : <i>Beaudelaire Clip</i> · <i>Ex-Rienneux</i> · <i>Sauve les Rienneux</i> · <i>Rienneux Motivation</i>.<br><br>
+      Ton <b>@username</b>, lui, est libre. Mets ce que tu veux.
+    </div>
+    <p style="margin-bottom:0">C'est ce qui permet de reconnaître les comptes du programme et d'éviter que quelqu'un réclame les vues d'une vidéo qui n'est pas à lui.</p>
+  </div>
+</details>
+
+<details class="acc">
+  <summary>4. Inscris-toi au programme</summary>
+  <div class="in">
+    <p style="margin-bottom:0">Ouvre le lien ci-dessous, connecte-toi avec ton compte Discord, et renseigne ton compte TikTok. Ta demande arrive chez moi, je la valide, et ton espace s'ouvre.</p>
+  </div>
+</details>
+
+<p style="text-align:center;margin:26px 0">
   <a class="btn" href="https://bot.beaudelaireconsulting.com/createur">Rejoindre le Programme Créateur →</a>
 </p>
 
@@ -193,7 +271,9 @@ footer a{color:var(--accent);text-decoration:none;font-weight:600}
 <h2 id="questions">Questions fréquentes</h2>
 <div class="faq">
   <details><summary>Ça coûte quelque chose de s'inscrire ?</summary>
-    <p>Non. L'inscription au programme est gratuite. Ce qui est payant, c'est l'abonnement à la communauté, et c'est lui qui débloque la rémunération de tes vues. Tu peux aussi l'obtenir gratuitement en atteignant 2 000 vues cumulées.</p></details>
+    <p>Non. L'inscription au programme est gratuite, et tu peux poster dès le premier jour. Ce qui est payant, c'est l'abonnement à la communauté, et c'est lui qui débloque la rémunération de tes vues. Tu peux aussi l'obtenir gratuitement en atteignant 2 000 vues cumulées.</p></details>
+  <details><summary>Pourquoi mes vues ne me rapportent rien pour l'instant ?</summary>
+    <p>Parce que tu n'es pas encore membre de la communauté. Tes vues sont bien comptées et s'accumulent — le compteur de ton espace te montre où tu en es. À 2 000 vues cumulées, tu gagnes ton mois offert et tes gains se débloquent. Tu peux aussi t'abonner directement pour ne pas attendre.</p></details>
   <details><summary>Il me faut du matériel ?</summary>
     <p>Un téléphone et une connexion. Le montage se fait sur CapCut, qui est gratuit. Des tutoriels et des modèles prêts à remplir sont dans ton espace clippeur.</p></details>
   <details><summary>Je peux utiliser mon compte TikTok actuel ?</summary>
