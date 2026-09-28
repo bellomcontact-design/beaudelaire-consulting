@@ -338,6 +338,10 @@
      </ul>
      <a class="pbtn solid" href="https://bot.beaudelaireconsulting.com/pay" target="_blank" rel="noopener" onclick="track('click_offre_guide_momo')" data-i18n="momo">Payer en mobile money</a>
      <a class="pbtn" href="https://whop.com/checkout/plan_1KcNtNKYTcX3M" target="_blank" rel="noopener" onclick="track('click_offre_guide_card')" data-i18n="card">Payer par carte</a>
+     <!-- LA CRYPTO, POUR LES PAYS QU'AUCUN PRESTATAIRE NE DESSERT.
+          Le mobile money couvre dix-neuf pays, la carte demande une banque.
+          Au-delà, quelqu'un qui veut entrer repartait sans avoir pu payer. -->
+     <a class="pbtn" href="https://bot.beaudelaireconsulting.com/crypto/payer" target="_blank" rel="noopener" onclick="track('click_offre_guide_crypto')" data-i18n="crypto">Payer en crypto</a>
      <p class="paysbloque">
       <span data-i18n="fbq">Ton opérateur n'est pas là ?</span><br>
       <a href="https://bot.beaudelaireconsulting.com/pawapay" target="_blank" rel="noopener" onclick="track('click_offre_guide_pawapay')" data-i18n="fblink">Autre méthode de paiement</a>
@@ -624,6 +628,7 @@ var I18N = {
   o2f3:"Un accompagnement personnalisé, tous les mois",
   card:"Payer par carte", momo:"Payer en mobile money",
   fbq:"Ton opérateur n'est pas là ?", fblink:"Autre méthode de paiement",
+  crypto:"Payer en crypto",
   soldout:"Complet pour le moment",
   note:"Carte (international) ou mobile money (Afrique) · Accès immédiat après paiement.",
   back:"← Revenir à l'accueil"
@@ -703,6 +708,7 @@ var I18N = {
   o2f3:"Personalised support, every month",
   card:"Pay by card", momo:"Pay with mobile money",
   fbq:"Your operator isn't listed?", fblink:"Other payment method",
+  crypto:"Pay with crypto",
   soldout:"Currently full",
   note:"Card (international) or mobile money (Africa) · Instant access after payment.",
   back:"← Back to home"
@@ -1064,7 +1070,10 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') fermeMenu
     if(!uid){uid=Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem('bc_uid',uid);}
     document.querySelectorAll('a[href]').forEach(function(el){
       var h=el.getAttribute('href')||'';
-      if(h.indexOf('bot.beaudelaireconsulting.com/pay')>=0||h.indexOf('bot.beaudelaireconsulting.com/pawapay')>=0){
+      /* `/crypto/payer` ne contient PAS `.com/pay` : sans cette troisieme
+         condition, les ventes en crypto sortaient du test A/B et du suivi des
+         paniers abandonnes, en silence. Ajoute le 28/09/2026. */
+      if(h.indexOf('bot.beaudelaireconsulting.com/pay')>=0||h.indexOf('bot.beaudelaireconsulting.com/pawapay')>=0||h.indexOf('bot.beaudelaireconsulting.com/crypto/payer')>=0){
         var sep=h.indexOf('?')>=0?'&':'?';
         var params='uid='+encodeURIComponent(uid)+'&sid='+encodeURIComponent(sid);
         if(v)params+='&v='+encodeURIComponent(v);

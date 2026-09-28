@@ -983,6 +983,10 @@
  <div style="display:flex;flex-direction:column;gap:10px">
  <a id="rpMomo" class="cta" style="width:100%" href="https://bot.beaudelaireconsulting.com/pay" target="_blank" rel="noopener" data-i18n="book.momo">Payer en mobile money (Afrique)</a>
  <a id="rpCard" class="cta" style="width:100%;background:transparent;color:var(--accent-strong);border:2px solid var(--accent-strong)" href="https://whop.com/checkout/plan_1KcNtNKYTcX3M" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
+ <!-- LA CRYPTO, POUR LES PAYS QU'AUCUN PRESTATAIRE NE DESSERT.
+      Le mobile money couvre dix-neuf pays, la carte demande une banque.
+      Au-dela, quelqu'un qui veut entrer repartait sans avoir pu payer. -->
+ <a id="rpCrypto" class="cta" style="width:100%;background:transparent;color:var(--accent-strong);border:2px solid var(--accent-strong)" href="https://bot.beaudelaireconsulting.com/crypto/payer" target="_blank" rel="noopener" data-i18n="book.crypto">Payer en crypto (USDT, Bitcoin)</a>
  </div>
  </div>
 
@@ -2114,7 +2118,9 @@ function toggleInside(btn){
 function addVariant(url){try{var vv=typeof _vslVariant!=='undefined'?_vslVariant:'';var ss=typeof _vsid==='function'?_vsid():'';if(!url||url==='#'||!vv)return url;var sep=url.indexOf('?')>=0?'&':'?';return url+sep+'v='+vv+'&w='+(typeof _vslMot!=='undefined'?_vslMot:'')+(ss?'&sid='+encodeURIComponent(ss):'');}catch(e){return url;}}
 // Injecte le variant+sid dans TOUS les boutons de paiement dès le chargement
 // (pas seulement après le quiz, pour ne rater aucune vente)
-(function(){function applyVariants(){['rpMomo','rpCard','ppMomo','ppCard','payMomo','payCard'].forEach(function(id){var el=document.getElementById(id);if(el&&el.href&&el.href!=='#'){var updated=addVariant(el.href);if(updated!==el.href)el.href=updated;}});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',applyVariants);}else{applyVariants();}})();
+(function(){function applyVariants(){/* `rpCrypto` ajoute le 28/09/2026 : sans lui, les ventes en crypto partaient
+   sans variante ni session, donc hors du test A/B et du suivi, en silence. */
+['rpMomo','rpCard','rpCrypto','ppMomo','ppCard','payMomo','payCard'].forEach(function(id){var el=document.getElementById(id);if(el&&el.href&&el.href!=='#'){var updated=addVariant(el.href);if(updated!==el.href)el.href=updated;}});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',applyVariants);}else{applyVariants();}})();
 function pickOffer(el, scope){
  el.parentElement.querySelectorAll('.otile').forEach(function(t){ t.classList.remove('selected'); });
  el.classList.add('selected');
