@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Devenir parrain · Ton code te paie · Beaudelaire Consulting</title>
+<meta name="description" content="Deviens parrain de la communauté Ex-Rienneux : choisis ton code, partage-le, et gagne 1 250 F à chaque paiement fait avec ton code, chaque mois. Gratuit, retrait sans minimum.">
+<meta property="og:title" content="Devenir parrain : ton code te paie">
+<meta property="og:description" content="Choisis ton code, partage-le, gagne 1 250 F à chaque paiement fait avec ton code. Chaque mois.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060E15; --bg2:#0B141C; --card:#131B23; --card2:#18222c; --border:#222E39;
+  --text:#FFFFFF; --muted:rgba(255,255,255,.68); --faint:rgba(255,255,255,.5);
+  --accent:#FFA545; --accent2:#FFB43C; --accent-soft:rgba(255,165,69,.12);
+  --grad:linear-gradient(95deg,#FFB43C 0%,#FFA930 50%,#E4930F 100%);
+  --green:#3ECF7B; --red:#FF6B5E; --fb:#1877F2; --tt1:#25F4EE; --tt2:#FE2C55;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);
+  line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+b{font-weight:800}
+
+/* ── Fond animé ─────────────────────────────────────────────── */
+.aurora{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.aurora i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.33;animation:flotte 18s ease-in-out infinite}
+.aurora i:nth-child(1){width:520px;height:520px;background:#FFA930;top:-180px;left:-120px}
+.aurora i:nth-child(2){width:420px;height:420px;background:#1877F2;top:30%;right:-160px;animation-delay:-6s;opacity:.18}
+.aurora i:nth-child(3){width:380px;height:380px;background:#FE2C55;bottom:-160px;left:20%;animation-delay:-12s;opacity:.14}
+@keyframes flotte{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,30px) scale(1.12)}}
+
+/* ── En-tête ────────────────────────────────────────────────── */
+header{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(6,14,21,.72);border-bottom:1px solid rgba(255,255,255,.06)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:800;font-size:15px}
+.logo img{width:32px;height:32px;border-radius:9px}
+.logo span{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--grad);color:#1a1206;font-weight:800;text-decoration:none;
+  border-radius:14px;padding:15px 26px;font-size:16px;border:0;cursor:pointer;box-shadow:0 10px 30px rgba(255,169,48,.25);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(255,169,48,.35)}
+.btn.sm{padding:10px 16px;font-size:14px;border-radius:11px;box-shadow:none}
+.btn.pulse{animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 10px 30px rgba(255,169,48,.25)}50%{box-shadow:0 10px 44px rgba(255,169,48,.5)}}
+
+/* ── Héros ──────────────────────────────────────────────────── */
+.hero{padding:56px 0 40px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.tag{display:inline-flex;align-items:center;gap:8px;background:rgba(62,207,123,.12);border:1px solid rgba(62,207,123,.35);color:var(--green);
+  font-weight:700;font-size:13px;padding:6px 12px;border-radius:999px;margin-bottom:18px}
+.tag i{width:8px;height:8px;border-radius:50%;background:var(--green);animation:clignote 1.6s infinite}
+@keyframes clignote{50%{opacity:.25}}
+h1{font-size:clamp(40px,7vw,72px);line-height:1.02;letter-spacing:-.03em;font-weight:900;margin-bottom:18px}
+h1 .or{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.sous{font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:520px;margin-bottom:26px}
+.hero p.sous b{color:#fff}
+.mini{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;color:var(--faint);font-size:13.5px}
+.mini span{display:flex;align-items:center;gap:6px}
+.mini svg{color:var(--green)}
+
+/* Le téléphone qui compte */
+.tel{position:relative;justify-self:center;width:300px;max-width:100%;background:linear-gradient(180deg,#141e28,#0c141b);border:1px solid #2a3846;
+  border-radius:38px;padding:18px 16px 22px;box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 0 0 6px #0a1016;animation:levite 6s ease-in-out infinite}
+@keyframes levite{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.tel .encoche{width:90px;height:22px;background:#0a1016;border-radius:0 0 14px 14px;margin:-18px auto 14px}
+.tel .lab{font-size:12px;color:var(--faint);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.pf{display:flex;align-items:center;justify-content:space-between;background:#0f1820;border:1px solid #233241;border-radius:14px;padding:12px 14px;margin-bottom:9px}
+.pf .nom{display:flex;align-items:center;gap:9px;font-weight:700;font-size:14px}
+.pf .pt{width:10px;height:10px;border-radius:50%}
+.pf .v{font-weight:800;font-variant-numeric:tabular-nums}
+.pf.tt .pt{background:linear-gradient(135deg,var(--tt1),var(--tt2))}
+.pf.fb .pt{background:var(--fb)}
+.tel .egal{display:flex;justify-content:space-between;align-items:center;padding:10px 4px 12px;border-bottom:1px dashed #2a3846;margin-bottom:14px;color:var(--muted);font-size:14px}
+.tel .egal b{color:#fff;font-variant-numeric:tabular-nums}
+.gain{background:linear-gradient(135deg,rgba(62,207,123,.18),rgba(62,207,123,.05));border:1px solid rgba(62,207,123,.4);border-radius:18px;padding:16px;text-align:center}
+.gain small{display:block;color:var(--green);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.gain .f{font-size:44px;font-weight:900;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+.gain .f em{font-style:normal;font-size:22px;color:var(--muted);margin-left:4px}
+.gain .mm{font-size:12.5px;color:var(--muted);margin-top:4px}
+.tel .note{font-size:11.5px;color:var(--faint);text-align:center;margin-top:10px}
+.piece{position:absolute;width:34px;height:34px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;
+  color:#1a1206;font-weight:900;font-size:15px;box-shadow:0 6px 18px rgba(255,169,48,.4);opacity:0}
+.piece.go{animation:monte 1.8s ease-out forwards}
+@keyframes monte{0%{opacity:0;transform:translateY(20px) scale(.6)}20%{opacity:1}100%{opacity:0;transform:translateY(-120px) scale(1)}}
+
+/* ── Sections ───────────────────────────────────────────────── */
+section{padding:64px 0}
+.kicker{color:var(--accent);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px}
+h2{font-size:clamp(30px,4.6vw,46px);line-height:1.08;letter-spacing:-.02em;font-weight:900;margin-bottom:14px}
+.lead{color:var(--muted);font-size:18px;max-width:640px;margin-bottom:32px}
+.apparait{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.apparait.vu{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+/* 3 étapes */
+.etapes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;position:relative}
+.etape{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:26px 22px;position:relative;overflow:hidden}
+.etape .num{position:absolute;top:14px;right:18px;font-size:64px;font-weight:900;color:rgba(255,255,255,.05);line-height:1}
+.etape .ico{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.etape h3{font-size:21px;font-weight:800;margin-bottom:6px}
+.etape p{color:var(--muted);font-size:15px}
+.e1 .ico{background:rgba(255,169,48,.14);color:var(--accent)}
+.e2 .ico{background:linear-gradient(135deg,rgba(37,244,238,.16),rgba(24,119,242,.2));color:#7cc4ff}
+.e3 .ico{background:rgba(62,207,123,.15);color:var(--green)}
+.duo{display:flex;gap:8px;margin-top:12px}
+.puce{font-size:12.5px;font-weight:800;padding:5px 10px;border-radius:999px}
+.puce.tt{background:#000;color:#fff;border:1px solid rgba(254,44,85,.6)}
+.puce.fb{background:var(--fb);color:#fff}
+
+/* Combien */
+.tuiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.tuile{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:24px 22px}
+.tuile .gros{font-size:40px;font-weight:900;letter-spacing:-.02em;line-height:1.05}
+.tuile .gros small{font-size:17px;color:var(--muted);font-weight:700}
+.tuile p{color:var(--muted);font-size:14.5px;margin-top:8px}
+.tuile.t1 .gros{color:var(--accent)} .tuile.t2 .gros{color:var(--green)} .tuile.t3 .gros{color:#7cc4ff}
+.fleche{display:inline-block;margin:0 6px;color:var(--faint)}
+
+/* Simulateur */
+.simu{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid #2b3a48;border-radius:26px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.simu h3{font-size:22px;font-weight:800;margin-bottom:4px}
+.simu .aide{color:var(--muted);font-size:14px;margin-bottom:22px}
+.champ{margin-bottom:22px}
+.champ label{display:flex;justify-content:space-between;align-items:baseline;font-weight:700;font-size:15px;margin-bottom:10px}
+.champ label output{font-size:22px;font-weight:900;color:var(--accent);font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:10px;border-radius:999px;background:#0c141b;outline:none;border:1px solid #2a3846}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--grad);cursor:pointer;box-shadow:0 4px 14px rgba(255,169,48,.5);border:3px solid #1a1206}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#FFA930;cursor:pointer;border:3px solid #1a1206}
+.resultat{background:#0c141b;border:1px solid #2a3846;border-radius:20px;padding:22px;display:flex;flex-direction:column}
+.ligne{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:15px;color:var(--muted)}
+.ligne b{color:#fff;font-variant-numeric:tabular-nums}
+.ligne.haut b{color:var(--green)}
+.total{margin-top:auto;padding-top:16px;text-align:center}
+.total small{display:block;color:var(--faint);font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.total .f{font-size:54px;font-weight:900;letter-spacing:-.03em;line-height:1.05;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.total .f em{font-style:normal;font-size:24px}
+.badge-haut{display:none;margin:10px auto 0;background:rgba(62,207,123,.14);border:1px solid rgba(62,207,123,.4);color:var(--green);font-size:12.5px;font-weight:800;border-radius:999px;padding:5px 12px;width:max-content}
+.badge-haut.on{display:block;animation:pop .4s ease}
+@keyframes pop{0%{transform:scale(.7)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
+.petit{font-size:12.5px;color:var(--faint);margin-top:14px;line-height:1.5}
+
+/* Entrée */
+.chemin{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;margin-top:10px}
+.chemin .barre{position:absolute;top:30px;left:16%;right:16%;height:4px;background:#1f2b36;border-radius:4px;overflow:hidden}
+.chemin .barre i{display:block;height:100%;width:0;background:var(--grad);transition:width 1.8s ease}
+.chemin.vu .barre i{width:100%}
+.jalon{text-align:center;padding:0 10px;position:relative}
+.jalon .rond{width:64px;height:64px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;background:var(--card);border:2px solid #2a3846;position:relative;z-index:1}
+.jalon.j3 .rond{background:var(--grad);color:#1a1206;border:0}
+.jalon h4{font-size:17px;font-weight:800;margin-bottom:4px}
+.jalon p{font-size:14px;color:var(--muted)}
+.ou{margin-top:26px;text-align:center;color:var(--muted);font-size:15px}
+.ou b{color:#fff}
+
+/* Retraits */
+.retrait{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.cal{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:20px}
+.cal .mois{font-weight:800;margin-bottom:12px;display:flex;justify-content:space-between;color:var(--muted);font-size:14px}
+.grille{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.grille span{aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--faint);background:#0f1820}
+.grille span.ok{background:var(--grad);color:#1a1206;font-weight:900;animation:battre 2s ease-in-out infinite}
+.grille span.ok:nth-child(2){animation-delay:.2s}.grille span.ok:nth-child(3){animation-delay:.4s}
+@keyframes battre{50%{transform:scale(1.1)}}
+.points{list-style:none}
+.points li{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;font-size:16px;color:var(--muted)}
+.points li b{color:#fff}
+.points .c{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:rgba(62,207,123,.15);color:var(--green);display:flex;align-items:center;justify-content:center;margin-top:1px}
+
+/* Règles */
+.regles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.bloc{border-radius:22px;padding:24px 22px;border:1px solid}
+.bloc h3{font-size:19px;font-weight:800;margin-bottom:14px}
+.bloc .l{display:flex;gap:11px;align-items:flex-start;font-size:15px;line-height:1.5;margin-bottom:12px;color:rgba(255,255,255,.88)}
+.bloc .l:last-child{margin-bottom:0}
+.bloc .m{flex:0 0 auto;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;margin-top:1px}
+.b-ok{background:rgba(62,207,123,.07);border-color:rgba(62,207,123,.32)} .b-ok h3{color:var(--green)} .b-ok .m{background:var(--green);color:#06140c}
+.b-or{background:rgba(255,169,48,.07);border-color:rgba(255,169,48,.32)} .b-or h3{color:var(--accent)} .b-or .m{background:var(--accent);color:#1a1206}
+.b-ko{background:rgba(255,107,94,.07);border-color:rgba(255,107,94,.32)} .b-ko h3{color:var(--red)} .b-ko .m{background:rgba(255,107,94,.22);color:var(--red)}
+
+/* Inscription */
+.inscr{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.pas{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:22px 18px}
+.pas .n{width:36px;height:36px;border-radius:12px;background:var(--accent-soft);color:var(--accent);font-weight:900;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.pas h4{font-size:17px;font-weight:800;margin-bottom:6px}
+.pas p{font-size:14.5px;color:var(--muted)}
+.pas .ex{margin-top:10px;font-size:13px;background:#0f1820;border:1px solid #233241;border-radius:10px;padding:8px 10px;color:rgba(255,255,255,.85)}
+.pas.p-tt{border-color:rgba(254,44,85,.4)} .pas.p-tt .n{background:#000;color:#fff;border:1px solid var(--tt2)}
+.pas.p-fb{border-color:rgba(24,119,242,.5)} .pas.p-fb .n{background:var(--fb);color:#fff}
+.bio{display:flex;gap:8px;margin-top:10px}
+.bio div{flex:1;min-width:0;font-size:13px;background:#0f1820;border:1px solid #233241;border-radius:10px;padding:8px 10px;color:#fff}
+.bio button{flex:0 0 auto;background:var(--accent-soft);color:var(--accent);border:1px solid rgba(255,169,48,.4);border-radius:10px;font-weight:800;font-size:12.5px;padding:0 10px;cursor:pointer;font-family:inherit}
+details{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-top:12px}
+details summary{list-style:none;cursor:pointer;padding:16px 18px;font-weight:800;font-size:15.5px;display:flex;justify-content:space-between;gap:12px}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:'+';color:var(--accent);font-size:20px;line-height:1}
+details[open] summary::after{content:'–'}
+details .in{padding:0 18px 18px;color:var(--muted);font-size:15px}
+details .in ol{padding-left:20px}
+details .in li{margin-bottom:8px}
+details .in b{color:#fff}
+
+/* Appel final */
+.final{text-align:center;background:radial-gradient(600px 260px at 50% 0,rgba(255,169,48,.18),transparent),var(--card);border:1px solid #2b3a48;border-radius:30px;padding:48px 24px}
+.final h2{margin-bottom:10px}
+.final p{color:var(--muted);font-size:17px;margin-bottom:26px}
+footer{padding:36px 0 50px;text-align:center;color:var(--faint);font-size:14px;line-height:1.9}
+footer a{text-decoration:none;font-weight:600}
+.barre-mobile{display:none}
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;padding-top:34px;text-align:left}
+  .tel{margin-top:6px}
+  .etapes,.tuiles,.regles,.inscr{grid-template-columns:1fr}
+  .simu,.retrait{grid-template-columns:1fr}
+  .simu{padding:20px}
+  .chemin{grid-template-columns:1fr;gap:20px}
+  .chemin .barre{display:none}
+  section{padding:48px 0}
+  header .btn.sm{display:none}
+  .barre-mobile{display:block;position:fixed;left:0;right:0;bottom:0;z-index:30;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    background:rgba(6,14,21,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,.08);transform:translateY(110%);transition:transform .35s}
+  .barre-mobile.on{transform:none}
+  .barre-mobile .btn{width:100%}
+  footer{padding-bottom:110px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.apparait{opacity:1;transform:none}}
+
+/* Spécifique au parrainage */
+.notif{opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
+.notif.in{opacity:1;transform:none}
+.notif .pt{background:var(--green)}
+.notif .nom{font-size:13px}
+.notif .v{color:var(--green);white-space:nowrap}
+#notifs{min-height:196px}
+.app{display:grid;gap:8px}
+.app-l{background:#0f1820;border:1px solid #233241;border-radius:12px;padding:11px 13px}
+.app-l b{display:block;font-size:14.5px}
+.app-l span{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="aurora"><i></i><i></i><i></i></div>
+
+<header><div class="wrap">
+  <a class="logo" href="/"><img src="/app-icon.png" alt="" onerror="this.style.display='none'"><div><span>Ex</span>-Rienneux</div></a>
+  <a class="btn sm" href="https://bot.beaudelaireconsulting.com/parrainage">Devenir parrain</a>
+</div></header>
+
+<main>
+<!-- ═══ HÉROS ═══ -->
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <div class="tag"><i></i>Parrainage ouvert à tous</div>
+      <h1>Ton code<br><span class="or">te paie.</span></h1>
+      <p class="sous">Tu choisis ton code de parrainage, tu le partages, et chaque personne qui rejoint la communauté avec ton code te rapporte <b style="white-space:nowrap">1 250 F</b>. <b>Chaque mois</b> où elle renouvelle avec ton code.</p>
+      <a class="btn pulse" href="https://bot.beaudelaireconsulting.com/parrainage">Créer mon compte parrain
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <div class="mini">
+        <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Gratuit</span>
+        <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Un e-mail suffit</span>
+        <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Retrait sans minimum</span>
+      </div>
+    </div>
+
+    <div class="tel" id="tel" aria-label="Exemple : les paiements faits avec ton code">
+      <div class="encoche"></div>
+      <div class="lab">Ex-Rainage · ton code KOF7</div>
+      <div id="notifs"></div>
+      <div class="gain"><small>Tu as gagné</small><div class="f"><span id="vF">0</span><em>F</em></div><div class="mm">retirable sur ton mobile money</div></div>
+      <div class="note">Exemple : chaque paiement avec ton code te rapporte 1 250 F</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 3 ÉTAPES ═══ -->
+<section id="comment"><div class="wrap">
+  <div class="kicker apparait">Comment ça marche</div>
+  <h2 class="apparait">Trois étapes. C'est tout.</h2>
+  <p class="lead apparait">Pas besoin d'être membre de la communauté, pas besoin d'abonnés. Tu as juste besoin de personnes autour de toi qui veulent apprendre à faire de l'argent en ligne.</p>
+  <div class="etapes">
+    <div class="etape e1 apparait">
+      <div class="num">1</div>
+      <div class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></div>
+      <h3>Tu crées ton compte</h3>
+      <p>Ton e-mail, un mot de passe, et tu choisis ton code : 2 ou 3 lettres puis 1 chiffre, comme KOF7. Ton espace s'ouvre tout de suite.</p>
+    </div>
+    <div class="etape e2 apparait d1">
+      <div class="num">2</div>
+      <div class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.5-4.9A8 8 0 1 1 21 12z"/></svg></div>
+      <h3>Tu partages ton code</h3>
+      <p>Sur WhatsApp, TikTok, partout. Au moment de payer en mobile money, la personne tape ton code et paie un prix réduit.</p>
+    </div>
+    <div class="etape e3 apparait d2">
+      <div class="num">3</div>
+      <div class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></svg></div>
+      <h3>Tu es payé, chaque mois</h3>
+      <p>1 250 F à chaque paiement fait avec ton code. Tu le vois dans ton appli, et tu le retires quand tu veux sur ton mobile money.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═══ COMBIEN ═══ -->
+<section id="gains"><div class="wrap">
+  <div class="kicker apparait">Combien tu gagnes</div>
+  <h2 class="apparait">Ça s'additionne. Et ça revient chaque mois.</h2>
+  <p class="lead apparait">Une personne qui reste et renouvelle avec ton code te rapporte 1 250 F tous les mois.</p>
+  <div class="tuiles">
+    <div class="tuile t1 apparait">
+      <div class="gros">1 250 F <small>par paiement</small></div>
+      <p>À chaque fois qu'une personne paie avec ton code, ton gain apparaît dans ton appli.</p>
+    </div>
+    <div class="tuile t2 apparait d1">
+      <div class="gros">Chaque mois <small>récurrent</small></div>
+      <p>Pour garder son prix réduit, elle remet ton code à chaque renouvellement. Et toi, tu regagnes.</p>
+    </div>
+    <div class="tuile t3 apparait d2">
+      <div class="gros">0 F <small>de minimum</small></div>
+      <p>Tu retires dès qu'un gain est disponible, quel que soit le montant.</p>
+    </div>
+  </div>
+
+  <div class="simu apparait" id="simu">
+    <div>
+      <h3>Calcule ce que tu peux gagner</h3>
+      <p class="aide">Bouge les curseurs.</p>
+      <div class="champ">
+        <label for="sN">Personnes qui rejoignent avec ton code <output id="oN">10</output></label>
+        <input type="range" id="sN" min="1" max="100" step="1" value="10">
+      </div>
+      <div class="champ">
+        <label for="sM">Mois où elles restent <output id="oM">3</output></label>
+        <input type="range" id="sM" min="1" max="12" step="1" value="3">
+      </div>
+      <p class="petit">Estimation : 1 250 F par paiement fait avec ton code, un paiement par personne et par mois.</p>
+    </div>
+    <div class="resultat">
+      <div class="ligne"><span>Paiements avec ton code</span><b id="rP">30</b></div>
+      <div class="ligne"><span>Par paiement</span><b>1 250 F</b></div>
+      <div class="ligne haut"><span>Chaque mois</span><b id="rMois">12 500 F</b></div>
+      <div class="total"><small>Au total</small><div class="f"><span id="rTot">37 500</span><em> F</em></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═══ RETRAITS ═══ -->
+<section id="retraits"><div class="wrap">
+  <div class="retrait">
+    <div>
+      <div class="kicker apparait">Ton argent</div>
+      <h2 class="apparait">Tu le retires quand tu veux.</h2>
+      <ul class="points apparait">
+        <li><span class="c"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Un gain devient retirable <b>3 jours</b> après le paiement, une fois la personne entrée dans la communauté.</span></li>
+        <li><span class="c"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Tu appuies sur <b>« Retirer mes gains »</b>, <b>sans minimum</b>.</span></li>
+        <li><span class="c"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>L'argent arrive sur ton <b>mobile money</b>.</span></li>
+      </ul>
+    </div>
+    <div class="cal apparait d1" aria-hidden="true">
+      <div class="mois"><span>Ex-Rainage</span><span>ton appli de parrain</span></div>
+      <div class="app">
+        <div class="app-l"><b>Accueil</b><span>Tes gains, tes inscrits, ton code à partager</span></div>
+        <div class="app-l"><b>Retirer mes gains</b><span>Quand tu veux, sans minimum</span></div>
+        <div class="app-l"><b>Assistance</b><span>Une question ? On te répond</span></div>
+        <div class="app-l"><b>Profil</b><span>Ton e-mail, ton mot de passe</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═══ RÈGLES ═══ -->
+<section id="regles"><div class="wrap">
+  <div class="kicker apparait">Les règles</div>
+  <h2 class="apparait">Simples, et les mêmes pour tout le monde.</h2>
+  <div class="regles">
+    <div class="bloc b-ok apparait">
+      <h3>Ce que tu fais</h3>
+      <div class="l"><span class="m">1</span><span><b>Partage ton code</b> à ceux qui veulent rejoindre la communauté.</span></div>
+      <div class="l"><span class="m">2</span><span>Dis-leur de le taper <b>au moment de payer en mobile money</b>, après avoir choisi leur pays.</span></div>
+      <div class="l"><span class="m">3</span><span>Rappelle-leur de <b>remettre ton code chaque mois</b> : c'est ce qui garde leur prix réduit, et ton gain.</span></div>
+    </div>
+    <div class="bloc b-or apparait d1">
+      <h3>À savoir</h3>
+      <div class="l"><span class="m">!</span><span>Ton code est réservé aux <b>nouveaux membres</b>. Ceux qui sont déjà dans la communauté ne peuvent pas l'utiliser.</span></div>
+      <div class="l"><span class="m">!</span><span>Le code marche avec le <b>mobile money</b> (pas par carte ni en crypto).</span></div>
+      <div class="l"><span class="m">!</span><span>Chaque parrain a <b>son propre code</b>, choisi à l'inscription.</span></div>
+    </div>
+    <div class="bloc b-ko apparait d2">
+      <h3>Ce qui n'est pas payé</h3>
+      <div class="l"><span class="m">×</span><span>Un paiement fait <b>sans ton code</b>.</span></div>
+      <div class="l"><span class="m">×</span><span>Un paiement d'une personne qui était <b>déjà membre</b>.</span></div>
+      <div class="l"><span class="m">×</span><span>Toute tentative de triche : le compte est bloqué.</span></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ═══ QUESTIONS ═══ -->
+<section id="faq" style="padding-top:20px"><div class="wrap">
+  <div class="kicker apparait">Questions fréquentes</div>
+  <h2 class="apparait">Tu te demandes peut-être…</h2>
+  <details class="apparait"><summary>Je dois être membre de la communauté pour être parrain ?</summary><div class="in">Non. Tout le monde peut devenir parrain avec un simple e-mail. Ton espace parrain est séparé de la communauté.</div></details>
+  <details class="apparait"><summary>Ça coûte quelque chose ?</summary><div class="in">Non, c'est gratuit.</div></details>
+  <details class="apparait"><summary>Où je vois mes gains ?</summary><div class="in">Dans Ex-Rainage, ton appli de parrain : tes gains, les personnes inscrites avec ton code, tes retraits. Tu peux l'installer sur l'écran d'accueil de ton téléphone.</div></details>
+  <details class="apparait"><summary>Je gagne seulement sur le premier mois ?</summary><div class="in">Non. Tu gagnes 1 250 F à chaque paiement fait avec ton code, donc chaque mois où la personne renouvelle avec ton code.</div></details>
+  <details class="apparait"><summary>Quand est-ce que je peux retirer ?</summary><div class="in">Quand tu veux, sans minimum. Un gain devient retirable 3 jours après le paiement, une fois la personne entrée dans la communauté.</div></details>
+  <details class="apparait"><summary>Je peux être clippeur et parrain en même temps ?</summary><div class="in">Oui. Ce sont deux programmes différents : le <a href="/programme-createur.html">Programme Créateur</a> te paie pour tes vues, le parrainage te paie pour les personnes que tu fais entrer.</div></details>
+</div></section>
+
+<!-- ═══ APPEL FINAL ═══ -->
+<section style="padding-top:20px"><div class="wrap">
+  <div class="final apparait">
+    <h2>Ton code peut te payer chaque mois.</h2>
+    <p>Crée ton compte, choisis ton code, partage-le.</p>
+    <a class="btn pulse" href="https://bot.beaudelaireconsulting.com/parrainage">Devenir parrain</a>
+  </div>
+</div></section>
+</main>
+
+<div class="barre-mobile" id="bm"><a class="btn" href="https://bot.beaudelaireconsulting.com/parrainage">Devenir parrain</a></div>
+
+<footer><div class="wrap">
+  <a href="/">Retour à l'accueil</a> · <a href="/programme-createur.html">Devenir clippeur</a> · <a href="/devenir-parrain.html">Devenir parrain</a><br>
+  Contact : <a href="mailto:beaudelaireconsulting@gmail.com">beaudelaireconsulting@gmail.com</a><br>
+  © <span id="yr"></span> Beaudelaire Consulting
+</div></footer>
+
+<script>
+(function () {
+  var fr = function (n) { return Math.round(n).toLocaleString('fr-FR'); };
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  var obs = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('vu'); obs.unobserve(e.target); } });
+  }, { threshold: 0.15 }) : null;
+  document.querySelectorAll('.apparait').forEach(function (el) { if (obs) obs.observe(el); else el.classList.add('vu'); });
+
+  /* ── Le téléphone : les paiements avec le code arrivent, le gain monte ── */
+  var noms = ['Awa', 'Kevin', 'Fatou', 'Moussa', 'Ines', 'Yao', 'Aminata', 'Junior'];
+  var box = document.getElementById('notifs'), vF = document.getElementById('vF'), tel = document.getElementById('tel');
+  var total = 0, i = 0;
+  function piece() {
+    var p = document.createElement('div'); p.className = 'piece'; p.textContent = 'F';
+    p.style.left = (Math.random() < 0.5 ? -14 + Math.random() * 18 : tel.offsetWidth - 22 - Math.random() * 18) + 'px';
+    p.style.bottom = (40 + Math.random() * 90) + 'px';
+    tel.appendChild(p); requestAnimationFrame(function () { p.classList.add('go'); });
+    setTimeout(function () { p.remove(); }, 1900);
+  }
+  function anim(de, a) { var t0 = null; function s(t) { if (!t0) t0 = t; var k = Math.min(1, (t - t0) / 700); vF.textContent = fr(de + (a - de) * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(s); } requestAnimationFrame(s); }
+  function suivant() {
+    if (i >= 4) { setTimeout(function () { box.innerHTML = ''; anim(total, 0); total = 0; i = 0; setTimeout(suivant, 900); }, 2600); return; }
+    var d = document.createElement('div'); d.className = 'pf notif';
+    d.innerHTML = '<div class="nom"><span class="pt"></span>' + noms[(Math.random() * noms.length) | 0] + ' a payé</div><div class="v">+1 250 F</div>';
+    box.appendChild(d); requestAnimationFrame(function () { d.classList.add('in'); });
+    anim(total, total + 1250); total += 1250; i += 1; piece();
+    setTimeout(suivant, 1500);
+  }
+  setTimeout(suivant, 700);
+
+  /* ── Simulateur ── */
+  var sN = document.getElementById('sN'), sM = document.getElementById('sM');
+  function calc() {
+    var n = +sN.value, m = +sM.value;
+    document.getElementById('oN').textContent = n; document.getElementById('oM').textContent = m;
+    document.getElementById('rP').textContent = fr(n * m);
+    document.getElementById('rMois').textContent = fr(n * 1250) + ' F';
+    document.getElementById('rTot').textContent = fr(n * m * 1250);
+  }
+  sN.addEventListener('input', calc); sM.addEventListener('input', calc); calc();
+
+  var bm = document.getElementById('bm');
+  window.addEventListener('scroll', function () { bm.classList.toggle('on', window.scrollY > 520); }, { passive: true });
+})();
+</script>
+</body>
+</html>
