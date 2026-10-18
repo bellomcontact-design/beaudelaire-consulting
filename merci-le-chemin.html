@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
 <title>Merci · Active ton accès</title>
+<script>
+  /* PAIEMENT ANNULÉ (18/10/2026) : FedaPay renvoie ici AUSSI quand on appuie
+     sur « Annuler », avec ?status=canceled. La page affichait « Paiement
+     réussi ». On décide avant l'affichage, pour ne jamais montrer la
+     mauvaise page, même une fraction de seconde. */
+  (function(){try{var s=(new URLSearchParams(location.search).get('status')||'').toLowerCase();
+    if(['canceled','cancelled','declined','failed','refunded','expired'].indexOf(s)>=0){document.documentElement.className+=' annule';}}catch(e){}})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -79,11 +87,27 @@
   .note{color:var(--muted);font-size:12.5px;margin:20px 0 0}
   .note a{color:var(--discord-dark);text-decoration:none;font-weight:600}
   .brand{text-align:center;margin-top:14px;font-size:12px;color:var(--muted);font-weight:600}
+  #annuleBox{display:none}
+  .annule #okBox{display:none}
+  .annule #annuleBox{display:block}
+  .x{width:46px;height:46px;border-radius:50%;background:#fdeaea;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+  .x svg{width:22px;height:22px}
+  .btn-retry{display:block;background:linear-gradient(95deg,#FFB43C,#E4930F);color:#1a1206;font-weight:800;font-size:15px;text-decoration:none;border-radius:12px;padding:14px;margin-top:16px}
 </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="card">
+    <div class="card" id="annuleBox">
+      <div class="x">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#d62828" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </div>
+      <h1>Paiement annulé</h1>
+      <p class="sub" style="margin-bottom:6px">Aucun argent n'a été débité.</p>
+      <p style="font-size:14px;color:var(--muted);margin:0">Tu as changé d'avis ou eu un souci pendant le paiement ? Tu peux réessayer quand tu veux.</p>
+      <a class="btn-retry" href="https://beaudelaireconsulting.com/checkout.html">Réessayer le paiement</a>
+      <p class="note" style="margin-top:14px">Un souci ? <a href="mailto:beaudelaireconsulting@gmail.com">beaudelaireconsulting@gmail.com</a></p>
+    </div>
+    <div class="card" id="okBox">
       <div class="check">
         <svg viewBox="0 0 24 24" fill="none" stroke="#159a45" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
       </div>
