@@ -316,7 +316,7 @@
    <div class="pcard" id="offre">
     <div class="phead">
      <div class="pname" data-i18n="o1name">La communauté des Ex-Rienneux</div>
-     <div class="pprice" data-xof="10 000" data-eur="16" data-usd="18"><span class="pmain"></span> <span class="pper" data-i18n="month">par mois</span></div>
+     <div class="pprice" data-offre="mois" data-xof="10 000" data-eur="16" data-usd="18"><span class="pmain"></span> <span class="pper" data-i18n="month">par mois</span></div>
      <span class="peuro"></span>
      <p class="verrou"><span class="ico" aria-hidden="true">&#9888;</span><span data-i18n="verrou"></span></p>
      <p class="ptag" style="margin-top:12px;font-weight:700;font-size:15px" data-i18n="o1tag"></p>
@@ -352,9 +352,9 @@
    <div class="pcard featured" id="offre3">
     <div class="phead">
      <div class="pname" data-i18n="o3name">3 mois d'accès aux Ex-Rienneux</div>
-     <div class="pprice" data-xof="25 000" data-eur="38" data-usd="45"><span class="pmain"></span> <span class="pper" data-i18n="o3per">pour 3 mois</span></div>
+     <div class="pprice" data-offre="trimestre" data-xof="25 000" data-eur="38" data-usd="45"><span class="pmain"></span> <span class="pper" data-i18n="o3per">pour 3 mois</span></div>
      <span class="peuro"></span>
-     <p style="margin-top:10px;font-size:13px;font-weight:700;color:#3ECF7E" data-i18n="o3save">Soit 8 333 XOF par mois</p>
+     <p id="o3save" style="margin-top:10px;font-size:13px;font-weight:700;color:#3ECF7E" data-i18n="o3save">Soit 8 333 XOF par mois</p>
     </div>
     <div class="pbody">
      <ul class="pfeat">
@@ -1018,6 +1018,36 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 applyI18N();
 marqueLangue();
 applyDevise();
+
+/* LES PRIX VIENNENT DU BOT (19/10/2026) : un changement de prix au tableau de
+   bord s'affiche ici tout seul, sans republier la page. Les montants écrits
+   dans la page restent ceux qu'on voit si le bot ne répond pas. L'euro et le
+   dollar suivent dans la même proportion que le FCFA. */
+(function(){
+ if(!window.fetch) return;
+ var fmt=function(n){return Math.round(n).toLocaleString('fr-FR').replace(/\u202f|\u00a0/g,' ');};
+ fetch('https://bot.beaudelaireconsulting.com/prix',{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+  if(!d||!d.ok) return;
+  var poser=function(cle,xof,usd){
+   if(!(xof>0)) return;
+   document.querySelectorAll('.pprice[data-offre="'+cle+'"]').forEach(function(el){
+    var avant=Number(String(el.getAttribute('data-xof')).replace(/[^0-9]/g,''))||xof;
+    var k=xof/avant;
+    el.setAttribute('data-xof',fmt(xof));
+    el.setAttribute('data-eur',String(Math.round(Number(el.getAttribute('data-eur'))*k)));
+    el.setAttribute('data-usd',String(usd>0?usd:Math.round(Number(el.getAttribute('data-usd'))*k)));
+   });
+  };
+  poser('mois',d.mois,0);
+  poser('trimestre',d.trimestre,d.trimestreUsd);
+  var s3=document.getElementById('o3save');
+  if(s3&&d.trimestre>0){
+   var en=document.documentElement.lang==='en';
+   s3.textContent=en?('That\'s about $'+Math.round((d.trimestreUsd||d.trimestre/555)/3)+' per month'):('Soit '+fmt(d.trimestre/3)+' XOF par mois');
+  }
+  applyDevise();
+ }).catch(function(){});
+})();
 track('visit_checkout');
 
 /* Les deux chiffres alternent toutes les 5 secondes, en fondu. */
