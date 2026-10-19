@@ -124,7 +124,8 @@
  .catdrop[open] .catchev{transform:rotate(180deg)}
  .catdrop-body{padding:2px 18px 20px}
  .catcta{max-width:340px;margin:28px auto 0}
- .pcards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:0 auto;align-items:start}
+ .pcards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1180px;margin:0 auto;align-items:start}
+ @media(max-width:1100px){.pcards{grid-template-columns:repeat(2,1fr);max-width:900px}}
  @media(max-width:780px){.pcards{grid-template-columns:1fr;max-width:440px}}
  .pcard{position:relative;background:var(--card);border:1.5px solid var(--border);border-radius:18px;overflow:hidden;text-align:left}
  .pcard.featured{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 0 28px rgba(255,165,69,.28)}
@@ -312,9 +313,9 @@
   <div class="pcards">
 
    <!-- Offre 1 : le guide -->
-   <div class="pcard featured" id="offre">
+   <div class="pcard" id="offre">
     <div class="phead">
-     <div class="pname" data-i18n="o1name">Le guide pour faire 1 million</div>
+     <div class="pname" data-i18n="o1name">La communauté des Ex-Rienneux</div>
      <div class="pprice" data-xof="10 000" data-eur="16" data-usd="18"><span class="pmain"></span> <span class="pper" data-i18n="month">par mois</span></div>
      <span class="peuro"></span>
      <p class="verrou"><span class="ico" aria-hidden="true">&#9888;</span><span data-i18n="verrou"></span></p>
@@ -342,6 +343,28 @@
           Le mobile money couvre dix-neuf pays, la carte demande une banque.
           Au-delà, quelqu'un qui veut entrer repartait sans avoir pu payer. -->
      <a class="pbtn" href="https://bot.beaudelaireconsulting.com/crypto/payer" target="_blank" rel="noopener" onclick="track('click_offre_guide_crypto')" data-i18n="crypto">Payer en crypto</a>
+    </div>
+   </div>
+
+   <!-- Offre 3 MOIS (19/10/2026) : 25 000 XOF pour 90 jours, prix fixe, sans
+        code de parrainage. Le mobile money et la crypto passent ?offre=trimestre
+        au bot. La carte attend le lien du plan Whop dédié. -->
+   <div class="pcard featured" id="offre3">
+    <div class="phead">
+     <div class="pname" data-i18n="o3name">3 mois d'accès aux Ex-Rienneux</div>
+     <div class="pprice" data-xof="25 000" data-eur="38" data-usd="45"><span class="pmain"></span> <span class="pper" data-i18n="o3per">pour 3 mois</span></div>
+     <span class="peuro"></span>
+     <p style="margin-top:10px;font-size:13px;font-weight:700;color:#3ECF7E" data-i18n="o3save">Soit 8 333 XOF par mois</p>
+    </div>
+    <div class="pbody">
+     <ul class="pfeat">
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o3f1">3 mois d'accès à la communauté privée de Beaudelaire (Ex-Rienneux)</span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o3f2">Tout ce que contient l'offre au mois</span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o3f3">Un seul paiement, aucun renouvellement automatique</span></li>
+     </ul>
+     <a class="pbtn solid" href="https://bot.beaudelaireconsulting.com/pay?offre=trimestre" target="_blank" rel="noopener" onclick="track('click_offre_3mois_momo')" data-i18n="momo">Payer en mobile money</a>
+     <a class="pbtn" href="https://whop.com/checkout/plan_OcD91rVS3cXlZ" target="_blank" rel="noopener" onclick="track('click_offre_3mois_card')" data-i18n="card">Payer par carte</a>
+     <a class="pbtn" href="https://bot.beaudelaireconsulting.com/crypto/payer?offre=trimestre" target="_blank" rel="noopener" onclick="track('click_offre_3mois_crypto')" data-i18n="crypto">Payer en crypto</a>
     </div>
    </div>
 
@@ -575,8 +598,10 @@ var I18N = {
  mr_s3:"Ils vivent de leurs vues",
   pv_legal:"Ces résultats sont ceux de personnes réelles et ne sont pas représentatifs de ce que tu obtiendras. Leur parcours, leur travail et leur situation ont joué. Rien ici ne constitue une garantie de revenu.",
   once:"une fois", month:"par mois", ribbon:"COMPLET",
+  o3name:"3 mois d'accès aux Ex-Rienneux", o3per:"pour 3 mois", o3save:"Soit 8 333 XOF par mois",
+  o3f1:"3 mois d'accès à la communauté privée de Beaudelaire (Ex-Rienneux)", o3f2:"Tout ce que contient l'offre au mois", o3f3:"Un seul paiement, aucun renouvellement automatique",
   verrou:"<b>Verrouille ce prix.</b> Le mois prochain, l'abonnement passe à 25 000 XOF par mois.",
-  o1name:"Le guide pour faire 1 million",
+  o1name:"La communauté des Ex-Rienneux",
   o1tag:"Tout ce dont tu as besoin pour faire 1 million de FCFA par mois.",
   cat_eyebrow:"Inclus dans la communauté",
   cat_h2:"Tout ce qui est inclus dans la communauté",
@@ -655,8 +680,10 @@ var I18N = {
  mr_s3:"They live off their views",
   pv_legal:"These results come from real people and are not representative of what you will achieve. Their background, work and circumstances played a part. Nothing here is a guarantee of income.",
   once:"one-off", month:"per month", ribbon:"SOLD OUT",
+  o3name:"3 months of Ex-Rienneux access", o3per:"for 3 months", o3save:"That's about $15 per month",
+  o3f1:"3 months of access to Beaudelaire's private community (Ex-Rienneux)", o3f2:"Everything in the monthly plan", o3f3:"One payment, no automatic renewal",
   verrou:"<b>Lock this price.</b> Next month, the subscription goes up to 25,000 XOF (~$42) per month.",
-  o1name:"The guide to make 1 million",
+  o1name:"The Ex-Rienneux community",
   o1tag:"Everything you need to make 1 million FCFA per month.",
   cat_eyebrow:"Included in the community",
   cat_h2:"Everything included in the community",
@@ -972,11 +999,12 @@ document.getElementById('yr').textContent = new Date().getFullYear();
        en:{o1name:'The Ex-rienneux school',
            rcta:'Join the school', o2f1:'Everything in the school'}}
   };
-  if(!M[W]) return;
   function poser(){
     try{
       var L=(document.documentElement.lang==='en')?'en':'fr';
-      var m=M[W][L];
+      /* « Ça s'appelle la communauté des Ex-Rienneux » (19/10/2026) : le NOM
+         affiché est toujours celui-là. Le tirage reste mémorisé et remonté. */
+      var m=M.C[L];
       try{var d=I18N[L]; d.o1name=m.o1name; d.r_cta=m.rcta; d.o2f1=m.o2f1;}catch(e){}
       var maj=function(cle,txt){document.querySelectorAll('[data-i18n="'+cle+'"]').forEach(function(el){el.textContent=txt;});};
       maj('o1name',m.o1name); maj('r_cta',m.rcta); maj('o2f1',m.o2f1);
