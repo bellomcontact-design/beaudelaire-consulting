@@ -980,7 +980,7 @@
  <span class="oeur">130€</span>
  <span class="olabel" data-i18n="result.tileAppel">Appel 1-à-1</span>
  </button>
- <button type="button" class="otile selected" onclick="pickOffer(this,'r')" data-desckey="book.desc15" data-momo="https://bot.beaudelaireconsulting.com/pay" data-card="https://whop.com/checkout/plan_yEiWwJeAaBGkW">
+ <button type="button" class="otile selected" onclick="pickOffer(this,'r')" data-desckey="book.desc15" data-momo="https://bot.beaudelaireconsulting.com/pay" data-card="https://bot.beaudelaireconsulting.com/carte/payer">
  <span class="obadge" style="color:var(--danger)" data-i18n="book.promobadge">🎁 PROMO</span>
  <span class="oprice">10 000<sup>FCFA</sup><span style="font-size:.42em;font-weight:700"> /mois</span></span>
  <span class="oeur">16€ / mois</span>
@@ -991,7 +991,7 @@
  <p id="rpDesc" style="font-size:13.5px;line-height:1.5;color:var(--text);background:rgba(255,255,255,.05);border-radius:10px;padding:11px 13px;margin:0 0 14px;text-align:left"></p>
  <div style="display:flex;flex-direction:column;gap:10px">
  <a id="rpMomo" class="cta" style="width:100%" href="https://bot.beaudelaireconsulting.com/pay" target="_blank" rel="noopener" data-i18n="book.momo">Payer en mobile money (Afrique)</a>
- <a id="rpCard" class="cta" style="width:100%;background:transparent;color:var(--accent-strong);border:2px solid var(--accent-strong)" href="https://whop.com/checkout/plan_yEiWwJeAaBGkW" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
+ <a id="rpCard" class="cta" style="width:100%;background:transparent;color:var(--accent-strong);border:2px solid var(--accent-strong)" href="https://bot.beaudelaireconsulting.com/carte/payer" target="_blank" rel="noopener" data-i18n="book.card">Payer par carte (Visa / Mastercard)</a>
  <!-- LA CRYPTO, POUR LES PAYS QU'AUCUN PRESTATAIRE NE DESSERT.
       Le mobile money couvre dix-neuf pays, la carte demande une banque.
       Au-dela, quelqu'un qui veut entrer repartait sans avoir pu payer. -->
@@ -1008,7 +1008,7 @@
  <a class="paybtn" id="rgCard" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide_card')"><b id="rgCtaC">Rejoindre la communauté</b><span>Paiement par carte · Visa / Mastercard</span></a>
  <a class="paybtn" id="rgBuy" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide')"><b id="rgCta">Rejoindre la communauté</b><span>Paiement mobile money (Afrique) · Accès immédiat</span></a>
  </div>
- <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0;line-height:1.5" data-i18n-html="result.guideonly">Ou juste le guide, sans la communauté (10 000 FCFA · 16€) : <a href="https://bot.beaudelaireconsulting.com/pay" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">mobile money</a> · <a href="https://whop.com/checkout/plan_yEiWwJeAaBGkW" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">carte</a></p>
+ <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0;line-height:1.5" data-i18n-html="result.guideonly">Ou juste le guide, sans la communauté (10 000 FCFA · 16€) : <a href="https://bot.beaudelaireconsulting.com/pay" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">mobile money</a> · <a href="https://bot.beaudelaireconsulting.com/carte/payer" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">carte</a></p>
  </div>
  <div id="rOr" style="display:none;font-weight:800;color:var(--muted);margin:2px 0 14px;letter-spacing:.14em;font-size:13px">OU</div>
  <div class="rcard" id="rcard">
@@ -1229,7 +1229,7 @@ const I18N = {
  book:"Réserver mon appel", card:"Paiement par carte · Visa / Mastercard", momo:"Paiement Mobile Money · Orange, MTN, Wave",
  guarantee:"Paiement sécurisé · Réservation immédiate de ton créneau", home:"Revenir à l'accueil",
  guideopt:{ name:"La communauté des Ex-rienneux", price:'<span class="pnow">10 000<sup>FCFA</sup> <span class="peur">(16€)</span></span>', line:"Tu rejoins la communauté privée où on t'accompagne pour faire tes premiers revenus, quel que soit ton point de départ. Tout le programme est dedans.", cta:"Rejoindre la communauté" },
- guideonly:'Ou juste le guide, sans la communauté (10 000 FCFA · 16€) : <a href="https://bot.beaudelaireconsulting.com/pay" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">mobile money</a> · <a href="https://whop.com/checkout/plan_yEiWwJeAaBGkW" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">carte</a>'
+ guideonly:'Ou juste le guide, sans la communauté (10 000 FCFA · 16€) : <a href="https://bot.beaudelaireconsulting.com/pay" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">mobile money</a> · <a href="https://bot.beaudelaireconsulting.com/carte/payer" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">carte</a>'
  },
  js:{
  alert_fill:"Merci de remplir ton prénom, ton nom, ton email et ton pays.",
@@ -1426,7 +1426,7 @@ const I18N = {
  book:"Book my call", card:"Card payment · Visa / Mastercard", momo:"Mobile Money · Orange, MTN, Wave",
  guarantee:"Secure payment · Instant slot booking · billed in EUR at checkout", home:"Back to home",
  guideopt:{ name:"The Ex-rienneux community", price:'<span class="pnow">10,000<sup>FCFA</sup> <span class="peur">($18)</span></span>', line:"You join the private community where we walk you through making your first income online.", cta:"Join the community" },
- guideonly:'Or just the guide, without the community (10,000 FCFA · $18): <a href="https://bot.beaudelaireconsulting.com/pay" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">mobile money</a> · <a href="https://whop.com/checkout/plan_yEiWwJeAaBGkW" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">card</a>'
+ guideonly:'Or just the guide, without the community (10,000 FCFA · $18): <a href="https://bot.beaudelaireconsulting.com/pay" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">mobile money</a> · <a href="https://bot.beaudelaireconsulting.com/carte/payer" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">card</a>'
  },
  js:{
  alert_fill:"Please fill in your first name, last name, email and country.",
