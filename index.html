@@ -2353,7 +2353,9 @@ try{if(typeof vslPing==='function'){vslPing({ev:'v',t:0,pct:0});}}catch(e){}</sc
 #bcChat .m{max-width:85%;padding:10px 12px;border-radius:14px;font-size:14px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word}
 #bcChat .m.b{background:#16202a;border:1px solid #222E39;align-self:flex-start;border-bottom-left-radius:4px}
 #bcChat .m.u{background:linear-gradient(95deg,#FFB43C,#E4930F);color:#1a1206;align-self:flex-end;border-bottom-right-radius:4px;font-weight:600}
-#bcChat .m a{color:#FFB43C;font-weight:700;word-break:break-all}
+#bcChat .m .bt{display:block;margin-top:9px;text-align:center;background:linear-gradient(95deg,#FFB43C,#E4930F);color:#1a1206;font-weight:800;text-decoration:none;border-radius:10px;padding:10px 12px;font-size:13.5px;white-space:normal}
+#bcChat .m .bt.sec{background:transparent;color:#FFB43C;border:1px solid #FFA930}
+#bcChat .m .bt:first-of-type{margin-top:11px}
 #bcChat .ch{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 10px}
 #bcChat .ch button{background:transparent;border:1px solid #2c3a47;color:#e6e9ec;border-radius:999px;padding:7px 11px;font-size:12.5px;cursor:pointer;font-family:inherit}
 #bcChat .ch button:hover{border-color:#FFA930;color:#FFA930}
@@ -2401,8 +2403,26 @@ try{if(typeof vslPing==='function'){vslPing({ev:'v',t:0,pct:0});}}catch(e){}</sc
  marquer();
  $('bcT1').textContent=T.t1;$('bcT2').textContent=T.t2;inp.placeholder=T.ph;bul.textContent=T.bul;
  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
- function lier(s){return esc(s).replace(/(https?:\/\/[^\s<]+[^\s<.,;:!?)])/g,function(u){return '<a href="'+u+'" target="_blank" rel="noopener">'+u+'</a>';});}
- function ajoute(qui,txt){var d=document.createElement('div');d.className='m '+(qui==='user'?'u':'b');d.innerHTML=qui==='user'?esc(txt):lier(txt);ms.appendChild(d);ms.scrollTop=ms.scrollHeight;return d;}
+ /* LIENS EN BOUTONS (20/10/2026) : « au lieu d'afficher des liens grands
+    comme ça, un bouton Payer ». Les adresses sont retirées du texte et
+    deviennent des boutons sous le message. */
+ function libelle(u){var p=u.replace(/^https?:\/\/[^\/]+/,'').toLowerCase(),t=/offre=trimestre/.test(p),d=t?(en?'3 months':'3 mois'):(en?'1 month':'1 mois');
+  if(/^\/pay(\?|$)/.test(p))return[(en?'Pay ':'Payer ')+d+' · Mobile money',1];
+  if(/^\/carte\/payer/.test(p))return[(en?'Pay ':'Payer ')+d+(en?' · Card':' · Carte'),1];
+  if(/^\/crypto\/payer/.test(p))return[(en?'Pay ':'Payer ')+d+' · Crypto',1];
+  if(/checkout/.test(p))return[en?'See the offers':'Voir les offres',1];
+  if(/^\/communaute/.test(p))return[en?'Join the free WhatsApp group':'Rejoindre le groupe WhatsApp gratuit',0];
+  if(/programme-createur/.test(p))return[en?'Become a clipper':'Devenir clippeur',0];
+  if(/^\/formation/.test(p))return[en?'My member space':'Mon espace membre',0];
+  return[en?'Open':'Ouvrir',0];}
+ function ajoute(qui,txt){var d=document.createElement('div');d.className='m '+(qui==='user'?'u':'b');
+  if(qui==='user'){d.textContent=txt;}else{
+   var re=/https?:\/\/[^\s<]+[^\s<.,;:!?)]/g,liens=String(txt).match(re)||[],vus={};
+   var propre=String(txt).replace(/\s*(?:(?:ici|here|ce lien|this link)\s*)?:?\s*https?:\/\/[^\s<]+[^\s<.,;:!?)]/gi,'\u0001').replace(/([^.!?\s])\u0001\s+(?=[A-ZÀ-Ý])/g,'$1. ').replace(/\u0001/g,'').replace(/\s+([.,!?])/g,'$1').replace(/[ \t]+\n/g,'\n').trim();
+   if(!/[.!?]$/.test(propre)&&liens.length)propre+='.';
+   d.textContent=propre;
+   liens.forEach(function(u){var k=u.replace(/[?&]chat=[a-z0-9]+/,'');if(vus[k])return;vus[k]=1;var l=libelle(u),a=document.createElement('a');a.className='bt'+(l[1]?'':' sec');a.href=u;a.target='_blank';a.rel='noopener';a.textContent=l[0];a.onclick=function(){suivi('chat_bouton',{lien:k});};d.appendChild(a);});}
+  ms.appendChild(d);ms.scrollTop=ms.scrollHeight;return d;}
  function suivi(n,o){try{if(typeof track==='function')track(n,o||{});}catch(e){}}
  function ouvrir(){box.classList.add('open');bul.style.display='none';
   if(!started){started=true;ajoute('bot',T.hi);T.ch.forEach(function(q){var b=document.createElement('button');b.type='button';b.textContent=q;b.onclick=function(){envoyer(q);};ch.appendChild(b);});}
