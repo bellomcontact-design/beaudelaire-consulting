@@ -2392,6 +2392,13 @@ try{if(typeof vslPing==='function'){vslPing({ev:'v',t:0,pct:0});}}catch(e){}</sc
  var $=function(i){return document.getElementById(i);};
  var box=$('bcChat'),ms=$('bcMs'),inp=$('bcIn'),ch=$('bcCh'),bul=$('bcChatBul');
  var hist=[],busy=false,started=false;
+ /* Identifiant de conversation, anonyme et tiré au hasard : il sert à relier
+    les clics et un éventuel paiement à cette conversation (analytique admin). */
+ var cid=null;try{cid=localStorage.getItem('bc_chat_cid');}catch(e){}
+ if(!/^c[a-z0-9]{10,24}$/.test(cid||''))cid='c'+Math.random().toString(36).slice(2,10)+Date.now().toString(36);
+ function marquer(){try{if(localStorage.getItem('bc_chat_cid')!==cid)return;}catch(e){return;}
+  document.querySelectorAll('a[href*="bot.beaudelaireconsulting.com"]').forEach(function(a){if(a.href.indexOf('chat=')<0)a.href+=(a.href.indexOf('?')<0?'?':'&')+'chat='+cid;});}
+ marquer();
  $('bcT1').textContent=T.t1;$('bcT2').textContent=T.t2;inp.placeholder=T.ph;bul.textContent=T.bul;
  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
  function lier(s){return esc(s).replace(/(https?:\/\/[^\s<]+[^\s<.,;:!?)])/g,function(u){return '<a href="'+u+'" target="_blank" rel="noopener">'+u+'</a>';});}
@@ -2405,9 +2412,9 @@ try{if(typeof vslPing==='function'){vslPing({ev:'v',t:0,pct:0});}}catch(e){}</sc
  bul.onclick=ouvrir; box.querySelector('.x').onclick=fermer;
  setTimeout(function(){if(!started&&window.innerWidth>480)bul.style.display='block';},9000);
  function envoyer(q){q=String(q||'').trim();if(!q||busy)return;busy=true;ch.innerHTML='';
-  ajoute('user',q);hist.push({from:'user',text:q});inp.value='';suivi('chat_message');
+  ajoute('user',q);hist.push({from:'user',text:q});try{localStorage.setItem('bc_chat_cid',cid);}catch(e){}marquer();inp.value='';suivi('chat_message');
   var w=document.createElement('div');w.className='m b dots';w.innerHTML='<span></span><span></span><span></span>';ms.appendChild(w);ms.scrollTop=ms.scrollHeight;
-  fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist.slice(-12)})})
+  fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist.slice(-12),cid:cid,lang:en?'en':'fr',page:location.pathname})})
    .then(function(r){return r.json();}).then(function(j){w.remove();var t=(j&&j.texte)||T.err;ajoute('bot',t);if(j&&j.ok)hist.push({from:'bot',text:t});})
    .catch(function(){w.remove();ajoute('bot',T.err);})
    .then(function(){busy=false;});}
