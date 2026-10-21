@@ -375,21 +375,27 @@
     </div>
    </div>
 
-   <div class="pcard full">
-    <span class="ribbon" data-i18n="ribbon">COMPLET</span>
+   <!-- COACHING PRIVÉ (21/10/2026) : 20 places, 330 000 F en une fois, 1 an
+        d'accès. Mobile money, carte et crypto passent ?offre=coaching au bot. -->
+   <div class="pcard" id="coaching">
     <div class="phead">
-     <div class="pname" data-i18n="o2name">Coaching</div>
-     <div class="pprice" data-xof="330 000" data-eur="500" data-usd="550"><span class="pmain"></span> <span class="pper" data-i18n="month">par mois</span></div>
+     <span class="pbadge3" style="background:#c084fc" data-i18n="o2badge">20 places seulement</span>
+     <div class="pname" data-i18n="o2name">Coaching privé</div>
+     <div class="pprice" data-xof="330 000" data-eur="503" data-usd="595"><span class="pmain"></span> <span class="pper" data-i18n="o2per">en une fois</span></div>
      <span class="peuro"></span>
     </div>
     <div class="pbody">
      <ul class="pfeat">
-      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o2f1"></span></li>
-      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o2f2"></span></li>
-      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o2f3"></span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o2c1">1 an d'accès à la communauté privée de Beaudelaire (Ex-Rienneux)</span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o2c2">Un appel direct avec Beaudelaire par mois pendant 6 mois</span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o2c3">Tout ce que contient l'offre au mois</span></li>
+      <li><span class="ck" aria-hidden="true">&#10003;</span><span data-i18n="o2c4">Un accompagnement suivi avec les profs de la communauté</span></li>
      </ul>
-     <span class="pbtn off" aria-disabled="true" data-i18n="soldout">Complet pour le moment</span>
+     <a class="pbtn solid" href="https://bot.beaudelaireconsulting.com/pay?offre=coaching" target="_blank" rel="noopener" onclick="track('click_coaching_momo')" data-i18n="momo">Payer en mobile money</a>
+     <a class="pbtn" href="https://bot.beaudelaireconsulting.com/carte/payer?offre=coaching" target="_blank" rel="noopener" onclick="track('click_coaching_card')" data-i18n="card">Payer par carte</a>
+     <a class="pbtn" href="https://bot.beaudelaireconsulting.com/crypto/payer?offre=coaching" target="_blank" rel="noopener" onclick="track('click_coaching_crypto')" data-i18n="crypto">Payer en crypto</a>
     </div>
+   </div>
    </div>
 
   </div>
@@ -649,7 +655,8 @@ var I18N = {
   o1f9:"La vérité sur l'e-commerce et le trading",
   o1f10:"Ton plan d'action : tes 7 premiers jours, puis tes 30 premiers",
   joined:"Ils sont <b>4 910+</b> à nous avoir rejoints",
-  o2name:"Coaching",
+  o2name:"Coaching privé", o2per:"en une fois", o2badge:"20 places seulement",
+  o2c1:"1 an d'accès à la communauté privée de Beaudelaire (Ex-Rienneux)", o2c2:"Un appel direct avec Beaudelaire par mois pendant 6 mois", o2c3:"Tout ce que contient l'offre au mois", o2c4:"Un accompagnement suivi avec les profs de la communauté",
   o2f1:"Tout ce que contient le guide",
   o2f2:"Un accès direct à Beaudelaire",
   o2f3:"Un accompagnement personnalisé, tous les mois",
@@ -731,7 +738,8 @@ var I18N = {
   o1f9:"The truth about e-commerce and trading",
   o1f10:"Your action plan: your first 7 days, then your first 30",
   joined:"<b>4,910+</b> people have joined",
-  o2name:"Coaching",
+  o2name:"Private coaching", o2per:"one payment", o2badge:"Only 20 spots",
+  o2c1:"1 year of access to Beaudelaire's private community (Ex-Rienneux)", o2c2:"One direct call with Beaudelaire every month for 6 months", o2c3:"Everything in the monthly plan", o2c4:"Ongoing support from the community's teachers",
   o2f1:"Everything in the guide",
   o2f2:"Direct access to Beaudelaire",
   o2f3:"Personalised support, every month",
@@ -1238,7 +1246,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') fermeMenu
  /* LIENS EN BOUTONS (20/10/2026) : « au lieu d'afficher des liens grands
     comme ça, un bouton Payer ». Les adresses sont retirées du texte et
     deviennent des boutons sous le message. */
- function libelle(u){var p=u.replace(/^https?:\/\/[^\/]+/,'').toLowerCase(),t=/offre=trimestre/.test(p),d=t?(en?'3 months':'3 mois'):(en?'1 month':'1 mois');
+ function libelle(u){var p=u.replace(/^https?:\/\/[^\/]+/,'').toLowerCase(),t=/offre=trimestre/.test(p),d=/offre=coaching/.test(p)?(en?'the coaching':'le coaching'):t?(en?'3 months':'3 mois'):(en?'1 month':'1 mois');
   if(/^\/pay(\?|$)/.test(p))return[(en?'Pay ':'Payer ')+d+' · Mobile money',1];
   if(/^\/carte\/payer/.test(p))return[(en?'Pay ':'Payer ')+d+(en?' · Card':' · Carte'),1];
   if(/^\/crypto\/payer/.test(p))return[(en?'Pay ':'Payer ')+d+' · Crypto',1];
