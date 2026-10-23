@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Visite l'intérieur de la communauté Ex-Rienneux</title>
+<meta name="description" content="Regarde exactement ce qu'il y a dans la communauté Ex-Rienneux avant de rejoindre : l'espace membre, les formations, le programme clippeur et l'appli de parrainage.">
+<meta name="theme-color" content="#060E15">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!--
+  visite.html — l'aperçu de l'espace membre (23/10/2026).
+  Demande : « une preview, ils pourront voir exactement ce qui est dans la
+  communauté, mais ils ne pourront pas avoir accès ». Copie fidèle des écrans
+  de l'appli (formation.js, creator.js, parrainage.js) : mêmes couleurs, mêmes
+  textes. On navigue, rien ne s'ouvre. Les montants sont des exemples, et sont
+  marqués comme tels.
+-->
+<style>
+:root{--bg:#060E15;--bg2:#0b141c;--card:#131b23;--bd:#223040;--txt:#fff;--mut:#8b95a1;--acc:#FFA930;--grn:#3ecf7b;--red:#FF6B5E;--grad:linear-gradient(95deg,#FFB43C 0%,#FFA623 52%,#E4930F 113%)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:radial-gradient(1000px 420px at 50% -120px,rgba(255,169,48,.08),transparent),var(--bg);color:var(--txt);font-family:Inter,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;line-height:1.55}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.page{max-width:1080px;margin:0 auto;padding:28px 18px 60px}
+.tete{text-align:center;max-width:640px;margin:0 auto 22px}
+.eyebrow{color:var(--acc);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.tete h1{font-size:clamp(26px,4.4vw,40px);font-weight:900;line-height:1.15;margin:8px 0 10px}
+.tete p{color:var(--mut);font-size:15px}
+.retour{display:inline-block;color:var(--mut);font-size:13px;margin-bottom:16px}
+.onglets{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:0 auto 22px}
+.onglets button{background:var(--card);border:1px solid var(--bd);color:var(--mut);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:700;cursor:pointer}
+.onglets button.on{background:var(--grad);color:#1a1206;border-color:transparent}
+.scene{display:grid;grid-template-columns:minmax(0,1fr) 390px minmax(0,1fr);gap:28px;align-items:start}
+.cote{padding-top:30px}
+.cote h3{font-size:18px;font-weight:900;margin-bottom:8px}
+.cote p{color:var(--mut);font-size:14px;margin-bottom:12px}
+.cote ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.cote li{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:11px 13px;font-size:13.5px}
+.cote li b{color:var(--acc)}
+.plus-info{display:none}
+@media(max-width:980px){.scene{grid-template-columns:1fr}.cote{padding-top:0;max-width:430px;margin:0 auto;width:100%}.cote.g{order:2}.tel-zone{order:1}.cote.d{order:3}}
+/* ── le téléphone ── */
+.tel-zone{display:flex;justify-content:center}
+.tel{width:100%;max-width:390px;height:780px;border-radius:44px;border:10px solid #0b0f14;box-shadow:0 0 0 1px #2a3542,0 30px 80px rgba(0,0,0,.55);background:var(--bg);position:relative;overflow:hidden}
+.ecran{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
+.app.on{display:flex;flex-direction:column;min-height:100%}
+.app.on>.vue.on,.app.on>.pad{flex:1}
+.ecran::-webkit-scrollbar{display:none}
+.app{display:none}
+.vue{display:none}.vue.on{display:block}
+.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:9px;padding:12px 16px;background:rgba(6,14,21,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd)}
+.logobox{width:30px;height:30px;border-radius:8px;background:#0b0b0d;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.logobox img{width:100%;height:100%}
+.marque{font-weight:800;font-size:15px}.marque span{color:var(--acc)}
+.badge-ex{margin-left:auto;font-size:10px;font-weight:800;color:var(--acc);border:1px solid rgba(255,169,48,.45);border-radius:999px;padding:3px 8px;letter-spacing:.04em}
+.pad{padding:16px}
+.ahead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.ahead h1{font-size:20px;font-weight:800}
+.cloche{width:44px;height:44px;border-radius:11px;background:var(--card);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;position:relative}
+.cloche i{position:absolute;top:9px;right:10px;width:8px;height:8px;border-radius:50%;background:var(--red)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px}
+.prog-h{display:flex;justify-content:space-between;align-items:flex-start}
+.lab{font-size:11px;color:var(--mut);font-weight:600}
+.big{font-size:20px;font-weight:800;color:var(--grn)}
+.pill{display:inline-block;font-size:11px;font-weight:800;border-radius:999px;padding:3px 10px}
+.barre{height:8px;border-radius:99px;background:#0d141b;overflow:hidden;margin:12px 0 6px}
+.barre i{display:block;height:100%;border-radius:99px}
+.mini{display:flex;justify-content:space-between;font-size:11.5px;color:var(--mut)}
+.btn{display:block;width:100%;text-align:center;background:var(--grad);color:#1a1206;font-weight:800;border:0;border-radius:12px;padding:12px;font-size:14px;cursor:pointer}
+.btn.sec{background:#0d141b;color:var(--txt);border:1px solid var(--bd)}
+.champ{background:#0d141b;border:1px solid var(--bd);border-radius:10px;padding:10px 12px;color:var(--mut);font-size:13px}
+.hsec{font-size:11.5px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;margin:18px 0 10px}
+.tile{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--bd);border-radius:15px;padding:15px;margin-bottom:10px;cursor:pointer}
+.tile.acc{border-color:rgba(255,169,48,.55);background:linear-gradient(95deg,rgba(255,169,48,.12),rgba(255,169,48,.02)),var(--card)}
+.ico{width:44px;height:44px;border-radius:12px;background:rgba(255,169,48,.1);color:var(--acc);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.tile b{display:block;font-size:14.5px;font-weight:800}
+.tile small{display:block;color:var(--mut);font-size:12.5px;line-height:1.4}
+.chev{margin-left:auto;color:var(--mut);flex:0 0 auto}
+.rail{position:relative;padding-left:34px}
+.rail:before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:2px;background:linear-gradient(rgba(255,169,48,.5),rgba(255,169,48,.14))}
+.etape{position:relative;margin:6px 0 12px}
+.etape .n{position:absolute;left:-34px;top:0;width:24px;height:24px;border-radius:50%;border:2px solid;background:var(--bg);font-size:10.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.etape b{font-size:15px;font-weight:800}
+.etape p{color:var(--mut);font-size:12.5px}
+.fcard{display:flex;gap:11px;align-items:flex-start;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:13px;margin-bottom:9px;cursor:pointer}
+.fcard.lock{border-style:dashed;opacity:.85}
+.fcard .ico{width:42px;height:42px}
+.fcard b{display:block;font-size:15px;font-weight:800;line-height:1.3}
+.fcard p{color:var(--mut);font-size:12.5px;line-height:1.45;margin-top:5px}
+.chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.chip{font-size:10.5px;font-weight:800;border-radius:999px;padding:2px 8px;border:1px solid}
+.prow{display:flex;align-items:center;justify-content:space-between;padding:14px 4px;border-bottom:1px solid var(--bd);font-size:14px;font-weight:600}
+.nav{position:sticky;bottom:0;margin-top:auto;z-index:6;display:flex;background:rgba(9,13,18,.95);backdrop-filter:blur(12px);border-top:1px solid var(--bd);padding:8px 4px 14px}
+.nav button{flex:1;background:none;border:0;color:var(--mut);font-size:10.5px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+.nav button.on{color:var(--acc)}
+.nav svg{width:23px;height:23px}
+.sgs{display:flex;background:#0d141b;border-radius:12px;padding:4px;gap:4px;margin:12px 0}
+.sgs button{flex:1;background:none;border:0;color:var(--mut);font-size:12.5px;font-weight:700;border-radius:9px;padding:8px 4px;cursor:pointer}
+.sgs button.on{background:var(--acc);color:#1a1206}
+.hero{background:linear-gradient(160deg,rgba(62,207,123,.12),rgba(62,207,123,.02)),var(--card);border:1px solid rgba(62,207,123,.3);border-radius:16px;padding:16px}
+.hero .m{font-size:27px;font-weight:900;color:var(--grn)}
+.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vthumb{aspect-ratio:3/4;border-radius:11px;position:relative;overflow:hidden;border:1px solid var(--bd)}
+.vthumb .dl{position:absolute;right:7px;bottom:7px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center}
+.vthumb .pl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.8}
+.solde{background:linear-gradient(160deg,rgba(62,207,123,.16),rgba(62,207,123,.03)),var(--card);border:1px solid rgba(62,207,123,.35);border-radius:16px;padding:18px;text-align:center}
+.solde .m{font-size:38px;font-weight:900;color:var(--grn);line-height:1.1;margin:4px 0 12px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stats div{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;font-size:12px;color:var(--mut)}
+.stats b{display:block;font-size:18px;font-weight:900;color:var(--txt)}
+.code{border:2px dashed var(--acc);border-radius:14px;text-align:center;font-size:34px;font-weight:900;letter-spacing:.12em;color:var(--acc);padding:12px;margin:10px 0}
+.regles{counter-reset:r;list-style:none;display:flex;flex-direction:column;gap:9px}
+.regles li{counter-increment:r;position:relative;padding-left:32px;font-size:13px;color:var(--mut)}
+.regles li:before{content:counter(r);position:absolute;left:0;top:0;width:22px;height:22px;border-radius:50%;background:rgba(255,169,48,.14);color:var(--acc);font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.regles b{color:var(--txt)}
+.ex{font-size:10.5px;color:var(--acc);font-weight:700}
+.dc{background:#313338;min-height:100%;display:flex;flex-direction:column;color:#dbdee1}
+.dc-srv{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:#2b2d31;border-bottom:1px solid #1e1f22;font-weight:800;color:#f2f3f5}
+.dc-srv small{font-size:10px;font-weight:800;color:var(--acc);border:1px solid rgba(255,169,48,.45);border-radius:999px;padding:2px 7px}
+.dc-cat{font-size:11px;font-weight:800;color:#949ba4;text-transform:uppercase;letter-spacing:.04em;padding:14px 16px 4px}
+.dc-ch{display:flex;align-items:center;gap:7px;margin:1px 8px;padding:8px 10px;border-radius:6px;color:#949ba4;font-size:14.5px;font-weight:600;cursor:pointer}
+.dc-ch:hover,.dc-ch.on{background:#404249;color:#f2f3f5}
+.dc-ch .h{font-size:18px;color:#80848e;font-weight:400;width:16px;text-align:center}
+.dc-ch .lk{margin-left:auto;opacity:.6;flex:0 0 auto}
+.dc-ch .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.dc-top{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid #1e1f22;background:#313338;font-weight:800;color:#f2f3f5}
+.dc-top button{background:none;border:0;color:#b5bac1;font-size:20px;cursor:pointer;padding:0 6px 0 0}
+.dc-msgs{position:relative;padding:12px 14px;flex:1}
+.dc-m{display:flex;gap:10px;margin-bottom:16px}
+.dc-av{width:38px;height:38px;border-radius:50%;flex:0 0 auto}
+.dc-l{height:10px;border-radius:5px;background:#4e5058;margin:6px 0}
+.dc-flou{filter:blur(3px);opacity:.75}
+.dc-voile{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px}
+.dc-voile div{background:rgba(17,18,20,.92);border:1px solid rgba(255,169,48,.5);border-radius:14px;padding:16px 18px;text-align:center;max-width:270px}
+.dc-voile b{display:block;color:var(--acc);font-size:15px;margin-bottom:4px}
+.dc-voile span{color:#b5bac1;font-size:13px}
+.dc-saisie{margin:10px 14px 16px;background:#383a40;border-radius:8px;padding:11px 13px;color:#6d6f78;font-size:14px}
+.dc-mem{display:flex;align-items:center;gap:9px;padding:6px 16px;color:#949ba4;font-size:13.5px}
+.dc-mem i{width:28px;height:28px;border-radius:50%;display:block}
+.toast{position:absolute;left:14px;right:14px;bottom:92px;z-index:9;background:#0b141c;border:1px solid rgba(255,169,48,.55);color:var(--txt);border-radius:12px;padding:12px 14px;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.5);opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none}
+.toast.on{opacity:1;transform:none}
+.toast b{color:var(--acc)}
+/* ── le parcours ── */
+.parcours{max-width:760px;margin:0 auto}
+.mois{display:grid;grid-template-columns:86px 1fr;gap:16px;position:relative;padding-bottom:22px}
+.mois:before{content:"";position:absolute;left:42px;top:44px;bottom:0;width:2px;background:linear-gradient(rgba(255,169,48,.5),rgba(255,169,48,.1))}
+.mois:last-child:before{display:none}
+.mois .pastille{width:86px;height:44px;border-radius:12px;background:var(--grad);color:#1a1206;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:14px;position:relative;z-index:1}
+.mois .corps{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:15px 16px}
+.mois h4{font-size:16px;font-weight:900;margin-bottom:5px}
+.mois p{color:var(--mut);font-size:14px}
+.paye{margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.paye div{border:1px solid rgba(62,207,123,.35);background:rgba(62,207,123,.06);border-radius:11px;padding:10px 12px;font-size:12.5px;color:var(--mut)}
+.paye b{display:block;color:var(--grn);font-size:13.5px;margin-bottom:2px}
+@media(max-width:560px){.paye{grid-template-columns:1fr}.mois{grid-template-columns:1fr}.mois:before{display:none}.mois .pastille{width:auto;height:auto;padding:8px 14px;justify-self:start}}
+.note{color:var(--mut);font-size:12.5px;text-align:center;margin-top:10px}
+.final{text-align:center;margin-top:34px}
+.final .btn{display:inline-block;width:auto;padding:15px 30px;font-size:16px}
+.final p{color:var(--mut);font-size:13px;margin-top:10px}
+
+/* ── TÉLÉPHONE (23/10/2026) : « il faudrait que ça s'adapte au téléphone ».
+   Plus de cadre ni de défilement dans le défilement : l'appli prend l'écran,
+   la page défile normalement, la barre du bas reste collée en bas. */
+@media(max-width:640px){
+  .page{padding:16px 0 40px}
+  .retour,.tete{margin-left:16px;margin-right:16px}
+  .tete{margin-bottom:14px}
+  .tete p{font-size:14px}
+  .onglets{position:sticky;top:0;z-index:30;flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;background:rgba(6,14,21,.96);backdrop-filter:blur(10px);padding:10px 14px;margin:0 0 4px;border-bottom:1px solid var(--bd)}
+  .onglets::-webkit-scrollbar{display:none}
+  .onglets button{flex:0 0 auto;padding:8px 14px;font-size:13px}
+  .scene{gap:20px}
+  .tel{max-width:none;height:auto;border:0;border-radius:0;box-shadow:none;overflow:visible;background:transparent}
+  .ecran{position:static;overflow:visible}
+  .app.on{min-height:0}
+  .top{position:static;background:transparent;border-bottom:1px solid var(--bd)}
+  .nav{position:sticky;bottom:0;padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+  .toast{position:fixed;bottom:84px}
+  .cote{padding:0 16px;display:none}
+  .scene.ouvert .cote{display:block}
+  .plus-info{display:block;order:2;margin:0 16px;background:var(--card);border:1px solid rgba(255,169,48,.5);color:var(--acc);border-radius:12px;padding:13px;font-size:14.5px;font-weight:800;cursor:pointer}
+  .plus-info:after{content:" \25BE"}
+  .scene.ouvert .plus-info:after{content:" \25B4"}
+  .cote.g{order:3}.cote.d{order:4}
+  .parcours{padding:0 16px}
+  .final{padding:0 16px}
+  .final .btn{display:block;width:100%}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <a class="retour" href="/">‹ Retour au site</a>
+  <div class="tete">
+    <div class="eyebrow">Visite avant de rejoindre</div>
+    <h1>Regarde exactement ce qu'il y a à l'intérieur</h1>
+    <p>Voici l'appli des membres telle qu'elle est. Navigue, fais défiler, ouvre les onglets. Les formations et les outils s'ouvrent une fois que tu as rejoint.</p>
+  </div>
+
+  <div class="onglets" role="tablist">
+    <button class="on" data-app="membre">L'espace membre</button>
+    <button data-app="createur">Le programme clippeur</button>
+    <button data-app="parrain">Le parrainage</button>
+    <button data-app="discord">Le Discord</button>
+    <button data-app="parcours">Ton parcours</button>
+  </div>
+
+  <div class="scene" id="scene">
+    <div class="cote g" id="coteG"></div>
+    <div class="tel-zone">
+      <div class="tel">
+        <div class="ecran" id="ecran">
+
+          <!-- ═════════ ESPACE MEMBRE ═════════ -->
+          <div class="app on" id="app-membre">
+            <div class="top"><div class="logobox"><img src="https://bot.beaudelaireconsulting.com/app-icon.png?v=2" alt="" onerror="this.outerHTML='<b style=&quot;color:#FFA930;font-size:11px&quot;>EX</b>'"></div><div class="marque"><span>Ex</span>-Rienneux</div><span class="badge-ex">APERÇU</span></div>
+
+            <div class="vue on pad" id="m-accueil">
+              <div class="ahead"><h1>Bienvenue</h1><div class="cloche"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b95a1" stroke-width="1.8" stroke-linecap="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg><i></i></div></div>
+              <div class="card">
+                <div class="prog-h">
+                  <div><div class="lab">Solde total gagné</div><div class="big">48 500 F</div><div class="ex">exemple</div></div>
+                  <div style="text-align:right"><span class="pill" style="background:#3ecf7b22;border:1px solid #3ecf7b55;color:#3ecf7b">Soldat</span></div>
+                </div>
+                <div class="barre"><i style="width:18%;background:#3ecf7b"></i></div>
+                <div class="mini"><span>12 000 F ce mois</span><span>Capitaine : 6 559 570 F</span></div>
+                <div style="font-size:12.5px;color:var(--mut);margin:10px 0 12px">Chaque franc que tu gagnes fait monter ton badge, et chaque badge ouvre de nouvelles formations.</div>
+                <button class="btn sec" data-bloque>J'ai reçu de l'argent</button>
+                <div style="margin-top:12px;font-size:13px;font-weight:700">Qu'est-ce que tu as fait aujourd'hui ?</div>
+                <div style="display:flex;gap:7px;margin-top:7px"><div class="champ" style="flex:1">Ex : 2 vidéos, prospection…</div><button class="btn" style="width:auto;padding:10px 16px" data-bloque>OK</button></div>
+              </div>
+              <div class="hsec">Raccourcis</div>
+              <div class="tile acc" data-bloque><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg></div><div><b>Commence ici : le guide</b><small>Lis le guide en entier pour débloquer toutes les formations</small></div><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div>
+              <div class="tile" data-aller="createur"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></svg></div><div><b>Programme Créateur</b><small>Clippe mes vidéos, gagne de l'argent</small></div><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div>
+              <div class="tile" data-bloque><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.8-.7-.7-2.8z"/></svg></div><div><b>Tes outils</b><small>Télécharger sans filigrane, récupérer un script, et un troisième qui arrive</small></div><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div>
+              <div class="tile" data-bloque><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg></div><div><b>Mes favoris</b><small>Tes vidéos gardées de côté</small></div><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></div>
+            </div>
+
+            <div class="vue pad" id="m-formations">
+              <div class="hsec" style="margin-top:2px">Mes formations</div>
+              <div class="champ" style="margin-bottom:14px">Rechercher une formation…</div>
+              <div class="rail" id="rail"></div>
+            </div>
+
+            <div class="vue pad" id="m-profil">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px"><div style="width:52px;height:52px;border-radius:50%;background:var(--card);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;color:var(--acc);font-weight:900">EX</div><div><b style="font-size:16px">Ton profil</b><div style="color:var(--mut);font-size:12.5px">Membre Ex-Rienneux</div></div></div>
+              <div class="prow" data-aller="createur">Programme Créateur<span class="chev">›</span></div>
+              <div class="prow" data-bloque>Le guide complet<span class="chev">›</span></div>
+              <div class="prow" data-bloque>Mes favoris<span class="chev">›</span></div>
+              <div class="prow" data-bloque>Mon abonnement<span style="color:#3ECF7B;font-size:13px;font-weight:800">Actif</span></div>
+              <div class="prow" data-bloque>Installer l'appli<span class="chev">›</span></div>
+              <div class="prow" data-bloque>Activer les notifications<span class="chev">›</span></div>
+            </div>
+
+            <div class="nav">
+              <button class="on" data-vue="m-accueil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg>Accueil</button>
+              <button data-vue="m-formations"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/></svg>Formations</button>
+              <button data-aller="createur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 6-3v10l-6-3z"/></svg>Créateur</button>
+              <button data-vue="m-profil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>Profil</button>
+            </div>
+          </div>
+
+          <!-- ═════════ PROGRAMME CLIPPEUR ═════════ -->
+          <div class="app" id="app-createur">
+            <div class="top"><div class="logobox"><img src="https://bot.beaudelaireconsulting.com/app-icon.png?v=2" alt="" onerror="this.outerHTML='<b style=&quot;color:#FFA930;font-size:11px&quot;>EX</b>'"></div><div class="marque"><span>Ex</span>-Rienneux</div><span class="badge-ex">APERÇU</span></div>
+            <div class="pad">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start">
+                <div><div style="font-size:11px;font-weight:800;color:var(--mut);letter-spacing:.08em">ESPACE CRÉATEUR</div><div style="font-size:18px;font-weight:800">Salut</div><div style="color:var(--mut);font-size:12.5px">@tonCompteTikTok</div></div>
+                <span class="pill" style="background:#3ecf7b22;border:1px solid #3ecf7b55;color:#3ecf7b">Payant</span>
+              </div>
+              <div class="sgs"><button class="on" data-vue="c-gains">Gains</button><button data-vue="c-poster">Poster</button><button data-vue="c-outils">Outils</button><button data-vue="c-videos">Vidéos</button></div>
+
+              <div class="vue on" id="c-gains">
+                <div class="hero">
+                  <div class="sgs" style="margin:0 0 12px;background:rgba(0,0,0,.25)"><button>Aujourd'hui</button><button>7 jours</button><button class="on">Ce mois</button></div>
+                  <div style="display:flex;justify-content:space-between;align-items:flex-end">
+                    <div><div class="lab" style="letter-spacing:.06em">À RECEVOIR CE MOIS</div><div class="m">5 300 F</div><div class="ex">exemple</div></div>
+                    <div style="text-align:right;color:var(--mut);font-size:12.5px">9 vidéos<br>64 000 vues</div>
+                  </div>
+                  <div style="font-size:12.5px;color:var(--mut);margin-top:10px">Dont 4 800 F sur tes vues, <b style="color:var(--txt)">500 F</b> de bonus vidéos.</div>
+                  <div style="font-size:11.5px;color:var(--mut);margin-top:8px;border-top:1px solid var(--bd);padding-top:8px">75 F / 1 000 vues · à demander du 1er au 3 du mois</div>
+                </div>
+                <div class="card" style="margin-top:10px">
+                  <div style="font-size:14px;font-weight:800">Encore 6 vidéos et tu gagnes 2 000 F en plus</div>
+                  <div class="barre"><i style="width:60%;background:var(--grad)"></i></div>
+                  <div style="font-size:12px;color:var(--mut)">Barème : <b style="color:var(--txt)">5 vidéos = 500 F</b> · <b style="color:var(--txt)">15 vidéos = 2 000 F</b>. Tout repart à zéro le 1er du mois.</div>
+                </div>
+                <div class="card" style="margin-top:10px">
+                  <div style="font-size:14px;font-weight:800;color:var(--grn)">Tarif haut débloqué</div>
+                  <div style="font-size:12px;color:var(--mut);margin-top:4px">Tu as passé 50 000 vues ce mois : tout ton mois est payé 75 F les 1 000 vues au lieu de 25 F, tes premières vidéos comprises.</div>
+                </div>
+                <div class="card" style="margin-top:10px;border-color:rgba(62,207,123,.35)">
+                  <div style="font-size:14px;font-weight:800;color:var(--grn)">Tu peux demander ton argent</div>
+                  <div style="font-size:12.5px;color:var(--mut);margin:4px 0 10px">Ton solde a atteint le minimum de 2 000 F. Tu le reçois sur ton mobile money.</div>
+                  <button class="btn" data-bloque>Demander un retrait</button>
+                </div>
+                <div class="hsec">Mes vidéos (9) · les 4 dernières</div>
+                <div class="card" style="padding:0;overflow:hidden" id="tabVideos"></div>
+              </div>
+
+              <div class="vue" id="c-poster">
+                <div class="card">
+                  <div style="font-size:16px;font-weight:800;margin-bottom:10px">Tu viens de poster ?</div>
+                  <div class="lab" style="margin-bottom:5px">Lien de la vidéo TikTok</div>
+                  <div class="champ" style="margin-bottom:10px">https://www.tiktok.com/@…</div>
+                  <div class="lab" style="margin-bottom:5px">Lien de la même vidéo sur Facebook (facultatif)</div>
+                  <div class="champ" style="margin-bottom:12px">https://www.facebook.com/reel/…</div>
+                  <button class="btn" data-bloque>Envoyer</button>
+                </div>
+                <div class="hsec">Les règles pour poster</div>
+                <div class="card" style="font-size:13px;color:var(--mut);display:flex;flex-direction:column;gap:7px">
+                  <div><b style="color:var(--grn)">✓</b> Clipe mes vidéos.</div>
+                  <div><b style="color:var(--grn)">✓</b> Vidéos de 10 à 30 s max (15 s parfait).</div>
+                  <div><b style="color:var(--grn)">✓</b> Poste autant que tu veux.</div>
+                  <div><b style="color:var(--grn)">✓</b> Vues comptées 7 jours par vidéo.</div>
+                  <div><b style="color:var(--red)">✗</b> Pas de vues achetées.</div>
+                  <div><b style="color:var(--red)">✗</b> Une vidéo sans rapport ne compte pas.</div>
+                </div>
+              </div>
+
+              <div class="vue" id="c-outils">
+                <div class="tile" data-vue-c="c-videos"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m10 9 5 3-5 3z"/></svg></div><div><b>Vidéos à cliper</b><small>Télécharge mes vidéos et monte tes clips</small></div><span class="chev">›</span></div>
+                <div class="tile" data-bloque><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 19h16"/></svg></div><div><b>Télécharger une vidéo</b><small>TikTok, YouTube, Instagram, sans filigrane, extrait au choix</small></div><span class="chev">›</span></div>
+                <div class="tile" data-bloque><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 4h14v16H5zM8 9h8M8 13h8M8 17h5"/></svg></div><div><b>Récupérer le script d'une vidéo</b><small>Le texte dit dans la vidéo, prêt à copier</small></div><span class="chev">›</span></div>
+                <div class="tile" data-bloque><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg></div><div><b>Templates CapCut</b><small>Des montages prêts à remplir, idéal pour débuter</small></div><span class="chev">›</span></div>
+                <div class="tile" data-bloque><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/></svg></div><div><b>Formation · Montage vidéo</b><small>Le cours complet pour monter comme un pro</small></div><span class="chev">›</span></div>
+              </div>
+
+              <div class="vue" id="c-videos">
+                <div style="font-size:18px;font-weight:900">Vidéos à cliper</div>
+                <div style="color:var(--mut);font-size:12.5px;margin-bottom:10px">Télécharge, monte, poste.</div>
+                <div class="card" style="font-size:12.5px;color:var(--mut);margin-bottom:10px"><b style="color:var(--txt);display:block;margin-bottom:3px">Avant de poster, la qualité compte</b>Exporte en 1080p, format vertical 9:16.</div>
+                <div class="vgrid" id="vgrid"></div>
+                <div style="text-align:center;color:var(--mut);font-size:11.5px;margin-top:9px">Appuie sur un clip pour le regarder · la flèche pour le télécharger</div>
+              </div>
+            </div>
+            <div class="nav">
+              <button data-aller="membre" data-vue-m="m-accueil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg>Accueil</button>
+              <button data-aller="membre" data-vue-m="m-formations"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/></svg>Formations</button>
+              <button class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 6-3v10l-6-3z"/></svg>Créateur</button>
+              <button data-aller="membre" data-vue-m="m-profil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>Profil</button>
+            </div>
+          </div>
+
+          <!-- ═════════ EX-RAINAGE ═════════ -->
+          <div class="app" id="app-parrain">
+            <div class="top"><div class="logobox" style="background:#fff;border-radius:10px"><img src="https://bot.beaudelaireconsulting.com/parrainage/icone-192.png" alt="" onerror="this.outerHTML='<b style=&quot;color:#060E15;font-size:11px&quot;>EX</b>'"></div><div class="marque" style="font-weight:900;font-size:17px">Ex-<span>Rainage</span></div><span class="badge-ex">APERÇU</span></div>
+            <div class="vue on pad" id="p-accueil">
+              <div style="font-size:20px;font-weight:800">Salut !</div>
+              <div style="color:var(--mut);font-size:13px;margin-bottom:12px">Voici où tu en es.</div>
+              <div class="solde"><div class="lab" style="letter-spacing:.08em">DISPONIBLE À RETIRER</div><div class="m">3 750 F</div><div class="ex" style="margin:-8px 0 10px">exemple</div><button class="btn" data-vue-p="p-retirer">Retirer mes gains</button></div>
+              <div class="hsec">Tes résultats</div>
+              <div class="stats"><div><b>4</b>personnes inscrites avec ton code</div><div><b>6</b>paiements avec ton code</div><div><b style="color:var(--grn)">7 500 F</b>gagnés au total</div><div><b>1 250 F</b>en attente (3 jours)</div></div>
+              <div class="hsec">Ton code de parrainage</div>
+              <div class="card">
+                <div class="code">KOF7</div>
+                <div style="display:flex;gap:7px"><button class="btn sec" data-bloque>Copier mon code</button><button class="btn sec" data-bloque>Copier le message</button></div>
+                <button class="btn" style="background:#25D366;color:#062b16;margin-top:8px" data-bloque>Partager sur WhatsApp</button>
+              </div>
+              <div class="hsec">Les règles du parrainage</div>
+              <ol class="regles">
+                <li><b>Ton code est pour les nouveaux.</b></li>
+                <li><b>Tu gagnes chaque mois.</b> À chaque paiement fait avec ton code, tu gagnes 1 250 F.</li>
+                <li><b>Ton gain est retirable 3 jours</b> après le paiement.</li>
+                <li><b>Tu retires quand tu veux</b>, sans minimum, sur ton mobile money.</li>
+              </ol>
+            </div>
+            <div class="vue pad" id="p-retirer">
+              <div style="font-size:20px;font-weight:800">Retirer mes gains</div>
+              <div style="color:var(--mut);font-size:13px;margin-bottom:12px">Pas de minimum : dès qu'un gain est disponible, tu peux le retirer.</div>
+              <div class="solde"><div class="lab" style="letter-spacing:.08em">DISPONIBLE MAINTENANT</div><div class="m">3 750 F</div><div class="ex" style="margin-top:-8px">exemple</div></div>
+              <div class="card" style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+                <div class="lab">Pays</div><div class="champ">Bénin</div>
+                <div class="lab">Numéro mobile money (avec l'indicatif)</div><div class="champ">+229 01 00 00 00 00</div>
+                <div class="lab">Nom du titulaire du compte</div><div class="champ">Ton nom</div>
+                <button class="btn" data-bloque>Demander mon retrait (3 750 F)</button>
+              </div>
+            </div>
+            <div class="vue pad" id="p-profil">
+              <div style="font-size:20px;font-weight:800;margin-bottom:12px">Profil</div>
+              <div class="prow" data-bloque>Mon prénom<span class="chev">›</span></div>
+              <div class="prow" data-bloque>Changer mon adresse e-mail<span class="chev">›</span></div>
+              <div class="prow" data-bloque>Changer mon mot de passe<span class="chev">›</span></div>
+              <div class="prow" data-bloque>Mettre Ex-Rainage sur mon écran d'accueil<span class="chev">›</span></div>
+            </div>
+            <div class="nav">
+              <button class="on" data-vue-p="p-accueil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg>Accueil</button>
+              <button data-vue-p="p-retirer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M16 12.5h2M2 10h20"/></svg>Retirer mes gains</button>
+              <button data-bloque><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Assistance</button>
+              <button data-vue-p="p-profil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>Profil</button>
+            </div>
+          </div>
+
+          <!-- ═════════ DISCORD ═════════ -->
+          <div class="app" id="app-discord">
+            <div class="dc">
+              <div class="vue on" id="d-salons">
+                <div class="dc-srv">Ex-rienneux<small>APERÇU</small></div>
+                <div class="dc-cat">&#128274; Espace membres</div>
+                <div class="dc-ch" data-salon="🗺️-le-guide-des…"><span class="h">#</span><span class="nm">🗺️-le-guide-des…</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🚨annonces"><span class="h" style="font-size:15px">&#128226;</span><span class="nm">🚨annonces</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="👋-présentations"><span class="h">#</span><span class="nm">👋-présentations</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🎓-ressources"><span class="h">#</span><span class="nm">🎓-ressources</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="💬discussions"><span class="h">#</span><span class="nm">💬discussions</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="👋aide"><span class="h">#</span><span class="nm">👋aide</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🤑vos-gains"><span class="h">#</span><span class="nm">🤑vos-gains</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🔥flex"><span class="h">#</span><span class="nm">🔥flex</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="💸programme-c…"><span class="h">#</span><span class="nm">💸programme-c…</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🙈progressions"><span class="h">#</span><span class="nm">🙈progressions</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="💻-productivité…"><span class="h">#</span><span class="nm">💻-productivité…</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="👽ia"><span class="h">#</span><span class="nm">👽ia</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🕺création-de-c…"><span class="h">#</span><span class="nm">🕺création-de-c…</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🔰compte-mon…"><span class="h">#</span><span class="nm">🔰compte-mon…</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="💬creation-de-contenu-discussions"><span class="h">#</span><span class="nm">💬creation-de-contenu-discussions</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="📘free-lance-tu…"><span class="h">#</span><span class="nm">📘free-lance-tu…</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="💬freelance-chat"><span class="h">#</span><span class="nm">💬freelance-chat</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🎬montage-vidéo"><span class="h">#</span><span class="nm">🎬montage-vidéo</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🎨création-grap…"><span class="h">#</span><span class="nm">🎨création-grap…</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🛒ecommerce"><span class="h">#</span><span class="nm">🛒ecommerce</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="📦dropshipping"><span class="h">#</span><span class="nm">📦dropshipping</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="📁produits-digit…"><span class="h">#</span><span class="nm">📁produits-digit…</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🤝affiliation"><span class="h">#</span><span class="nm">🤝affiliation</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🤝closing-ventes"><span class="h">#</span><span class="nm">🤝closing-ventes</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="📊trading"><span class="h">#</span><span class="nm">📊trading</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🪙cryptomonna…"><span class="h">#</span><span class="nm">🪙cryptomonna…</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="💰banques"><span class="h">#</span><span class="nm">💰banques</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🗃️création-de-s…"><span class="h">#</span><span class="nm">🗃️création-de-s…</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="✈️visas-expatri…"><span class="h">#</span><span class="nm">✈️visas-expatri…</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🏠air-bnb"><span class="h">#</span><span class="nm">🏠air-bnb</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="😎beauté-et-att…"><span class="h">#</span><span class="nm">😎beauté-et-att…</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="🚺femmes"><span class="h">#</span><span class="nm">🚺femmes</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="💪musculation"><span class="h">#</span><span class="nm">💪musculation</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="💪concours"><span class="h" style="font-size:15px">&#128172;</span><span class="nm">💪concours</span><svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+                <div class="dc-ch" data-salon="General"><span class="h" style="font-size:15px">&#128266;</span><span class="nm">General</span></div>
+                <div class="dc-cat">Membres</div>
+                <div class="dc-flou">
+                  <div class="dc-mem"><i style="background:#5865F2"></i><span class="dc-l" style="width:110px;display:block"></span></div>
+                  <div class="dc-mem"><i style="background:#3ecf7b"></i><span class="dc-l" style="width:80px;display:block"></span></div>
+                  <div class="dc-mem"><i style="background:#FFA930"></i><span class="dc-l" style="width:130px;display:block"></span></div>
+                  <div class="dc-mem"><i style="background:#c084fc"></i><span class="dc-l" style="width:95px;display:block"></span></div>
+                </div>
+                <div style="padding:14px 16px 22px;color:#949ba4;font-size:12.5px">Appuie sur un salon pour voir à quoi il ressemble.</div>
+              </div>
+              <div class="vue" id="d-salon" style="display:none">
+                <div class="dc-top"><button data-dc-retour>‹</button><span class="h" style="color:#80848e;font-weight:400">#</span><span id="dc-nom"></span></div>
+                <div class="dc-msgs">
+                  <div class="dc-flou" id="dc-fil"></div>
+                  <div class="dc-voile"><div><b>Réservé aux membres</b><span>Tu verras les messages et tu pourras écrire dès que tu rejoins la communauté.</span></div></div>
+                </div>
+                <div class="dc-saisie">Envoyer un message…</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="toast" id="toast"><b>Réservé aux membres.</b> Tout ça s'ouvre dès que tu rejoins la communauté.</div>
+      </div>
+    </div>
+    <button type="button" class="plus-info" id="plusInfo">Ce qu'il y a dans cet onglet</button>
+    <div class="cote d" id="coteD"></div>
+  </div>
+
+  <!-- ═════════ LE PARCOURS ═════════ -->
+  <div class="parcours" id="parcours" style="display:none">
+    <div class="mois">
+      <div class="pastille">Mois 1</div>
+      <div class="corps">
+        <h4>Tu entres et tu choisis ta voie</h4>
+        <p>Tu lis le guide, il débloque toutes les formations. Tu choisis la compétence qui te correspond et tu commences à la pratiquer chaque jour.</p>
+        <div class="paye">
+          <div><b>Payé dès le premier mois : le clipping</b>Tu clippes mes vidéos, tu es payé sur tes vues (de 25 à 75 F les 1 000), retrait dès 2 000 F.</div>
+          <div><b>Payé dès le premier mois : le parrainage</b>Chaque personne qui paie avec ton code te rapporte 1 250 F, tous les mois où elle paie.</div>
+        </div>
+      </div>
+    </div>
+    <div class="mois">
+      <div class="pastille">Mois 2</div>
+      <div class="corps"><h4>Tu appliques</h4><p>Tu suis les modules, tu poses tes questions, et tu sors tes premiers résultats avec ta compétence : premiers clients, premières ventes, premières vues.</p></div>
+    </div>
+    <div class="mois">
+      <div class="pastille">Mois 3</div>
+      <div class="corps"><h4>Tu accélères</h4><p>Tu répètes ce qui marche. Ton badge monte avec ce que tu gagnes, et chaque badge ouvre de nouvelles formations.</p></div>
+    </div>
+    <div class="mois">
+      <div class="pastille">Mois 4</div>
+      <div class="corps"><h4>Tu deviens rentable</h4><p>Il faut compter au minimum 4 mois pour être rentable. C'est pour ça qu'il existe l'offre 3 mois : tu te donnes le temps d'y arriver.</p></div>
+    </div>
+    <div class="note">Ce n'est pas une promesse de gains : ce que tu gagnes dépend de ce que tu fais.</div>
+  </div>
+
+  <div class="final">
+    <a class="btn" href="/checkout" onclick="try{track('click_go_checkout',{depuis:'visite'})}catch(e){}">Rejoindre la communauté</a>
+    <p>Plus de 4 910 élèves ont déjà rejoint.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var COTES={
+    membre:{g:'<h3>Ton espace membre</h3><p>C\'est l\'appli que tu ouvres chaque jour, sur ton téléphone comme une vraie appli.</p><ul><li><b>Ton badge</b> monte avec ce que tu gagnes : Soldat, Capitaine, Général, Elite.</li><li><b>Le guide</b> d\'abord, puis toutes les formations s\'ouvrent.</li></ul>',
+      d:'<h3>Ce que tu y trouves</h3><ul><li><b>11 formations</b> ouvertes dès ton entrée, et d\'autres qui s\'ouvrent avec ton badge.</li><li><b>Tes outils</b> : télécharger sans filigrane, récupérer un script.</li><li><b>Le programme clippeur</b> et <b>le parrainage</b> pour être payé dès le premier mois.</li><li><b>Le Discord</b> de la communauté, pour échanger et poser tes questions.</li></ul>'},
+    createur:{g:'<h3>Le programme clippeur</h3><p>Tu montes des clips de mes vidéos, tu les postes, et tu es payé sur les vues.</p><ul><li><b>25 F les 1 000 vues</b>, et dès 50 000 vues dans le mois, tout le mois passe à <b>75 F</b>.</li><li><b>Bonus</b> : 500 F à 5 vidéos, 2 000 F à 15 vidéos.</li></ul>',
+      d:'<h3>Comment tu es payé</h3><ul><li><b>Dès 2 000 F</b> de solde, tu demandes ton retrait.</li><li><b>Du 1er au 3 du mois</b>, sur ton mobile money.</li><li><b>Les outils</b> sont fournis : vidéos à cliper, templates CapCut.</li></ul>'},
+    discord:{g:'<h3>Le Discord de la communauté</h3><p>C\'est là que les membres se retrouvent : les annonces, les discussions, l\'entraide.</p><ul><li><b>Les annonces</b> : les nouveautés et les nouvelles formations.</li><li><b>Un salon par compétence</b> : freelance, montage vidéo, e-commerce, trading, produits digitaux, et bien d\'autres.</li></ul>',
+      d:'<h3>Tu n\'es jamais seul</h3><ul><li><b>#aide</b> : tu bloques, tu poses ta question.</li><li><b>#vos-gains</b> et <b>#flex</b> : les membres partagent ce qu\'ils gagnent.</li><li><b>#progressions</b> et <b>#concours</b> pour avancer ensemble.</li><li><b>Les messages</b> sont réservés aux membres : ici, ils sont floutés.</li></ul>'},
+    parrain:{g:'<h3>L\'appli de parrainage</h3><p>Ex-Rainage : ton code, tes gains, tes retraits, au même endroit.</p><ul><li><b>1 250 F</b> à chaque paiement fait avec ton code.</li><li><b>Chaque mois</b> où la personne repaie avec ton code, tu regagnes.</li></ul>',
+      d:'<h3>Tu retires quand tu veux</h3><ul><li><b>Sans minimum</b>, dès qu\'un gain est disponible.</li><li><b>Sur ton mobile money</b>, 3 jours après le paiement.</li><li><b>Prévenu</b> à chaque vente faite avec ton code.</li></ul>'}
+  };
+  var FORMATIONS=[
+    ['Recevoir & retirer ton argent depuis l\'Afrique','Encaisser depuis l\'Afrique et sortir ton argent, sans blocage.'],
+    ['Beauté & Attractivité','Visage, corps, présence : devenir un homme qu\'on remarque, étape par étape.'],
+    ['Productivité & Focus','T\'organiser, rester concentré et avancer chaque jour.'],
+    ['Produits digitaux','Créer et vendre des produits numériques (ebooks, templates…) qui rapportent même quand tu dors.'],
+    ['Intelligence artificielle (IA)','Utiliser l\'intelligence artificielle pour travailler plus vite et gagner de l\'argent, même sans t\'y connaître.'],
+    ['Création de contenu','Devenir créateur, faire des vues et transformer ton audience en revenus.'],
+    ['Freelance','Vendre tes services en ligne et décrocher tes premiers clients, depuis ton téléphone.'],
+    ['Montage vidéo (CapCut)','Monter des vidéos pro sur téléphone ou PC, une compétence très demandée et bien payée.'],
+    ['Création de miniatures','Créer des miniatures qui donnent envie de cliquer et qui font exploser tes vues.'],
+    ['Affiliation','Gagner une commission en recommandant les produits des autres, sans créer le tien.'],
+    ['Musculation','Prendre du muscle chez toi, sans matériel, et tenir sur la durée.']
+  ];
+  var PALIERS=[
+    ['Capitaine','#4aa8ff','Ce qui s\'ouvre quand ton activité commence à tourner.',[['Closing & vente','Convaincre, closer et vendre par téléphone, et toucher des commissions sur chaque deal.'],['Femmes','Approcher, discuter et créer de vraies relations avec confiance.']]],
+    ['Général','#f4c430','Pour ceux dont le business tourne déjà pour de bon.',[['E-commerce','Monter ta boutique en ligne, trouver tes produits et vendre pour de bon.'],['Dropshipping','Vendre des produits sans stock, trouver les bons fournisseurs et scaler rapidement.']]],
+    ['Elite','#c084fc','Le haut de l\'échelle.',[['Airbnb','Lancer une activité de location courte durée et générer des revenus réguliers.'],['Visa & expatriation','Obtenir ton visa et t\'installer à l\'étranger, étape par étape.'],['Trading & marchés financiers','Comprendre les marchés et trader intelligemment, sans te ruiner.'],['Cryptomonnaies','Investir dans les cryptos sans te faire avoir, étape par étape.'],['Création de société','Créer ta société proprement, où que tu sois, sans te tromper.']]]
+  ];
+  var livre='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/></svg>';
+  var cad='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+  function carte(t,d,chip,lock,coul){return '<div class="fcard'+(lock?' lock':'')+'" data-bloque><div class="ico"'+(lock?' style="color:'+coul+';background:'+coul+'1a"':'')+'>'+(lock?cad:livre)+'</div><div style="flex:1"><b>'+t+'</b><div class="chips">'+chip+'</div><p>'+d+'</p></div><span class="chev">›</span></div>';}
+  var h='<div class="etape"><div class="n" style="border-color:#3ecf7b;color:#3ecf7b">01</div><b>Soldat</b><p>Tout ce que tu as déjà entre les mains, dès aujourd\'hui.</p></div>';
+  FORMATIONS.forEach(function(f){h+=carte(f[0],f[1],'<span class="chip" style="border-color:#3ecf7b;color:#3ecf7b">Soldat</span><span class="chip" style="border-color:rgba(255,169,48,.5);color:var(--acc)">À commencer</span>',false);});
+  PALIERS.forEach(function(p,i){
+    h+='<div class="etape" style="margin-top:16px"><div class="n" style="border-color:'+p[1]+';color:'+p[1]+'">0'+(i+2)+'</div><b>'+p[0]+'</b><p>'+p[2]+'</p></div>';
+    p[3].forEach(function(f){h+=carte(f[0],f[1]+'<br><span style="color:'+p[1]+'">Débloqué au badge <b>'+p[0]+'</b></span>','<span class="chip" style="border-color:'+p[1]+';color:'+p[1]+'">'+p[0]+'</span><span class="chip" style="border-color:var(--bd);color:var(--mut)">Verrouillé</span>',true,p[1]);});
+  });
+  document.getElementById('rail').innerHTML=h;
+  // Grille « Vidéos à cliper » : vignettes neutres (aucune vraie vidéo).
+  var tons=['#1d2b3a','#2a1f14','#14261d','#261624','#1f2433','#2b2312','#13232a','#2a1919'];
+  var g='';for(var i=0;i<8;i++){g+='<div class="vthumb" data-bloque style="background:linear-gradient(160deg,'+tons[i]+',#0b141c)"><div class="pl"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div><div class="dl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg></div></div>';}
+  document.getElementById('vgrid').innerHTML=g;
+  var lignes=[['12 oct.','22 000','1 650 F'],['14 oct.','18 000','1 350 F'],['16 oct.','14 000','1 050 F'],['18 oct.','10 000','750 F']];
+  var t='<div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;padding:9px 12px;font-size:11px;color:var(--mut);font-weight:700;border-bottom:1px solid var(--bd)"><span>Ajoutée</span><span>Vues</span><span style="text-align:right">Gain</span></div>';
+  lignes.forEach(function(l){t+='<div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;padding:9px 12px;font-size:12.5px;border-bottom:1px solid var(--bd)"><span>'+l[0]+'</span><span>'+l[1]+'</span><span style="text-align:right;color:var(--grn);font-weight:800">'+l[2]+'</span></div>';});
+  t+='<div style="padding:8px 12px;font-size:10.5px;color:var(--acc);font-weight:700">exemple</div>';
+  document.getElementById('tabVideos').innerHTML=t;
+
+  // Discord : fil de messages flouté (formes seulement, aucun vrai message).
+  var couls=['#5865F2','#3ecf7b','#FFA930','#c084fc','#4aa8ff','#FF6B5E'],fil='';
+  for(var m=0;m<7;m++){fil+='<div class="dc-m"><div class="dc-av" style="background:'+couls[m%6]+'"></div><div style="flex:1"><div class="dc-l" style="width:'+(70+m*9%60)+'px;background:'+couls[m%6]+'88"></div><div class="dc-l" style="width:'+(60+(m*23)%35)+'%"></div>'+(m%2?'<div class="dc-l" style="width:'+(35+(m*17)%40)+'%"></div>':'')+'</div></div>';}
+  document.getElementById('dc-fil').innerHTML=fil;
+  function salon(nom){var a=document.getElementById('d-salons'),b=document.getElementById('d-salon');
+    if(nom){document.getElementById('dc-nom').textContent=nom;a.style.display='none';b.style.display='block';}else{a.style.display='';b.style.display='none';}haut();}
+  var ecran=document.getElementById('ecran'),toast=document.getElementById('toast'),tt;
+  function haut(){
+    if(window.innerWidth>640){ecran.scrollTop=0;return;}
+    var y=document.querySelector('.tel').getBoundingClientRect().top+window.scrollY-58;
+    if(window.scrollY>y)window.scrollTo(0,y);
+  }
+  function bloque(){toast.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on');},2200);}
+  function vue(app,id){var a=document.getElementById('app-'+app);a.querySelectorAll('.vue').forEach(function(v){v.classList.toggle('on',v.id===id);});
+    a.querySelectorAll('.nav button,.sgs button').forEach(function(b){var c=b.getAttribute('data-vue')||b.getAttribute('data-vue-p');if(c)b.classList.toggle('on',c===id);});haut();}
+  function app(nom){
+    var parcours=nom==='parcours';
+    document.getElementById('scene').style.display=parcours?'none':'';
+    document.getElementById('parcours').style.display=parcours?'':'none';
+    document.querySelectorAll('.onglets button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-app')===nom);});
+    document.getElementById('scene').classList.remove('ouvert');
+    if(parcours)return;
+    document.querySelectorAll('.app').forEach(function(a){a.classList.toggle('on',a.id==='app-'+nom);});
+    document.getElementById('coteG').innerHTML=COTES[nom].g;document.getElementById('coteD').innerHTML=COTES[nom].d;
+    haut();
+  }
+  document.addEventListener('click',function(e){
+    if(e.target.closest('#plusInfo')){document.getElementById('scene').classList.toggle('ouvert');return;}
+    var ds=e.target.closest('[data-salon]');if(ds){salon(ds.getAttribute('data-salon'));return;}
+    if(e.target.closest('[data-dc-retour]')){salon('');return;}
+    var el=e.target.closest('[data-app],[data-aller],[data-vue],[data-vue-p],[data-vue-c],[data-bloque]');if(!el)return;
+    if(el.hasAttribute('data-app')){app(el.getAttribute('data-app'));return;}
+    if(el.hasAttribute('data-aller')){var n=el.getAttribute('data-aller');app(n);var vm=el.getAttribute('data-vue-m');if(vm)vue('membre',vm);return;}
+    if(el.hasAttribute('data-vue-p')){vue('parrain',el.getAttribute('data-vue-p'));return;}
+    if(el.hasAttribute('data-vue-c')){vue('createur',el.getAttribute('data-vue-c'));return;}
+    if(el.hasAttribute('data-vue')){var id=el.getAttribute('data-vue');vue(id.charAt(0)==='m'?'membre':'createur',id);return;}
+    if(el.hasAttribute('data-bloque'))bloque();
+  });
+  var dep=(location.hash||'').replace('#','');app(COTES[dep]||dep==='parcours'?dep:'membre');
+  // Suivi des visites, comme le reste du site (sans effet si le suivi n'est pas chargé).
+  window.track=window.track||function(){};
+})();
+</script>
+</body>
+</html>
