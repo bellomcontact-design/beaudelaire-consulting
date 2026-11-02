@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Programme Créateur · Tes vues te paient · Beaudelaire Consulting</title>
-<meta name="description" content="Clippe les vidéos de Beaudelaire, poste-les sur TikTok et Facebook, et sois payé pour tes vues sur ton mobile money. Inscription gratuite, un téléphone suffit.">
+<meta name="description" content="Clippe les vidéos de Beaudelaire, poste-les sur TikTok, Facebook, Snapchat, Instagram et YouTube. Tes vues TikTok et Facebook sont payées sur ton mobile money, les autres te débloquent des outils de montage gratuits. Inscription gratuite.">
 <meta property="og:title" content="Programme Créateur : tes vues te paient">
 <meta property="og:description" content="Clippe, poste sur TikTok et Facebook, sois payé sur ton mobile money. Inscription gratuite.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -142,6 +142,16 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 @keyframes pop{0%{transform:scale(.7)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
 .petit{font-size:12.5px;color:var(--faint);margin-top:14px;line-height:1.5}
 
+/* Outils */
+.outils-g{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+.outil-c{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:22px 18px}
+.outil-c .oi{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:var(--accent-soft);color:var(--accent);margin-bottom:14px}
+.outil-c h3{font-size:17px;font-weight:800;margin-bottom:6px}
+.outil-c p{font-size:14.5px;color:var(--muted)}
+.acces-o{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.acces-o div{background:#0f1820;border:1px solid #233241;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:4px}
+.acces-o b{font-size:16px}.acces-o span{font-size:14px;color:var(--muted)}
+
 /* Entrée */
 .chemin{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;margin-top:10px}
 .chemin .barre{position:absolute;top:30px;left:16%;right:16%;height:4px;background:#1f2b36;border-radius:4px;overflow:hidden}
@@ -214,7 +224,7 @@ footer a{text-decoration:none;font-weight:600}
 @media (max-width:860px){
   .hero{grid-template-columns:1fr;padding-top:34px;text-align:left}
   .tel{margin-top:6px}
-  .etapes,.tuiles,.regles,.inscr{grid-template-columns:1fr}
+  .etapes,.tuiles,.regles,.inscr,.outils-g,.acces-o{grid-template-columns:1fr}
   .simu,.retrait{grid-template-columns:1fr}
   .simu{padding:20px}
   .chemin{grid-template-columns:1fr;gap:20px}
@@ -248,7 +258,7 @@ footer a{text-decoration:none;font-weight:600}
     <div>
       <div class="tag"><i></i>Programme Créateur ouvert</div>
       <h1>Tes vues<br><span class="or">te paient.</span></h1>
-      <p class="sous">Tu clippes mes vidéos, tu les postes sur <b>TikTok</b> et <b>Facebook</b>, et chaque vue te rapporte de l'argent, versé sur ton <b>mobile money</b>.</p>
+      <p class="sous">Tu clippes mes vidéos et tu les postes partout. Chaque vue <b>TikTok</b> et <b>Facebook</b> te rapporte de l'argent, versé sur ton <b>mobile money</b>. Et tu as des <b>outils de montage</b> pour aller plus vite.</p>
       <a class="btn pulse" href="https://bot.beaudelaireconsulting.com/createur">Devenir clippeur
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <a href="https://whatsapp.com/channel/0029Vb8pHFJJ3juqxMFamp0F" target="_blank" rel="noopener" style="display:flex;width:fit-content;max-width:100%;box-sizing:border-box;align-items:center;gap:8px;margin:12px 0 0 0;padding:9px 14px;border-radius:11px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.55);color:#4ee38b;font-weight:700;font-size:13.5px;text-decoration:none">
@@ -289,8 +299,8 @@ footer a{text-decoration:none;font-weight:600}
       <div class="num">2</div>
       <div class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
       <h3>Tu postes partout</h3>
-      <p>Le même clip sur ton compte TikTok et en Reel sur ton compte Facebook. Tu colles les deux liens dans ton espace.</p>
-      <div class="duo"><span class="puce tt">TikTok</span><span class="puce fb">Facebook</span></div>
+      <p>Le même clip sur TikTok et en Reel sur Facebook : ces vues-là sont payées. Poste-le aussi sur Snapchat, Instagram et YouTube : chaque clip te rapporte 1 point pour tes outils.</p>
+      <div class="duo" style="flex-wrap:wrap"><span class="puce tt">TikTok</span><span class="puce fb">Facebook</span><span class="puce" style="background:#1f2b36;color:#fff">Snapchat</span><span class="puce" style="background:#1f2b36;color:#fff">Instagram</span><span class="puce" style="background:#1f2b36;color:#fff">YouTube</span></div>
     </div>
     <div class="etape e3 apparait d2">
       <div class="num">3</div>
@@ -345,6 +355,24 @@ footer a{text-decoration:none;font-weight:600}
   </div>
 </div></section>
 
+<!-- ═══ LES OUTILS (01/11/2026) ═══ -->
+<section id="outils"><div class="wrap">
+  <div class="kicker apparait">Tes outils</div>
+  <h2 class="apparait">Tout pour monter vite, depuis ton téléphone.</h2>
+  <p class="lead apparait">Plus besoin de payer CapCut ni de passer par des sites remplis de pubs. Tout est dans ton espace.</p>
+  <div class="outils-g">
+    <div class="outil-c apparait"><div class="oi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></div><h3>Télécharger sans filigrane</h3><p>TikTok, YouTube, Instagram, Facebook. En qualité d'origine, prête à monter.</p></div>
+    <div class="outil-c apparait d1"><div class="oi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><h3>Récupérer le script</h3><p>Tout le texte dit dans une vidéo, prêt à copier, avec les accroches repérées.</p></div>
+    <div class="outil-c apparait d2"><div class="oi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h9M8.5 3v2M6 5c.6 3 2.6 5.6 5 7M11 5c-.8 3.6-3.3 6.6-6.5 8"/><path d="m13 21 4-9 4 9M14.4 18h5.2"/></svg></div><h3>Traduire en français</h3><p>Un script en anglais devient un texte français naturel, prêt à reprendre.</p></div>
+    <div class="outil-c apparait d3"><div class="oi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M6 14h5M13 14h5M8 17.5h8"/></svg></div><h3>Sous-titres automatiques</h3><p>Mot par mot, 8 styles, corrections et placement au doigt. Comme sur CapCut.</p></div>
+  </div>
+  <div class="acces-o apparait">
+    <div><b>3 essais gratuits</b><span>pour chaque outil, pour découvrir.</span></div>
+    <div><b>Gratuits avec tes points</b><span>1 clip posté sur Snapchat, Instagram ou YouTube = 1 point. 12 points = 3 jours d'outils.</span></div>
+    <div><b>1 200 F par mois</b><span>en illimité, par mobile money, carte ou crypto.</span></div>
+  </div>
+</div></section>
+
 <!-- ═══ L'ENTRÉE ═══ -->
 <section id="entree"><div class="wrap">
   <div class="kicker apparait">Le deal, en clair</div>
@@ -389,18 +417,19 @@ footer a{text-decoration:none;font-weight:600}
     <div class="bloc b-ok apparait">
       <h3>Ce que tu fais</h3>
       <div class="l"><span class="m">1</span><span><b>Clipe mes vidéos</b> : elles doivent venir de mon contenu, parler de la communauté ou me mettre en avant.</span></div>
-      <div class="l"><span class="m">2</span><span><b>Poste chaque clip sur TikTok et Facebook</b>, de 10 à 30 secondes.</span></div>
-      <div class="l"><span class="m">3</span><span><b>Colle les deux liens dans les 24 h</b> après avoir posté.</span></div>
+      <div class="l"><span class="m">2</span><span><b>Poste chaque clip</b> sur TikTok et Facebook (payés), et sur Snapchat, Instagram, YouTube (points). De 10 à 30 secondes.</span></div>
+      <div class="l"><span class="m">3</span><span><b>Colle tes liens dans les 24 h</b> après avoir posté. Tous sont facultatifs.</span></div>
     </div>
     <div class="bloc b-or apparait d1">
       <h3>Tes comptes</h3>
-      <div class="l"><span class="m">!</span><span>Sur TikTok et sur Facebook, le <b>nom du compte</b> doit contenir <b>Beaudelaire, Ex-Rienneux ou Rienneux</b>. Sinon, il est refusé.</span></div>
+      <div class="l"><span class="m">!</span><span><b>5 comptes</b> : TikTok, Facebook, Snapchat, Instagram et YouTube. Leur nom doit contenir <b>Beaudelaire, Ex-Rienneux ou Rienneux</b>. Sinon, ils sont refusés.</span></div>
+      <div class="l"><span class="m">!</span><span>Sur Snapchat, crée ton <b>profil public</b> : sans lui, tu ne peux pas publier tes clips.</span></div>
       <div class="l"><span class="m">!</span><span>Mets le <b>lien de l'école</b> dans tes deux bios. Tu as <b>3 jours</b> pour le faire.</span></div>
       <div class="l"><span class="m">!</span><span>Un compte, un seul clippeur.</span></div>
     </div>
     <div class="bloc b-ko apparait d2">
       <h3>Ce qui coupe ton accès</h3>
-      <div class="l"><span class="m">×</span><span>Une vidéo <b>sans rapport</b> avec moi ou la communauté est refusée. <b>3 refus pour hors sujet</b> et ton accès est coupé.</span></div>
+      <div class="l"><span class="m">×</span><span>Une vidéo <b>sans rapport</b> avec moi ou la communauté est refusée. <b>3 refus pour hors sujet</b> et ton accès est suspendu 5 jours.</span></div>
       <div class="l"><span class="m">×</span><span><b>Les vues achetées</b>, sur TikTok comme sur Facebook.</span></div>
       <div class="l"><span class="m">×</span><span>Reposter la même vidéo : un lien ne compte qu'une fois.</span></div>
     </div>
@@ -411,7 +440,7 @@ footer a{text-decoration:none;font-weight:600}
 <section id="inscription"><div class="wrap">
   <div class="kicker apparait">Comment t'inscrire</div>
   <h2 class="apparait">Quinze minutes, une seule fois.</h2>
-  <p class="lead apparait">Tes comptes sont vérifiés automatiquement. Si le nom est bon, ton espace s'ouvre tout de suite.</p>
+  <p class="lead apparait">Tes comptes sont vérifiés automatiquement. Si le nom est bon, ton espace s'ouvre tout de suite. Pas encore de comptes ? L'IA de ton espace te propose des noms.</p>
   <div class="inscr">
     <div class="pas apparait">
       <div class="n">1</div>
@@ -421,19 +450,19 @@ footer a{text-decoration:none;font-weight:600}
     <div class="pas p-tt apparait d1">
       <div class="n">2</div>
       <h4>Ton compte TikTok</h4>
-      <p>Un compte dédié aux clips, avec la marque dans le nom affiché. Ton @username est libre.</p>
+      <p>Un compte dédié aux clips, avec la marque dans le nom affiché. Ton nom d'utilisateur est libre.</p>
       <div class="ex">Beaudelaire Clip · Ex-Rienneux Motivation · Rienneux Daily</div>
     </div>
     <div class="pas p-fb apparait d2">
       <div class="n">3</div>
-      <h4>Ton compte Facebook</h4>
-      <p>Profil ou Page, avec la marque dans le nom. Mets ce texte dans tes bios TikTok et Facebook :</p>
+      <h4>Tes autres comptes</h4>
+      <p>Facebook (profil ou Page), Snapchat, Instagram et YouTube, avec la marque dans le nom. Mets ce texte dans tes bios TikTok et Facebook :</p>
       <div class="bio"><div id="bioT">Voici le lien pour rejoindre l'école de formation : https://beaudelaireconsulting.com</div><button type="button" onclick="copier(this)">Copier</button></div>
     </div>
     <div class="pas apparait d3">
       <div class="n">4</div>
       <h4>Rejoins le programme</h4>
-      <p>Connecte-toi avec Discord, colle ton compte TikTok et le lien de ton compte Facebook. C'est vérifié tout de suite.</p>
+      <p>Connecte-toi avec Discord, indique tes 5 comptes et accepte les règles. C'est vérifié tout de suite.</p>
       <a class="btn sm" style="margin-top:12px" href="https://bot.beaudelaireconsulting.com/createur">Rejoindre</a>
     </div>
   </div>
@@ -467,10 +496,11 @@ footer a{text-decoration:none;font-weight:600}
   <h2 class="apparait">Tu te demandes peut-être…</h2>
   <details class="apparait"><summary>Ça coûte quelque chose de s'inscrire ?</summary><div class="in">Non. L'inscription est gratuite et tu postes dès le premier jour. Tes vues sont payées quand tu es membre de la communauté : gratuitement en atteignant 20 000 vues, ou en t'abonnant à 10 000 FCFA par mois.</div></details>
   <details class="apparait"><summary>Il me faut du matériel ?</summary><div class="in">Un téléphone et une connexion. Le montage se fait sur CapCut, qui est gratuit. Les tutos et des modèles prêts à remplir sont dans ton espace.</div></details>
-  <details class="apparait"><summary>Pourquoi TikTok ET Facebook ?</summary><div class="in">Parce que le même clip fait des vues sur les deux, et que les vues s'additionnent sur la même vidéo, au même tarif. Tu montes le clip une fois, et les vues des deux plateformes s'additionnent. Ta vidéo est déjà sur TikTok ? Tu peux déposer son Reel Facebook seul, et l'inverse aussi.</div></details>
+  <details class="apparait"><summary>Pourquoi TikTok ET Facebook ?</summary><div class="in">Parce que le même clip fait des vues sur les deux, et que les vues s'additionnent sur la même vidéo, au même tarif. Tu montes le clip une fois, et les vues des deux plateformes s'additionnent. Tous les liens sont facultatifs : tu peux envoyer TikTok seul, ou Facebook seul.</div></details>
   <details class="apparait"><summary>Je peux utiliser mes comptes actuels ?</summary><div class="in">Oui, si tu changes leur nom pour qu'il contienne Beaudelaire, Ex-Rienneux ou Rienneux. La plupart préfèrent créer des comptes à part, pour ne pas mélanger avec leurs publications personnelles.</div></details>
   <details class="apparait"><summary>Et si ma vidéo est refusée ?</summary><div class="in">Tu vois le motif dans ton espace : lien collé trop tard, clip hors sujet, compte au nom non conforme… Tu peux corriger et reposter. Seuls les refus pour hors sujet comptent pour la règle des 3.</div></details>
-  <details class="apparait"><summary>Et Instagram ou YouTube ?</summary><div class="in">Tu peux poster où tu veux, mais aujourd'hui seules les vues TikTok et Facebook sont comptées et payées.</div></details>
+  <details class="apparait"><summary>Et Snapchat, Instagram ou YouTube ?</summary><div class="in">Leurs vues ne sont pas payées pour l'instant. Mais chaque clip que tu y postes te rapporte 1 point, et 12 points t'ouvrent 3 jours d'outils gratuits (téléchargement, scripts, traduction, sous-titres). Chaque lien est vérifié : seuls tes clips de mes vidéos comptent.</div></details>
+  <details class="apparait"><summary>Les outils sont payants ?</summary><div class="in">Tu as 3 essais gratuits pour chaque outil. Ensuite, c'est 1 200 F par mois en illimité, ou gratuit avec tes points.</div></details>
   <details class="apparait"><summary>Je peux gagner plus en ramenant des élèves ?</summary><div class="in">Oui, avec le parrainage. Tu crées ton compte parrain, tu choisis ton code, et chaque personne qui rejoint la communauté avec ton code te rapporte 1 250 F à chaque paiement, en plus de tes vues. <a href="/devenir-parrain.html">Voir le parrainage</a>.</div></details>
 </div></section>
 
@@ -478,7 +508,7 @@ footer a{text-decoration:none;font-weight:600}
 <section style="padding-top:20px"><div class="wrap">
   <div class="final apparait">
     <h2>Ton prochain clip peut te payer.</h2>
-    <p>Inscris-toi, poste sur TikTok et Facebook, et regarde tes vues se transformer en argent.</p>
+    <p>Inscris-toi, poste partout, et regarde tes vues TikTok et Facebook se transformer en argent.</p>
     <a class="btn pulse" href="https://bot.beaudelaireconsulting.com/createur">Rejoindre le Programme Créateur</a>
   </div>
 </div></section>
