@@ -241,21 +241,21 @@ footer .qui{display:inline-block;margin-bottom:8px;font-size:13px}
         <div class="ds">Tu arrêtes quand tu veux</div>
         <div class="mt"><span data-prix="mois">10 000 F</span><small>/ mois</small></div>
         <div class="eq"></div>
-        <a class="btn fl" data-lien="mois" href="https://bot.beaudelaireconsulting.com/pay" rel="noopener">Rejoindre </a>
+        <a class="btn fl" data-lien="mois" href="https://bot.beaudelaireconsulting.com/pay?src=exrienneux" rel="noopener">Rejoindre </a>
       </div>
       <div class="pc top">
         <div class="nm">3 mois <span class="pop">Le plus choisi</span></div>
         <div class="ds">Un seul paiement</div>
         <div class="mt"><span data-prix="trimestre">25 000 F</span></div>
         <div class="eq" data-parmois="trimestre">soit 8 333 F / mois</div>
-        <a class="btn or fl" data-lien="trimestre" href="https://bot.beaudelaireconsulting.com/pay?offre=trimestre" rel="noopener">Rejoindre </a>
+        <a class="btn or fl" data-lien="trimestre" href="https://bot.beaudelaireconsulting.com/pay?offre=trimestre&src=exrienneux" rel="noopener">Rejoindre </a>
       </div>
       <div class="pc">
         <div class="nm">1 an</div>
         <div class="ds">Un seul paiement, prix bloqué 1 an</div>
         <div class="mt"><span data-prix="annuel">100 000 F</span></div>
         <div class="eq" data-parmois="annuel">soit 8 333 F / mois</div>
-        <a class="btn fl" data-lien="annuel" href="https://bot.beaudelaireconsulting.com/pay?offre=annuel" rel="noopener">Rejoindre </a>
+        <a class="btn fl" data-lien="annuel" href="https://bot.beaudelaireconsulting.com/pay?offre=annuel&src=exrienneux" rel="noopener">Rejoindre </a>
       </div>
     </div>
     <div class="dessous">
@@ -307,6 +307,9 @@ function track(event, data){
   try{ if(window.clarity) window.clarity('event', event); }catch(e){}
 }
 window.track = track;
+/* Le suivi dans l'admin du bot (page « Page /exrienneux ») : une fois par étape et par visite. */
+var vus = {};
+function ping(e){ if (vus[e]) return; vus[e] = 1; var u = BOT + '/vb/ev?p=exrienneux&e=' + e + '&z=' + ZONE + '&t=' + Date.now(); try{ if (e === 'clic' && navigator.sendBeacon && navigator.sendBeacon(u)) return; new Image().src = u; }catch(x){} }
 function lire(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
 function ecrire(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 
@@ -324,8 +327,8 @@ function parMois(o){
   return ZONE === 'AF' ? 'soit ' + nb(Math.round(p)) + ' F / mois' : 'soit ' + p.toFixed(2).replace('.', ',') + ' € / mois';
 }
 function lien(o){
-  var q = o === 'mois' ? '' : 'offre=' + o;
-  return ZONE === 'AF' ? BOT + '/pay' + (q ? '?' + q : '') : BOT + '/carte/payer?devise=EUR' + (q ? '&' + q : '');
+  var q = (o === 'mois' ? '' : 'offre=' + o + '&') + 'src=exrienneux';
+  return ZONE === 'AF' ? BOT + '/pay?' + q : BOT + '/carte/payer?devise=EUR&' + q;
 }
 function afficher(){
   document.querySelectorAll('[data-prix]').forEach(function(el){ el.textContent = prix(el.getAttribute('data-prix')); });
@@ -339,8 +342,8 @@ function afficher(){
   document.getElementById('zoneBtn').textContent = ZONE === 'AF' ? 'Tu es en Europe ?' : 'Tu es en Afrique ?';
   document.getElementById('autreTxt').textContent = ZONE === 'AF' ? 'Pas de mobile money ?' : 'Pas de carte ?';
   var autres = ZONE === 'AF'
-    ? [['Payer par carte', BOT + '/carte/payer?offre=trimestre', 'carte'], ['Payer en crypto', BOT + '/crypto/payer?offre=trimestre', 'crypto']]
-    : [['Payer en crypto', BOT + '/crypto/payer?offre=trimestre', 'crypto']];
+    ? [['Payer par carte', BOT + '/carte/payer?offre=trimestre&src=exrienneux', 'carte'], ['Payer en crypto', BOT + '/crypto/payer?offre=trimestre&src=exrienneux', 'crypto']]
+    : [['Payer en crypto', BOT + '/crypto/payer?offre=trimestre&src=exrienneux', 'crypto']];
   document.getElementById('autres').innerHTML = autres.map(function(a){ return '<a class="btn mini" href="' + a[1] + '" rel="noopener" data-moyen="' + a[2] + '">' + a[0] + '</a>'; }).join('');
   var v = document.getElementById('vsl'), V = ZONE === 'AF' ? 'F' : 'E', src = '/exr/vsl-' + V + '.mp4';
   if (v.getAttribute('data-src') !== src) {
@@ -362,9 +365,9 @@ fetch(BOT + '/prix', {cache:'no-store'}).then(function(r){ return r.json(); }).t
 
 document.getElementById('zoneBtn').addEventListener('click', function(){ var z = ZONE === 'AF' ? 'EU' : 'AF'; ecrire('exr_zone', z); choisirZone(z); track('change_zone', {}); });
 document.getElementById('autreBtn').addEventListener('click', function(){ var a = document.getElementById('autres'); a.classList.toggle('on'); this.setAttribute('aria-expanded', a.classList.contains('on')); });
-document.getElementById('autres').addEventListener('click', function(e){ var a = e.target.closest('a'); if (a) track('click_paiement', {moyen:a.getAttribute('data-moyen'), offre:'trimestre'}); });
-document.querySelectorAll('[data-lien]').forEach(function(a){ a.addEventListener('click', function(){ track('click_paiement', {moyen: ZONE === 'AF' ? 'mobile' : 'carte', offre:a.getAttribute('data-lien')}); }); });
-document.getElementById('colleGo').addEventListener('click', function(){ track('click_colle', {offre:'trimestre'}); });
+document.getElementById('autres').addEventListener('click', function(e){ var a = e.target.closest('a'); if (a) { track('click_paiement', {moyen:a.getAttribute('data-moyen'), offre:'trimestre'}); ping('clic'); } });
+document.querySelectorAll('[data-lien]').forEach(function(a){ a.addEventListener('click', function(){ track('click_paiement', {moyen: ZONE === 'AF' ? 'mobile' : 'carte', offre:a.getAttribute('data-lien')}); ping('clic'); }); });
+document.getElementById('colleGo').addEventListener('click', function(){ track('click_colle', {offre:'trimestre'}); ping('clic'); });
 
 /* ── La vidéo : muette au départ, le clic relance du début avec le son. ── */
 var v = document.getElementById('vsl'), son = document.getElementById('son'), pause = document.getElementById('pause'), prog = document.getElementById('prog');
@@ -373,7 +376,7 @@ function offreT(){ return ZONE === 'AF' ? 180 : 183; }
 son.addEventListener('click', function(e){
   e.stopPropagation(); avecSon = true; son.style.display = 'none';
   v.muted = false; v.currentTime = 0; var p = v.play(); if (p && p.catch) p.catch(function(){});
-  track('vsl_son', {});
+  track('vsl_son', {}); ping('son');
 });
 document.getElementById('lect').addEventListener('click', function(){
   if (!avecSon) return;
@@ -386,11 +389,11 @@ v.addEventListener('timeupdate', function(){
   /* Barre qui avance vite au début, puis plus lentement. */
   prog.style.width = (100 * (1 - Math.pow(1 - x, 2))) + '%';
   if (avecSon) {
-    [25,50,75].forEach(function(k){ if (!paliers[k] && x * 100 >= k) { paliers[k] = 1; track('vsl_' + k, {}); } });
+    [25,50,75].forEach(function(k){ if (!paliers[k] && x * 100 >= k) { paliers[k] = 1; track('vsl_' + k, {}); ping('v' + k); } });
     if (v.currentTime >= offreT()) reveler();
   }
 });
-v.addEventListener('ended', function(){ if (avecSon) { track('vsl_fin', {}); reveler(); pause.style.display = 'flex'; } else { v.currentTime = 0; v.play().catch(function(){}); } });
+v.addEventListener('ended', function(){ if (avecSon) { track('vsl_fin', {}); ping('fin'); reveler(); pause.style.display = 'flex'; } else { v.currentTime = 0; v.play().catch(function(){}); } });
 var colle = document.getElementById('colle'), bloc = document.getElementById('rejoindre');
 function majColle(){
   var r = bloc.getBoundingClientRect(), dans = r.top < innerHeight && r.bottom > 0;
@@ -401,6 +404,8 @@ addEventListener('scroll', majColle, {passive:true});
 majColle();
 document.getElementById('yr').textContent = new Date().getFullYear();
 track('vue', {});
+/* La visite part une fois la zone connue (pays ou fuseau), pour la ranger dans la bonne colonne. */
+setTimeout(function(){ ping('vue'); }, 1200);
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
