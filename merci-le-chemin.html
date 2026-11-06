@@ -15,84 +15,108 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#030810">
+<link rel="icon" type="image/png" href="/exr/logo.png">
 <style>
+  /* STYLE « VERSION B » (06/11/2026), le même que /exrienneux : bleu nuit,
+     halos dorés, verre dépoli, titres Host Grotesk, boutons pilule.
+     La logique (paiement annulé, case à cocher, référence ?tx=) est inchangée. */
   :root{
-    --bg:#faf8f3; --card:#fffefb; --text:#1a1813; --muted:#7a766c; --border:#eae5d9;
-    --green:#159a45; --green-soft:#e9f5ee;
+    --bg:#030810; --card:linear-gradient(180deg,rgba(20,30,46,.78),rgba(10,16,26,.78));
+    --text:#f3f5f8; --muted:#8f9bab; --faint:#5b6778;
+    --border:rgba(255,255,255,.08); --border2:rgba(255,255,255,.14); --glass:rgba(16,24,38,.55);
+    --or:#F5B54A; --green:#43d17f; --green-soft:rgba(67,209,127,.12);
     --discord:#5865F2; --discord-dark:#4752c4;
-    --red:#d62828;
+    --red:#FF6B5E;
+    --hf:"Host Grotesk",Inter,-apple-system,sans-serif;
   }
   *{box-sizing:border-box}
   body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);
-    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-    display:flex;align-items:center;justify-content:center;padding:16px;line-height:1.5}
-  .wrap{width:100%;max-width:390px}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:18px;
-    padding:26px 20px 22px;box-shadow:0 6px 26px rgba(20,40,25,.06);text-align:center}
+    font-family:Inter,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;line-height:1.5}
+  body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+    background:radial-gradient(600px 460px at -10% 20%,rgba(245,181,74,.10),transparent 70%),
+               radial-gradient(600px 460px at 110% 26%,rgba(245,181,74,.08),transparent 70%),
+               radial-gradient(800px 460px at 50% -10%,rgba(80,110,160,.18),transparent 70%)}
+  .wrap{width:100%;max-width:420px}
+  .marque{display:flex;justify-content:center;margin:4px 0 16px}
+  .marque span{display:inline-flex;align-items:center;gap:9px;padding:7px 16px 7px 10px;border-radius:999px;
+    background:var(--glass);border:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    font-family:var(--hf);font-weight:600;font-size:15px;letter-spacing:-.01em}
+  .marque img{width:24px;height:24px;display:block;filter:drop-shadow(0 0 10px rgba(126,226,70,.35))}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:22px;
+    padding:28px 20px 22px;box-shadow:0 30px 80px rgba(0,0,0,.5);text-align:center}
 
-  .check{width:46px;height:46px;border-radius:50%;background:var(--green-soft);
-    display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+  .check{width:52px;height:52px;border-radius:50%;background:var(--green-soft);border:1px solid rgba(67,209,127,.38);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
   .check svg{width:24px;height:24px}
-  h1{font-size:19px;font-weight:800;margin:0 0 4px}
-  .sub{color:var(--muted);font-size:14px;margin:0 0 18px}
+  h1{font-family:var(--hf);font-size:28px;font-weight:500;letter-spacing:-.025em;line-height:1.1;margin:0 0 6px}
+  .sub{color:var(--muted);font-size:14.5px;margin:0 0 18px}
 
   .noclose{display:inline-flex;align-items:center;gap:7px;
-    background:#fff6e0;border:1px solid #f0d089;color:#8a5a00;
-    font-weight:700;font-size:12.5px;border-radius:999px;padding:7px 14px;margin:0 0 16px}
+    background:rgba(245,181,74,.10);border:1px solid rgba(245,181,74,.45);color:var(--or);
+    font-weight:600;font-size:12.5px;border-radius:999px;padding:6px 14px;margin:0 0 16px}
 
-  .stopbox{display:flex;gap:11px;text-align:left;border:1px solid var(--border);
-    border-left:3px solid var(--red);background:#fff;border-radius:12px;padding:12px 14px;margin:0 0 22px}
+  .stopbox{display:flex;gap:11px;text-align:left;border:1px solid rgba(255,107,94,.32);
+    background:rgba(255,107,94,.07);border-radius:16px;padding:13px 14px;margin:0 0 24px}
   .stopbox .ico{font-size:17px;line-height:1.3;flex:0 0 auto}
-  .stopbox .txt{font-size:13px;color:var(--text);line-height:1.5}
-  .stopbox .txt b.red{color:var(--red);font-weight:800}
+  .stopbox .txt{font-size:13px;color:#d5dbe3;line-height:1.5}
+  .stopbox .txt b.red{color:var(--red);font-weight:600}
 
-  .steptitle{font-size:11.5px;font-weight:700;color:var(--muted);text-transform:uppercase;
-    letter-spacing:.06em;text-align:left;margin:0 0 12px}
+  .steptitle{font-size:12.5px;font-weight:500;color:var(--muted);text-align:left;margin:0 0 12px}
 
-  .block{text-align:left;margin-bottom:18px}
-  .blabel{display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:700;color:var(--text);margin:0 0 10px}
+  .block{text-align:left;margin-bottom:20px;padding-top:18px;border-top:1px solid var(--border)}
+  .blabel{display:flex;align-items:center;gap:10px;font-size:15.5px;font-weight:600;color:var(--text);margin:0 0 11px}
   .blabel .n{display:inline-flex;align-items:center;justify-content:center;
-    width:22px;height:22px;border-radius:50%;background:var(--discord);color:#fff;
-    font-size:12.5px;font-weight:800;flex:0 0 auto}
+    width:26px;height:26px;border-radius:9px;background:rgba(245,181,74,.12);border:1px solid rgba(245,181,74,.3);color:var(--or);
+    font-size:13px;font-weight:600;flex:0 0 auto}
 
   a.btn{display:block;width:100%;text-align:center;text-decoration:none;
-    font-weight:600;font-size:14.5px;padding:12px 14px;border-radius:11px;margin-bottom:8px;
+    font-weight:600;font-size:14.5px;padding:12px 14px;border-radius:999px;margin-bottom:8px;
     line-height:1.3;transition:border-color .12s ease,background .12s ease,opacity .12s ease}
   a.btn:last-child{margin-bottom:0}
-  a.light{background:#f6f3ec;color:var(--text);border:1px solid var(--border)}
-  a.light:hover{border-color:var(--discord)}
-  a.discord{background:var(--discord);color:#fff;font-weight:700;font-size:15.5px;padding:14px}
+  a.light{background:linear-gradient(180deg,#1d2b40,#121c2c);color:#fff;border:1px solid var(--border2)}
+  a.light:hover{border-color:rgba(255,255,255,.28)}
+  a.discord{background:var(--discord);color:#fff;font-weight:600;font-size:15.5px;padding:14px;box-shadow:0 12px 34px rgba(88,101,242,.28)}
   a.discord:hover{background:var(--discord-dark)}
-  a.btn.locked{opacity:.4;cursor:not-allowed}
+  a.btn.locked{opacity:.38;cursor:not-allowed;box-shadow:none}
 
-  .acc{margin-bottom:8px;border:1px solid var(--border);border-radius:11px;background:#f6f3ec;overflow:hidden}
-  .acc summary{list-style:none;cursor:pointer;padding:12px 14px;font-size:14.5px;font-weight:600;
+  .acc{margin-bottom:8px;border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.03);overflow:hidden}
+  .acc summary{list-style:none;cursor:pointer;padding:13px 15px;font-size:14.5px;font-weight:500;
     display:flex;align-items:center;justify-content:space-between}
   .acc summary::-webkit-details-marker{display:none}
-  .acc summary::after{content:'⌄';font-size:15px;color:var(--muted);transition:transform .15s ease}
-  .acc[open] summary::after{transform:rotate(180deg)}
-  .acc[open]{background:#fff}
-  .accbody{padding:2px 14px 13px}
-  .accbody ol{margin:6px 0 0;padding-left:19px}
-  .accbody li{font-size:13px;color:var(--text);margin-bottom:6px;line-height:1.45}
+  .acc summary::after{content:'+';font-size:21px;font-weight:300;line-height:1;color:var(--muted)}
+  .acc[open] summary::after{content:'\2212'}
+  .acc[open]{background:rgba(255,255,255,.05);border-color:var(--border2)}
+  .accbody{padding:0 15px 14px}
+  .accbody ol{margin:2px 0 0;padding-left:19px}
+  .accbody li{font-size:13.5px;color:#c4ccd6;margin-bottom:6px;line-height:1.45}
+  .accbody li b{color:var(--text);font-weight:600}
   .accbody li:last-child{margin-bottom:0}
 
-  .readcheck{display:flex;align-items:center;gap:10px;text-align:left;
-    background:#fff8e6;border:1px solid #f0d089;border-radius:11px;
-    padding:11px 13px;margin-bottom:9px;font-size:13.5px;font-weight:600;cursor:pointer}
+  .alerte{background:rgba(255,107,94,.08);border:1px solid rgba(255,107,94,.32);color:#ff9a90;font-size:12.5px;font-weight:500;
+    border-radius:14px;padding:10px 13px;margin:0 0 10px;text-align:left;line-height:1.45}
+
+  .readcheck{display:flex;align-items:center;gap:11px;text-align:left;
+    background:rgba(245,181,74,.08);border:1px solid rgba(245,181,74,.35);border-radius:16px;
+    padding:12px 14px;margin-bottom:10px;font-size:13.5px;font-weight:500;cursor:pointer;color:#d5dbe3}
+  .readcheck b{color:var(--text);font-weight:600}
   .readcheck input{width:20px;height:20px;margin:0;flex:0 0 auto;accent-color:var(--green);cursor:pointer}
 
-  .hint{color:var(--muted);font-size:12.5px;margin:8px 2px 0}
+  .hint{color:var(--faint);font-size:12.5px;margin:8px 2px 0}
   .note{color:var(--muted);font-size:12.5px;margin:20px 0 0}
-  .note a{color:var(--discord-dark);text-decoration:none;font-weight:600}
-  .brand{text-align:center;margin-top:14px;font-size:12px;color:var(--muted);font-weight:600}
+  .note a{color:var(--text);text-decoration:none;font-weight:500}
+  .brand{text-align:center;margin-top:16px;font-size:12px;color:var(--faint);font-weight:500}
   #annuleBox{display:none}
   .annule #okBox{display:none}
   .annule #annuleBox{display:block}
-  .x{width:46px;height:46px;border-radius:50%;background:#fdeaea;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+  .x{width:52px;height:52px;border-radius:50%;background:rgba(255,107,94,.10);border:1px solid rgba(255,107,94,.34);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
   .x svg{width:22px;height:22px}
-  .btn-retry{display:block;background:linear-gradient(95deg,#FFB43C,#E4930F);color:#1a1206;font-weight:800;font-size:15px;text-decoration:none;border-radius:12px;padding:14px;margin-top:16px}
+  .annule-txt{font-size:14px;color:var(--muted);margin:0}
+  .btn-retry{display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(180deg,#FFC566,#EFA02A);color:#1b1205;font-weight:600;font-size:15px;text-decoration:none;border-radius:999px;padding:13px;margin-top:18px}
+  .btn-retry:after{content:"→";font-weight:500}
+  @media(max-width:380px){.card{padding:24px 16px 20px}h1{font-size:25px}}
 </style>
 <!-- PIXEL WHOP (25/10/2026) : mesure les visites pour Whop. Pas d'événement « purchase » ici :
      les paiements par carte passent par Whop, qui les compte déjà. -->
@@ -100,27 +124,28 @@
 </head>
 <body>
   <div class="wrap">
+    <div class="marque"><span><img src="/exr/logo.png" alt="" width="24" height="24">Ex-Rienneux</span></div>
     <div class="card" id="annuleBox">
       <div class="x">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#d62828" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B5E" stroke-width="3" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </div>
       <h1>Paiement annulé</h1>
       <p class="sub" style="margin-bottom:6px">Aucun argent n'a été débité.</p>
-      <p style="font-size:14px;color:var(--muted);margin:0">Tu as changé d'avis ou eu un souci pendant le paiement ? Tu peux réessayer quand tu veux.</p>
+      <p class="annule-txt">Tu as changé d'avis ou eu un souci pendant le paiement ? Tu peux réessayer quand tu veux.</p>
       <a class="btn-retry" href="https://beaudelaireconsulting.com/checkout.html">Réessayer le paiement</a>
-      <p class="note" style="margin-top:14px">Un souci ? <a href="mailto:beaudelaireconsulting@gmail.com">beaudelaireconsulting@gmail.com</a></p>
+      <p class="note" style="margin-top:14px">Un souci ? <a href="/contact?objet=paiement">Écris-nous</a></p>
     </div>
     <div class="card" id="okBox">
       <div class="check">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#159a45" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#43d17f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
       </div>
-      <h1>Paiement réussi 🎉</h1>
+      <h1>Paiement réussi </h1>
       <p class="sub">Encore 2 étapes pour entrer dans la communauté.</p>
 
-      <div class="noclose">⚠️ Ne ferme pas cette page</div>
+      <div class="noclose"> Ne ferme pas cette page</div>
 
       <div class="stopbox">
-        <span class="ico">🛑</span>
+        
         <span class="txt"><b class="red">STOP — lis avant de cliquer.</b> Ne clique sur rien avant d'avoir fait les 2 étapes ci-dessous, dans l'ordre. Si tu en sautes une, tu risques de ne pas entrer dans la communauté.</span>
       </div>
 
@@ -129,7 +154,7 @@
       <div class="block">
         <div class="blabel"><span class="n">1</span> Installe Discord</div>
         <details class="acc">
-          <summary>📱 iPhone</summary>
+          <summary> iPhone</summary>
           <div class="accbody">
             <ol>
               <li>Ouvre l'<b>App Store</b>.</li>
@@ -141,7 +166,7 @@
           </div>
         </details>
         <details class="acc">
-          <summary>🤖 Android</summary>
+          <summary> Android</summary>
           <div class="accbody">
             <ol>
               <li>Ouvre le <b>Play Store</b>.</li>
@@ -156,16 +181,16 @@
       </div>
 
       <div class="block">
-        <div class="blabel"><span class="n">2</span> Vérifie ton e-mail Discord ⚠️</div>
-        <div style="background:#fdeaea;border:1px solid #e7b3b3;color:#b71c1c;font-size:12.5px;font-weight:700;border-radius:9px;padding:9px 12px;margin:0 0 10px;text-align:left">Sans cette étape, le bouton « Activer » ne marchera pas. C'est l'étape que presque tout le monde oublie.</div>
+        <div class="blabel"><span class="n">2</span> Vérifie ton e-mail Discord </div>
+        <div class="alerte">Sans cette étape, le bouton « Activer » ne marchera pas. C'est l'étape que presque tout le monde oublie.</div>
         <details class="acc" open>
-          <summary>📧 Comment vérifier mon e-mail</summary>
+          <summary> Comment vérifier mon e-mail</summary>
           <div class="accbody">
             <ol>
-              <li>Dans Discord, va dans <b>Paramètres</b> (la roue ⚙️), puis <b>Mon compte</b>.</li>
+              <li>Dans Discord, va dans <b>Paramètres</b> (la roue ), puis <b>Mon compte</b>.</li>
               <li>Tu verras une <b>bande rouge</b> : « ton e-mail n'est pas vérifié ». Clique dessus.</li>
               <li>Ouvre ta <b>boîte mail</b> (Gmail, Yahoo…) et trouve l'e-mail de <b>Discord</b>.</li>
-              <li>Clique sur le <b>lien</b> dans l'e-mail pour valider ton adresse. ✅</li>
+              <li>Clique sur le <b>lien</b> dans l'e-mail pour valider ton adresse. </li>
               <li><b>Reviens ici</b> et passe à l'étape 3.</li>
             </ol>
           </div>
@@ -182,9 +207,8 @@
         <p class="hint">Coche la case pour débloquer le bouton.</p>
       </div>
 
-      <p class="note">Un souci ? <a href="mailto:beaudelaireconsulting@gmail.com">beaudelaireconsulting@gmail.com</a></p>
+      <p class="note">Un souci ? <a href="/contact?objet=paiement">Écris-nous</a></p>
     </div>
-    <p class="brand">Beaudelaire Consulting</p>
   </div>
 
   <script>
@@ -207,7 +231,7 @@
         else { btn.classList.add('locked'); btn.setAttribute('aria-disabled','true'); }
       }
       btn.addEventListener('click', function(e){
-        if (!cb.checked){ e.preventDefault(); cb.focus(); alert("Coche d'abord la case juste au-dessus 👆"); }
+        if (!cb.checked){ e.preventDefault(); cb.focus(); alert("Coche d'abord la case juste au-dessus "); }
       });
       cb.addEventListener('change', update);
       update();

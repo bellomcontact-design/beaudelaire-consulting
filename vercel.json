@@ -1,11 +1,30 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/fr", "destination": "/index.html" },
-    { "source": "/en", "destination": "/index.html" }
+    {
+      "source": "/fr",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/en",
+      "destination": "/index.html"
+    }
   ],
   "redirects": [
-    { "source": "/communaute", "destination": "https://whatsapp.com/channel/0029VbDh1GNHQbRxUobuaM3Q", "permanent": false },
-    { "source": "/r/:code", "destination": "https://bot.beaudelaireconsulting.com/r/:code", "permanent": false }
+    {
+      "source": "/communaute",
+      "destination": "https://whatsapp.com/channel/0029VbDh1GNHQbRxUobuaM3Q",
+      "permanent": false
+    },
+    {
+      "source": "/r/:code",
+      "destination": "https://bot.beaudelaireconsulting.com/r/:code",
+      "permanent": false
+    },
+    {
+      "source": "/programme-createur-v2",
+      "destination": "/programme-createur",
+      "permanent": true
+    }
   ]
 }

@@ -12,543 +12,442 @@
 <link rel="preconnect" href="https://iframe.mediadelivery.net">
 <link rel="preconnect" href="https://assets.mediadelivery.net">
 <link rel="preconnect" href="https://vz-624ebb34-95c.b-cdn.net" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#030810">
 <style>
+ /* ══════════════════════════════════════════════════════════════
+    STYLE « VERSION B » (06/11/2026), le même que /exrienneux,
+    inspiré de sandcastles.ai : fond bleu nuit, halos dorés,
+    verre dépoli, titres fins Host Grotesk, boutons pilule.
+    Les noms de classes d'origine sont conservés : le JavaScript
+    (quiz, VSL, carrousels, traductions) n'a pas été touché.
+    ══════════════════════════════════════════════════════════════ */
  :root{
- /* Fonds — du plus profond au plus proche */
- --bg:#060E15; --bg2:#0B141C; --card:#131B23; --border:#222E39;
- /* Texte — hiérarchie par opacité du blanc */
- --text:#FFFFFF; --muted:rgba(255,255,255,.64); --faint:rgba(255,255,255,.50);
- /* Accents */
- --accent:#FFA545; --accent-strong:#FFA545; --accent-soft:rgba(255,165,69,.12);
- --star:#FFCF23; --on-accent:#060E15;
- /* Sémantique */
+ --bg:#030810; --bg2:#060d18; --card:rgba(16,24,38,.72); --border:rgba(255,255,255,.08); --border2:rgba(255,255,255,.14);
+ --text:#f3f5f8; --muted:#8f9bab; --faint:#5b6778; --text-soft:#c4ccd6;
+ --glass:rgba(16,24,38,.55); --cardg:linear-gradient(180deg,rgba(20,30,46,.72),rgba(10,16,26,.72));
+ --accent:#F5B54A; --accent-strong:#F5B54A; --accent-soft:rgba(245,181,74,.12); --or2:#E4930F;
+ --star:#F5B54A; --on-accent:#1b1205; --vert:#43d17f;
  --danger:#FF6B5E; --danger-bg:#A32C24;
- /* Dégradé des boutons, relevé sur therealworld.net */
- --accent-grad:linear-gradient(95deg,#FFA930 0%,#FFAB23 51%,#D5AA12 113%);
- /* Variantes translucides, centralisées */
- --text-soft:rgba(255,255,255,.80); --on-accent-soft:rgba(6,14,21,.72);
- --bg-veil:rgba(6,14,21,.85); --star-soft:rgba(255,207,35,.10); --star-line:rgba(255,207,35,.34);
+ --accent-grad:linear-gradient(180deg,#FFC566,#EFA02A);
+ --on-accent-soft:rgba(27,18,5,.72);
+ --bg-veil:rgba(3,8,16,.85); --star-soft:rgba(245,181,74,.10); --star-line:rgba(245,181,74,.34);
+ --hf:"Host Grotesk",Inter,-apple-system,sans-serif;
  }
  *{box-sizing:border-box;margin:0;padding:0}
- body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
- background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
- .wrap{max-width:780px;margin:0 auto;padding:0 20px}
- .wide{max-width:1000px}
- /* En-tete : la bande reste visible en permanence ; la navigation
-    s'efface quand on descend et revient des qu'on remonte. */
- .entete{position:sticky;top:0;z-index:60}
- .entete .topnav{position:static;padding-top:12px;transition:transform .28s ease,opacity .28s ease,max-height .28s ease}
- .entete.compacte .topnav{transform:translateY(-6px);opacity:0;max-height:0;
-   overflow:hidden;border-bottom-color:transparent;pointer-events:none}
- @media(prefers-reduced-motion:reduce){ .entete .topnav{transition:none} }
- /* Bande d'annonce : elle defile avec la page, la navigation reste
-    collee en haut. Sur mobile seul le bouton subsiste, faute de place. */
- /* Une seule barre : logo a gauche, appel a l'action au centre, menu a
-    droite. Le choix de langue vit dans le menu, il n'a pas besoin d'etre
-    visible en permanence. */
- .topbar{position:relative;background:var(--bg);border-bottom:1px solid var(--border);
-   display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 18px 20px}
- .tb-logo{display:inline-flex;align-items:center;text-decoration:none;flex:0 0 auto}
- .tb-logo img{width:34px;height:34px;border-radius:9px;display:block}
+ html{scroll-behavior:smooth}
+ body{font-family:Inter,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:15px;
+ background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:radial-gradient(700px 520px at -8% 18%,rgba(245,181,74,.10),transparent 70%),
+             radial-gradient(700px 520px at 108% 22%,rgba(245,181,74,.08),transparent 70%),
+             radial-gradient(900px 500px at 50% -10%,rgba(80,110,160,.16),transparent 70%)}
+ .wrap{max-width:780px;margin:0 auto;padding:0 16px}
+ .wide{max-width:1080px}
+ @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+ /* ── navigation pilule (logo · bouton · menu) ── */
+ .entete{position:sticky;top:12px;z-index:60;display:flex;justify-content:center;padding:12px 16px 0}
+ .topbar{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;
+   width:100%;max-width:760px;padding:7px 7px 7px 14px;border-radius:999px;background:var(--glass);
+   border:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+ .tb-logo{display:inline-flex;align-items:center;gap:9px;text-decoration:none;flex:0 0 auto;color:var(--text);
+   font-family:var(--hf);font-weight:600;font-size:17px;letter-spacing:-.01em}
+ .tb-logo img{width:28px;height:28px;display:block;filter:drop-shadow(0 0 10px rgba(126,226,70,.35))}
+ .tb-logo .tb-nom{white-space:nowrap}
+ .tb-droite{display:flex;align-items:center;gap:6px}
  .topbar-btn{display:inline-flex;align-items:center;justify-content:center;
-   background-image:var(--accent-grad);color:var(--on-accent);font-weight:800;font-size:13px;
-   padding:9px 16px;border-radius:999px;text-decoration:none;text-align:center;
-   transition:transform .12s ease}
- .topbar-btn:hover{transform:scale(1.04)}
- .tb-burger{flex:0 0 auto;background:none;border:1px solid var(--border);border-radius:9px;
-   color:var(--text);font-size:18px;line-height:1;width:40px;height:38px;cursor:pointer;
-   font-family:inherit}
- .tb-burger:hover{border-color:var(--accent)}
- @media(max-width:420px){ .topbar-btn{font-size:11.5px;padding:8px 11px} .tb-logo img{width:30px;height:30px} }
+   background:#fff;color:#0a1220;font-weight:600;font-size:13.5px;
+   padding:9px 16px;border-radius:999px;text-decoration:none;text-align:center;white-space:nowrap;
+   transition:background .15s,transform .12s}
+ .topbar-btn:hover{background:#eef1f5}
+ .topbar-btn:active{transform:scale(.98)}
+ .tb-burger{flex:0 0 auto;background:transparent;border:1px solid var(--border2);border-radius:999px;
+   color:var(--text);font-size:16px;line-height:1;width:38px;height:38px;cursor:pointer;font-family:inherit;
+   display:flex;align-items:center;justify-content:center}
+ .tb-burger:hover{border-color:rgba(255,255,255,.28)}
+ @media(max-width:640px){ .tb-logo .tb-nom{display:none} }
+ @media(max-width:380px){ .topbar-btn{font-size:12px;padding:8px 12px} }
 
- /* Menu deroulant : liens de navigation puis choix de langue */
- .tb-menu{position:absolute;top:100%;right:12px;z-index:70;min-width:212px;
-   background:var(--card);border:1px solid var(--border);border-radius:14px;
-   box-shadow:0 18px 40px rgba(0,0,0,.6);padding:8px;display:none}
+ .tb-menu{position:absolute;top:calc(100% + 10px);right:0;z-index:70;min-width:240px;
+   background:rgba(12,19,31,.96);border:1px solid var(--border2);border-radius:18px;
+   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+   box-shadow:0 24px 60px rgba(0,0,0,.6);padding:8px;display:none}
  .tb-menu.ouvert{display:block}
- .tb-menu a{display:block;padding:11px 13px;border-radius:9px;color:var(--text);
-   text-decoration:none;font-size:15px;font-weight:600}
- .tb-menu a:hover{background:var(--accent-soft);color:var(--accent)}
- .tb-menu a small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
- .tb-menu a:hover small{color:var(--text-soft)}
- /* Dernière entrée du menu : traitée comme un bouton, pour qu'elle
-    ressorte des simples liens de navigation. */
- .tb-menu a.appel{background-image:var(--accent-grad);color:var(--on-accent);
-   text-align:center;margin-top:4px;font-weight:800}
- .tb-menu a.appel small{color:rgba(6,14,21,.72)}
- .tb-menu a.appel:hover{background-image:var(--accent-grad);color:var(--on-accent);opacity:.94}
- .tb-menu a.appel:hover small{color:rgba(6,14,21,.72)}
- .tb-menu hr{border:0;border-top:1px solid var(--border);margin:7px 4px}
+ .tb-menu a{display:block;padding:11px 13px;border-radius:12px;color:var(--text);text-decoration:none;font-size:15px;font-weight:500}
+ .tb-menu a:hover{background:rgba(255,255,255,.05)}
+ .tb-menu a small{display:block;font-size:12.5px;font-weight:400;color:var(--muted);margin-top:2px}
+ .tb-menu a.appel{background-image:var(--accent-grad);color:var(--on-accent);text-align:center;margin-top:6px;font-weight:600;border-radius:14px}
+ .tb-menu a.appel small{color:var(--on-accent-soft)}
+ .tb-menu a.appel:hover{opacity:.94}
+ .tb-menu hr{border:0;border-top:1px solid var(--border);margin:8px 4px}
  .tb-lang{display:flex;gap:7px;padding:4px}
- .tb-lang button{flex:1;background:none;border:1px solid var(--border);border-radius:9px;
-   color:var(--muted);font-family:inherit;font-weight:800;font-size:13px;padding:9px 0;cursor:pointer}
- .tb-lang button.actif{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
- @media(prefers-reduced-motion:reduce){ .topbar-btn{transition:none} .topbar-btn:hover{transform:none} }
+ .tb-lang button{flex:1;background:none;border:1px solid var(--border2);border-radius:999px;
+   color:var(--muted);font-family:inherit;font-weight:500;font-size:13px;padding:8px 0;cursor:pointer}
+ .tb-lang button.actif{border-color:rgba(245,181,74,.55);color:var(--accent);background:var(--accent-soft)}
 
- .topbar-info{position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);z-index:2;
-   display:inline-flex;align-items:center;justify-content:center;
-   border:1px solid var(--border);border-radius:999px;padding:6px 18px;
-   background:var(--card);max-width:92vw;box-shadow:0 6px 18px rgba(0,0,0,.45)}
- .topbar-info span{color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;
-   text-overflow:ellipsis;transition:opacity .4s ease}
+ /* L'info qui tourne (montant généré, élèves) : la pastille au-dessus du titre */
+ .topbar-info{display:inline-flex;align-items:center;justify-content:center;gap:8px;max-width:92vw;
+   padding:6px 14px;border-radius:999px;border:1px solid var(--border2);background:var(--glass);margin-bottom:6px}
+ .topbar-info span{color:#d5dbe3;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .4s ease}
  .topbar-info span.efface{opacity:0}
- .topbar-info b{color:var(--accent);font-weight:800}
- @media(max-width:420px){ .topbar-info span{font-size:11.5px} .topbar-btn{font-size:12.5px} }
- @media(prefers-reduced-motion:reduce){
-   .topbar-btn,.topbar-info span{transition:none} .topbar-btn:hover{transform:none} }
- .topnav{position:sticky;top:0;z-index:40;background:var(--bg-veil);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
- .topnav-in{display:flex;align-items:center;justify-content:space-between;max-width:1000px;margin:0 auto;padding:13px 20px}
- .brand{font-family:'Inter',sans-serif;font-weight:700;font-size:20px;text-decoration:none;color:var(--text);letter-spacing:-.01em;display:inline-flex;align-items:center;gap:9px}
- .brand img{width:36px;height:36px;border-radius:9px;flex-shrink:0}
- .navright{display:flex;align-items:center;gap:14px}
- .navlinks{display:flex;align-items:center;gap:22px}
- .navlinks a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:600;transition:color .12s}
- .navlinks a:hover{color:var(--text)}
- .navlinks a.nav-cta{font-size:14px;padding:10px 18px;border-radius:10px;color:var(--on-accent)}
- .navctl{display:flex;align-items:center;gap:9px}
- .navburger{display:none;background:none;border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:19px;line-height:1;width:40px;height:38px;cursor:pointer}
- .langtoggle{background:none;border:1px solid var(--border);border-radius:8px;color:var(--muted);
- font-family:inherit;font-weight:700;font-size:13px;padding:7px 11px;cursor:pointer;transition:.12s}
- .langtoggle:hover{border-color:var(--accent);color:var(--text)}
- .pnow{display:block;text-align:center;font-size:36px;font-weight:800;color:var(--accent);white-space:nowrap;line-height:1.02}
- .pnow sup{font-size:.4em;font-weight:800;vertical-align:super;margin-left:3px}
- .pnow .peur{font-size:.42em;font-weight:700;color:var(--muted);vertical-align:middle;margin-left:2px}
- .bkcards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:660px;margin:24px auto 8px;text-align:left}
- .bkcard{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:16px 16px}
- .bkcard .bkico{font-size:22px;margin-bottom:6px;line-height:1}
- .bkcard b{display:block;font-size:15px;color:var(--text);margin-bottom:3px}
- .bkcard span{font-size:13.5px;color:var(--muted);line-height:1.45}
- .bkcommu{background:var(--accent-soft);border:1.5px solid rgba(255,165,69,.28);border-radius:14px;padding:16px 18px;max-width:660px;margin:14px auto 22px;text-align:left}
- .bkcommu b{display:block;font-size:16px;color:var(--accent-strong);margin-bottom:5px}
- .bkcommu span{font-size:14px;color:var(--text);line-height:1.5}
- @media(max-width:560px){ .bkcards{grid-template-columns:1fr} }
- .pold{display:block;text-align:center;font-size:16px;font-weight:700;color:var(--faint);text-decoration:line-through;white-space:nowrap;margin-top:5px}
- @media(max-width:680px){
-   .brand{font-size:16px;white-space:nowrap}
-   .brand img{width:30px;height:30px}
-   .topnav-in{position:relative}
-   .navburger{display:block}
-   .navlinks{position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:1px solid var(--border);
-     flex-direction:column;align-items:stretch;gap:0;padding:6px 20px 14px;display:none;box-shadow:0 10px 22px rgba(0,0,0,.55)}
-   .navlinks.open{display:flex}
-   .navlinks a{font-size:16px;padding:13px 2px}
-   .navlinks a.nav-cta{background:var(--accent-strong);background-image:var(--accent-grad);color:var(--on-accent);border-radius:10px;text-align:center;margin-top:8px;padding:13px}
- }
- .cta{display:inline-block;background:var(--accent-strong);background-image:var(--accent-grad);color:var(--on-accent);font-weight:700;font-size:16px;
- padding:16px 34px;border-radius:12px;text-decoration:none;border:none;cursor:pointer;
- font-family:inherit;transition:transform .12s ease,opacity .12s ease}
- .cta:hover,.cta:focus-visible{opacity:.94;transform:scale(1.04)}
- @media(prefers-reduced-motion:reduce){.cta,.paybtn{transition:none}.cta:hover,.paybtn:hover{transform:none}}
- .eyebrow{color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase;
- font-size:12px;text-align:center;margin-bottom:12px}
- h1,h2,.qtitle,.price,.stat b,.rescard .ba,.brand{font-family:'Inter',sans-serif}
- h1,h2{letter-spacing:-.02em;font-weight:800}
- h2{font-size:clamp(27px,4vw,42px);text-align:center;margin-bottom:14px}
- .lead{color:var(--muted);text-align:center;max-width:600px;margin:0 auto 40px}
- section{padding:62px 0}
+ .topbar-info b{color:var(--accent);font-weight:600}
+ @media(prefers-reduced-motion:reduce){.topbar-info span{transition:none}}
+
+ /* ── boutons ── */
+ .cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;font-weight:600;font-size:15px;
+   padding:13px 24px;border:1px solid var(--border2);background:linear-gradient(180deg,#1d2b40,#121c2c);color:#fff;
+   text-decoration:none;cursor:pointer;font-family:inherit;transition:transform .12s,border-color .15s;white-space:nowrap}
+ .cta:after{content:"→";font-weight:500}
+ .cta:hover,.cta:focus-visible{border-color:rgba(255,255,255,.28)}
+ .cta:active{transform:scale(.98)}
+ header .cta,.band .cta,.vslend .cta,.chcta .cta{background:var(--accent-grad);color:var(--on-accent);border-color:transparent}
+ .cta{position:relative;z-index:1}
+ header .cta:hover,.band .cta:hover,.chcta .cta:hover{filter:brightness(1.04)}
+ @media(prefers-reduced-motion:reduce){.cta,.paybtn{transition:none}}
+
+ /* ── typographie ── */
+ .eyebrow{display:table;margin:0 auto 16px;padding:5px 12px;border-radius:999px;border:1px solid var(--border2);
+   background:var(--glass);color:#d5dbe3;font-weight:500;font-size:12.5px;letter-spacing:0;text-transform:none;text-align:center}
+ h1,h2,.qtitle,.price,.stat b,.rescard .ba{font-family:var(--hf)}
+ h1,h2{letter-spacing:-.025em;font-weight:500;line-height:1.08}
+ h1,h2,.honest .concl,.band h2{text-wrap:balance}
+ h2{font-size:clamp(28px,5.6vw,44px);text-align:center;margin:0 auto 12px;max-width:760px}
+ h2 b,h2 em,h2 .hl{font-style:normal;font-weight:500;color:var(--accent);-webkit-text-fill-color:var(--accent)}
+ .lead{color:var(--muted);text-align:center;max-width:540px;margin:0 auto 36px}
+ section{padding:96px 0 0}
  .stars{color:var(--star);letter-spacing:2px}
-
- /* HERO */
- header{background:radial-gradient(1000px 460px at 50% -10%, rgba(255,165,69,.10), transparent 60%), var(--bg);
- padding:84px 0 70px;text-align:center;border-bottom:1px solid var(--border)}
- .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--bg2);
- color:var(--text);font-size:13px;padding:7px 16px;border-radius:999px;margin-bottom:24px;font-weight:600}
- h1{font-weight:400;font-size:clamp(32px,4.6vw,50px);line-height:1.08;margin-bottom:18px;letter-spacing:-.02em;color:var(--text)}
- .sub b,.sub strong,h1 b,h1 strong{font-weight:800}
  .nowrap{white-space:nowrap}
- .sub{font-size:clamp(17px,2.4vw,23px);color:var(--text);max-width:640px;margin:0 auto 22px;line-height:1.4;font-weight:400}
- .herobullets{color:var(--muted);font-size:14px;margin-bottom:30px}
- .herobullets b{color:var(--text);font-weight:700}
- .vsl{position:relative;max-width:560px;margin:0 auto 30px;aspect-ratio:16/9;background:var(--bg2);
- border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden}
- /* Ce que tu obtiens : deux blocs, chacun avec sa liste de promesses */
- .obtiens{background:var(--bg2)}
- .duo{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:960px;margin:0 auto}
- @media(max-width:820px){.duo{grid-template-columns:1fr;gap:18px}}
- .bloc{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:26px 24px}
- .bloc .ico{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--accent);
-   display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
- .bloc h3{font-size:clamp(19px,2.4vw,24px);font-weight:800;letter-spacing:-.01em;margin-bottom:18px;line-height:1.2}
- .bloc h3 b{color:var(--accent);font-weight:800}
- .bloc ul{list-style:none;display:flex;flex-direction:column;gap:13px}
- .bloc li{display:flex;gap:11px;font-size:15px;line-height:1.45;color:var(--text-soft)}
- .bloc li b{color:var(--text);font-weight:700}
- .bloc .ck{flex:0 0 auto;color:var(--accent);font-weight:800}
 
- /* Les quatre voies : cartes de meme hauteur, sans bouton */
- .voies{background:var(--bg)}
- .vgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:960px;margin:34px auto 0}
- @media(max-width:760px){.vgrid{grid-template-columns:1fr}}
- .voie{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 22px}
- .voie .vtete{display:flex;align-items:center;gap:12px;margin-bottom:14px}
- .voie .vico{font-size:26px;line-height:1;flex:0 0 auto}
- .voie h3{font-size:18px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
- .voie h3 b{color:var(--accent)}
- .voie p{color:var(--text-soft);font-size:14.5px;line-height:1.5}
- .voie p+p{margin-top:10px;color:var(--muted)}
-
- /* Chiffres animes : ils defilent une fois, a l'arrivee a l'ecran. */
- /* Halo derriere les chiffres : ils doivent sembler eclairer la page. */
- .chiffres{position:relative;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-   background:radial-gradient(720px 420px at 50% 42%, rgba(255,165,69,.14), transparent 68%), var(--bg)}
- /* Empiles, tous a la meme taille : c'est la repetition du format qui
-    donne son rythme au bloc, pas la taille de chaque nombre. */
- .chgrid{display:flex;flex-direction:column;max-width:660px;margin:0 auto;text-align:center;position:relative}
- .ch{padding:34px 0}
- .ch + .ch{border-top:1px solid rgba(255,165,69,.16)}
-
- /* Le nombre : degrade or, halo diffus, chasse fixe pour que le defilement
-    du compteur ne fasse pas trembler la ligne. */
- .ch b{display:block;font-size:clamp(42px,12vw,84px);font-weight:900;letter-spacing:-.045em;
-   line-height:.96;font-variant-numeric:tabular-nums;white-space:nowrap;
-   color:var(--star);
-   background-image:linear-gradient(180deg,#FFE9A8 0%,#FFC24A 46%,#F08A1E 100%);
-   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-   filter:drop-shadow(0 6px 26px rgba(255,165,69,.34));padding-bottom:.05em}
- /* Le nombre et sa devise restent sur la meme ligne : les elements
-    internes du chiffre ne doivent pas heriter du style des libelles,
-    d'ou le selecteur d'enfant direct plus bas. */
- .ch b .val,.ch b .unite{display:inline}
- .ch .unite{font-size:.32em;font-weight:900;margin-left:6px;letter-spacing:.01em;vertical-align:.3em}
- .ch > span{display:block;color:var(--text-soft);font-size:clamp(11px,2.9vw,14px);margin-top:14px;
-   text-transform:uppercase;letter-spacing:.14em;font-weight:700;
-   padding:0 14px;max-width:100%;overflow-wrap:break-word}
- @media(max-width:430px){ .ch b{font-size:34px} .ch > span{letter-spacing:.08em;font-size:11px;padding:0 8px} }
-
- /* Sous les chiffres : l'appel a l'action, puis la preuve sociale */
- .chcta{text-align:center;margin-top:54px}
- .chjoined{display:flex;align-items:center;justify-content:center;gap:11px;margin-top:16px;
-   color:var(--muted);font-size:14.5px;flex-wrap:wrap}
- .chjoined b{color:var(--text);font-weight:800}
- .chav{display:inline-flex;flex:0 0 auto}
- .chav i{width:30px;height:30px;border-radius:50%;background:var(--card);border:2px solid var(--bg);
-   margin-left:-9px;display:flex;align-items:center;justify-content:center;
-   font-style:normal;font-weight:800;font-size:12px;color:var(--accent)}
- .chav i:first-child{margin-left:0}
- .chav img{width:30px;height:30px;border-radius:50%;border:2px solid var(--bg);margin-left:-9px;object-fit:cover;display:block}
- .chav img:first-child{margin-left:0}
-
- /* Preuves sociales : un carrousel d'activites, 3 captures en eventail */
- .proof{background:var(--bg2);border-top:1px solid var(--border)}
- .proof .eyebrow{margin-bottom:10px;text-align:center}
- .proof h2{font-size:clamp(24px,3.4vw,36px);font-weight:800;letter-spacing:-.02em;text-align:center;margin-bottom:6px}
- .proof .sublead{text-align:center;color:var(--muted);font-size:15px;margin-bottom:26px}
- .pvp{overflow:hidden;position:relative;touch-action:pan-y}
- .pvtrack{display:flex;transition:transform .45s cubic-bezier(.22,.61,.36,1);will-change:transform}
- .pvslide{min-width:100%;padding:0 4px;user-select:none}
- .pvtitle{text-align:center;font-size:19px;font-weight:800;color:var(--accent);margin-bottom:4px}
- .pvsub{text-align:center;color:var(--muted);font-size:13.5px;margin-bottom:22px}
-
- /* Une preuve en avant, deux en retrait.
-    object-fit:contain — la capture est montree entiere, jamais rognee :
-    c'est la condition pour que les chiffres restent lisibles sans clic. */
- .fan{display:flex;align-items:center;justify-content:center;gap:14px;
-   min-height:clamp(210px,27vw,330px)}
- .fan img{background:#fff;object-fit:contain;object-position:center;display:block;
-   border-radius:12px;border:1px solid rgba(255,255,255,.10);cursor:zoom-in;
-   transition:width .45s cubic-bezier(.22,.61,.36,1),opacity .45s ease,transform .45s ease}
- .fan img.vedette{width:58%;max-width:540px;max-height:clamp(200px,26vw,310px);
-   order:2;opacity:1;transform:none;z-index:3;box-shadow:0 22px 50px rgba(0,0,0,.6)}
- .fan img.petite{width:20%;max-width:200px;max-height:clamp(110px,15vw,180px);
-   opacity:.55;transform:scale(.95);z-index:1;box-shadow:0 10px 24px rgba(0,0,0,.5)}
- .fan img.petite:hover{opacity:.9;transform:scale(1)}
-
- .merci{background:var(--bg2)}
- .merci .fan img{background:#fff}
-
- /* Visionneuse : la capture entiere, en grand */
- /* Fond translucide : on devine la page derriere, la visionneuse
-    se lit comme une couche posee dessus plutot qu'un ecran noir. */
- .lb{position:fixed;inset:0;z-index:200;background:rgba(6,14,21,.72);
-   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-   display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px}
- .lb[hidden]{display:none}
- /* Le titre et la croix sont solidaires de l'image, pas des bords de l'ecran */
- .lb-box{position:relative;display:flex;flex-direction:column;align-items:center;max-width:92vw}
- .lb-head{position:relative;display:flex;align-items:center;justify-content:center;
-   width:100%;min-height:44px;margin-bottom:10px;padding:0 52px}
- .lb-title{font-size:15px;font-weight:800;color:var(--accent);letter-spacing:.02em;text-align:center}
- .lb-close{position:absolute;right:0;top:50%;transform:translateY(-50%);
-   background:rgba(255,255,255,.10);border:1px solid var(--border);color:var(--text);
-   width:40px;height:40px;border-radius:50%;font-size:19px;line-height:1;cursor:pointer;font-family:inherit;
-   display:flex;align-items:center;justify-content:center;flex:0 0 auto;transition:.12s}
- .lb-close:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
- .lb-img{max-width:60vw;max-height:60vh;width:auto;height:auto;border-radius:14px;background:#fff;
-   box-shadow:0 30px 70px rgba(0,0,0,.6);display:block}
- .lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.08);
-   border:1px solid var(--border);color:var(--text);width:48px;height:48px;border-radius:50%;
-   font-size:26px;line-height:1;cursor:pointer;font-family:inherit;display:flex;align-items:center;
-   justify-content:center;transition:.12s;padding:0 0 3px}
- .lb-nav:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
- .lb-prev{left:18px} .lb-next{right:18px}
- .lb-count{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:var(--faint);font-size:13px}
- .fan img{cursor:zoom-in}
- @media(max-width:700px){
-   .lb-img{max-width:92vw;max-height:64vh}
-   .lb-nav{width:42px;height:42px;font-size:22px}
-   .lb-prev{left:8px} .lb-next{right:8px}
-   .lb-title{font-size:14px}
- }
-
- /* Pastilles de navigation */
- .pvdots{display:flex;gap:8px;justify-content:center;margin-top:26px}
- .pvdots b{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:.2s;border:0;padding:0}
- .pvdots b.on{background:var(--accent);width:24px;border-radius:999px}
- .pvhint{text-align:center;color:var(--faint);font-size:12px;margin-top:14px}
- .pvlegal{max-width:640px;margin:26px auto 0;text-align:center;color:var(--faint);font-size:11.5px;line-height:1.5}
-
- @media(max-width:700px){
-   .fan{min-height:200px}
-    .fan img{width:36%;height:clamp(150px,42vw,210px);border-radius:10px;box-shadow:0 12px 28px rgba(0,0,0,.55)}
-   .fan img:nth-child(2){margin:0 -7%}
-   .pvtitle{font-size:17px}
- }
- @media(prefers-reduced-motion:reduce){.pvtrack{transition:none}.fan img{transition:none}}
-
-
- .micro{display:block;color:var(--muted);font-size:13px;margin-top:14px}
-
- /* Façade vidéo : la vignette se transforme en lecteur au clic.
-    Évite de charger le player YouTube tant que le visiteur n'a rien demandé. */
+ /* ── hero ── */
+ header{text-align:center;padding:52px 0 0;background:none;border:0}
+ h1{font-size:clamp(34px,7.6vw,64px);margin:16px auto 12px;max-width:860px;color:var(--text)}
+ .hero-h1{text-transform:none}
+ .hero-h1 b,.hero-h1 strong{font-weight:500;color:var(--accent)}
+ .sub{font-size:clamp(15px,3.6vw,17px);color:var(--muted);max-width:540px;margin:0 auto;line-height:1.5;font-weight:400}
+ .sub b,.sub strong{color:var(--text);font-weight:500}
+ .hero-sub{color:var(--muted)}
+ .vsl{position:relative;max-width:900px;margin:34px auto 26px;aspect-ratio:16/9;background:#000;
+   border:1px solid var(--border2);border-radius:18px;display:flex;align-items:center;justify-content:center;overflow:hidden;
+   box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(245,181,74,.04)}
+ header .wrap{max-width:1080px}
+ .vsl:before{content:"";position:absolute;inset:-40px 0;background:radial-gradient(closest-side,rgba(245,181,74,.20),transparent);filter:blur(30px);z-index:-1}
  .vslfacade{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:#000;cursor:pointer;display:block;overflow:hidden;z-index:7}
  .vslfacade img{width:100%;height:100%;object-fit:cover;display:block}
  .vslfacade .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-   width:72px;height:72px;border-radius:50%;background-image:var(--accent-grad);color:var(--on-accent);
-   font-size:25px;line-height:1;display:flex;align-items:center;justify-content:center;
-   box-shadow:0 8px 26px rgba(0,0,0,.55);transition:transform .15s ease}
- .vslfacade:hover .play,.vslfacade:focus-visible .play{transform:translate(-50%,-50%) scale(1.08)}
- .vsldesc{max-width:600px;margin:0 auto 20px;font-size:16.5px;line-height:1.5;color:var(--text-soft);text-align:center}
- .vsldesc b{color:var(--text);font-weight:700}
+   width:68px;height:68px;border-radius:50%;background:#fff;color:#0a1220;
+   font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;padding-left:4px;
+   box-shadow:0 10px 40px rgba(0,0,0,.45);transition:transform .15s ease}
+ .vslfacade:hover .play,.vslfacade:focus-visible .play{transform:translate(-50%,-50%) scale(1.06)}
+ .vsldesc{max-width:600px;margin:0 auto 20px;font-size:16px;line-height:1.5;color:var(--text-soft);text-align:center}
  .vslblock{position:absolute;inset:0;z-index:5;pointer-events:none}
- .vslbarwrap{position:absolute;left:0;right:0;bottom:0;z-index:6;height:6px;background:rgba(255,255,255,.15);pointer-events:none}
- .vslbar{height:100%;width:0;background-image:var(--accent-grad);transition:width .25s linear}
- .vslend{position:absolute;inset:0;z-index:9;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(6,14,21,.94);padding:20px;text-align:center}
+ .vslbarwrap{position:absolute;left:0;right:0;bottom:0;z-index:6;height:4px;background:rgba(255,255,255,.12);pointer-events:none}
+ .vslbar{height:100%;width:0;background:var(--accent);transition:width .25s linear}
+ .vslend{position:absolute;inset:0;z-index:9;display:none;flex-direction:column;align-items:center;justify-content:center;
+   background:rgba(3,8,16,.92);backdrop-filter:blur(6px);padding:20px;text-align:center}
  .vslend.show{display:flex}
-.vsl-ctrl{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:8px;align-items:center;opacity:0;pointer-events:none;transition:opacity .25s}
-.vsl-ctrl.show{opacity:1;pointer-events:auto}
-/* Lecture automatique (13/10/2026) : la vidéo démarre seule, sans le son
-   (les navigateurs interdisent l'autoplay avec le son). Ce gros bouton
-   remet le son ET repart du début, pour qu'il ne rate pas l'accroche. */
-.vsl-son{position:absolute;inset:0;z-index:11;display:none;align-items:center;justify-content:center;background:rgba(6,14,21,.18);border:0;padding:0;cursor:pointer;font-family:inherit}
-.vsl-son.show{display:flex}
-.vsl-son span{display:flex;align-items:center;gap:10px;background:var(--accent-grad,#FFB43C);background-image:var(--accent-grad);color:#1a1206;font-weight:800;font-size:16px;padding:14px 22px;border-radius:99px;box-shadow:0 8px 28px rgba(0,0,0,.45);animation:vslPulse 1.6s ease-in-out infinite}
-.vsl-son svg{width:22px;height:22px;flex:0 0 auto}
-@keyframes vslPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-.vsl-cbtn{background:rgba(6,14,21,.72);border:1px solid rgba(255,255,255,.18);color:#fff;padding:7px 14px;border-radius:99px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;backdrop-filter:blur(6px);transition:.12s;line-height:1}
-.vsl-cbtn:hover{border-color:var(--accent);color:var(--accent)}
-.vsl-unmute{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:10;background:rgba(6,14,21,.85);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:13px;font-weight:700;padding:7px 16px;border-radius:99px;cursor:pointer;display:none;backdrop-filter:blur(6px);font-family:inherit;white-space:nowrap}
-.vsl-unmute.show{display:block}
- .vslend h3{font-size:clamp(17px,3vw,24px);font-weight:800;margin-bottom:14px;max-width:520px}
- .hsocial{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:16px;flex-wrap:wrap}
- .havs{display:flex}
- .havs i{width:30px;height:30px;border-radius:50%;border:2px solid var(--bg2);margin-left:-9px;display:block}
- .havs i:first-child{margin-left:0}
- .hsocial .ht{color:var(--text-soft);font-size:14px}.hsocial .ht b{color:var(--text);font-weight:800}
+ .vslend h3{font-family:var(--hf);font-size:clamp(19px,3.4vw,30px);font-weight:500;letter-spacing:-.02em;margin-bottom:16px;max-width:520px}
+ .vsl-ctrl{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:8px;align-items:center;opacity:0;pointer-events:none;transition:opacity .25s}
+ .vsl-ctrl.show{opacity:1;pointer-events:auto}
+ .vsl-son{position:absolute;inset:0;z-index:11;display:none;align-items:center;justify-content:center;background:rgba(3,8,16,.25);border:0;padding:0;cursor:pointer;font-family:inherit}
+ .vsl-son.show{display:flex}
+ .vsl-son span{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.96);color:#0a1220;font-weight:600;font-size:15px;
+   padding:12px 20px;border-radius:999px;box-shadow:0 10px 40px rgba(0,0,0,.45);animation:vslPulse 1.8s ease-in-out infinite}
+ .vsl-son b{font-weight:600}
+ .vsl-son svg{width:20px;height:20px;flex:0 0 auto}
+ @keyframes vslPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+ @media(prefers-reduced-motion:reduce){.vsl-son span{animation:none}}
+ .vsl-cbtn{background:rgba(3,8,16,.72);border:1px solid rgba(255,255,255,.18);color:#fff;padding:7px 14px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;backdrop-filter:blur(6px);line-height:1}
+ .vsl-cbtn:hover{border-color:rgba(255,255,255,.4)}
+ .vsl-unmute{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:10;background:rgba(3,8,16,.85);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:13px;font-weight:600;padding:7px 16px;border-radius:999px;cursor:pointer;display:none;backdrop-filter:blur(6px);font-family:inherit;white-space:nowrap}
+ .vsl-unmute.show{display:block}
+ .hsocial{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:18px;flex-wrap:wrap}
+ .hsocial .ht{color:var(--muted);font-size:13.5px}.hsocial .ht b{color:var(--text);font-weight:600}
+ .chav{display:inline-flex;flex:0 0 auto}
+ .chav img{width:28px;height:28px;border-radius:50%;border:2px solid var(--bg);margin-left:-8px;object-fit:cover;display:block}
+ .chav img:first-child{margin-left:0}
+ .chav i{width:28px;height:28px;border-radius:50%;background:var(--card);border:2px solid var(--bg);margin-left:-8px;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:600;font-size:12px;color:var(--accent)}
 
- /* Section d'auto-identification */
- .honest{background:var(--bg2)}
- .honest .wrap{max-width:700px}
- .honest h2 .hl{color:var(--accent);-webkit-text-fill-color:var(--accent)}
- .honest ul{list-style:none;display:flex;flex-direction:column;gap:15px;margin:34px 0 30px}
- .honest li{display:flex;gap:12px;font-size:16px;line-height:1.5;color:var(--text-soft)}
- .honest li b{color:var(--text);font-weight:700}
- .honest .bolt{flex:0 0 auto;color:var(--star)}
- .honest .concl{text-align:center;font-size:17px;color:var(--text);font-weight:700;margin-bottom:8px}
- .honest .concl2{text-align:center;color:var(--muted);font-size:15px;margin-bottom:28px}
- @media(max-width:560px){
-   .honest li{font-size:15px}
-   .vslfacade .play{width:60px;height:60px;font-size:21px}
+ /* ── « C'est toi, ça ? » : une carte de verre ── */
+ .honest .wrap{max-width:760px}
+ .honest ul{list-style:none;display:flex;flex-direction:column;gap:2px;margin:30px 0 26px;padding:8px;border-radius:20px;background:var(--cardg);border:1px solid var(--border)}
+ .honest li{display:flex;align-items:flex-start;gap:14px;font-size:15.5px;line-height:1.5;color:var(--muted);padding:14px 14px}
+ .honest li+li{border-top:1px solid var(--border)}
+ .honest li b{color:var(--text);font-weight:500}
+ .honest .bolt{flex:0 0 auto;width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+   background:rgba(245,181,74,.12);border:1px solid rgba(245,181,74,.25);font-size:14px;color:var(--star);margin-top:-3px}
+ .honest .concl{text-align:center;font-family:var(--hf);font-size:clamp(19px,3.6vw,24px);font-weight:500;letter-spacing:-.015em;color:var(--text);margin-bottom:6px;line-height:1.25}
+ .honest .concl2{text-align:center;color:var(--muted);font-size:14.5px;margin-bottom:26px}
+
+ /* ── preuves : carrousel d'activités, 3 captures en éventail ── */
+ .proof .eyebrow{margin-bottom:16px}
+ .proof h2{margin-bottom:10px}
+ .proof .sublead{text-align:center;color:var(--muted);font-size:15px;margin-bottom:30px}
+ .pvp{overflow:hidden;position:relative;touch-action:pan-y}
+ .pvtrack{display:flex;transition:transform .45s cubic-bezier(.22,.61,.36,1);will-change:transform}
+ .pvslide{min-width:100%;padding:0 4px;user-select:none}
+ .pvtitle{text-align:center;font-family:var(--hf);font-size:20px;font-weight:500;letter-spacing:-.01em;color:var(--text);margin-bottom:2px}
+ .pvsub{text-align:center;color:var(--muted);font-size:13.5px;margin-bottom:24px}
+ .fan{display:flex;align-items:center;justify-content:center;gap:14px;min-height:clamp(210px,27vw,330px);position:relative}
+ .fan:before{content:"";position:absolute;inset:10% 20%;background:radial-gradient(closest-side,rgba(245,181,74,.14),transparent);filter:blur(30px);z-index:0}
+ .fan img{background:#fff;object-fit:contain;object-position:center;display:block;position:relative;
+   border-radius:14px;border:1px solid var(--border2);cursor:zoom-in;
+   transition:width .45s cubic-bezier(.22,.61,.36,1),opacity .45s ease,transform .45s ease}
+ .fan img.vedette{width:58%;max-width:540px;max-height:clamp(200px,26vw,310px);order:2;opacity:1;transform:none;z-index:3;box-shadow:0 30px 70px rgba(0,0,0,.6)}
+ .fan img.petite{width:20%;max-width:200px;max-height:clamp(110px,15vw,180px);opacity:.5;transform:scale(.95);z-index:1;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+ .fan img.petite:hover{opacity:.85;transform:scale(1)}
+ .pvdots{display:flex;gap:8px;justify-content:center;margin-top:26px}
+ .pvdots b{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer;transition:.2s;border:0;padding:0}
+ .pvdots b.on{background:var(--accent);width:22px;border-radius:999px}
+ .pvhint{text-align:center;color:var(--faint);font-size:12px;margin-top:14px}
+ .pvlegal{max-width:560px;margin:22px auto 0;text-align:center;color:var(--faint);font-size:11.5px;line-height:1.5}
+ @media(max-width:700px){
+   .fan{min-height:200px}
+   .fan img{width:36%;height:clamp(150px,42vw,210px);border-radius:12px;box-shadow:0 12px 28px rgba(0,0,0,.55)}
+   .fan img:nth-child(2){margin:0 -7%}
+   .pvtitle{font-size:18px}
  }
+ @media(prefers-reduced-motion:reduce){.pvtrack{transition:none}.fan img{transition:none}}
 
- /* RESULTS */
- .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+ /* ── visionneuse ── */
+ .lb{position:fixed;inset:0;z-index:200;background:rgba(3,8,16,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+   display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px}
+ .lb[hidden]{display:none}
+ .lb-box{position:relative;display:flex;flex-direction:column;align-items:center;max-width:92vw}
+ .lb-head{position:relative;display:flex;align-items:center;justify-content:center;width:100%;min-height:44px;margin-bottom:10px;padding:0 52px}
+ .lb-title{font-family:var(--hf);font-size:16px;font-weight:500;color:var(--text);text-align:center}
+ .lb-close,.lb-nav{background:var(--glass);border:1px solid var(--border2);color:var(--text);border-radius:50%;cursor:pointer;font-family:inherit;
+   display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);transition:border-color .15s}
+ .lb-close{position:absolute;right:0;top:50%;transform:translateY(-50%);width:40px;height:40px;font-size:17px;line-height:1}
+ .lb-close:hover,.lb-nav:hover{border-color:rgba(255,255,255,.35)}
+ .lb-img{max-width:60vw;max-height:60vh;width:auto;height:auto;border-radius:16px;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.6);display:block}
+ .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;font-size:26px;line-height:1;padding:0 0 3px}
+ .lb-prev{left:18px} .lb-next{right:18px}
+ .lb-count{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:var(--faint);font-size:13px}
+ @media(max-width:700px){.lb-img{max-width:92vw;max-height:64vh}.lb-nav{width:42px;height:42px;font-size:22px}.lb-prev{left:8px}.lb-next{right:8px}}
+
+ /* ── les voies (détail des formations) ── */
+ .vgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:1000px;margin:18px auto 0}
+ @media(max-width:760px){.vgrid{grid-template-columns:1fr}}
+ .voie{background:var(--cardg);border:1px solid var(--border);border-radius:18px;padding:18px}
+ .voie .vtete{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+ .voie .vico{width:38px;height:38px;border-radius:12px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+   background:rgba(245,181,74,.12);border:1px solid rgba(245,181,74,.25);font-size:17px;line-height:1}
+ .voie h3{font-size:15.5px;font-weight:600;letter-spacing:0;line-height:1.25}
+ .voie h3 b{color:var(--accent)}
+ .voie p{color:var(--muted);font-size:14px;line-height:1.5}
+
+ /* ── chiffres ── */
+ .chiffres{position:relative}
+ .chgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1000px;margin:0 auto;text-align:center;position:relative}
+ @media(max-width:760px){.chgrid{grid-template-columns:1fr;max-width:440px}}
+ .ch{padding:30px 16px;border-radius:20px;background:var(--cardg);border:1px solid var(--border);position:relative;overflow:hidden}
+ .ch:first-child{border-color:rgba(245,181,74,.45);box-shadow:0 0 0 1px rgba(245,181,74,.12),0 20px 60px rgba(245,181,74,.07)}
+ .ch b{display:block;font-family:var(--hf);font-size:clamp(34px,3.7vw,46px);font-weight:500;letter-spacing:-.035em;line-height:1;
+   font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--text)}
+ .ch:first-child b{color:var(--accent)}
+ .ch b .val,.ch b .unite{display:inline}
+ .ch .unite{font-size:.4em;font-weight:500;margin-left:6px;letter-spacing:0;color:var(--muted)}
+ @media(min-width:761px){.ch b{font-size:clamp(28px,3vw,38px)}}
+ .ch .unite{display:block;margin:8px 0 0;font-size:14px!important;letter-spacing:.02em}
+ .ch > span{display:block;color:var(--muted);font-size:14px;margin-top:10px}
+ .chcta{text-align:center;margin-top:30px}
+ .chjoined{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:16px;color:var(--muted);font-size:13.5px;flex-wrap:wrap}
+ .chjoined b{color:var(--text);font-weight:600}
+
+ /* ── résultats (gabarit masqué) ── */
+ .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
  @media(max-width:760px){.grid{grid-template-columns:1fr}}
- .rescard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px}
+ .rescard{background:var(--cardg);border:1px solid var(--border);border-radius:18px;padding:20px}
  .rescard .top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
- .av{width:42px;height:42px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);
- display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--muted)}
- .rescard .who{font-weight:700;font-size:15px}
+ .av{width:42px;height:42px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--muted)}
+ .rescard .who{font-weight:600;font-size:15px}
  .rescard .who span{display:block;color:var(--muted);font-size:13px;font-weight:400}
- .ba{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
+ .ba{display:flex;align-items:center;gap:10px;font-weight:500;font-size:20px}
  .ba .arrow{color:var(--muted);font-weight:400}
- .ba .after{color:var(--accent);font-weight:800}
-
- /* ABOUT */
- .about{background:var(--bg2)}
- .about .wrap{max-width:680px}
- .about p{color:var(--text-soft);margin-bottom:16px;font-size:17px}
- .statrow{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px;border-top:1px solid var(--border);padding-top:30px}
- .stat{text-align:center;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;min-width:118px}
- .stat b{display:block;font-size:27px;letter-spacing:-.02em;color:var(--accent-strong)}
+ .ba .after{color:var(--accent)}
+ .stat{text-align:center;background:var(--cardg);border:1px solid var(--border);border-radius:16px;padding:14px 16px;min-width:118px}
+ .stat b{display:block;font-size:27px;font-weight:500;letter-spacing:-.02em;color:var(--accent)}
  .stat span{color:var(--muted);font-size:13px}
- .stat.hl{background:var(--star-soft);border-color:var(--star-line)}
- .stat.hl span{color:var(--star);font-weight:600}
- .otile{flex:1;min-width:0;background:var(--card);border:2px solid var(--border);border-radius:14px;padding:14px 8px 12px;cursor:pointer;text-align:center;font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:border-color .15s,background .15s}
- .otile.selected{border-color:var(--accent-strong);background:var(--accent-soft)}
- .otile .obadge{font-size:10px;font-weight:800;letter-spacing:.02em;color:var(--accent-strong);margin-bottom:2px}
- .otile .oprice{font-size:21px;font-weight:800;color:var(--accent-strong);line-height:1.05;white-space:nowrap}
- .otile .oprice sup{font-size:10px}
- #rTiles .otile .oprice{font-size:16px}
+
+ /* ── tuiles d'offre (résultat du quiz) ── */
+ .otile{flex:1;min-width:0;background:var(--cardg);border:1px solid var(--border2);border-radius:18px;padding:14px 8px 12px;cursor:pointer;text-align:center;font-family:inherit;color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:border-color .15s,background .15s}
+ .otile.selected{border-color:rgba(245,181,74,.6);background:rgba(245,181,74,.08);box-shadow:0 0 0 1px rgba(245,181,74,.18)}
+ .otile .obadge{font-size:10.5px;font-weight:600;color:var(--accent);margin-bottom:2px}
+ .otile .oprice{font-family:var(--hf);font-size:22px;font-weight:500;letter-spacing:-.02em;color:var(--text);line-height:1.05;white-space:nowrap}
+ .otile .oprice sup{font-size:10px;color:var(--muted)}
+ #rTiles .otile .oprice{font-size:18px}
  #rTiles .otile{padding:12px 5px 11px}
  #rTiles .otile .olabel{font-size:12px}
- .otile .oeur{font-size:13px;color:var(--muted)}
- .otile .olabel{font-size:13.5px;font-weight:800;color:var(--text);margin-top:5px;line-height:1.2}
- .note{background:var(--star-soft);border:1px dashed var(--star-line);border-radius:10px;padding:11px 14px;color:var(--star);
- font-size:12px;margin:0 auto 24px;max-width:680px;text-align:center}
+ .otile .oeur{font-size:12.5px;color:var(--muted)}
+ .otile .olabel{font-size:13px;font-weight:600;color:var(--text);margin-top:5px;line-height:1.2}
+ .note{background:var(--star-soft);border:1px solid var(--star-line);border-radius:14px;padding:11px 14px;color:var(--accent);font-size:12.5px;margin:0 auto 24px;max-width:680px;text-align:center}
 
- /* FAQ */
- /* Reponses de la FAQ : des listes plutot que des blocs de texte.
-    Une pastille verte pour ce qui suffit, rouge barree pour ce qui est
-    inutile — la reponse se lit sans etre lue en entier. */
+ /* ── FAQ : titre à gauche, questions à droite ── */
+ .faqx{display:grid;grid-template-columns:1fr 1.25fr;gap:40px;align-items:start;max-width:1080px;margin:0 auto}
+ @media(max-width:820px){.faqx{grid-template-columns:1fr;gap:22px}}
+ .faqx .g h2{font-size:clamp(32px,6vw,52px);text-align:left;margin:0}
+ .faqx .g .eyebrow{margin:0 0 16px}
+ .faqx .g p{color:var(--muted);margin-top:12px;max-width:320px}
+ .faq{max-width:none;margin:0}
+ .faq details{border:0;border-top:1px solid var(--border);border-radius:0;padding:0;margin:0;background:none}
+ .faq details:last-child{border-bottom:1px solid var(--border)}
+ .faq summary{list-style:none;cursor:pointer;padding:18px 40px 18px 4px;font-weight:500;font-size:15.5px;position:relative;display:block}
+ .faq summary::-webkit-details-marker{display:none}
+ .faq summary::after{content:"+";position:absolute;right:6px;top:14px;font-size:22px;font-weight:300;color:var(--muted)}
+ .faq details[open] summary::after{content:"\2212"}
+ .faq details>div{padding:0 4px 18px;color:var(--muted);font-size:14.5px;max-width:580px}
+ .faq details p{color:var(--muted);padding:0 0 10px}
+ .faq details a{color:var(--text)}
  .fl{list-style:none;display:flex;flex-direction:column;gap:10px;margin:2px 0 14px}
- .fl li{display:flex;align-items:flex-start;gap:11px;font-size:15px;line-height:1.4;color:var(--text-soft)}
- .fl b{color:var(--text);font-weight:700}
- .fl .fi{flex:0 0 auto;width:26px;height:26px;border-radius:50%;display:flex;
-   align-items:center;justify-content:center;font-size:13px;line-height:1}
- .fl .oui{background:rgba(62,207,126,.14);border:1px solid rgba(62,207,126,.4)}
- .fl .non{background:rgba(255,107,94,.12);border:1px solid rgba(255,107,94,.36);position:relative}
- .fl .non::after{content:"";position:absolute;left:4px;right:4px;top:50%;height:1.5px;
-   background:var(--danger);transform:rotate(-38deg);border-radius:2px}
- .fl .num{background:var(--accent-soft);border:1px solid rgba(255,165,69,.4);
-   color:var(--accent);font-weight:900;font-size:13px}
- .faq .fnote{font-size:14px;color:var(--muted);margin-top:2px}
- .faq .fbtn{display:inline-flex;align-items:center;justify-content:center;margin-top:14px;
-   background-image:var(--accent-grad);color:var(--on-accent);font-weight:800;font-size:14.5px;
-   padding:12px 22px;border-radius:999px;text-decoration:none;transition:transform .12s ease}
- .faq .fbtn:hover{transform:scale(1.04)}
- @media(prefers-reduced-motion:reduce){ .faq .fbtn{transition:none} .faq .fbtn:hover{transform:none} }
+ .fl li{display:flex;align-items:flex-start;gap:11px;font-size:14.5px;line-height:1.45;color:var(--muted)}
+ .fl b{color:var(--text);font-weight:500}
+ .fl .fi{flex:0 0 auto;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;line-height:1}
+ .fl .oui{background:rgba(67,209,127,.12);border:1px solid rgba(67,209,127,.38)}
+ .fl .non{background:rgba(255,107,94,.10);border:1px solid rgba(255,107,94,.34);position:relative}
+ .fl .non::after{content:"";position:absolute;left:4px;right:4px;top:50%;height:1.5px;background:var(--danger);transform:rotate(-38deg);border-radius:2px}
+ .fl .num{background:var(--accent-soft);border:1px solid rgba(245,181,74,.4);color:var(--accent);font-weight:600;font-size:12px}
+ .faq .fnote{font-size:13.5px;color:var(--muted);margin-top:2px}
+ .faq .fbtn{display:inline-flex;align-items:center;justify-content:center;gap:7px;margin-top:12px;
+   background:linear-gradient(180deg,#1d2b40,#121c2c);border:1px solid var(--border2);color:#fff;font-weight:600;font-size:14px;
+   padding:10px 18px;border-radius:999px;text-decoration:none}
+ .faq .fbtn:after{content:"→"}
+ .faq .fbtn:hover{border-color:rgba(255,255,255,.28)}
 
- .faq{max-width:680px;margin:0 auto}
- details{border:1px solid var(--border);border-radius:12px;padding:4px 18px;margin-bottom:12px;background:var(--card)}
- details summary{cursor:pointer;font-weight:600;padding:14px 0;list-style:none;display:flex;justify-content:space-between;align-items:center}
- details summary::-webkit-details-marker{display:none}
- details summary::after{content:"+";font-size:22px;color:var(--accent)}
- details[open] summary::after{content:"\2212"}
- details p{color:var(--muted);padding:0 0 16px}
+ /* ── appel final ── */
+ .band{text-align:center;padding-top:110px}
+ .band h2{font-size:clamp(30px,6vw,50px);max-width:680px;margin:0 auto 26px}
+ .band h2 br{display:block}
+ .gratuit-bloc .gb{position:relative;text-align:center;max-width:720px;margin:0 auto;padding:34px 22px;border-radius:24px;background:linear-gradient(180deg,rgba(67,209,127,.07),rgba(10,16,26,.72));border:1px solid rgba(67,209,127,.28)}
+ .gratuit-bloc .gb-t{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:#9be9bf;padding:5px 12px;border-radius:999px;border:1px solid rgba(67,209,127,.35);margin-bottom:14px}
+ .gratuit-bloc .gb-pt{width:7px;height:7px;border-radius:50%;background:#43d17f;box-shadow:0 0 10px rgba(67,209,127,.8)}
+ .gratuit-bloc h2{font-size:clamp(26px,5vw,38px);margin-bottom:10px}
+ .gratuit-bloc h2 em{color:#43d17f;-webkit-text-fill-color:#43d17f}
+ .gratuit-bloc p{color:var(--muted);max-width:480px;margin:0 auto 22px}
+ .gratuit-bloc .gb-btn{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:999px;background:#43d17f;color:#04140b;font-weight:600;font-size:15px;text-decoration:none}
+ .gratuit-bloc .gb-btn:after{content:"→"}
+ .gratuit-bloc .gb-btn:hover{filter:brightness(1.05)}
+ .band .gratuit{margin-top:18px;font-size:13.5px;color:var(--muted)}
+ .band .gratuit a{color:var(--text);text-decoration:underline;text-underline-offset:3px}
 
- /* NEWSLETTER */
- .news .wrap{max-width:540px}
- .newsform{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
- .newsform input{flex:1;min-width:220px;background:var(--bg);border:1.5px solid var(--border);color:var(--text);
- padding:14px 15px;border-radius:11px;font-size:15px;outline:none;font-family:inherit}
- .newsform input:focus{border-color:var(--accent)}
-
- .band{text-align:center}
- .band h2{margin-bottom:18px}
-
- /* QUIZ */
- #quiz{display:none;padding:46px 0 80px}
+ /* ── QUIZ ── */
+ #quiz{display:none;padding:56px 0 80px}
  #quiz.active{display:flex;flex-direction:column;justify-content:center;min-height:80vh}
- .progress{height:6px;background:var(--bg2);border-radius:999px;overflow:hidden;margin:0 auto 34px;max-width:560px;width:100%}
+ .progress{height:4px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;margin:0 auto 34px;max-width:560px;width:100%}
  .progress > i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s ease}
  .qbox{max-width:560px;margin:0 auto;width:100%}
  .step{display:none;animation:fade .25s ease}
  .step.active{display:block}
  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
- .qnum{color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
- .qtitle{font-size:clamp(22px,3.4vw,30px);margin-bottom:24px;font-weight:600;letter-spacing:-.01em}
- .options{display:flex;flex-direction:column;gap:11px}
- .opt{display:flex;align-items:center;gap:13px;text-align:left;background:var(--card);
- border:1.5px solid var(--border);border-radius:13px;padding:16px 18px;font-size:16px;color:var(--text);cursor:pointer;transition:.12s;width:100%;font-family:inherit}
- .opt:hover{border-color:var(--accent)}
- .opt.sel{border-color:var(--accent);background:var(--accent-soft)}
- .opt .dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);flex:0 0 auto;position:relative}
+ .qnum{color:var(--muted);font-size:12.5px;font-weight:500;margin-bottom:8px}
+ .qtitle{font-size:clamp(24px,4.6vw,34px);margin-bottom:24px;font-weight:500;letter-spacing:-.025em;line-height:1.12}
+ .options{display:flex;flex-direction:column;gap:10px}
+ .opt{display:flex;align-items:center;gap:13px;text-align:left;background:var(--cardg);
+   border:1px solid var(--border);border-radius:16px;padding:16px 18px;font-size:15.5px;color:var(--text);cursor:pointer;transition:border-color .12s,background .12s;width:100%;font-family:inherit}
+ .opt:hover{border-color:var(--border2)}
+ .opt.sel{border-color:rgba(245,181,74,.6);background:rgba(245,181,74,.08)}
+ .opt .dot{width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,.22);flex:0 0 auto;position:relative}
  .opt.sel .dot{border-color:var(--accent)}
  .opt.sel .dot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--accent)}
  .field{margin-bottom:15px}
- .field label{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
- .field input,.field select{width:100%;background:var(--bg);border:1.5px solid var(--border);color:var(--text);padding:13px 14px;border-radius:11px;font-size:15px;outline:none;font-family:inherit}
- .field input:focus,.field select:focus{border-color:var(--accent)}
- .field small{display:block;color:var(--muted);font-size:12px;margin-top:5px}
+ .field label{display:block;font-size:13.5px;color:var(--muted);margin-bottom:6px}
+ .field input,.field select{width:100%;background:rgba(10,16,26,.8);border:1px solid var(--border2);color:var(--text);padding:13px 14px;border-radius:14px;font-size:16px;outline:none;font-family:inherit}
+ .field input:focus,.field select:focus{border-color:rgba(245,181,74,.6)}
+ .field small{display:block;color:var(--faint);font-size:12px;margin-top:5px}
  .phonerow{display:flex;gap:10px}
- .phonerow select{flex:0 0 165px}
- .phonerow input{flex:1}
+ .phonerow select{flex:0 0 150px}
+ .phonerow input{flex:1;min-width:0}
+ @media(max-width:420px){.phonerow select{flex-basis:118px}}
  .nav{display:flex;justify-content:space-between;align-items:center;margin-top:26px;gap:12px}
- .back{background:none;border:none;color:var(--muted);cursor:pointer;font-size:15px;padding:8px;font-family:inherit}
+ .back{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14.5px;padding:8px;font-family:inherit}
  .back:hover{color:var(--text)}
  .result{display:none;text-align:center;max-width:520px;margin:0 auto}
  .result.active{display:block;animation:fade .25s ease}
- .rcheck{width:58px;height:58px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:28px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
- .result h2{margin-bottom:8px}
- .rcard{background:var(--card);border:1.5px solid var(--accent);border-radius:18px;padding:28px;margin-top:24px;text-align:left}
- .rcard .name{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
- .rcard .price{font-size:38px;font-weight:800;letter-spacing:-.02em;margin:4px 0 6px}
+ .rcheck{width:56px;height:56px;border-radius:50%;background:rgba(67,209,127,.12);border:1px solid rgba(67,209,127,.4);color:var(--vert);font-size:24px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+ .result h2{margin-bottom:8px;font-size:clamp(26px,5vw,36px)}
+ .rcard{background:var(--cardg);border:1px solid rgba(245,181,74,.5);box-shadow:0 0 0 1px rgba(245,181,74,.14),0 20px 60px rgba(245,181,74,.07);border-radius:20px;padding:24px;margin-top:24px;text-align:left}
+ .rcard .name{font-family:var(--hf);font-size:18px;font-weight:500;color:var(--text)}
+ .rcard .price{font-size:40px;font-weight:500;letter-spacing:-.03em;margin:14px 0 4px;line-height:1}
  .anchor{font-size:13px;color:var(--muted);margin-bottom:16px}
- .feat{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
- .feat li{padding-left:25px;position:relative;font-size:15px}
- .feat li::before{content:"\2713";position:absolute;left:0;font-weight:800;color:var(--accent)}
- .reassure{font-size:13px;color:var(--text-soft);margin-bottom:16px;padding:11px 13px;background:var(--accent-soft);border-radius:9px}
- .pay{display:flex;flex-direction:column;gap:11px}
- .paybtn{display:block;background:var(--accent-strong);background-image:var(--accent-grad);border:none;border-radius:12px;padding:16px;cursor:pointer;text-decoration:none;color:var(--on-accent);text-align:center;transition:opacity .12s}
- .paybtn{transition:opacity .12s ease,transform .12s ease}
- .paybtn:hover,.paybtn:focus-visible{opacity:.96;transform:scale(1.03)}
- .paybtn b{display:block;font-size:16px;color:var(--on-accent);font-weight:700}
- .paybtn span{color:var(--on-accent-soft);font-size:13px}
+ .feat{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:20px}
+ .feat li{padding-left:24px;position:relative;font-size:14.5px;color:var(--text-soft)}
+ .feat li::before{content:"\2713";position:absolute;left:0;font-weight:600;color:var(--vert)}
+ .reassure{font-size:13px;color:var(--muted);margin-bottom:16px;padding:11px 13px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px}
+ .pay{display:flex;flex-direction:column;gap:10px}
+ .paybtn{display:block;background-image:var(--accent-grad);border:none;border-radius:999px;padding:12px 16px;cursor:pointer;text-decoration:none;color:var(--on-accent);text-align:center;transition:filter .12s,transform .12s}
+ .paybtn+.paybtn{background:linear-gradient(180deg,#1d2b40,#121c2c);border:1px solid var(--border2);color:#fff}
+ .paybtn+.paybtn b{color:#fff}.paybtn+.paybtn span{color:var(--muted)}
+ .paybtn:hover{filter:brightness(1.04)}
+ .paybtn:active{transform:scale(.98)}
+ .paybtn b{display:block;font-size:15px;color:var(--on-accent);font-weight:600}
+ .paybtn span{color:var(--on-accent-soft);font-size:12.5px}
  .guarantee{text-align:center;color:var(--muted);font-size:12.5px;margin-top:14px}
+ #rTiles .cta{white-space:normal}
 
- footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;color:var(--muted);font-size:13px}
+ /* ── pied de page ── */
+ footer{margin-top:90px;border-top:1px solid var(--border);padding:28px 16px 110px;text-align:center;color:var(--faint);font-size:12.5px;line-height:1.9}
+ footer a{color:var(--muted)!important;font-weight:500!important;text-decoration:none}
+ footer a:hover{color:#fff!important}
+ footer .pliens{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:10px;font-size:13px}
 
- /* === OPTIMISATION MOBILE (plus léger, plus clair) === */
+ /* ── mobile ── */
  @media(max-width:560px){
-   /* HERO aéré — style Real World */
-   header{padding:44px 0 52px}
-   h1{font-size:28px;line-height:1.15;margin-bottom:20px;letter-spacing:-.02em}
-   .sub{font-size:15px;line-height:1.5;margin-bottom:28px}
-   .vsl{margin-bottom:28px;border-radius:14px}
-   /* Bouton pleine largeur sur mobile */
-   header .cta{display:block;width:100%;text-align:center;padding:17px 20px;font-size:16px;border-radius:14px;box-sizing:border-box}
-   .hsocial{margin-top:24px}
-   .hsocial .ht{font-size:13px}
-   /* Reste */
-   h2{font-size:23px;margin-bottom:12px}
-   .herobullets{font-size:12.5px;margin-bottom:20px}
-   .lead{font-size:15px;margin-bottom:24px}
-   section{padding:42px 0}
-   .badge{font-size:12px;margin-bottom:18px;padding:6px 13px}
-   .cta{padding:15px 22px;font-size:15px}
-   .eyebrow{margin-bottom:10px;font-size:10.5px;letter-spacing:.1em}
-   .qtitle{font-size:20px;margin-bottom:18px}
-   .rescard{padding:18px}
-   .bkcommu{padding:14px 15px}
-   .statrow{gap:8px}
-   .stat{min-width:92px;padding:11px 8px}
-   .stat b{font-size:21px}
-   .honest{background:var(--bg)}
-   .honest ul{gap:11px;margin:20px 0 18px}
-   .honest li{font-size:15px}
-   .honest .concl{font-size:15px}
-   .honest .concl2{font-size:13.5px;margin-bottom:20px}
+   header{padding:38px 0 0}
+   .vsl{margin:26px -4px 22px;border-radius:16px}
+   header .cta{display:flex;width:100%;padding:14px 20px}
+   section{padding:76px 0 0}
+   .lead{font-size:14.5px;margin-bottom:26px}
+   .honest li{font-size:14.5px;padding:12px 10px;gap:12px}
+   .honest ul{padding:4px}
+   .band{padding-top:90px}
+   .cta{font-size:14.5px;padding:13px 22px}
  }
-.hero-h1{text-transform:uppercase;font-weight:300;letter-spacing:-.01em;margin-bottom:8px}
-.hero-h1 b{font-weight:900}
-.hero-sub{color:var(--text);font-size:clamp(17px,2vw,22px)}
-.hero-sub b{font-weight:800}
+
+ /* Sans emojis (06/11/2026) : des repères sobres à la place */
+ .honest .bolt{font-size:0}
+ .honest .bolt:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px rgba(245,181,74,.6)}
+ .fl .fi.oui:before{content:"\2713";font-size:12px;font-weight:700;color:var(--vert)}
+ .fl .fi.non{font-size:0}
+ .fl .fi.oui{font-size:0}
+ .fl .fi.oui:before{font-size:12px}
 </style>
 <!-- PIXEL WHOP (25/10/2026) : mesure les visites pour Whop. Pas d'événement « purchase » ici :
      les paiements par carte passent par Whop, qui les compte déjà. -->
 <script>!function(w,d,s,u,n,a,b){if(w[n])return;a=w[n]={q:[],t:+new Date,s:[],o:u,track:function(){a.q.push([+new Date].concat([].slice.call(arguments)))},setScope:function(){a.s=[].slice.call(arguments).filter(function(x){return typeof x==="string"});a.q.push([+new Date,"setScope"].concat(a.s))},scope:function(){var c=[].slice.call(arguments);return{track:function(){a.q.push([+new Date].concat([].slice.call(arguments)).concat([{__scope:c}]))}}}};b=d.createElement(s);b.async=1;b.src=u+"/s.js";d.getElementsByTagName(s)[0].parentNode.insertBefore(b,d.getElementsByTagName(s)[0])}(window,document,"script","https://t.whop.tw","whop");whop.setScope("biz_3JB5Blu2mvUyGE");whop.track("page");</script>
+<style id="xnav-css">
+/* ── La barre de menu commune (06/11/2026) : Ex-Rienneux + liens, la même partout ── */
+.xnav{position:sticky;top:12px;z-index:80;display:flex;justify-content:center;padding:12px 16px 0;font-family:Inter,-apple-system,"Segoe UI",sans-serif}
+.xnav .xin{position:relative;display:flex;align-items:center;gap:10px;width:100%;max-width:960px;padding:7px 7px 7px 14px;border-radius:999px;
+  background:rgba(16,24,38,.6);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.xnav .xlogo{display:inline-flex;align-items:center;gap:9px;color:#f3f5f8;text-decoration:none;font-family:"Host Grotesk",Inter,sans-serif;font-weight:600;font-size:17px;letter-spacing:-.01em;white-space:nowrap;flex:0 0 auto}
+.xnav .xlogo img{width:28px;height:28px;display:block;filter:drop-shadow(0 0 10px rgba(126,226,70,.35))}
+.xnav .xliens{display:flex;align-items:center;gap:4px;margin:0 auto}
+.xnav .xliens a,.xnav .xmenu a{color:#c4ccd6;text-decoration:none;font-size:14px;font-weight:500;padding:8px 12px;border-radius:999px;white-space:nowrap}
+.xnav .xliens a:hover{color:#fff}
+.xnav .xliens a.on{color:#fff;background:rgba(255,255,255,.07)}
+.xnav .xbtn{display:inline-flex;align-items:center;justify-content:center;background:#fff;color:#0a1220;font-weight:600;font-size:13.5px;padding:9px 16px;border-radius:999px;text-decoration:none;white-space:nowrap;flex:0 0 auto}
+.xnav .xbtn:hover{background:#eef1f5}
+.xnav .xburger{display:none;flex:0 0 auto;width:38px;height:38px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:transparent;color:#f3f5f8;cursor:pointer;align-items:center;justify-content:center;padding:0}
+.xnav .xburger i,.xnav .xburger i:before,.xnav .xburger i:after{display:block;width:15px;height:1.5px;background:currentColor;border-radius:2px;position:relative;content:"";transition:transform .2s}
+.xnav .xburger i:before{position:absolute;top:-5px}.xnav .xburger i:after{position:absolute;top:5px}
+.xnav.open .xburger i{background:transparent}.xnav.open .xburger i:before{top:0;transform:rotate(45deg)}.xnav.open .xburger i:after{top:0;transform:rotate(-45deg)}
+.xnav .xmenu{display:none;position:absolute;top:calc(100% + 8px);left:16px;right:16px;max-width:960px;margin:0 auto;padding:8px;border-radius:20px;
+  background:rgba(12,19,31,.97);border:1px solid rgba(255,255,255,.12);box-shadow:0 24px 60px rgba(0,0,0,.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.xnav .xmenu a{display:block;font-size:15.5px;padding:13px 14px;border-radius:14px}
+.xnav .xmenu a.on{background:rgba(255,255,255,.06);color:#fff}
+.xnav .xmenu a.gratuit{color:#43d17f}
+@media(max-width:820px){.xnav .xliens{display:none}.xnav .xburger{display:inline-flex}.xnav .xbtn{margin-left:auto}.xnav.open .xmenu{display:block}}
+@media(max-width:380px){.xnav .xlogo span{display:none}.xnav .xbtn{font-size:12.5px;padding:8px 12px}}
+</style>
 </head>
 <body>
+<script>/* Zone du visiteur (06/11/2026) : Afrique → F CFA, ailleurs → euros. Même règle que /exrienneux. */
+window.EXR_ZONE=(function(){try{var f=localStorage.getItem('exr_zone');if(f==='AF'||f==='EU')return f;var a=localStorage.getItem('exr_zone_auto');if(a==='AF'||a==='EU')return a;var tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';return /^Africa\//.test(tz)||tz==='Indian/Reunion'||tz==='Indian/Mayotte'?'AF':'EU';}catch(e){return 'AF';}})();
+document.documentElement.classList.toggle('zeu',window.EXR_ZONE==='EU');</script>
+<style>html.zeu .af{display:none!important}html:not(.zeu) .eu{display:none!important}</style>
 
-<div class="entete">
-<div class="topbar">
- <a class="tb-logo" href="/" aria-label="Beaudelaire Consulting"><img src="/logo.png" alt="Beaudelaire Consulting" width="34" height="34"></a>
- <a class="topbar-btn" href="/communaute" target="_blank" rel="noopener"
-    onclick="track('click_whatsapp',{depuis:'accueil'})" data-i18n="topbar.cta">Rejoindre le groupe privé (Gratuit)</a>
- <button class="tb-burger" id="tbBurger" onclick="basculeMenu()" aria-label="Menu" aria-expanded="false">&#9776;</button>
- <div class="tb-menu" id="tbMenu">
-  <a href="/scaler" data-i18n-html="menu.chemin">Le chemin<small>Le plan pour scaler ton business</small></a>
-  <a href="/mon-histoire" data-i18n-html="menu.histoire">Qui je suis<small>Mon histoire, de 0 à 50k€ par mois</small></a>
-  <a class="appel" href="#" onclick="startQuiz();fermeMenu();return false;" data-i18n-html="menu.appel">Réserver un appel<small>2 minutes pour voir si je peux t'aider</small></a>
-  <hr>
-  <div class="tb-lang">
-   <button type="button" data-lang="fr" onclick="choisirLangue('fr')">Français</button>
-   <button type="button" data-lang="en" onclick="choisirLangue('en')">English</button>
-  </div>
- </div>
- <div class="topbar-info"><span id="tbInfo"></span></div>
-</div>
+
+<nav class="xnav"><div class="xin"><a class="xlogo" href="/" aria-label="Ex-Rienneux, accueil"><img src="/exr/logo.png" alt="" width="28" height="28"><span>Ex-Rienneux</span></a><div class="xliens"><a href="/" class="on">Accueil</a><a href="/visite">La visite</a><a href="/programme-createur">Programme créateur</a><a href="/devenir-parrain">Devenir affilié</a></div><a class="xbtn" href="/checkout" onclick="track('click_go_checkout',{depuis:'nav_accueil'})">Rejoindre</a><button class="xburger" type="button" aria-label="Menu" onclick="this.closest('.xnav').classList.toggle('open')"><i></i></button></div><div class="xmenu"><a href="/" class="on">Accueil</a><a href="/visite">La visite</a><a href="/programme-createur">Programme créateur</a><a href="/devenir-parrain">Devenir affilié</a><a href="/contact">Nous contacter</a><a class="gratuit" href="/communaute" target="_blank" rel="noopener">Rejoindre le groupe WhatsApp gratuit</a></div></nav>
 
 
 </div>
@@ -558,21 +457,22 @@
  <!-- HERO -->
  <header>
  <div class="wrap">
- <h1 class="hero-h1" data-i18n-html="hero.h1">Gagner de l'argent est <b>une compétence</b></h1>
- <p class="sub hero-sub" data-i18n-html="hero.sub">On va t'apprendre à la <b>maîtriser</b></p>
+ <div class="topbar-info"><span id="tbInfo"></span></div>
+ <h1 class="hero-h1" data-i18n-html="hero.h1">Apprends à gagner tes premiers <b>1&nbsp;000&nbsp;000&nbsp;F&nbsp;CFA</b> sur internet</h1>
+ <p class="sub hero-sub" data-i18n-html="hero.sub">Avec juste ton téléphone, même si tu pars de zéro.</p>
  <div class="vsl" id="vsl">
  <div id="vslPlayer"></div>
  <div class="vslblock" aria-hidden="true"></div>
  <div class="vslbarwrap"><div class="vslbar" id="vslBar"></div></div>
  <button type="button" class="vslfacade" id="vslStart" onclick="playVSL()" aria-label="Lire la vidéo">
  <img id="vslThumb" src="" alt="" decoding="async">
- <span class="play" aria-hidden="true">&#9654;</span>
+ <span class="play" aria-hidden="true"></span>
  </button>
  <div class="vslend" id="vslEnd"><h3 data-i18n="hero.endq">Prêt à faire ton premier million en ligne&nbsp;?</h3><a class="cta" href="/checkout" onclick="track('click_go_checkout',{depuis:'vslend',v:_vslVariant})" data-i18n="hero.vslcta">Rejoindre la communauté</a></div>
  <button type="button" class="vsl-son" id="vslSon" aria-label="Activer le son"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg><b data-i18n="hero.son">Appuie pour activer le son</b></span></button>
  <div class="vsl-ctrl" id="vslCtrl">
   <button type="button" class="vsl-cbtn" id="vslBack">⟪ −15s</button>
-  <button type="button" class="vsl-cbtn" id="vslToggle">⏸</button>
+  <button type="button" class="vsl-cbtn" id="vslToggle"></button>
  </div>
  </div>
  <a class="cta" href="/checkout" onclick="track('click_go_checkout',{depuis:'hero',v:_vslVariant})" data-i18n="hero.vslcta">Rejoindre la communauté</a>
@@ -586,10 +486,10 @@
  <div class="eyebrow" data-i18n="honest.eyebrow">Sois honnête avec toi-même</div>
  <h2 data-i18n-html="honest.h2">C'est toi, <span class='hl'>ça&nbsp;?</span></h2>
  <ul>
- <li><span class="bolt" aria-hidden="true">&#9889;</span><span data-i18n-html="honest.i1"></span></li>
- <li><span class="bolt" aria-hidden="true">&#9889;</span><span data-i18n-html="honest.i3"></span></li>
- <li><span class="bolt" aria-hidden="true">&#9889;</span><span data-i18n-html="honest.i4"></span></li>
- <li><span class="bolt" aria-hidden="true">&#9889;</span><span data-i18n-html="honest.i8"></span></li>
+ <li><span class="bolt" aria-hidden="true"></span><span data-i18n-html="honest.i1"></span></li>
+ <li><span class="bolt" aria-hidden="true"></span><span data-i18n-html="honest.i3"></span></li>
+ <li><span class="bolt" aria-hidden="true"></span><span data-i18n-html="honest.i4"></span></li>
+ <li><span class="bolt" aria-hidden="true"></span><span data-i18n-html="honest.i8"></span></li>
  </ul>
  <p class="concl" data-i18n="honest.concl"></p>
  <p class="concl2" data-i18n="honest.concl2"></p>
@@ -616,7 +516,7 @@
 <section class="proof">
  <div class="wrap">
   <div class="eyebrow" data-i18n="pv.eyebrow">Leurs réussites</div>
-  <h2 data-i18n="pv.h2">Ceux qui m'ont suivi gagnent</h2>
+  <h2 data-i18n-html="pv.h2">Ceux qui m'ont suivi <em>gagnent</em></h2>
   <p class="sublead" data-i18n="pv.sub">Les promesses ne prouvent rien. Les résultats, si.</p>
 
   <div class="pvp" id="pvpA">
@@ -670,116 +570,126 @@
 </section>
 
 
-<!-- REMERCIEMENTS -->
-<section class="proof merci">
- <div class="wrap">
-  <div class="eyebrow" data-i18n="pv.mr_eyebrow">Ce qu'ils m'écrivent</div>
-
-  <div class="pvp" id="pvpB">
-   <div class="pvtrack">
-
-    <div class="pvslide">
-     <div class="pvtitle" data-i18n="pv.pv_t1">Création de contenu</div>
-     <div class="pvsub" data-i18n="pv.mr_s1">Ils ont construit leur audience</div>
-     <div class="fan">
-      <img data-src="/preuves/merci/vign/m1.jpg" data-full="/preuves/merci/m1.jpg" alt="" decoding="async">
-      <img data-src="/preuves/merci/vign/m4.jpg" data-full="/preuves/merci/m4.jpg" alt="" decoding="async">
-      <img data-src="/preuves/merci/vign/m3.jpg" data-full="/preuves/merci/m3.jpg" alt="" decoding="async">
-     </div>
-    </div>
-
-    <div class="pvslide">
-     <div class="pvtitle" data-i18n="pv.pv_t2">E-commerce</div>
-     <div class="pvsub" data-i18n="pv.mr_s2">Ils ont fait décoller leur boutique</div>
-     <div class="fan">
-      <img data-src="/preuves/merci/vign/m2.jpg" data-full="/preuves/merci/m2.jpg" alt="" decoding="async">
-      <img data-src="/preuves/merci/vign/m6.jpg" data-full="/preuves/merci/m6.jpg" alt="" decoding="async">
-      <img data-src="/preuves/merci/vign/m7.jpg" data-full="/preuves/merci/m7.jpg" alt="" decoding="async">
-     </div>
-    </div>
-
-    <div class="pvslide">
-     <div class="pvtitle" data-i18n="pv.pv_t3">Monétisation TikTok / YouTube</div>
-     <div class="pvsub" data-i18n="pv.mr_s3">Ils vivent de leurs vues</div>
-     <div class="fan">
-      <img data-src="/preuves/merci/vign/m10.jpg" data-full="/preuves/merci/m10.jpg" alt="" decoding="async">
-      <img data-src="/preuves/merci/vign/m11.jpg" data-full="/preuves/merci/m11.jpg" alt="" decoding="async">
-      <img data-src="/preuves/merci/vign/m12.jpg" data-full="/preuves/merci/m12.jpg" alt="" decoding="async">
-     </div>
-    </div>
-    <div class="pvslide">
-     <div class="pvtitle" data-i18n="pv.pv_t4">Freelance & services</div>
-     <div class="pvsub" data-i18n="pv.mr_s4">Ils vivent de leur compétence</div>
-     <div class="fan">
-      <img data-src="/preuves/merci/vign/m5.jpg" data-full="/preuves/merci/m5.jpg" alt="" decoding="async">
-      <img data-src="/preuves/merci/vign/m9.jpg" data-full="/preuves/merci/m9.jpg" alt="" decoding="async">
-      <img data-src="/preuves/merci/vign/m8.jpg" data-full="/preuves/merci/m8.jpg" alt="" decoding="async">
-     </div>
-    </div>
-
-   </div>
-  </div>
-
-  <div class="pvdots"></div>
-  <p class="pvhint" data-i18n="pv.pv_hint">Fais glisser pour changer d'activité · touche une image pour l'agrandir</p>
-  <div style="text-align:center;margin-top:30px">
-   <a class="cta" href="/checkout" onclick="track('click_go_checkout',{depuis:'merci'})" data-i18n="hero.cta">Apprendre à gagner de l'argent</a>
-  </div>
- </div>
-</section>
+<!-- REMERCIEMENTS : retirés le 06/11/2026. Des messages de merci convainquent moins que des résultats chiffrés ; la place est gardée pour des témoignages vidéo. -->
 
 
 
 
  <!-- CATALOGUE : tout ce que tu débloques -->
  <style>
-  .catalogue2{background:#0B141C;padding:44px 0 58px}
-  .catgrid2{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));margin:0}
-  .catitem2{display:flex;align-items:center;gap:10px;background:#131B23;border:1px solid #222E39;border-radius:12px;padding:14px;font-weight:700;font-size:14px;color:#fff}
-  .catitem2 .e{font-size:22px;flex:0 0 auto}
-  .catitem2.bonus2{background:transparent;border-style:dashed}
-  .grouptitle2{font-size:14px;font-weight:800;color:#fff;margin:22px 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  .grouptitle2 .tag2{font-size:11px;font-weight:700;color:#FFA545;background:rgba(255,165,69,.12);border:1px solid rgba(255,165,69,.3);padding:3px 9px;border-radius:999px}
-  .grouphint2{font-size:13px;color:rgba(255,255,255,.64);margin:24px 0 12px}
-  .catcta2{max-width:340px;margin:28px auto 0}
-  .voiesdrop{border:1px solid var(--border);border-radius:14px;background:var(--card);overflow:hidden;margin-top:8px}
-  .voiesdrop>summary{list-style:none;cursor:pointer;padding:16px 18px;font-weight:800;font-size:16px;display:flex;align-items:center;gap:8px;color:var(--text)}
+  .catgrid2{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));margin:0}
+  @media(max-width:560px){.catgrid2{grid-template-columns:1fr 1fr;gap:8px}}
+  .catitem2{display:flex;align-items:flex-start;gap:11px;background:var(--cardg);border:1px solid var(--border);border-radius:16px;padding:12px;font-weight:500;font-size:14px;line-height:1.3;color:var(--text)}
+  .catitem2 b{display:block;font-weight:600;font-size:14.5px}
+  .catitem2 small{display:block;color:var(--muted);font-size:12.5px;font-weight:400;margin-top:2px;line-height:1.35}
+  .catgrid2.salons .catitem2{padding:11px 14px}
+  .grouptitle2.g2{margin-top:28px}
+  .catitem2 .e{width:34px;height:34px;border-radius:11px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;background:rgba(245,181,74,.12);border:1px solid rgba(245,181,74,.25);font-size:16px}
+  .catitem2.bonus2{background:transparent;border-style:dashed;border-color:var(--border2)}
+  .catitem2.bonus2 .e{background:rgba(255,255,255,.04);border-color:var(--border)}
+  .grouptitle2{font-size:14.5px;font-weight:600;color:var(--text);margin:8px 0 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .grouptitle2 .tag2{font-size:11.5px;font-weight:600;color:var(--accent);background:rgba(245,181,74,.10);border:1px solid rgba(245,181,74,.45);padding:3px 10px;border-radius:999px}
+  .grouphint2{font-size:13.5px;color:var(--muted);margin:24px 0 12px}
+  .catcta2{margin:30px auto 0}
+  .voiesdrop{border:1px solid var(--border);border-radius:20px;background:var(--cardg);overflow:hidden;margin-top:8px}
+  .voiesdrop>summary{list-style:none;cursor:pointer;padding:18px 20px;font-weight:500;font-size:15.5px;display:flex;align-items:center;gap:8px;color:var(--text)}
   .voiesdrop>summary::-webkit-details-marker{display:none}
-  .voiesdrop .vchev{margin-left:auto;color:var(--accent);transition:transform .2s ease;font-size:18px}
-  .voiesdrop[open] .vchev{transform:rotate(180deg)}
-  .voiesdrop .vgrid{padding:6px 16px 12px}
-  .voiesbody{padding-bottom:8px}
-  .vgrp{font-size:15px;font-weight:800;margin:16px 16px 2px;color:var(--text)}
+  .voiesdrop>summary::after{content:"+";margin-left:auto;font-size:22px;font-weight:300;color:var(--muted);line-height:1}
+  .voiesdrop[open]>summary::after{content:"\2212"}
+  .voiesdrop .vchev{display:none}
+  .voiesdrop .vgrid{padding:0 14px 6px}
+  .voiesbody{padding-bottom:10px;border-top:1px solid var(--border)}
+  .vgrp{font-size:14.5px;font-weight:600;margin:18px 16px 0;color:var(--text)}
+
+  .catdrop{border:1px solid var(--border);border-radius:20px;background:var(--cardg);margin-top:10px;overflow:hidden}
+  .catdrop>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:17px 18px}
+  .catdrop>summary::-webkit-details-marker{display:none}
+  .catdrop>summary .ct{font-weight:600;font-size:15.5px;line-height:1.3}
+  .catdrop>summary .tag2{margin-left:auto;flex:0 0 auto;font-size:11.5px;font-weight:600;color:var(--accent);background:rgba(245,181,74,.10);border:1px solid rgba(245,181,74,.45);padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .catdrop>summary:after{content:"+";flex:0 0 auto;font-size:22px;font-weight:300;color:var(--muted);line-height:1;width:16px;text-align:center}
+  .catdrop[open]>summary:after{content:"\2212"}
+  .catdrop .catbody{padding:0 14px 16px}
+  .catdrop .grade{font-size:12.5px;font-weight:600;color:var(--accent);margin:14px 4px 8px}
+  .catdrop .grade:first-child{margin-top:2px}
+  .catdrop .salons{display:flex;flex-wrap:wrap;gap:7px}
+  .catdrop .salons span{font-size:13px;color:var(--text-soft);padding:7px 11px;border-radius:999px;border:1px solid var(--border2);background:rgba(255,255,255,.02)}
+  .catdrop .catgrid2{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+  @media(max-width:560px){.catdrop .catgrid2{grid-template-columns:1fr}.catdrop>summary{padding:15px 14px}.catdrop>summary .ct{font-size:14.5px}}
  </style>
  <section class="catalogue2" id="catalogue">
  <div class="wrap wide">
-  <div class="eyebrow" data-i18n="cat.eyebrow">Inclus dans la communauté</div>
-  <h2 data-i18n="cat.h2">Tout est inclus dans ton abonnement</h2>
-  <p class="lead" data-i18n="cat.sub">Un seul abonnement — tous les moyens de gagner de l'argent en ligne, réunis au même endroit.</p>
-  <div class="grouptitle2">💸 <span data-i18n="cat.g1">Les moyens de gagner de l'argent</span> <span class="tag2" data-i18n="cat.g1tag">14 façons</span></div>
-  <div class="catgrid2">
-   <div class="catitem2"><span class="e" aria-hidden="true">🤖</span><span data-i18n="cat.ia">Intelligence artificielle</span></div>
-   <div class="catitem2"><span class="e" aria-hidden="true">🎥</span><span data-i18n="cat.contenu">Création de contenu</span></div>
-   <div class="catitem2"><span class="e" aria-hidden="true">💼</span><span data-i18n="cat.freelance">Freelance</span></div>
-   <div class="catitem2"><span class="e" aria-hidden="true">🎬</span><span data-i18n="cat.montage">Montage vidéo</span></div>
-   <div class="catitem2"><span class="e" aria-hidden="true">🛒</span><span data-i18n="cat.ecom">E-commerce</span></div>
-   <div class="catitem2"><span class="e" aria-hidden="true">📦</span><span data-i18n="cat.produits">Produits digitaux</span></div>
-   <div class="catitem2"><span class="e" aria-hidden="true">🎨</span><span data-i18n="cat.graph">Création graphique</span></div>
-   <div class="catitem2"><span class="e" aria-hidden="true">🤝</span><span data-i18n="cat.affiliation">Affiliation</span></div>
-   <div class="catitem2"><span class="e" aria-hidden="true">📱</span><span data-i18n="cat.influenceur">Devenir influenceur</span></div>
-   <div class="catitem2"><span class="e" aria-hidden="true">✂️</span><span data-i18n="cat.clippeur">Clippeur</span></div>
-   <div class="catitem2"><span class="e" aria-hidden="true">💻</span><span data-i18n="cat.sites">Créer des sites web</span></div>
-   <div class="catitem2"><span class="e" aria-hidden="true">🧩</span><span data-i18n="cat.applis">Créer des applications</span></div>
-   <div class="catitem2"><span class="e" aria-hidden="true">📈</span><span data-i18n="cat.trading">Trading</span></div>
-   <div class="catitem2"><span class="e" aria-hidden="true">🏠</span><span data-i18n="cat.airbnb">Airbnb</span></div>
-  </div>
-  <div class="grouphint2" data-i18n="cat.g2">Et tout ce qu'il faut autour pour réussir :</div>
-  <div class="catgrid2">
-   <div class="catitem2 bonus2"><span class="e" aria-hidden="true">🏢</span><span data-i18n="cat.societe">Création de société</span></div>
-   <div class="catitem2 bonus2"><span class="e" aria-hidden="true">✈️</span><span data-i18n="cat.visas">Visas & expatriation</span></div>
-   <div class="catitem2 bonus2"><span class="e" aria-hidden="true">🏦</span><span data-i18n="cat.banques">Recevoir son argent</span></div>
-  </div>
-  <div style="text-align:center"><a class="cta catcta2" href="/visite" onclick="track('click_visite',{depuis:'catalogue'})" data-i18n="cat.visite">Voir l'intérieur de la communauté</a></div>
+  <div class="eyebrow">Inclus dans la communauté</div>
+  <h2>Tout est inclus dans <em>ton abonnement</em></h2>
+  <p class="lead">22 formations dans l'appli des membres, et un Discord privé de 30 salons. Touche une ligne pour voir le détail.</p>
+  <details class="catdrop"><summary><span class="ct">Les compétences qui te paient dès ton entrée</span><span class="tag2">9 formations</span></summary>
+   <div class="catbody">
+    <div class="catgrid2">
+    <div class="catitem2"><span><b>IA Master</b><small>ChatGPT, Gemini, Claude, Google Flow, Higgsfield</small></span></div>
+    <div class="catitem2"><span><b>Création de contenu</b><small>100 % IA sans montrer ton visage, ou face caméra</small></span></div>
+    <div class="catitem2"><span><b>Freelance</b><small>Vendre tes services et trouver tes premiers clients</small></span></div>
+    <div class="catitem2"><span><b>Montage vidéo</b><small>CapCut sur téléphone et sur PC</small></span></div>
+    <div class="catitem2"><span><b>Produits digitaux</b><small>Créer et vendre guides, templates, formations</small></span></div>
+    <div class="catitem2"><span><b>Affiliation</b><small>Toucher une commission sur les produits des autres</small></span></div>
+    <div class="catitem2"><span><b>Vendre en affiliation</b><small>Le contenu faceless qui transforme tes vues en ventes</small></span></div>
+    <div class="catitem2"><span><b>Clipping</b><small>Être payé aux vues en coupant des vidéos</small></span></div>
+    <div class="catitem2"><span><b>Création de miniatures</b><small>Bientôt</small></span></div>
+    </div>
+   </div>
+  </details>
+  <details class="catdrop"><summary><span class="ct">Ce qui te fait tenir</span><span class="tag2">4 formations</span></summary>
+   <div class="catbody">
+    <div class="catgrid2">
+    <div class="catitem2"><span><b>Recevoir ton argent</b><small><span class="af">Encaisser depuis l'Afrique et retirer sans blocage</span><span class="eu">Encaisser et retirer sans blocage</span></small></span></div>
+    <div class="catitem2"><span><b>Beauté et attractivité</b><small>Visage, corps, présence</small></span></div>
+    <div class="catitem2"><span><b>Musculation</b><small>Chez toi sans matériel, ou à la salle</small></span></div>
+    <div class="catitem2"><span><b>Productivité et focus</b><small>Bientôt</small></span></div>
+    </div>
+   </div>
+  </details>
+  <details class="catdrop"><summary><span class="ct">Ce que tu débloques en montant de grade</span><span class="tag2">9 formations</span></summary>
+   <div class="catbody">
+    <div class="grade">Capitaine</div>
+    <div class="catgrid2">
+    <div class="catitem2"><span><b>Closing et vente</b><small>Convaincre, conclure, toucher des commissions</small></span></div>
+    <div class="catitem2"><span><b>Femmes</b><small>Approcher et créer de vraies relations</small></span></div>
+    </div>
+    <div class="grade">Général</div>
+    <div class="catgrid2">
+    <div class="catitem2"><span><b>E-commerce</b><small>Ta boutique en ligne, tes produits, tes ventes</small></span></div>
+    <div class="catitem2"><span><b>Dropshipping</b><small>Vendre sans stock, trouver les bons fournisseurs</small></span></div>
+    </div>
+    <div class="grade">Elite</div>
+    <div class="catgrid2">
+    <div class="catitem2"><span><b>Airbnb</b><small>La location courte durée</small></span></div>
+    <div class="catitem2"><span><b>Visa et expatriation</b><small>Partir étudier, travailler ou vivre ailleurs</small></span></div>
+    <div class="catitem2"><span><b>Trading et marchés financiers</b><small>Comprendre les marchés sans te ruiner</small></span></div>
+    <div class="catitem2"><span><b>Cryptomonnaies</b><small>Investir sans te faire avoir</small></span></div>
+    <div class="catitem2"><span><b>Création de société</b><small>Créer ta société proprement</small></span></div>
+    </div>
+   </div>
+  </details>
+  <details class="catdrop"><summary><span class="ct">Le Discord privé</span><span class="tag2">30 salons</span></summary>
+   <div class="catbody">
+    <div class="grade">Pour bien démarrer</div>
+    <div class="salons"><span># Guide des salons</span><span># Présentations</span><span># Guide et formations</span><span># Discussion</span><span># Aide</span><span># Victoires</span><span># Progression</span><span># Arnaques signalées</span></div>
+    <div class="grade">Pour gagner de l'argent</div>
+    <div class="salons"><span># Programme Créateur</span><span># IA</span><span># Création de contenu</span><span># Compte monétisé</span><span># Freelance</span><span># Montage vidéo</span><span># Création graphique</span><span># Produits digitaux</span><span># Affiliation</span><span># Closing et ventes</span><span># E-commerce</span><span># Dropshipping</span><span># Trading</span><span># Cryptomonnaies</span></div>
+    <div class="grade">Pour ta vie et ton argent</div>
+    <div class="salons"><span># Recevoir ton argent</span><span># Création de sociétés</span><span># Visas et expatriation</span><span># Airbnb</span><span># Espace femmes</span><span># Beauté et attractivité</span><span># Musculation</span><span># Productivité et focus</span></div>
+   </div>
+  </details>
+  <details class="catdrop"><summary><span class="ct">Et aussi dans ton abonnement</span><span class="tag2">5 en plus</span></summary>
+   <div class="catbody">
+    <div class="catgrid2">
+    <div class="catitem2"><span><b>L'appli des membres</b><small>Ton espace sur téléphone : formations, progression, grade</small></span></div>
+    <div class="catitem2"><span><b>Ton assistant IA</b><small>Il connaît ton parcours, te donne un défi par semaine</small></span></div>
+    <div class="catitem2"><span><b>Le Programme Créateur</b><small><span class="af">Tes vidéos te paient en F CFA</span><span class="eu">Tes vidéos IA te paient en euros</span></small></span></div>
+    <div class="catitem2"><span><b><span class="af">Le parrainage</span><span class="eu">L'affiliation</span></b><small>Ton code te rapporte à chaque paiement, chaque mois</small></span></div>
+    <div class="catitem2"><span><b>Les outils</b><small>Télécharger sans filigrane, script, sous-titres</small></span></div>
+    </div>
+   </div>
+  </details>
+  <div style="text-align:center"><a class="cta catcta2" href="/visite" onclick="track('click_visite',{depuis:'catalogue'})">Voir l'intérieur de la communauté</a></div>
  </div>
  </section>
 
@@ -792,7 +702,7 @@
  <span data-i18n="ch.l1">gagnés par mes élèves</span>
  </div>
  <div class="ch">
- <b data-compteur data-valeur="14"><span class="val">0</span></b>
+ <b data-compteur data-valeur="22"><span class="val">0</span></b>
  <span data-i18n="ch.l2">façons de gagner de l'argent en ligne</span>
  </div>
  <div class="ch">
@@ -811,48 +721,25 @@
  </section>
 
  <!-- LES VOIES -->
-  <section class="voies" id="voies">
- <div class="wrap wide">
- <div class="eyebrow" data-i18n="vo.eyebrow">Le contenu</div>
- <h2 data-i18n="vo.h2">Ce que tu vas apprendre</h2>
- <p class="lead" data-i18n="vo.lead">Quatorze façons de gagner de l'argent en ligne, et tout ce qu'il faut autour pour que ça tienne.</p>
- <details class="voiesdrop"><summary>Voir le détail de chaque formation <span class="vchev" aria-hidden="true">▾</span></summary>
- <div class="voiesbody">
- <h3 class="vgrp">💸 <span data-i18n="vo.grp1">Les moyens de gagner de l'argent</span></h3>
- <div class="vgrid">
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">🤖</span><h3 data-i18n="vo.t_ia">Intelligence artificielle</h3></div><p data-i18n="vo.p_ia">Utiliser l'IA pour créer, automatiser et produire plus vite — et en faire un revenu.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">🎥</span><h3 data-i18n="vo.t_contenu">Création de contenu</h3></div><p data-i18n="vo.p_contenu">Construire une audience et la monétiser, même sans jamais te montrer.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">💼</span><h3 data-i18n="vo.t_freelance">Freelance</h3></div><p data-i18n="vo.p_freelance">Vendre une compétence et décrocher tes premiers clients, sans produit à créer.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">🎬</span><h3 data-i18n="vo.t_montage">Montage vidéo</h3></div><p data-i18n="vo.p_montage">Monter des vidéos (CapCut, PC) — une compétence très demandée et bien payée.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">🛒</span><h3 data-i18n="vo.t_ecom">E-commerce</h3></div><p data-i18n="vo.p_ecom">Vendre un produit sous ta marque, sans copier le dropshipping de tout le monde.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">📦</span><h3 data-i18n="vo.t_produits">Produits digitaux</h3></div><p data-i18n="vo.p_produits">Créer et vendre ebooks, formations et templates — des revenus qui tournent.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">🎨</span><h3 data-i18n="vo.t_graph">Création graphique</h3></div><p data-i18n="vo.p_graph">Créer des visuels et des miniatures qui claquent, pour toi ou tes clients.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">🤝</span><h3 data-i18n="vo.t_affiliation">Affiliation</h3></div><p data-i18n="vo.p_affiliation">Toucher une commission en recommandant les produits des autres, sans stock.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">📱</span><h3 data-i18n="vo.t_influenceur">Devenir influenceur</h3></div><p data-i18n="vo.p_influenceur">Percer sur TikTok, YouTube et Insta, te construire une communauté et la transformer en revenus.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">✂️</span><h3 data-i18n="vo.t_clippeur">Clippeur</h3></div><p data-i18n="vo.p_clippeur">Découper des vidéos en clips viraux et être payé aux vues — sans jamais te montrer.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">💻</span><h3 data-i18n="vo.t_sites">Créer des sites web</h3></div><p data-i18n="vo.p_sites">Construire des sites avec l'IA et les vendre aux entreprises, même sans savoir coder.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">🧩</span><h3 data-i18n="vo.t_applis">Créer des applications</h3></div><p data-i18n="vo.p_applis">Créer des applis sans coder et en faire un vrai business.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">📈</span><h3 data-i18n="vo.t_trading">Trading</h3></div><p data-i18n="vo.p_trading">Comprendre les marchés et trader avec méthode, sans te faire piéger par les vendeurs de rêve.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">🏠</span><h3 data-i18n="vo.t_airbnb">Airbnb</h3></div><p data-i18n="vo.p_airbnb">Lancer une activité de location courte durée et générer des revenus réguliers.</p></div>
- </div>
- <h3 class="vgrp"><span data-i18n="vo.grp2">Et tout ce qu'il faut autour pour réussir</span></h3>
- <div class="vgrid">
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">🏦</span><h3 data-i18n="vo.t_argent">Recevoir son argent</h3></div><p data-i18n="vo.p_argent">Te faire payer et retirer ton argent depuis l'Afrique : mobile money, banques, les solutions qui marchent.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">🏢</span><h3 data-i18n="vo.t_societe">Création de société</h3></div><p data-i18n="vo.p_societe">Créer et structurer ta société proprement, du bon côté des règles.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">✈️</span><h3 data-i18n="vo.t_visas">Visas & expatriation</h3></div><p data-i18n="vo.p_visas">Les démarches pour voyager ou t'expatrier, si un jour tu veux bouger.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">🛡️</span><h3 data-i18n="vo.t_piege">Le système anti-piège</h3></div><p data-i18n="vo.p_piege">Repérer les arnaques avant d'y laisser ton argent : faux mentors, rendements garantis, paiements qui n'arrivent jamais.</p></div>
- <div class="voie"><div class="vtete"><span class="vico" aria-hidden="true">📊</span><h3 data-i18n="vo.t_finance">Finance & business</h3></div><p data-i18n="vo.p_finance">Faire tenir ton activité : séparer ton argent de celui du business, savoir quoi réinvestir et quand.</p></div>
- </div>
- </div>
- </details>
+
+
+ <!-- GROUPE GRATUIT (06/11/2026) : visible, mais après la vidéo et les preuves -->
+ <section class="gratuit-bloc" id="gratuit">
+ <div class="wrap">
+  <div class="gb">
+   <div class="gb-t"><span class="gb-pt"></span>Pas encore prêt à rejoindre ?</div>
+   <h2>Commence par le <em>groupe gratuit</em></h2>
+   <p>Le groupe WhatsApp des Ex-Rienneux : des conseils chaque jour, les annonces, et tu vois comment on travaille avant de rejoindre.</p>
+   <a class="gb-btn" href="/communaute" target="_blank" rel="noopener" onclick="track('click_whatsapp',{depuis:'bloc_gratuit'})">Rejoindre le groupe gratuit</a>
+  </div>
  </div>
  </section>
 
  <!-- FAQ -->
- <section style="background:var(--bg2)">
- <div class="wrap">
- <div class="eyebrow" data-i18n="faq.eyebrow">FAQ</div>
- <h2 data-i18n="faq.h2">Les questions fréquentes</h2>
+ <section id="faq">
+ <div class="wrap wide">
+ <div class="faqx">
+ <div class="g"><div class="eyebrow" data-i18n="faq.eyebrow">FAQ</div><h2 data-i18n-html="faq.h2">Encore des <em>questions</em> ?</h2></div>
  <div class="faq">
  <details><summary data-i18n="faq.q1">De quoi j'ai besoin pour commencer ?</summary><div data-i18n-html="faq.a1"></div></details>
  <details><summary data-i18n="faq.q2">Comment je fais pour payer ?</summary><div data-i18n-html="faq.a2"></div></details>
@@ -861,13 +748,15 @@
  <details><summary data-i18n="faq.q5">Est-ce que je serai accompagné ?</summary><div data-i18n-html="faq.a5"></div></details>
  </div>
  </div>
+ </div>
  </section>
 
  <!-- CTA FINALE -->
- <section class="band" style="background:var(--bg2)">
+ <section class="band">
  <div class="wrap">
  <h2 data-i18n-html="final.h2">Tu peux rester bloqué encore 5 ans.<br>Ou régler ça aujourd'hui.</h2>
  <a class="cta" href="/checkout" onclick="track('click_go_checkout',{depuis:'final'})" data-i18n="final.cta">Apprendre à gagner de l'argent</a>
+ <p class="gratuit">Pas encore prêt ? <a href="/communaute" target="_blank" rel="noopener" onclick="track('click_whatsapp',{depuis:'final'})">Rejoins d'abord le groupe gratuit</a></p>
  </div>
  </section>
 
@@ -979,8 +868,8 @@
  <p class="lead" id="rWho" style="margin-bottom:0"></p>
 
  <div id="rTiles" style="display:none;max-width:470px;margin:10px auto 0">
- <div style="background:var(--star-soft);border:1px solid var(--star-line);color:var(--star);border-radius:12px;padding:11px 14px;margin:0 auto 12px;font-size:13px;line-height:1.45;font-weight:600" data-i18n-html="book.promo">🎁 Le guide + l'accès à la communauté <b>Ex-rienneux</b> à <b>10 000 FCFA/mois</b>.</div>
- <p style="font-size:13px;color:var(--muted);margin:0 0 10px" data-i18n="book.choose">Choisis ton offre 👇</p>
+ <div style="background:var(--star-soft);border:1px solid var(--star-line);color:var(--star);border-radius:12px;padding:11px 14px;margin:0 auto 12px;font-size:13px;line-height:1.45;font-weight:600" data-i18n-html="book.promo"> Le guide + l'accès à la communauté <b>Ex-rienneux</b> à <b>10 000 FCFA/mois</b>.</div>
+ <p style="font-size:13px;color:var(--muted);margin:0 0 10px" data-i18n="book.choose">Choisis ton offre </p>
  <div style="display:flex;gap:8px;margin-bottom:14px">
  <button type="button" class="otile" onclick="pickOffer(this,'r')" data-desckey="result.descAppel" data-momo="https://me.fedapay.com/demarrage" data-card="https://whop.com/checkout/plan_bReryALMV3QYm">
  <span class="oprice">85 000<sup>FCFA</sup></span>
@@ -988,7 +877,7 @@
  <span class="olabel" data-i18n="result.tileAppel">Appel 1-à-1</span>
  </button>
  <button type="button" class="otile selected" onclick="pickOffer(this,'r')" data-desckey="book.desc15" data-momo="https://bot.beaudelaireconsulting.com/pay" data-card="https://bot.beaudelaireconsulting.com/carte/payer">
- <span class="obadge" style="color:var(--danger)" data-i18n="book.promobadge">🎁 PROMO</span>
+ <span class="obadge" style="color:var(--danger)" data-i18n="book.promobadge"> PROMO</span>
  <span class="oprice">10 000<sup>FCFA</sup><span style="font-size:.42em;font-weight:700"> /mois</span></span>
  <span class="oeur">16€ / mois</span>
  
@@ -1010,7 +899,7 @@
  <div class="name" id="rgName"></div>
  <div class="price" id="rgPrice"></div>
  <p class="anchor" id="rgLine"></p>
- <p style="display:inline-block;background:var(--star-soft);border:1px solid var(--star-line);color:var(--star);font-weight:700;font-size:12.5px;padding:5px 12px;border-radius:999px;margin:2px 0 12px" data-i18n="book.urgency">⏳ Offre limitée · places limitées</p>
+ <p style="display:inline-block;background:var(--star-soft);border:1px solid var(--star-line);color:var(--star);font-weight:700;font-size:12.5px;padding:5px 12px;border-radius:999px;margin:2px 0 12px" data-i18n="book.urgency"> Offre limitée · places limitées</p>
  <div class="pay">
  <a class="paybtn" id="rgCard" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide_card')"><b id="rgCtaC">Rejoindre la communauté</b><span>Paiement par carte · Visa / Mastercard</span></a>
  <a class="paybtn" id="rgBuy" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide')"><b id="rgCta">Rejoindre la communauté</b><span>Paiement mobile money (Afrique) · Accès immédiat</span></a>
@@ -1051,7 +940,10 @@
  <div class="lb-count" id="lbCount"></div>
 </div>
 
-<footer><div class="wrap"><a href="/programme-createur.html" style="color:var(--accent);text-decoration:none;font-weight:600">Devenir clippeur</a> · <a href="/devenir-parrain.html" style="color:var(--accent);text-decoration:none;font-weight:600">Devenir parrain</a><br style="margin-bottom:6px">Contact : <a href="mailto:beaudelaireconsulting@gmail.com" style="color:var(--accent);text-decoration:none;font-weight:600">beaudelaireconsulting@gmail.com</a><br style="margin-bottom:6px">© <span id="yr"></span> Beaudelaire Consulting</div></footer>
+<footer><div class="wrap">
+ <div class="pliens"><a href="/communaute" target="_blank" rel="noopener">Groupe gratuit</a><a href="/visite">La visite</a><a href="/programme-createur">Devenir créateur</a><a href="/devenir-parrain">Devenir affilié</a></div>
+ <a href="/contact">Nous contacter</a> · <a href="/confidentialite">Confidentialité</a><br>© <span id="yr"></span> Beaudelaire Consulting
+</div></footer>
 
 <script>
 /* =================================================================
@@ -1069,7 +961,7 @@ const I18N = {
  b1:"Des gens qui étaient <b>à ta place</b> il y a six mois",
  b2:"Tes questions, mes réponses, <b>tous les jours</b>",
  b3:"On suit tes progrès : tu ne restes pas <b>bloqué dans ton coin</b>"},
- vo:{eyebrow:"Le contenu", h2:"Ce que tu vas apprendre",
+ vo:{eyebrow:"Le contenu", h2:"Ce que tu vas <em>apprendre</em>",
  lead:"Quatorze façons de gagner de l'argent en ligne, et tout ce qu'il faut autour pour que ça tienne.",
  grp1:"Les moyens de gagner de l'argent", grp2:"Et tout ce qu'il faut autour pour réussir",
  t_ia:"Intelligence artificielle", p_ia:"Utiliser l'IA pour créer, automatiser et produire plus vite — et en faire un revenu.",
@@ -1112,13 +1004,13 @@ const I18N = {
  t4:"Encaisser <b>depuis l'Afrique</b>",
  p4:"<b>Te faire payer et sortir ton argent</b> quand tu n'as pas de compte bancaire classique : banques, mobile money, les solutions qui fonctionnent vraiment.",
  s4:"Le problème dont personne ne parle, et qui bloque le plus de gens."},
- ch:{l1:"gagnés par mes élèves", l2:"façons de gagner de l'argent en ligne",
+ ch:{l1:"gagnés par mes élèves", l2:"formations dans l'appli des membres",
  l3:"élèves accompagnés depuis le début",
  joined:"Ils sont <b>5 180+</b> à nous avoir rejoints"},
  topbar:{cta:"Rejoindre le groupe privé (Gratuit)",
   i1:"<b>845 720 640+</b> XOF générés par les élèves",
   i2:"<b>5 180+</b> élèves accompagnés depuis le début"},
- cat:{eyebrow:"Inclus dans la communauté", h2:"Tout est inclus dans ton abonnement",
+ cat:{eyebrow:"Inclus dans la communauté", h2:"Tout est inclus dans <em>ton abonnement</em>",
   sub:"Un seul abonnement — tous les moyens de gagner de l'argent en ligne, plus tout ce qu'il faut autour pour que ça tienne.",
   visite:"Voir l'intérieur de la communauté",
   cta:"Apprendre à gagner de l'argent", g1:"Les moyens de gagner de l'argent", g1tag:"14 façons", g2:"Et tout ce qu'il faut autour pour réussir :",
@@ -1131,7 +1023,7 @@ const I18N = {
   appel:"Réserver un appel<small>2 minutes pour voir si je peux t'aider</small>"},
  nav:{offres:"Les offres", about:"Qui je suis", debutants:"La communauté", chemin:"Le chemin", cta:"Réserver un appel"},
  pv:{
- eyebrow:"Leurs réussites", h2:"Ceux qui m'ont suivi gagnent",
+ eyebrow:"Leurs réussites", h2:"Ceux qui m'ont suivi <em>gagnent</em>",
  sub:"Les promesses ne prouvent rien. Les résultats, si.",
  pv_t1:"Création de contenu", pv_s1:"Construire une audience à partir de zéro",
  pv_t2:"E-commerce", pv_s2:"Des boutiques qui vendent vraiment",
@@ -1148,14 +1040,14 @@ const I18N = {
  honest:{
  eyebrow:"Sois honnête avec toi-même",
  h2:"C'est toi, <span class='hl'>ça&nbsp;?</span>",
- i1:"Tu es fatigué de regarder les autres avancer <b>pendant que toi, tu stagnes</b>.",
+ i1:"Tu passes des heures sur ton téléphone à regarder les autres gagner de l'argent, <b>et toi rien</b>.",
  i2:"Tu sais que tu vaux mieux que ça, mais <b>personne autour de toi ne comprend</b>.",
- i3:"Tu as enchaîné les vidéos gratuites et <b>tu n'as toujours rien lancé</b>.",
- i4:"Tu veux <b>un chemin clair</b>, pas des conseils de gens qui n'ont jamais rien construit.",
+ i3:"Tu as essayé les vidéos gratuites, parfois un « mentor », et <b>tu n'as toujours rien lancé</b>.",
+ i4:"Tu ne sais pas <b>quelle compétence choisir</b>, ni par où commencer.",
  i5:"Tu es prêt à bosser, <b>à condition qu'on te montre exactement quoi faire</b>.",
  i6:"Tu veux <b>une compétence qui rapporte</b>, pas un diplôme qui prend la poussière.",
  i7:"Tu ne sais pas <b>comment te faire payer depuis l'Afrique</b>.",
- i8:"Tu veux arrêter de dépendre d'un salaire et <b>construire quelque chose à toi</b>.",
+ i8:"Tu veux un revenu à toi, <b>sans capital et sans diplôme</b>, juste avec ton téléphone.",
  concl:"Si tu t'es reconnu, c'est exactement pour toi que j'ai tracé ce chemin.",
  concl2:"Pas pour ceux qui vont y réfléchir. Pour ceux qui sont prêts à bouger.",
  cta:"Apprendre à gagner de l'argent"
@@ -1163,55 +1055,56 @@ const I18N = {
  hero:{
  desc:"C'est un cours qui t'apprend exactement <b>quelles actions mettre en place</b> pour faire tes premiers 1 000 000 XOF (1 500 €).",
  badge_pre:"Plus de", badge_post:"rienneux sauvés",
- h1:"Gagner de l'argent est <b>une compétence</b>",
- sub:"On va t'apprendre à la <b>maîtriser</b>",
+ h1:"Apprends à gagner tes premiers <b>1&nbsp;000&nbsp;000&nbsp;F&nbsp;CFA</b> sur internet",
+ sub:"Avec juste ton téléphone, même si tu pars de zéro.",
  social:"Rejoins <b>5 180+</b> élèves qui apprennent à gagner leur vie en ligne",
  endq:"Prêt à faire ton premier million en ligne ?",
  bullets:'Tu repars avec : <b>ce qui te bloque vraiment</b> · <b>les leviers à activer en premier</b> · <b>ton plan d\'action priorisé</b>',
- storyhook:"Parti de zéro au Bénin. Aujourd'hui, +50k€ par mois. Mon histoire, en vidéo 👇",
+ storyhook:"Parti de zéro au Bénin. Aujourd'hui, +50k€ par mois. Mon histoire, en vidéo ",
  cta:"Apprendre à gagner de l'argent",
  vslcta:"Rejoindre la communauté", son:"Appuie pour activer le son",
  wa:"Rejoindre gratuitement la communauté des Rienneux",
  wamicro:"Sur WhatsApp · gratuit · on avance ensemble"
  },
  faq:{
- eyebrow:"FAQ", h2:"Les questions fréquentes",
+ eyebrow:"FAQ", h2:"Encore des <em>questions</em> ?",
  q1:"De quoi j'ai besoin pour commencer ?",
  a1:'<ul class="fl">'
-   +'<li><span class="fi oui">&#128241;</span><span><b>Un téléphone</b></span></li>'
-   +'<li><span class="fi oui">&#128246;</span><span><b>Une connexion internet</b></span></li>'
-   +'<li><span class="fi non">&#128187;</span><span>Pas besoin d\'ordinateur</span></li>'
-   +'<li><span class="fi non">&#128176;</span><span>Pas de capital de départ</span></li>'
-   +'<li><span class="fi non">&#127891;</span><span>Pas de diplôme</span></li></ul>'
+   +'<li><span class="fi oui"></span><span><b>Un téléphone</b></span></li>'
+   +'<li><span class="fi oui"></span><span><b>Une connexion internet</b></span></li>'
+   +'<li><span class="fi non"></span><span>Pas besoin d\'ordinateur</span></li>'
+   +'<li><span class="fi non"></span><span>Pas de capital de départ</span></li>'
+   +'<li><span class="fi non"></span><span>Pas de diplôme</span></li></ul>'
    +'<p class="fnote">J\'ai commencé exactement comme ça depuis le Bénin, et la plupart de mes élèves travaillent encore aujourd\'hui uniquement depuis leur téléphone.</p>',
  q2:"Comment je fais pour payer ?",
  a2:'<ul class="fl">'
-   +'<li><span class="fi num">1</span><span><b>Carte bancaire</b> — Visa ou Mastercard, depuis l\'international</span></li>'
-   +'<li><span class="fi num">2</span><span><b>Mobile money</b> — Orange Money, MTN, Moov, Wave</span></li>'
-   +'<li><span class="fi num">3</span><span><b>Cryptomonnaie</b> — USDT, Bitcoin et 300 autres, depuis n\'importe quel pays</span></li>'
-   +'<li><span class="fi oui">&#9889;</span><span>Accès <b>immédiat</b> après le paiement</span></li>'
-   +'<li><span class="fi non">&#128181;</span><span>Ni espèces ni dépôt en liquide</span></li></ul>',
+   +'<li class="af"><span class="fi num">1</span><span><b>Mobile money</b> : Orange Money, MTN, Moov, Wave</span></li>'
+   +'<li class="af"><span class="fi num">2</span><span><b>Carte bancaire</b> : Visa ou Mastercard</span></li>'
+   +'<li class="eu"><span class="fi num">1</span><span><b>Carte bancaire</b> : Visa ou Mastercard</span></li>'
+   +'<li><span class="fi num"><span class="af">3</span><span class="eu">2</span></span><span><b>Cryptomonnaie</b> : USDT, Bitcoin et 300 autres, depuis n\'importe quel pays</span></li>'
+   +'<li><span class="fi oui"></span><span>Accès <b>immédiat</b> après le paiement</span></li>'
+   +'<li><span class="fi non"></span><span>Ni espèces ni dépôt en liquide</span></li></ul>',
  q3:"Qu'est-ce qu'il y a dans la communauté ?",
  a3:'<ul class="fl">'
-   +'<li><span class="fi num">22</span><span><b>modules</b>, du départ à tes premiers revenus</span></li>'
-   +'<li><span class="fi oui">&#128188;</span><span>Trouver la compétence que tu peux <b>vendre</b>, et décrocher ton premier client</span></li>'
-   +'<li><span class="fi oui">&#127916;</span><span>Création de contenu, <b>affiliation</b>, e-commerce et la vérité sur le trading</span></li>'
-   +'<li><span class="fi oui">&#127978;</span><span><b>Encaisser depuis l\'Afrique</b> : la question que tout le monde évite</span></li>'
-   +'<li><span class="fi oui">&#128737;</span><span>Les <b>pièges à éviter</b>, mon histoire d\'arnaque comprise</span></li>'
-   +'<li><span class="fi oui">&#128101;</span><span>La communauté Ex-rienneux, <b>accès mensuel</b></span></li></ul>',
+   +'<li><span class="fi num">22</span><span><b>formations</b>, du guide de départ jusqu\'aux grades Capitaine, Général et Elite</span></li>'
+   +'<li><span class="fi oui"></span><span>Trouver la compétence que tu peux <b>vendre</b>, et décrocher ton premier client</span></li>'
+   +'<li><span class="fi oui"></span><span><b>IA Master</b>, création de contenu, freelance, montage, affiliation, clipping</span></li>'
+   +'<li><span class="fi oui"></span><span><b><span class="af">Encaisser depuis l\'Afrique</span><span class="eu">Encaisser et retirer ton argent</span></b> : la question que tout le monde évite</span></li>'
+   +'<li><span class="fi oui"></span><span>Les <b>pièges à éviter</b>, mon histoire d\'arnaque comprise</span></li>'
+   +'<li><span class="fi oui"></span><span>La communauté Ex-rienneux, <b>accès mensuel</b></span></li></ul>',
  q4:"Qu'est-ce qui est gratuit ?",
  a4:'<ul class="fl">'
-   +'<li><span class="fi oui">&#128172;</span><span>Le <b>groupe WhatsApp privé</b>, sans rien payer</span></li>'
-   +'<li><span class="fi oui">&#128200;</span><span>De la valeur <b>tous les jours</b></span></li>'
+   +'<li><span class="fi oui"></span><span>Le <b>groupe WhatsApp privé</b>, sans rien payer</span></li>'
+   +'<li><span class="fi oui"></span><span>De la valeur <b>tous les jours</b></span></li>'
    +'<li><span class="fi oui">&#10004;</span><span>Tu poses tes questions, <b>j\'y réponds</b></span></li></ul>'
    +'<a class="fbtn" href="/communaute" target="_blank" rel="noopener" onclick="track(\'click_whatsapp\',{depuis:\'faq\'})">Rejoindre le groupe maintenant</a>',
  q5:"Est-ce que je serai accompagné ?",
  a5:'<ul class="fl">'
-   +'<li><span class="fi oui">&#128077;</span><span><b>Oui, tu n\'es jamais seul.</b></span></li>'
-   +'<li><span class="fi oui">&#128218;</span><span>Un <b>accompagnement par des professeurs</b> dans chaque domaine (IA, freelance, e-commerce, création de contenu, montage…), selon la voie que tu choisis</span></li>'
-   +'<li><span class="fi oui">&#128172;</span><span>Tu poses tes questions dans le salon de ta compétence, <b>on te répond</b></span></li></ul>'
+   +'<li><span class="fi oui"></span><span><b>Oui, tu n\'es jamais seul.</b></span></li>'
+   +'<li><span class="fi oui"></span><span>Un <b>accompagnement par des professeurs</b> dans chaque domaine (IA, freelance, e-commerce, création de contenu, montage…), selon la voie que tu choisis</span></li>'
+   +'<li><span class="fi oui"></span><span>Tu poses tes questions dans le salon de ta compétence, <b>on te répond</b></span></li></ul>'
  },
- final:{ h2:"Tu peux rester bloqué encore 5 ans.<br>Ou régler ça aujourd'hui.", cta:"Apprendre à gagner de l'argent" },
+ final:{ h2:"Tu peux rester bloqué encore 5 ans.<br><em>Ou régler ça aujourd'hui.</em>", cta:"Apprendre à gagner de l'argent" },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Où en es-tu dans ton business ?",
  stage_idee:"Je n'ai pas encore commencé, j'ai juste une idée", stage_debut:"Je viens de lancer, je cherche mes premiers clients", stage_tourne:"J'ai déjà un business qui tourne", stage_stagne:"J'ai un business qui stagne / qui plafonne",
@@ -1233,7 +1126,7 @@ const I18N = {
  },
  result:{
  head:"C'est bon, je peux t'aider à débloquer ça",
- reassure:"Un vrai diagnostic de ton business, pas un argumentaire de vente déguisé. Tu repars avec un plan clair, quoi qu'il arrive.", tileAppel:"Appel 1-à-1", descAppel:'✅ 60 min en direct avec moi, rien que pour ton projet. Le guide et la communauté Ex-rienneux sont inclus.',
+ reassure:"Un vrai diagnostic de ton business, pas un argumentaire de vente déguisé. Tu repars avec un plan clair, quoi qu'il arrive.", tileAppel:"Appel 1-à-1", descAppel:' 60 min en direct avec moi, rien que pour ton projet. Le guide et la communauté Ex-rienneux sont inclus.',
  book:"Réserver mon appel", card:"Paiement par carte · Visa / Mastercard", momo:"Paiement Mobile Money · Orange, MTN, Wave",
  guarantee:"Paiement sécurisé · Réservation immédiate de ton créneau", home:"Revenir à l'accueil",
  guideopt:{ name:"La communauté des Ex-rienneux", price:'<span class="pnow">10 000<sup>FCFA</sup> <span class="peur">(16€)</span></span>', line:"Tu rejoins la communauté privée où on t'accompagne pour faire tes premiers revenus, quel que soit ton point de départ. Tout le programme est dedans.", cta:"Rejoindre la communauté" },
@@ -1267,7 +1160,7 @@ const I18N = {
  b1:"People who were <b>exactly where you are</b> six months ago",
  b2:"Your questions, my answers, <b>every day</b>",
  b3:"We track your progress: you never stay <b>stuck on your own</b>"},
- vo:{eyebrow:"The content", h2:"What you will learn",
+ vo:{eyebrow:"The content", h2:"What you will <em>learn</em>",
  lead:"Fourteen ways to make money online, plus everything around them that keeps it standing.",
  grp1:"The ways to make money", grp2:"Plus everything you need around it",
  t_ia:"Artificial intelligence", p_ia:"Use AI to create, automate and produce faster — and turn it into income.",
@@ -1316,7 +1209,7 @@ const I18N = {
  topbar:{cta:"Join the private group (Free)",
   i1:"<b>845,720,640+</b> XOF generated by students",
   i2:"<b>5,180+</b> students coached since day one"},
- cat:{eyebrow:"Included in the community", h2:"Everything is included in your subscription",
+ cat:{eyebrow:"Included in the community", h2:"Everything is included in <em>your subscription</em>",
   sub:"One subscription — every way to make money online, plus everything around it to make it last.",
   visite:"See inside the community",
   cta:"Learn to make money online", g1:"The ways to make money", g1tag:"14 methods", g2:"Plus everything you need around it:",
@@ -1329,7 +1222,7 @@ const I18N = {
   appel:"Book a call<small>2 minutes to see if I can help</small>"},
  nav:{offres:"Pricing", about:"About me", debutants:"The community", chemin:"The path", cta:"Book a call"},
  pv:{
- eyebrow:"Their wins", h2:"The people who followed me are winning",
+ eyebrow:"Their wins", h2:"The people who followed me are <em>winning</em>",
  sub:"Promises prove nothing. Results do.",
  pv_t1:"Content creation", pv_s1:"Building an audience from scratch",
  pv_t2:"E-commerce", pv_s2:"Stores that actually sell",
@@ -1366,50 +1259,50 @@ const I18N = {
  social:"Join <b>5,180+</b> students learning to earn a living online",
  endq:"Ready to make your first million online?",
  bullets:'You leave with: <b>what\'s really blocking you</b> · <b>the levers to pull first</b> · <b>your prioritized action plan</b>',
- storyhook:"From zero in Benin to over €50k a month. My story, in the video 👇",
+ storyhook:"From zero in Benin to over €50k a month. My story, in the video ",
  cta:"Learn to make money",
  vslcta:"Join the community", son:"Tap to turn the sound on",
  wa:"Join the free Rienneux community",
  wamicro:"On WhatsApp · free · let's grow together"
  },
  faq:{
- eyebrow:"FAQ", h2:"Frequently asked questions",
+ eyebrow:"FAQ", h2:"Still have <em>questions</em>?",
  q1:"What do I need to start?",
  a1:'<ul class="fl">'
-   +'<li><span class="fi oui">&#128241;</span><span><b>A phone</b></span></li>'
-   +'<li><span class="fi oui">&#128246;</span><span><b>An internet connection</b></span></li>'
-   +'<li><span class="fi non">&#128187;</span><span>No computer needed</span></li>'
-   +'<li><span class="fi non">&#128176;</span><span>No starting capital</span></li>'
-   +'<li><span class="fi non">&#127891;</span><span>No diploma</span></li></ul>'
+   +'<li><span class="fi oui"></span><span><b>A phone</b></span></li>'
+   +'<li><span class="fi oui"></span><span><b>An internet connection</b></span></li>'
+   +'<li><span class="fi non"></span><span>No computer needed</span></li>'
+   +'<li><span class="fi non"></span><span>No starting capital</span></li>'
+   +'<li><span class="fi non"></span><span>No diploma</span></li></ul>'
    +'<p class="fnote">That is exactly how I started from Benin, and most of my students still work from their phone alone today.</p>',
  q2:"How do I pay?",
  a2:'<ul class="fl">'
-   +'<li><span class="fi num">1</span><span><b>Card</b> — Visa or Mastercard, from abroad</span></li>'
-   +'<li><span class="fi num">2</span><span><b>Mobile money</b> — Orange Money, MTN, Moov, Wave</span></li>'
-   +'<li><span class="fi num">3</span><span><b>Crypto</b> — USDT, Bitcoin and 300 more, from any country</span></li>'
-   +'<li><span class="fi oui">&#9889;</span><span><b>Instant</b> access after payment</span></li>'
-   +'<li><span class="fi non">&#128181;</span><span>No cash, no cash deposits</span></li></ul>',
+   +'<li class="af"><span class="fi num">1</span><span><b>Mobile money</b>: Orange Money, MTN, Moov, Wave</span></li>'
+   +'<li><span class="fi num"><span class="af">2</span><span class="eu">1</span></span><span><b>Card</b>: Visa or Mastercard</span></li>'
+   +'<li><span class="fi num"><span class="af">3</span><span class="eu">2</span></span><span><b>Crypto</b>: USDT, Bitcoin and 300 more, from any country</span></li>'
+   +'<li><span class="fi oui"></span><span><b>Instant</b> access after payment</span></li>'
+   +'<li><span class="fi non"></span><span>No cash, no cash deposits</span></li></ul>',
  q3:"What is inside the community?",
  a3:'<ul class="fl">'
    +'<li><span class="fi num">22</span><span><b>modules</b>, from the start to your first income</span></li>'
-   +'<li><span class="fi oui">&#128188;</span><span>Find the skill you can <b>sell</b>, and land your first client</span></li>'
-   +'<li><span class="fi oui">&#127916;</span><span>Content creation, <b>affiliation</b>, e-commerce and the truth about trading</span></li>'
-   +'<li><span class="fi oui">&#127978;</span><span><b>Getting paid from Africa</b>: the question everyone avoids</span></li>'
-   +'<li><span class="fi oui">&#128737;</span><span>The <b>traps to avoid</b>, including the time I got scammed</span></li>'
-   +'<li><span class="fi oui">&#128101;</span><span>The Ex-rienneux community, <b>monthly access</b></span></li></ul>',
+   +'<li><span class="fi oui"></span><span>Find the skill you can <b>sell</b>, and land your first client</span></li>'
+   +'<li><span class="fi oui"></span><span>Content creation, <b>affiliation</b>, e-commerce and the truth about trading</span></li>'
+   +'<li><span class="fi oui"></span><span><b>Getting paid from Africa</b>: the question everyone avoids</span></li>'
+   +'<li><span class="fi oui"></span><span>The <b>traps to avoid</b>, including the time I got scammed</span></li>'
+   +'<li><span class="fi oui"></span><span>The Ex-rienneux community, <b>monthly access</b></span></li></ul>',
  q4:"What is free?",
  a4:'<ul class="fl">'
-   +'<li><span class="fi oui">&#128172;</span><span>The <b>private WhatsApp group</b>, at no cost</span></li>'
-   +'<li><span class="fi oui">&#128200;</span><span>Value <b>every single day</b></span></li>'
+   +'<li><span class="fi oui"></span><span>The <b>private WhatsApp group</b>, at no cost</span></li>'
+   +'<li><span class="fi oui"></span><span>Value <b>every single day</b></span></li>'
    +'<li><span class="fi oui">&#10004;</span><span>You ask, <b>I answer</b></span></li></ul>'
    +'<a class="fbtn" href="/communaute" target="_blank" rel="noopener" onclick="track(\'click_whatsapp\',{depuis:\'faq\'})">Join the group now</a>',
  q5:"Will I be supported?",
  a5:'<ul class="fl">'
-   +'<li><span class="fi oui">&#128077;</span><span><b>Yes, you are never alone.</b></span></li>'
-   +'<li><span class="fi oui">&#128218;</span><span>Guidance from <b>mentors in every field</b> (AI, freelancing, e-commerce, content, editing…), based on the path you choose</span></li>'
-   +'<li><span class="fi oui">&#128172;</span><span>Ask your questions in your skill\'s channel, <b>we answer</b></span></li></ul>'
+   +'<li><span class="fi oui"></span><span><b>Yes, you are never alone.</b></span></li>'
+   +'<li><span class="fi oui"></span><span>Guidance from <b>mentors in every field</b> (AI, freelancing, e-commerce, content, editing…), based on the path you choose</span></li>'
+   +'<li><span class="fi oui"></span><span>Ask your questions in your skill\'s channel, <b>we answer</b></span></li></ul>'
  },
- final:{ h2:"You can stay stuck for 5 more years.<br>Or fix it today.", cta:"Learn to make money" },
+ final:{ h2:"You can stay stuck for 5 more years.<br><em>Or fix it today.</em>", cta:"Learn to make money" },
  quiz:{
  q1num:"Question 1 / 5", q1title:"Where are you in your business?",
  stage_idee:"I haven't started yet, I just have an idea", stage_debut:"I just launched, looking for my first clients", stage_tourne:"I already have a business running", stage_stagne:"I have a business that's stuck / plateauing",
@@ -1431,7 +1324,7 @@ const I18N = {
  },
  result:{
  head:"Good news, I can help you unlock this",
- reassure:"A real diagnostic of your business, not a disguised sales pitch. You leave with a clear plan, no matter what.", tileAppel:"1-on-1 call", descAppel:'✅ 60 min live with me, just for your project. The guide and Ex-rienneux community are included.',
+ reassure:"A real diagnostic of your business, not a disguised sales pitch. You leave with a clear plan, no matter what.", tileAppel:"1-on-1 call", descAppel:' 60 min live with me, just for your project. The guide and Ex-rienneux community are included.',
  book:"Book my call", card:"Card payment · Visa / Mastercard", momo:"Mobile Money · Orange, MTN, Wave",
  guarantee:"Secure payment · Instant slot booking · billed in EUR at checkout", home:"Back to home",
  guideopt:{ name:"The Ex-rienneux community", price:'<span class="pnow">10,000<sup>FCFA</sup> <span class="peur">($18)</span></span>', line:"You join the private community where we walk you through making your first income online.", cta:"Join the community" },
@@ -1497,7 +1390,8 @@ if(!location.hash){ try{ window.scrollTo(0,0); }catch(e){} }
 window.addEventListener('load', function(){ if(!location.hash){ window.scrollTo(0,0); } });
 
 /* ---- Langue ---- */
-var LANG = (function(){
+var LANG = 'fr'; /* site en français uniquement (06/11/2026) */
+var _LANG_AVANT = (function(){
  try{
  var p=(location.pathname.match(/\/(fr|en)(?:\/|$)/i)||[])[1];
  if(p){ p=p.toLowerCase(); try{localStorage.setItem('lang',p);}catch(e){} return p; }
@@ -1802,31 +1696,31 @@ var _vslMot=(function(){try{localStorage.setItem('bc_w','C');}catch(e){}
 var MOTS={
  G:{fr:{},en:{}},
  C:{fr:{nav:'La communauté',
-   sub:"On va t'apprendre à la <b>maîtriser</b>",
+   sub:"Avec juste ton téléphone, même si tu pars de zéro.",
    cta:'Rejoindre la communauté', q3:"Qu'est-ce qu'il y a dans la communauté ?",
-   promo:"🎁 L'accès à la communauté <b>Ex-rienneux</b> à <b>10 000 FCFA/mois</b>.",
+   promo:" L'accès à la communauté <b>Ex-rienneux</b> à <b>10 000 FCFA/mois</b>.",
    oname:'La communauté des Ex-rienneux',
    oline:"Tu rejoins la communauté privée où on t'accompagne pour faire tes premiers revenus, quel que soit ton point de départ. Tout le programme est dedans.",
    octa:'Rejoindre la communauté', btn:'Rejoindre la communauté',
    sous:'Paiement mobile money (Afrique) · Accès immédiat'},
   en:{nav:'The community', sub:'We will teach you how to <b>master it</b>',
    cta:'Join the community', q3:"What's inside the community?",
-   promo:"🎁 Access to the <b>Ex-rienneux</b> community for <b>10,000 FCFA/month</b>.",
+   promo:" Access to the <b>Ex-rienneux</b> community for <b>10,000 FCFA/month</b>.",
    oname:'The Ex-rienneux community',
    oline:"You join the private community where we walk you through making your first income online.",
    octa:'Join the community', btn:'Join the community',
    sous:'Mobile money (Africa) · Instant access'}},
  E:{fr:{nav:"L'école",
-   sub:"On va t'apprendre à la <b>maîtriser</b>",
+   sub:"Avec juste ton téléphone, même si tu pars de zéro.",
    cta:"Rejoindre l'école", q3:"Qu'est-ce qu'il y a dans l'école ?",
-   promo:"🎁 L'accès à l'école <b>Ex-rienneux</b> à <b>10 000 FCFA/mois</b>.",
+   promo:" L'accès à l'école <b>Ex-rienneux</b> à <b>10 000 FCFA/mois</b>.",
    oname:"L'école des Ex-rienneux",
    oline:"On t'apprend, étape par étape, à faire tes premiers revenus en ligne. Les cours, la méthode et la communauté privée : tout est dedans.",
    octa:"Rejoindre l'école", btn:"Rejoindre l'école",
    sous:'Paiement mobile money (Afrique) · Accès immédiat'},
   en:{nav:'The school', sub:"We will teach you how to <b>master it</b>",
    cta:'Join the school', q3:"What's inside the school?",
-   promo:"🎁 Access to the <b>Ex-rienneux</b> school for <b>10,000 FCFA/month</b>.",
+   promo:" Access to the <b>Ex-rienneux</b> school for <b>10,000 FCFA/month</b>.",
    oname:'The Ex-rienneux school',
    oline:"We teach you, step by step, how to make your first income online.",
    octa:'Join the school', btn:'Join the school',
@@ -1923,7 +1817,7 @@ function initVSL(){
       seraient gonflees par tous ceux qui font defiler la page. */
    _bunnyPlayer.on('play',function(){
      _vslPlaying=true;
-     if(toggle)toggle.textContent='⏸';
+     if(toggle)toggle.textContent='';
      if(!_vslMuet)vslPing({ev:'play',pct:0,t:0,dur:_vslDur});
    });
    function activerSon(){
@@ -1937,7 +1831,7 @@ function initVSL(){
    if(son)son.addEventListener('click',activerSon);
    _bunnyPlayer.on('pause',function(){
      _vslPlaying=false;
-     if(toggle)toggle.textContent='▶';
+     if(toggle)toggle.textContent='';
    });
    _bunnyPlayer.on('timeupdate',function(d){
      var t=d.seconds||0,dur=d.duration||1;
@@ -1948,12 +1842,12 @@ function initVSL(){
    });
    _bunnyPlayer.on('ended',function(){
      _vslPlaying=false;
-     if(toggle)toggle.textContent='▶';
+     if(toggle)toggle.textContent='';
      var b=document.getElementById('vslBar');if(b)b.style.width='100%';
      var ec=document.getElementById('vslEnd');if(ec)ec.classList.add('show');
      vslPing({ev:'end',pct:100,t:_vslDur,dur:_vslDur});
    });
-   /* Bouton ⏸/▶ */
+   /* Bouton / */
    if(toggle)toggle.addEventListener('click',function(){
      if(_vslMuet){activerSon();return;}
      if(_vslPlaying){_bunnyPlayer.pause();}else{_bunnyPlayer.play();}
@@ -2218,11 +2112,11 @@ marqueLangue();
  function cible(el){
   if(el.hasAttribute('data-valeur')) return parseInt(el.getAttribute('data-valeur'), 10);
   var xof=parseInt(el.getAttribute('data-xof'),10), eur=parseInt(el.getAttribute('data-eur'),10);
-  return (typeof LANG!=='undefined' && LANG==='en') ? eur : xof;
+  return window.EXR_ZONE==='EU' ? eur : xof;
  }
  function unite(el){
   if(!el.hasAttribute('data-xof')) return '';
-  return (typeof LANG!=='undefined' && LANG==='en') ? '$' : 'XOF';
+  return window.EXR_ZONE==='EU' ? '€' : 'F CFA';
  }
  function anime(el){
   var fin=cible(el), val=el.querySelector('.val'), uni=el.querySelector('.unite');
@@ -2340,35 +2234,35 @@ try{if(typeof vslPing==='function'){vslPing({ev:'v',t:0,pct:0});}}catch(e){}</sc
      en direct. Aucun code de réduction n'est jamais donné. -->
 <style>
 #bcChatBtn{position:fixed;right:18px;bottom:18px;z-index:150;width:60px;height:60px;border-radius:50%;border:0;cursor:pointer;
- background:linear-gradient(135deg,#FFB43C,#E4930F);color:#1a1206;box-shadow:0 10px 28px rgba(0,0,0,.45),0 0 0 4px rgba(255,169,48,.18);
+ background:linear-gradient(180deg,#FFC566,#EFA02A);color:#1b1205;box-shadow:0 12px 32px rgba(0,0,0,.5),0 0 0 4px rgba(245,181,74,.14);
  display:flex;align-items:center;justify-content:center;transition:transform .15s}
 #bcChatBtn:hover{transform:scale(1.06)}
-#bcChatBtn .pt{position:absolute;top:4px;right:4px;width:12px;height:12px;border-radius:50%;background:#2ec07a;border:2px solid #0a0e13}
+#bcChatBtn .pt{position:absolute;top:4px;right:4px;width:12px;height:12px;border-radius:50%;background:#43d17f;border:2px solid #030810}
 #bcChatBul{position:fixed;right:88px;bottom:30px;z-index:150;background:#fff;color:#111;font:600 13.5px/1.35 Inter,-apple-system,Segoe UI,Roboto,sans-serif;
  padding:10px 13px;border-radius:14px 14px 4px 14px;box-shadow:0 8px 24px rgba(0,0,0,.35);max-width:210px;cursor:pointer;display:none}
 #bcChat{position:fixed;right:18px;bottom:90px;z-index:151;width:370px;max-width:calc(100vw - 24px);height:560px;max-height:calc(100vh - 110px);
- background:#0d141b;border:1px solid #222E39;border-radius:18px;box-shadow:0 18px 50px rgba(0,0,0,.55);display:none;flex-direction:column;overflow:hidden;
+ background:rgba(10,16,26,.96);border:1px solid rgba(255,255,255,.14);border-radius:22px;box-shadow:0 24px 70px rgba(0,0,0,.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:none;flex-direction:column;overflow:hidden;
  font-family:Inter,-apple-system,Segoe UI,Roboto,sans-serif;color:#fff}
 #bcChat.open{display:flex}
-#bcChat .hd{display:flex;align-items:center;gap:11px;padding:14px 14px;background:linear-gradient(95deg,rgba(255,180,60,.16),rgba(228,147,15,.06));border-bottom:1px solid #222E39}
-#bcChat .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#FFB43C,#E4930F);color:#1a1206;font-weight:900;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
-#bcChat .hd b{display:block;font-size:14.5px}#bcChat .hd small{color:#8b95a1;font-size:12px}
+#bcChat .hd{display:flex;align-items:center;gap:11px;padding:14px 14px;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.08)}
+#bcChat .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(180deg,#FFC566,#EFA02A);color:#1b1205;font-weight:600;font-family:"Host Grotesk",Inter,sans-serif;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+#bcChat .hd b{display:block;font-size:14.5px;font-weight:600}#bcChat .hd small{color:#8f9bab;font-size:12px}
 #bcChat .x{margin-left:auto;background:none;border:0;color:#8b95a1;font-size:24px;cursor:pointer;line-height:1;padding:4px 6px}
 #bcChat .ms{flex:1;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:9px;-webkit-overflow-scrolling:touch}
 #bcChat .m{max-width:85%;padding:10px 12px;border-radius:14px;font-size:14px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word}
-#bcChat .m.b{background:#16202a;border:1px solid #222E39;align-self:flex-start;border-bottom-left-radius:4px}
-#bcChat .m.u{background:linear-gradient(95deg,#FFB43C,#E4930F);color:#1a1206;align-self:flex-end;border-bottom-right-radius:4px;font-weight:600}
-#bcChat .m .bt{display:block;margin-top:9px;text-align:center;background:linear-gradient(95deg,#FFB43C,#E4930F);color:#1a1206;font-weight:800;text-decoration:none;border-radius:10px;padding:10px 12px;font-size:13.5px;white-space:normal}
-#bcChat .m .bt.sec{background:transparent;color:#FFB43C;border:1px solid #FFA930}
+#bcChat .m.b{background:rgba(20,30,46,.9);border:1px solid rgba(255,255,255,.08);align-self:flex-start;border-bottom-left-radius:4px}
+#bcChat .m.u{background:#fff;color:#0a1220;align-self:flex-end;border-bottom-right-radius:4px;font-weight:600}
+#bcChat .m .bt{display:block;margin-top:9px;text-align:center;background:linear-gradient(180deg,#FFC566,#EFA02A);color:#1b1205;font-weight:600;text-decoration:none;border-radius:999px;padding:10px 12px;font-size:13.5px;white-space:normal}
+#bcChat .m .bt.sec{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2)}
 #bcChat .m .bt:first-of-type{margin-top:11px}
 #bcChat .ch{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 10px}
-#bcChat .ch button{background:transparent;border:1px solid #2c3a47;color:#e6e9ec;border-radius:999px;padding:7px 11px;font-size:12.5px;cursor:pointer;font-family:inherit}
-#bcChat .ch button:hover{border-color:#FFA930;color:#FFA930}
-#bcChat form{display:flex;gap:8px;padding:10px;border-top:1px solid #222E39;background:#0a0f14}
-#bcChat input{flex:1;background:#0d141b;border:1px solid #222E39;border-radius:11px;color:#fff;font-size:16px;padding:11px 12px;outline:none;font-family:inherit}
-#bcChat input:focus{border-color:#FFA930}
-#bcChat form button{background:linear-gradient(95deg,#FFB43C,#E4930F);border:0;border-radius:11px;color:#1a1206;font-weight:800;padding:0 15px;cursor:pointer}
-#bcChat .dots span{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:#8b95a1;animation:bcd 1s infinite}
+#bcChat .ch button{background:rgba(16,24,38,.55);border:1px solid rgba(255,255,255,.14);color:#d5dbe3;border-radius:999px;padding:7px 11px;font-size:12.5px;cursor:pointer;font-family:inherit}
+#bcChat .ch button:hover{border-color:rgba(255,255,255,.3);color:#fff}
+#bcChat form{display:flex;gap:8px;padding:10px;border-top:1px solid rgba(255,255,255,.08);background:rgba(3,8,16,.6)}
+#bcChat input{flex:1;background:rgba(10,16,26,.9);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding-left:16px!important;color:#fff;font-size:16px;padding:11px 12px;outline:none;font-family:inherit}
+#bcChat input:focus{border-color:rgba(245,181,74,.6)}
+#bcChat form button{background:#fff;border:0;border-radius:999px;color:#0a1220;font-weight:600;padding:0 16px;cursor:pointer}
+#bcChat .dots span{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:#8f9bab;animation:bcd 1s infinite}
 #bcChat .dots span:nth-child(2){animation-delay:.15s}#bcChat .dots span:nth-child(3){animation-delay:.3s}
 @keyframes bcd{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
 @media(max-width:480px){#bcChat{right:8px;left:8px;width:auto;bottom:84px;height:calc(100vh - 100px)}#bcChatBul{display:none!important}}
@@ -2382,7 +2276,7 @@ try{if(typeof vslPing==='function'){vslPing({ev:'v',t:0,pct:0});}}catch(e){}</sc
  <div class="hd"><div class="av">B</div><div><b id="bcT1"></b><small id="bcT2"></small></div><button class="x" type="button" aria-label="Fermer">&times;</button></div>
  <div class="ms" id="bcMs"></div>
  <div class="ch" id="bcCh"></div>
- <form id="bcF"><input id="bcIn" autocomplete="off" maxlength="500"><button type="submit" aria-label="Envoyer">&#10148;</button></form>
+ <form id="bcF"><input id="bcIn" autocomplete="off" maxlength="500"><button type="submit" aria-label="Envoyer"></button></form>
 </div>
 <script>
 (function(){
@@ -2447,5 +2341,26 @@ try{if(typeof vslPing==='function'){vslPing({ev:'v',t:0,pct:0});}}catch(e){}</sc
 })();
 </script>
 
+<script>
+/* Le bandeau « générés par les élèves » suit la zone (06/11/2026). */
+window.EXR_apresZone=function(z){ document.querySelectorAll('[data-compteur][data-xof]').forEach(function(el){ var v=el.querySelector('.val'),u=el.querySelector('.unite'); if(!v||v.textContent==='0') return; var n=parseInt(el.getAttribute(z==='EU'?'data-eur':'data-xof'),10); v.textContent=String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'\u202F')+(el.getAttribute('data-suffixe')||''); if(u) u.textContent=z==='EU'?'€':'F CFA'; }); };
+(function(){
+ var AFRIQUE='DZ AO BJ BW BF BI CV CM CF TD KM CG CD CI DJ EG GQ ER SZ ET GA GM GH GN GW KE LS LR LY MG MW ML MR MU YT MA MZ NA NE NG RE RW SH ST SN SC SL SO ZA SS SD TZ TG TN UG EH ZM ZW'.split(' ');
+ function poser(){
+  try{
+   var t=I18N.fr, d=(t.topbar&&t.topbar.i1)?t.topbar:t;
+   d.i1=window.EXR_ZONE==='EU'?'<b>1 290 000+ €</b> générés par les élèves':'<b>845 720 640+</b> F CFA générés par les élèves';
+   if(t.hero){t.hero.h1='Apprends à gagner tes premiers <b>'+(window.EXR_ZONE==='EU'?'1&nbsp;500&nbsp;€':'1&nbsp;000&nbsp;000&nbsp;F&nbsp;CFA')+'</b> sur internet';var h=document.querySelector('.hero-h1');if(h)h.innerHTML=t.hero.h1;}
+   if(window.majBandeInfo) majBandeInfo();
+  }catch(e){}
+ }
+ window.EXR_majZone=function(z){window.EXR_ZONE=z;document.documentElement.classList.toggle('zeu',z==='EU');poser();if(window.EXR_apresZone)try{EXR_apresZone(z);}catch(e){}};
+ poser();
+ var forcee=null;try{forcee=localStorage.getItem('exr_zone');}catch(e){}
+ if(!forcee&&window.fetch) fetch('/api/pays',{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+  if(d&&d.pays){var z=AFRIQUE.indexOf(String(d.pays).toUpperCase())>=0?'AF':'EU';try{localStorage.setItem('exr_zone_auto',z);}catch(e){}if(z!==window.EXR_ZONE)EXR_majZone(z);}
+ }).catch(function(){});
+})();
+</script>
 </body>
 </html>
