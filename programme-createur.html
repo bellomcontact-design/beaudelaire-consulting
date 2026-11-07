@@ -372,7 +372,7 @@ var Z=window.EXR_ZONE=(l('exr_zone')||l('exr_zone_auto')||f());if(Z==='EU')docum
       <div class="pf fb"><div class="nom"><span class="pt"></span>Facebook</div><div class="v" id="vFB">0</div></div>
       <div class="egal"><span>Vues additionnées</span><b id="vTot">0</b></div>
       <div class="gain"><small>Tu gagnes</small><div class="f"><span id="vF">0</span><em><span class="af">F</span><span class="eu">&nbsp;€</span></em></div><div class="mm"><span class="af">versés sur ton mobile money</span><span class="eu">versés sur ton compte Whop</span></div></div>
-      <div class="note">Exemple : 20 000 vues à <span class="af">50 F</span><span class="eu">0,50 €</span> les 1 000 vues</div>
+      <div class="note"><span class="af">Exemple : 20 000 vues à 50 F les 1 000 vues</span><span class="eu">Exemple : 60 000 vues en 7 jours à 0,50 € les 1 000 vues</span></div>
     </div>
   </div>
 </div>
@@ -438,7 +438,7 @@ var Z=window.EXR_ZONE=(l('exr_zone')||l('exr_zone_auto')||f());if(Z==='EU')docum
   <div class="tuiles">
     <div class="tuile t1 apparait eu">
       <div class="gros">0,50 € <small>/ 1 000 vues</small></div>
-      <p>Chaque vue <b>TikTok et Facebook</b> de tes vidéos IA est payée au même tarif, dès ta première vidéo.</p>
+      <p>Chaque vue <b>TikTok et Facebook</b> de tes vidéos IA est payée au même tarif, dès qu'elle atteint <b>50 000 vues en 7 jours</b>. Toutes ses vues comptent alors.</p>
     </div>
     <div class="tuile t1 apparait af">
       <div class="gros">50 F <span class="fleche">›</span> 75 F <small>/ 1 000 vues</small></div>
@@ -664,7 +664,7 @@ var Z=window.EXR_ZONE=(l('exr_zone')||l('exr_zone_auto')||f());if(Z==='EU')docum
   /* ── Le téléphone qui compte : vues TikTok + Facebook → francs, en boucle ── */
   var vTT = document.getElementById('vTT'), vFB = document.getElementById('vFB'), vTot = document.getElementById('vTot'), vF = document.getElementById('vF'), tel = document.getElementById('tel');
   var EUZ = window.EXR_ZONE === 'EU';
-  var CIBLE_TT = 12000, CIBLE_FB = 8000, TARIF = EUZ ? 0.5 : 50, DUREE = 4200;
+  var CIBLE_TT = EUZ ? 36000 : 12000, CIBLE_FB = EUZ ? 24000 : 8000, TARIF = EUZ ? 0.5 : 50, DUREE = 4200;
   function piece() {
     var p = document.createElement('div'); p.className = 'piece'; p.textContent = EUZ ? '€' : 'F';
     // Sur les bords du téléphone, pour ne jamais masquer les chiffres.
@@ -699,9 +699,11 @@ var Z=window.EXR_ZONE=(l('exr_zone')||l('exr_zone_auto')||f());if(Z==='EU')docum
     function p(t) { if (!t0) t0 = t; var k = Math.min(1, (t - t0) / 450); el.textContent = frA(de + (a - de) * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(p); }
     requestAnimationFrame(p);
   }
+  /* Europe : une vidéo IA n'est payée qu'à partir de 50 000 vues en 7 jours. */
+  if (EUZ) { sV.min = 50000; sV.max = 500000; sV.step = 5000; sV.value = 60000; }
   function calc() {
     var n = +sN.value, v = +sV.value;
-    var vues = n * Math.min(v, 2000000);
+    var vues = (EUZ && v < 50000) ? 0 : n * Math.min(v, 2000000);
     var haut = !EUZ && vues >= 50000, tarif = EUZ ? 0.5 : (haut ? 75 : 50);
     var g = vues / 1000 * tarif;
     var bonus = EUZ ? 0 : (n >= 5 ? 500 : 0) + (n >= 15 ? 2000 : 0);

@@ -1929,7 +1929,7 @@ function afficher(){
   document.getElementById('autreTxt').textContent = ZONE === 'AF' ? 'Pas de mobile money ?' : 'Pas de carte ?';
   var autres = ZONE === 'AF'
     ? [['Payer par carte', BOT + '/carte/payer?offre=trimestre&src=exrienneux', 'carte'], ['Payer en crypto', BOT + '/crypto/payer?offre=trimestre&src=exrienneux', 'crypto']]
-    : [['Payer en crypto', BOT + '/crypto/payer?offre=trimestre&src=exrienneux', 'crypto']];
+    : [['Payer en crypto', BOT + '/crypto/payer?devise=EUR&offre=trimestre&src=exrienneux', 'crypto']];
   document.getElementById('autres').innerHTML = autres.map(function(a){ return '<a class="btn mini" href="' + a[1] + '" rel="noopener" data-moyen="' + a[2] + '">' + a[0] + '</a>'; }).join('');
   var v = document.getElementById('vsl'), V = ZONE === 'AF' ? 'F' : 'E', src = '/exr/vsl-' + V + '.mp4';
   if (v.getAttribute('data-src') !== src) {
