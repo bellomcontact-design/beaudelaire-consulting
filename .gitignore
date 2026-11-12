@@ -1,0 +1,3 @@
+# Les copies de secours des pages ne doivent jamais partir en ligne.
+*.avant-*
+*.sauvegarde-*
