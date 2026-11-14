@@ -946,7 +946,7 @@ document.documentElement.classList.toggle('zeu',window.EXR_ZONE==='EU');</script
  <p class="lead" id="rWho" style="margin-bottom:0"></p>
 
  <div id="rTiles" style="display:none;max-width:470px;margin:10px auto 0">
- <div style="background:var(--star-soft);border:1px solid var(--star-line);color:var(--star);border-radius:12px;padding:11px 14px;margin:0 auto 12px;font-size:13px;line-height:1.45;font-weight:600" data-i18n-html="book.promo"> Le guide + l'accès à la communauté <b>Ex-rienneux</b> à <b>10 000 FCFA/mois</b>.</div>
+ <div style="background:var(--star-soft);border:1px solid var(--star-line);color:var(--star);border-radius:12px;padding:11px 14px;margin:0 auto 12px;font-size:13px;line-height:1.45;font-weight:600" data-i18n-html="book.promo"> Le guide + l'accès à la communauté <b>Ex-rienneux</b> à <b>5 000 FCFA/mois</b>.</div>
  <p style="font-size:13px;color:var(--muted);margin:0 0 10px" data-i18n="book.choose">Choisis ton offre </p>
  <div style="display:flex;gap:8px;margin-bottom:14px">
  <button type="button" class="otile" onclick="pickOffer(this,'r')" data-desckey="result.descAppel" data-momo="https://me.fedapay.com/demarrage" data-card="https://whop.com/checkout/plan_bReryALMV3QYm">
@@ -956,8 +956,8 @@ document.documentElement.classList.toggle('zeu',window.EXR_ZONE==='EU');</script
  </button>
  <button type="button" class="otile selected" onclick="pickOffer(this,'r')" data-desckey="book.desc15" data-momo="https://bot.beaudelaireconsulting.com/pay" data-card="https://bot.beaudelaireconsulting.com/carte/payer">
  <span class="obadge" style="color:var(--danger)" data-i18n="book.promobadge"> PROMO</span>
- <span class="oprice">10 000<sup>FCFA</sup><span style="font-size:.42em;font-weight:700"> /mois</span></span>
- <span class="oeur">16€ / mois</span>
+ <span class="oprice">5 000<sup>FCFA</sup><span style="font-size:.42em;font-weight:700"> /mois</span></span>
+ <span class="oeur">8€ / mois</span>
  
  <span class="olabel" data-i18n="book.t2short">Guide + Communauté</span>
  </button>
@@ -982,7 +982,7 @@ document.documentElement.classList.toggle('zeu',window.EXR_ZONE==='EU');</script
  <a class="paybtn" id="rgCard" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide_card')"><b id="rgCtaC">Rejoindre la communauté</b><span>Paiement par carte · Visa / Mastercard</span></a>
  <a class="paybtn" id="rgBuy" href="#" target="_blank" rel="noopener" onclick="track('click_buy_guide')"><b id="rgCta">Rejoindre la communauté</b><span>Paiement mobile money (Afrique) · Accès immédiat</span></a>
  </div>
- <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0;line-height:1.5" data-i18n-html="result.guideonly">Ou juste le guide, sans la communauté (10 000 FCFA · 16€) : <a href="https://bot.beaudelaireconsulting.com/pay" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">mobile money</a> · <a href="https://bot.beaudelaireconsulting.com/carte/payer" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">carte</a></p>
+ <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0;line-height:1.5" data-i18n-html="result.guideonly">Ou juste le guide, sans la communauté (5 000 FCFA · 8€) : <a href="https://bot.beaudelaireconsulting.com/pay" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">mobile money</a> · <a href="https://bot.beaudelaireconsulting.com/carte/payer" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">carte</a></p>
  </div>
  <div id="rOr" style="display:none;font-weight:800;color:var(--muted);margin:2px 0 14px;letter-spacing:.14em;font-size:13px">OU</div>
  <div class="rcard" id="rcard">
@@ -1207,8 +1207,8 @@ const I18N = {
  reassure:"Un vrai diagnostic de ton business, pas un argumentaire de vente déguisé. Tu repars avec un plan clair, quoi qu'il arrive.", tileAppel:"Appel 1-à-1", descAppel:' 60 min en direct avec moi, rien que pour ton projet. Le guide et la communauté Ex-rienneux sont inclus.',
  book:"Réserver mon appel", card:"Paiement par carte · Visa / Mastercard", momo:"Paiement Mobile Money · Orange, MTN, Wave",
  guarantee:"Paiement sécurisé · Réservation immédiate de ton créneau", home:"Revenir à l'accueil",
- guideopt:{ name:"La communauté des Ex-rienneux", price:'<span class="pnow">10 000<sup>FCFA</sup> <span class="peur">(16€)</span></span>', line:"Tu rejoins la communauté privée où on t'accompagne pour faire tes premiers revenus, quel que soit ton point de départ. Tout le programme est dedans.", cta:"Rejoindre la communauté" },
- guideonly:'Ou juste le guide, sans la communauté (10 000 FCFA · 16€) : <a href="https://bot.beaudelaireconsulting.com/pay" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">mobile money</a> · <a href="https://bot.beaudelaireconsulting.com/carte/payer" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">carte</a>'
+ guideopt:{ name:"La communauté des Ex-rienneux", price:'<span class="pnow">5 000<sup>FCFA</sup> <span class="peur">(8€)</span></span>', line:"Tu rejoins la communauté privée où on t'accompagne pour faire tes premiers revenus, quel que soit ton point de départ. Tout le programme est dedans.", cta:"Rejoindre la communauté" },
+ guideonly:'Ou juste le guide, sans la communauté (5 000 FCFA · 8€) : <a href="https://bot.beaudelaireconsulting.com/pay" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">mobile money</a> · <a href="https://bot.beaudelaireconsulting.com/carte/payer" target="_blank" rel="noopener" style="color:var(--accent-strong);font-weight:700">carte</a>'
  },
  js:{
  alert_fill:"Merci de remplir ton prénom, ton nom, ton email et ton pays.",
@@ -1776,7 +1776,7 @@ var MOTS={
  C:{fr:{nav:'La communauté',
    sub:"Avec juste ton téléphone, même si tu pars de zéro.",
    cta:'Commencer gratuitement', q3:"Qu'est-ce qu'il y a dans la communauté ?",
-   promo:" L'accès à la communauté <b>Ex-rienneux</b> à <b>10 000 FCFA/mois</b>.",
+   promo:" L'accès à la communauté <b>Ex-rienneux</b> à <b>5 000 FCFA/mois</b>.",
    oname:'La communauté des Ex-rienneux',
    oline:"Tu rejoins la communauté privée où on t'accompagne pour faire tes premiers revenus, quel que soit ton point de départ. Tout le programme est dedans.",
    octa:'Rejoindre la communauté', btn:'Rejoindre la communauté',
@@ -1791,7 +1791,7 @@ var MOTS={
  E:{fr:{nav:"L'école",
    sub:"Avec juste ton téléphone, même si tu pars de zéro.",
    cta:"Commencer gratuitement", q3:"Qu'est-ce qu'il y a dans l'école ?",
-   promo:" L'accès à l'école <b>Ex-rienneux</b> à <b>10 000 FCFA/mois</b>.",
+   promo:" L'accès à l'école <b>Ex-rienneux</b> à <b>5 000 FCFA/mois</b>.",
    oname:"L'école des Ex-rienneux",
    oline:"On t'apprend, étape par étape, à faire tes premiers revenus en ligne. Les cours, la méthode et la communauté privée : tout est dedans.",
    octa:"Rejoindre l'école", btn:"Rejoindre l'école",
