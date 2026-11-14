@@ -1035,6 +1035,7 @@ applyDevise();
   /* Les euros viennent du bot quand il les donne (14/11/2026) : le prix de la
      carte en Europe ne suit pas forcément le F CFA. */
   if(d.eur){
+   if(window.PRIX_EU){['mois','trimestre','annuel'].forEach(function(k){ if(d.eur[k]>0) PRIX_EU[k]=d.eur[k]; });}
    ['mois','trimestre','annuel'].forEach(function(k){ if(d.eur[k]>0) document.querySelectorAll('.pprice[data-offre="'+k+'"]').forEach(function(el){ el.setAttribute('data-eur',String(d.eur[k])); }); });
    var pe=document.getElementById('o12plein'); if(pe&&d.eur.mois>0) pe.setAttribute('data-eur',String(Math.round(d.eur.mois*12)));
   }
@@ -1276,7 +1277,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') fermeMenu
 
 <!-- ZONE (06/11/2026) : comme /exrienneux. Afrique → prix en F CFA et un seul bouton
      « Payer en mobile money » ; la carte et la crypto restent derrière un petit « ? ».
-     Europe et reste du monde → prix en euros (16 / 40 / 155 €), paiement par carte,
+     Europe et reste du monde → prix en euros (8 / 20 / 80 €, lus sur le bot), paiement par carte,
      la crypto derrière le « ? ». Le pays vient de /api/pays (Vercel), sinon du fuseau.
      Le choix manuel est partagé avec /exrienneux (localStorage exr_zone). -->
 <style>
@@ -1294,7 +1295,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') fermeMenu
 <script>
 (function(){
  var AFRIQUE='DZ AO BJ BW BF BI CV CM CF TD KM CG CD CI DJ EG GQ ER SZ ET GA GM GH GN GW KE LS LR LY MG MW ML MR MU YT MA MZ NA NE NG RE RW SH ST SN SC SL SO ZA SS SD TZ TG TN UG EH ZM ZW'.split(' ');
- var PRIX_EU={mois:16,trimestre:40,annuel:155};
+ var PRIX_EU={mois:8,trimestre:20,annuel:80}; window.PRIX_EU=PRIX_EU;
  var ZONE='AF';
  function lire(k){try{return localStorage.getItem(k);}catch(e){return null;}}
  function ecrire(k,v){try{localStorage.setItem(k,v);}catch(e){}}
